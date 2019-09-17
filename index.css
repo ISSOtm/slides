@@ -1,0 +1,56 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+body {
+    background-color: #333;
+
+    line-height: 1.4;
+    font-size: 24px;
+    font-family: Helvetica, sans-serif;
+    color: #eee;
+}
+
+main {
+    height: 90%;
+
+    padding: 4% 6% 5% 6%;
+}
+
+h1 {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+a {
+    color: #6060ff;
+}
+
+a:visited {
+    color: #af30ff;
+}
+
+ul {
+    padding: 2%;
+    list-style-position: inside;
+}
+
+
+section {
+    padding: 3%;
+}
+
+
+footer {
+    position: absolute;
+    bottom: 0;
+
+    height: 5%;
+    width: 100%;
+    padding: 2%;
+
+    background-color: #0008;
+}
