@@ -1,0 +1,331 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Débugger son code plus efficacement</title>
+
+        <base href="../" />
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section data-background-image="slide_assets/isilabs_final.svg" data-background-size="contain" data-background-opacity="0.4">
+                    <h1>Micro-tuto IsiLabs</h1>
+                    <code>Débugger son code plus efficacement</code>
+                </section>
+                <section>
+                    <h2>D'abord, quelques ressources</h2>
+                    <ul>
+                        <li>GDB (utilisez votre package manager favori)</li>
+                        <li>Un compilateur C suffisamment récent (GCC >= 4.7)</li>
+                        <li>Make (probablement le Make GNU)</li>
+                        <li><a href="https://github.com/ISSOtm/tuto-gdb" target="_blank">Un petit programme très très bien écrit</a></li>
+                    </ul>
+                    <p class="fragment"><small>Note : il n'est pas nécessaire d'utiliser GCC, Clang par exemple implémente plus ou moins les mêmes options</small></p>
+                </section>
+                <section>
+                    <h2>Pour bien commencer</h2>
+                    <section>
+                        <h3>Compiler le code</h3>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/make.png" alt="$ make" />
+                            <figcaption>Un warning ? Bof, c'est pas une erreur, pas grave</figcaption>
+                        </figure>
+                    </section>
+                    <section>
+                        <h3>Petits tests ?</h3>
+                        <img src="slide_assets/tuto-gdb/it_works.png" alt="$ ./shifter fr" />
+                        <p class="fragment">Chouette, tout baigne :D</p>
+                    </section>
+                    <section>
+                        <h2>En fait, non</h2>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/no-args.png" alt="$ ./shifter" />
+                            <figcaption><small>(Il est possible que le programme boucle indéfiniment)</small></figcaption>
+                        </figure>
+                    </section>
+                </section>
+                <section>
+                    <h2>Plus rien ne va<br /><small>Mais comment le résoudre ?</small></h2>
+                    <p class="fragment">Première étape : trouver le bug</p>
+                </section>
+                <section>
+                    <h2><q>I will look for you, I <em>will</em> find you...</q></h2>
+                    <section>
+                        <p>
+                            Solution intuitive : <span class="fragment"><code>printf</code> !</span>
+                        </p>
+                        <p><strong class="fragment">À proscrire !</strong></p>
+                    </section>
+                    <section>
+                        <p>
+                            Le mot-clef est <em><a href="https://en.cppreference.com/w/c/language/behavior">undefined behavior</a></em>. En gros, dans la plupart des cas, le compilateur est libre de réarranger le code d'une manière qui fausse les observations.<br />
+                        </p>
+                        <p class="fragment">
+                            Pour plus d'informations, voir la <a href="https://blog.regehr.org/archives/232">partie 3</a> des articles de John Regehr sur l'UB, particulièrement la section "Another Example".
+                        </p>
+                    </section>
+                    <section>
+                        <q>...and I will kill you.</q>
+                        <p>
+                            On va donc utiliser une autre solution, plus efficace, précise et puissante : <strong class="fragment">gdb !</strong>
+                        </p>
+                    </section>
+                </section>
+                <section>
+                    <h2>Bases de GDB</h2>
+                    <section>
+                        <p>Lancer son programme :</p>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/gdb.png" alt="$ gdb ./shifter" />
+                            <figcaption>(Il est possible que vous n'ayiez pas de couleur)</figcaption>
+                        </figure>
+                    </section>
+                    <section>
+                        <p><strong>Il ne faut pas passer les arguments du programme à gdb, uniquement le chemin vers l'exécutable !</strong></p>
+                        <p class="fragment">(Aussi, "<samp>No debugging symbols</samp>" ? Probablement rien de grave...)</p>
+                    </section>
+                    <section>
+                        <p>Le petit prompt <samp>(gdb)</samp> indique qu'il accepte des commandes.</p>
+                        <p class="fragment">Si le programme a actuellement la main, Ctrl+C l'interrompt et gdb prend la main.</p>
+                        <p class="fragment">À noter que les commandes GDB peuvent être abrégées, les lettres essentielles seront en majuscules.</p>
+                    </section>
+                    <section>
+                        <h3>Première commande : <code>Run</code></h3>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/run.png" alt="(gdb) run fr" />
+                            <figcaption>C'est à <code>Run</code> qu'on passe les arguments du programme.</figcaption>
+                        </figure>
+                    </section>
+                    <section>
+                        <h3>Deuxième commande : <code>Quit</code></h3>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/quit.png" alt="(gdb) quit" />
+                            <figcaption>Si le programme est en cours d'exécution, une confirmation sera demandée avant de quitter.</figcaption>
+                        </figure>
+                        <p class="fragment"><small>Les plus pressés utiliseront probablement juste Ctrl+D</small></p>
+                    </section>
+                </section>
+                <section>
+                    <h2><q>Sarah Connor ?</q></h2>
+                    <section>
+                        <p>Tentons de <code>run</code> avec aucun argument...</p>
+                        <img src="slide_assets/tuto-gdb/sigsegv.png" alt="(gdb) r" class="fragment" />
+                        <p class="fragment">Le programme a crashé et gdb a repris la main, mais <strong>là où le programme a crashé !</strong></p>
+                    </section>
+                    <section>
+                        <p>On va essayer une nouvelle commande : <strong><code>BackTrace</code></strong>.</p>
+                        <figure class="fragment">
+                            <img src="slide_assets/tuto-gdb/backtrace.png" alt="(gdb) bt" />
+                            <figcaption>(Les noms et le nombre des fonctions peuvent être légèrement différents selon les machines)</figcaption>
+                        </figure>
+                        <p class="fragment">On voit la <strong>pile d'exécution</strong> : quelles fonctions ont appelé celle en cours.</p>
+                    </section>
+                    <section>
+                        <p>L'erreur s'est produite dans une fonction de la librairie standard (<code>strcmp</code>), donc soit on a trouvé un bug dans la libc (lol) soit on lui a passé un mauvais argument.</p>
+                        <p class="fragment">On souhaite donc examiner les arguments passés à <code>strcmp</code>, on a donc besoin de se placer dans le contexte de la fonction appelante (<code>chaine_langue</code>).</p>
+                    </section>
+                    <section>
+                        <img src="slide_assets/tuto-gdb/backtrace.png" alt="Regardez la sortie de la commande backtrace" />
+                        <p>On va utiliser la commande <strong>FRame</strong> pour sélectionner une <em>stack frame</em>. Utilisez le numéro à gauche de <code>chaine_langue</code>.</p>
+                        <figure class="fragment">
+                            <img src="slide_assets/tuto-gdb/frame.png" alt="(gdb) fr 1 (dans mon cas)" />
+                            <figcaption>On manque d'informations..!</figcaption>
+                        </figure>
+                    </section>
+                </section>
+                <section>
+                    <h2>La pêche aux infos</h2>
+                    <section>
+                        <p>En soi, un programme ne contient peu ou pas d'informations sur son code source, c'est le but de la compilation. Mais on en aimerait bien pour débugger...</p>
+                        <p class="fragment">C'est l'intérêt de l'option <code>-g</code> de GCC !</p>
+                    </section>
+                    <section>
+                        <p>On va également se heurter au problème de l'optimisation : le compilateur est libre, si on l'autorise (option <code>-O</code>), de <strong>réarranger le code</strong> pour le rendre plus efficace, tant que le programme e comporte toujours pareil.</p>
+                        <p class="fragment">Mais, pour débugger, ça va poser problème. On va donc désactiver les optimisations.</p>
+                    </section>
+                </section>
+                <section>
+                    <h2>Deuxième prise !</h2>
+                    <section>
+                        <p>J'ai créé un target Make appelé <code>develop</code> qui compile avec les options qui vont bien. Il faut juste faire <code>make clean</code> avant, comme on veut tout recompiler.</p>
+                        <p class="fragment">(Si vous avez entendu parler de "configuration debug" versus "configuration release", c'est de ça que ça parle.)</p>
+                    </section>
+                    <section>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/develop.png" alt="On refait aussi toutes les commandes gdb" />
+                            <figcaption>Notez <code><samp>Reading symbols from ./shifter...</samp></code> !</figcaption>
+                        </figure>
+                    </section>
+                    <section>
+                        <p>On voit directement que <strong>l'argument</strong> <code>chaine_langue</code> vaut 0x0 (c'est-à-dire <code>NULL</code>) ! C'est donc la fonction appelante qui pose un problème...</p>
+                        <figure class="fragment">
+                            <img src="slide_assets/tuto-gdb/source.png" alt="Direction le code source !" />
+                            <figcaption>La backtrace indique que l'appel est à la ligne 44 de shifter.c</figcaption>
+                        </figure>
+                        <p class="fragment">Ah bah oui on a pas vérifié le nombre d'arguments !</p>
+                    </section>
+                    <section>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/no_args_fix.png" alt="On corrige le bug...">
+                            <figcaption>Nickel, ça crashe plus !</figcaption>
+                        </figure>
+                    </section>
+                </section>
+                <section>
+                    <h2>Jamais deux sans trois</h2>
+                    <section>
+                        <p>On va débugger un crash un poil moins simple.</p>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/bad_lang.png" alt="$ ./shifter es" />
+                            <figcaption>Pas encore prêts pour l'international...</figcaption>
+                        </figure>
+                    </section>
+                    <section>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/backtrace_es.png" alt="On lance le programme dans gdb..." />
+                            <figcaption>Ce coup-ci l'erreur vient de <code>main</code> !</figcaption>
+                        </figure>
+                        <p class="fragment">C'est normal que la backtrace indique <code>puts</code> et pas <code>printf</code>, faites comme si c'était <code>printf</code>.</p>
+                    </section>
+                    <section>
+                        <p>Question : d'où vient l'erreur ?</p>
+                        <p class="fragment">On sait que c'est un des arguments passés, donc c'est probablement le retour de <code>chaine_langue</code>.</p>
+                        <figure class="fragment">
+                            <figcaption>Découvrons la commande <strong>Print</strong> !</figcaption>
+                            <img src="slide_assets/tuto-gdb/print.png" alt="(gdb) p chaine_langue(prompts, argv[1])" />
+                        </figure>
+                        <p class="fragment">Ah oui, la fonction peut retourner NULL.</p>
+                    </section>
+                    <section>
+                        <figure>
+                            <img src="slide_assets/tuto-gdb/es_fix.png" alt="On vérifie la valeur retour..." />
+                            <figcaption>Vous pourriez mettre un message d'erreur, si vous préférez.</figcaption>
+                        </figure>
+                        <p class="fragment">Dernière chose, le programme ne vérifie pas qu'on a rentré un nombre dans le <code>scanf</code>, mais on ne cherchera pas à le corriger ici.</p>
+                    </section>
+                </section>
+                <section>
+                    <h2>2 puissance 32..?</h2>
+                    <section>
+                        <p>On va étudier (mais pas fixer) un dernier bug plus pernicieux. À votre avis, combien vaut 2^32 ?</p>
+                        <figure class="fragment">
+                            <img src="slide_assets/tuto-gdb/pow32.png" alt="$ ./shifter fr, et entrez 32" />
+                            <figcaption>Le résultat peut être différent selon votre machine !</figcaption>
+                        </figure>
+                    </section>
+                    <section>
+                        <p>Ce genre de bug provient en général d'une erreur de logique, mais pourtant on n'en a pas ici ?</p>
+                        <p class="fragment">On touche là à l'un des <em>undefined behavior</em> dont on parlait <a href="slides/gdb.html#/4/1">plus tôt</a>.</p>
+                        <p class="fragment">Le compilateur produit souvent des <em>warnings</em> en cas d'undefined behavior, mais par exemple ici il n'y en a pas. Nous allons voir un outil qui permet d'en détecter à l'exécution.</p>
+                    </section>
+                    <section>
+                        <p>Décommenter les deux flags à la ligne 10 du Makefile, puis <code>make clean</code> et <code>make develop</code>.</p>
+                        <img src="slide_assets/tuto-gdb/uncomment.png" alt="Donc, retirer la dièse" />
+                    </section>
+                    <section>
+                        <p>Maintenant, si on réexécute le programme avec comme argument 32...</p>
+                        <img src="slide_assets/tuto-gdb/sanitize.png" alt="./shifter fr, etc." />
+                        <p class="fragment">Comment corriger ? À vous de voir.</p>
+                    </section>
+                </section>
+                <section>
+                    <h2>Pour aller plus loin</h2>
+                </section>
+                <section>
+                    <p>Pour en savoir plus sur l'undefined behavior, je vous recommande de vous renseigner sur <a href="https://en.cppreference.com/w/c/language/behavior">cppreference</a>.</p>
+                    <p class="fragment">Les différentes pages comportent des descriptions de ce qui est - ou pas - UB (exemple : <a href="https://en.cppreference.com/w/c/language/operator_arithmetic#Shift_operators">les shifts</a>).</p>
+                    <p class="fragment">La documentation de GCC sur leurs <em>implementation-defined behavior</em> se trouve <a href="https://gcc.gnu.org/onlinedocs/gcc/C-Implementation.html#C-Implementation">ici</a> pour la dernière version de GCC.</p>
+                </section>
+                <section>
+                        <p>Si vous voulez en savoir plus sur des options comme <code>-fsanitize</code>, lisez <code>man gcc</code> ou bien la <a href="https://gcc.gnu.org/onlinedocs/" target="_blank">documentation en ligne</a> (sélectionnez le premier lien de la version que vous avez)</p>
+                </section>
+                <section>
+                    <h2>Commandes gdb intéressantes</h2>
+                    <section>
+                        <dl>
+                            <dt><code>Help</code></dt><dd>Fournit de l'aide sur une commande</dd>
+                            <dt><code>APRopos</code></dt><dd>Fournit une liste de commandes "à propos" d'un certain terme
+                            <dt><code>Info</code></dt><dd>Affiche différentes infos sur l'exécution du programme</dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <dl>
+                            <dt><code>X</code></dt><dd>Permet d'examiner la mémoire, pratique pour les tableaux</dd>
+                            <dt><code>DISPlay</code></dt><dd>Permet d'afficher une valeur automatiquement</dd>
+                            <dt><code>LIst</code></dt><dd>Affiche les lignes de code C autour de la ligne courante</dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <dl>
+                            <dt><code>Break</code></dt><dd>Place un breakpoint quelque part</dd>
+                            <dt><code>START</code></dt><dd>Place un breakpoint sur <code>main</code> et <code>run</code></dd>
+                            <dt><code>Delete</code></dt><dd>Retire un breakpoint</dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <dl>
+                            <dt><code>Next</code></dt><dd>Avance le programme jusqu'à la prochaine ligne (ne rentre pas dans les fonctions)</dd>
+                            <dt><code>Step</code></dt><dd>Avance le programme jusqu'à la prochaine ligne (rentre dans les fonctions)</dd>
+                            <dt><code>Continue</code></dt><dd>Rend la main au programme</dd>
+                        </dl>
+                    </section>
+                    <section>
+                        <dl>
+                            <dt><code>DISASsemble</code></dt><dd>Si vous voulez voir les instructions que le processeur est en train d'exécuter...</dd>
+                            <dt><code>PEDA</code></dt><dd>Python Exploit Development Assistant. Pour ceux qui trempent dans la sécurité.</dd>
+                        </dl>
+                    </section>
+                </section>
+                <section data-background-image="slide_assets/isilabs_final.svg" data-background-size="contain" data-background-opacity="0.3">
+                    <h2>Merci d'avoir suivi !</h2>
+                    Plus d'Isilabs :
+                    <nav>
+                        <ul>
+                            <li>Web <a href="https://www.isilabs.fr">isilabs.fr</a></li>
+                            <li>Twitter <a href="https://twitter.com/isilabs">@isilabs</a></li>
+                            <li>Facebook <a href="https://facebook.com/isilabs">IsiLabs - ISIMA</a></li>
+                        </ul>
+                        <hr>
+                        <small>© 2019 Eldred HABERT (ISSOtm)</small>
+                    </nav>
+                    <p>
+                </section>
+            </div>
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true }
+                ]
+            });
+        </script>
+    </body>
+</html>
