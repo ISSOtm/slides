@@ -27,9 +27,13 @@
     <body>
         <div class="reveal">
             <div class="slides">
-                <section>
-                    <h1 class="no-toc-progress">Présentation projet Habert-Ben Chrifa</h1>
-                    <small>Eldred HABERT, Clément Guilbert</small>
+                <section style="width: 100%; height: 70%;">
+                    <h2 class="no-toc-progress">Projet "Audit de sécurité"<br/>Ben Chrifa-Habert</h2>
+                    <small>Eldred HABERT, Clément GUILBERT</small>
+                    <div style="position: absolute; width: 100%; bottom: 0;">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8g2kIlSvz-nUHPOSIUwhSXUxQWRK83aF5C7S03boaczhv6252" style="float:left; height: 70px;">
+                        Patrice LAURENÇOT<br />Murielle MOUZAT
+                    </div>
                 </section>
                 <section>
                     <h2>Contexte</h2>
@@ -61,22 +65,28 @@
                             <ul>
                                 <li class="fragment">Plus pointus</li>
                                 <li class="fragment">Regard neuf</li>
-                                <li class="fragment">Cher</li>
                             </ul>
                         </p>
 
                         <aside class="notes">
                             La possibilité la plus évidente est de gérer la sécurité en interne <b>clic</b>, ce qui a l'avantage que le personnel connaît bien l'application, ses tenants et aboutissants <b>clic</b>, et en plus réduit les chances de fuites <b>clic</b>. Entraîner ledit personnel reste coûteux <b>clic</b>.
                             <hr>
-                            L'autre possibilité est de faire appel à un intervenant extérieur <b>clic</b>, qui aura plus d'expérience dans son domaine <b>clic</b> et potentiellement un nouveau point de vue <b>clic</b> sur l'entreprise. Le processus reste coûteux et intrusif <b>clic</b>, ceci dit.
+                            L'autre possibilité est de faire appel à un intervenant extérieur <b>clic</b>, qui aura plus d'expérience dans son domaine <b>clic</b> et potentiellement un nouveau point de vue <b>clic</b> sur l'entreprise. Le processus reste coûteux et intrusif, ceci dit.
                         </aside>
                     </section>
                     <section>
                         <h3>Le mécanisme</h3>
-                        <p class="fragment">L'audit.</p>
+                        <p class="fragment">L'<a href="https://fr.wikipedia.org/wiki/Audit_de_s%C3%A9curit%C3%A9">audit</a> !</p>
+                        <p class="fragment">Processus très général</p>
+                        <ul>
+                            <li class="fragment">Infrastructure (réseau)</li>
+                            <li class="fragment">Programmes</li>
+                            <li class="fragment">Pratiques dans l'entreprise</li>
+                        </ul>
 
                         <aside class="notes">
-                            Dans tous les cas, on en arrive à l'audit de sécurité <b>clic</b> : dans les grandes lignes, on prend une structure existante et on en analyse les angles d'attaque.
+                            Dans tous les cas, on en arrive à l'audit de sécurité <b>clic</b> : dans les grandes lignes, on prend une structure existante et on en analyse les angles d'attaque.<br />
+                            C'est quelque chose de très général, qui peut toucher à plusieurs
                         </aside>
                     </section>
                     <section>
@@ -109,7 +119,7 @@
                         </ul>
                     </section>
                     <section>
-                        <h3>Nmap</h3>
+                        <h3><a href="https://nmap.org/">Nmap</a></h3>
                         <p class="fragment">Network Mapper</p>
                         <p class="fragment">"Scan" pour déterminer qui est là</p>
                         <p class="fragment">Analyse de la réponse pour la version</p>
@@ -117,35 +127,48 @@
                         <aside class="notes">Faire une analogie avec toquer à toutes les portes d'un immeuble</aside>
                     </section>
                     <section>
+                        <h3><a href="https://nmap.org/movies/">Même dans les films !</a></h3>
+                        <img src="https://nmap.org/movies/matrix/trinity-nmapscreen-hd-crop-1200x728.jpg" style="height: 400px;"/>
+                    </section>
+                    <section>
                         <h3>Et ensuite ?</h3>
-                        <p class="fragment">Logiciel + version = ?</p>
-                        <p class="fragment">Listes de vulnérabilités (CVE...)</p>
+                        <p class="fragment">Logiciel + version = ?<br />
+                            <img src="https://www.tecmint.com/wp-content/uploads/2016/11/Nmap-Scan-Network-Services-Ports.png" style="height: 280px; margin-bottom: -40px;"></p>
+                        <p class="fragment">Listes de vulnérabilités&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://miro.medium.com/fit/c/1838/551/1*51hwpAU3rZpq0VN0YjAEVQ.jpeg" style="height: 40px; vertical-align: middle;" /></p>
                     </section>
                 </section>
                 <section>
                     <h2>Résultats</h2>
                     <section></section>
                     <section>
+                        <h3>Bons résultats</h3>
+                        <p class="fragment">Liste de ce qui tourne</p>
+                        <p class="fragment">Parfois des versions vraiment vieilles</p>
+                    </section>
+                    <section>
                         <h3>Scripting</h3>
                         <p class="fragment"><i>Scraper</i> les bases de données...</p>
-                        <p class="fragment">... nous ne sommes pas les premiers !</p>
+                        <p class="fragment">... <a href="https://github.com/vulnersCom/nmap-vulners">nous ne sommes pas les premiers !</a></p>
                     </section>
                     <section>
                         <h3>Trafic dense</h3>
                         <p class="fragment">Nmap peut <i>prober</i> <strong>beaucoup</strong> de ports</p>
                         <p class="fragment">Choix rapidité / saturation</p>
                         <p class="fragment">Les ports sont connus (?)</p>
+                        <p class="fragment">Firewalls</p>
                     </section>
                     <section>
-                        <h3>Une goutte d'eau</h3>
+                        <h3>Conclusion</h3>
                         <p class="fragment">Analyse systémique mais générique</p>
                         <p class="fragment">Uniquement les programmes connus</p>
-                        <p class="fragment">Un simple composant de l'audit !</p>
+                        <p class="fragment"><a href="https://www.metasploit.com/">Un simple composant de l'audit !</a></p>
                     </section>
                 </section>
                 <section>
                     <h1 class="no-toc-progress">Merci !</h1>
                     <small>Des questions ?</small>
+                    <hr>
+                    <p>Présentation disponible à l'adresse :<br /><a href="https://eldred.fr/slides/reveal.js/slides/projet_com.html">https://eldred.fr/slides/reveal.js/slides/projet_com.html</a></p>
                 </section>
             </div>
         </div>
