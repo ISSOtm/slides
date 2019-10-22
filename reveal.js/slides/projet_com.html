@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+        <title>Slides</title>
+
+        <base href="../" />
+
+        <link rel="stylesheet" href="css/reset.css">
+        <link rel="stylesheet" href="css/reveal.css">
+        <link rel="stylesheet" href="css/theme/black.css">
+
+        <!-- Theme used for syntax highlighting of code -->
+        <link rel="stylesheet" href="lib/css/monokai.css">
+
+        <!-- Printing and PDF exports -->
+        <script>
+            var link = document.createElement( 'link' );
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+            document.getElementsByTagName( 'head' )[0].appendChild( link );
+        </script>
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                <section>
+                    <h1 class="no-toc-progress">Présentation projet Habert-Ben Chrifa</h1>
+                    <small>Eldred HABERT, Clément Guilbert</small>
+                </section>
+                <section>
+                    <h2>Contexte</h2>
+                    <section></section>
+                    <section>
+                        <h3>Le besoin</h3>
+                        <ul>
+                            <li class="fragment">Continuité de l'activité</li>
+                            <li class="fragment">Protection des secrets</li>
+                            <li class="fragment">Tous quelque chose à cacher</li>
+                        </ul>
+
+                        <aside class="notes">
+                            Les entreprises ont souvent un fort besoin de sécurité informatique. Déjà de la manière évidente, <b>clic</b> quand l'infrastructure est leur base de commerce ; mais aussi plus généralement quand elles stockent des données sensibles <b>clic</b>. De toute façon, on a tous des secrets, <b>clic</b> ne serait-ce que l'accès à notre compte bancaire.
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>Les solutions</h3>
+                        <p class="fragment">
+                            Fait maison
+                            <ul>
+                                <li class="fragment">Personnalisable</li>
+                                <li class="fragment">Reste en interne</li>
+                                <li class="fragment">Coûteux</li>
+                            </ul>
+                        </p>
+                        <p class="fragment">
+                            Déléguer à un prestataire
+                            <ul>
+                                <li class="fragment">Plus pointus</li>
+                                <li class="fragment">Regard neuf</li>
+                                <li class="fragment">Cher</li>
+                            </ul>
+                        </p>
+
+                        <aside class="notes">
+                            La possibilité la plus évidente est de gérer la sécurité en interne <b>clic</b>, ce qui a l'avantage que le personnel connaît bien l'application, ses tenants et aboutissants <b>clic</b>, et en plus réduit les chances de fuites <b>clic</b>. Entraîner ledit personnel reste coûteux <b>clic</b>.
+                            <hr>
+                            L'autre possibilité est de faire appel à un intervenant extérieur <b>clic</b>, qui aura plus d'expérience dans son domaine <b>clic</b> et potentiellement un nouveau point de vue <b>clic</b> sur l'entreprise. Le processus reste coûteux et intrusif <b>clic</b>, ceci dit.
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>Le mécanisme</h3>
+                        <p class="fragment">L'audit.</p>
+
+                        <aside class="notes">
+                            Dans tous les cas, on en arrive à l'audit de sécurité <b>clic</b> : dans les grandes lignes, on prend une structure existante et on en analyse les angles d'attaque.
+                        </aside>
+                    </section>
+                    <section>
+                        <h3>Problématique</h3>
+                        <strong>Comment automatiser un audit de sécurité ?</strong>
+                    </section>
+                </section>
+                <section>
+                    <h2>Réalisation</h2>
+                    <section></section>
+                    <section>
+                        <h3>Réduire le champ</h3>
+                        <p class="fragment">Processus complexe</p>
+                        <p class="fragment">Point d'entrée privilégié : le réseau</p>
+                        <p class="fragment">Quand même vaste</p>
+                    </section>
+                    <section>
+                        <h3>Moyens de scan</h3>
+                        <h4 class="fragment">De l'intérieur</h4>
+                        <ul>
+                            <li class="fragment">Donne plus d'informations</li>
+                            <li class="fragment">Pas forcément nécessaires</li>
+                            <li class="fragment">Disruptif</li>
+                        </ul>
+                        <h4 class="fragment">De l'extérieur</h4>
+                        <ul>
+                            <li class="fragment">Point de vue d'un attaquant</li>
+                            <li class="fragment">Plus générique</li>
+                            <li class="fragment">Également disruptif</li>
+                        </ul>
+                    </section>
+                    <section>
+                        <h3>Nmap</h3>
+                        <p class="fragment">Network Mapper</p>
+                        <p class="fragment">"Scan" pour déterminer qui est là</p>
+                        <p class="fragment">Analyse de la réponse pour la version</p>
+
+                        <aside class="notes">Faire une analogie avec toquer à toutes les portes d'un immeuble</aside>
+                    </section>
+                    <section>
+                        <h3>Et ensuite ?</h3>
+                        <p class="fragment">Logiciel + version = ?</p>
+                        <p class="fragment">Listes de vulnérabilités (CVE...)</p>
+                    </section>
+                </section>
+                <section>
+                    <h2>Résultats</h2>
+                    <section></section>
+                    <section>
+                        <h3>Scripting</h3>
+                        <p class="fragment"><i>Scraper</i> les bases de données...</p>
+                        <p class="fragment">... nous ne sommes pas les premiers !</p>
+                    </section>
+                    <section>
+                        <h3>Trafic dense</h3>
+                        <p class="fragment">Nmap peut <i>prober</i> <strong>beaucoup</strong> de ports</p>
+                        <p class="fragment">Choix rapidité / saturation</p>
+                        <p class="fragment">Les ports sont connus (?)</p>
+                    </section>
+                    <section>
+                        <h3>Une goutte d'eau</h3>
+                        <p class="fragment">Analyse systémique mais générique</p>
+                        <p class="fragment">Uniquement les programmes connus</p>
+                        <p class="fragment">Un simple composant de l'audit !</p>
+                    </section>
+                </section>
+                <section>
+                    <h1 class="no-toc-progress">Merci !</h1>
+                    <small>Des questions ?</small>
+                </section>
+            </div>
+        </div>
+
+        <script src="js/reveal.js"></script>
+
+        <script>
+            // More info about config & dependencies:
+            // - https://github.com/hakimel/reveal.js#configuration
+            // - https://github.com/hakimel/reveal.js#dependencies
+            Reveal.initialize({
+                dependencies: [
+                    { src: 'plugin/markdown/marked.js' },
+                    { src: 'plugin/markdown/markdown.js' },
+                    { src: 'plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize(); toc_progress.create(); } },
+                    { src: 'plugin/notes/notes.js', async: true },
+                    { src: 'plugin/highlight/highlight.js', async: true }
+                ]
+            });
+        </script>
+    </body>
+</html>
