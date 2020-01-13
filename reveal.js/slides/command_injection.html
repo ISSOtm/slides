@@ -36,6 +36,13 @@
                     </small></aside>
                 </section>
                 <section>
+                    <h2>Kézako</h2>
+                    <p class="fragment">La command injection consiste en l'exécution de commandes shell arbitraires dans un service qui n'est pas destiné à fournir un shell.</p>
+                    <p class="fragment">(Par exemple, obtenir un shell à partir d'une application censée fournir l'état des utilisateurs)</p>
+                    <p class="fragment">Ce genre de faille apparaît quand le programme appelé invoque un shell avec des paramètres passés par l'utilisateur.</p>
+                    <p class="fragment">Voyons un exemple.</p>
+                </section>
+                <section>
                     <h2>Mise en situation</h2>
                     <section>
                         <p class="fragment">Vous êtes sysadmin.</p>
@@ -184,12 +191,10 @@ uid=0(root) gid=0(root) groups=0(root)
                         <p>Parfait pour la reconnaissance...</p>
                         <p class="fragment"><code>echo "localhost >/dev/null & id && uname -a && pwd" | nc &lt;ip&gt; 54321</code></p>
                         <code class="fragment"><pre>
-echo "localhost>/dev/null & id && uname -a && pwd" | nc localhost 54321
 uid=1000(issotm) gid=1000(issotm) groups=1000(issotm),56(bumblebee)
 Linux sheik-kitty 5.4.8-arch1-1 #1 SMP PREEMPT Sat, 04 Jan 2020 23:46:18 +0000 x86_64 GNU/Linux
 /home/issotm/command_injection
                         </pre></code>
-                        <p class="fragment">(On avait prévenu : <strong>mauvais</strong> sysadmin)</p>
                     </section>
                     <section>
                         <p>...l'attaque...</p>
@@ -273,6 +278,17 @@ int main() {
 
                         </code></pre>
                     </section>
+                </section>
+                <section>
+                    <h2>Conclusion</h2>
+                    <p class="fragment">Solutions possibles :</p>
+                    <ul>
+                        <li class="fragment">Éviter d'utiliser le shell si c'est possible</li>
+                        <li class="fragment">Utiliser <code>exec()</code> au lieu de <code>system()</code></li>
+                        <li class="fragment">Utiliser des appels systèmes au lieu d'appeler des programmes</li>
+                        <li class="fragment">Comme pour tout : <strong>ne jamais faire confiance aux données de l'utilisateur</strong></li>
+                        <li class="fragment">Ne <strong>jamais</strong> exposer un programme tournant en tant que <code>root</code> à l'Internet</li>
+                    </ul>
                 </section>
             </div>
         </div>
