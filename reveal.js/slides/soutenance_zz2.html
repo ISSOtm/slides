@@ -23,12 +23,107 @@
 			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
 			document.getElementsByTagName( 'head' )[0].appendChild( link );
 		</script>
+
+		<link rel="stylesheet" href="slide_assets/soutenance_zz2/gameboy.css">
+
+		<style type="text/css">
+			.small-caps { font-variant-caps: small-caps; }
+		</style>
 	</head>
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
+				<section>
+					<h1 class="no-toc-progress" style="font-size: 1.5em;">
+						Soutenance projet 2<sup>ème</sup> année<br>
+						<small>Adaptateur Ethernet pour Game Boy™</small>
+					</h1>
+					<div id="gameboy" style="float: left;">
+						<div id="back"></div>
+						<div id="border"></div>
+						<div id="card3"></div>
+						<div id="card2"></div>
+						<div id="chip2"></div>
+						<div id="screenBack"></div>
+						<div id="card1"></div>
+						<div id="speaker"></div>
+						<div id="chip"></div>
+						<div id="chipPinL"></div>
+						<div id="chipPinR"></div>
+						<div id="ec1"></div>
+						<div id="volumeWheelBack"></div>
+						<div id="volumeWheel"></div>
+						<div id="joystickBack"></div>
+						<div id="buttonsABBack"></div>
+						<div id="buttonsSSBack"></div>
+						<div id="jackBack"></div>
+						<div id="jack"></div>
+						<div id="ec2"></div>
+						<div id="powerBack"></div>
+						<div id="power"></div>
+						<div id="box"></div>
+						<div id="screen"></div>
+						<div id="screen2"></div>
+						<div id="joystickCross1"></div>
+						<div id="joystickCross2"></div>
+						<div id="buttonsSS"></div>
+						<div id="buttonsSSText"></div>
+						<div id="buttonsAB"></div>
+						<div id="buttonsABText"></div>
+						<div id="powerLed"></div>
+						<div id="speakerFilter"></div>
+					</div>
+					<dl>
+						<dt class="small-caps">Présentation</dt>
+						<dd>Loïck Chovet, Eldred Habert</dd>
+						<dt class="small-caps">Tuteur</dt>
+						<dd>Alexis Pereda</dd>
+						<dt class="small-caps">Responsable ISIMA</dt>
+						<dd>Patrice Laurençot</dd>
+					</dl>
+				</section>
+				<section>
+					<h2>Slide 1</h2>
+					<section>
+						Ayo
+					</section>
+					<section>
+						<h3>Test</h3>
+						Aiee
+					</section>
+					<section>
+						<h3>Test 2</h3>
+						Aiee
+					</section>
+					<section>
+						<h3>Test</h3>
+						Aiee
+					</section>
+					<section>
+						<h3>Test 2</h3>
+						Aiee
+					</section>
+				</section>
+				<section>
+					<h2>Slide 2</h2>
+				</section>
+				<section>
+					<h2>Slide 1</h2>
+					<section>
+						Ayo
+					</section>
+					<section>
+						<h3>Test</h3>
+						Aiee
+					</section>
+					<section>
+						<h3>Test 2</h3>
+						Aiee
+					</section>
+				</section>
+				<section>
+					<h2>Slide 2</h2>
+				</section>
 			</div>
 		</div>
 
@@ -40,6 +135,7 @@
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
 				dependencies: [
+                    { src: 'plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize('scroll', '#333'); toc_progress.create(); } },
 					{ src: 'plugin/notes/notes.js', async: true },
 					{ src: 'plugin/highlight/highlight.js', async: true }
 				]
