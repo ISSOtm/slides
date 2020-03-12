@@ -82,47 +82,172 @@
 						<dd>Patrice Laurençot</dd>
 					</dl>
 				</section>
-				<section>
-					<h2>Slide 1</h2>
+
+				<section>Le GameBoy </section>
+				<section >
+					<section data-background-image="slide_assets/soutenance_zz2/Link-Cable2.jpg" data-background-size="contain" data-background-opacity="0.4">Le Cable Link 
+						
+						<aside class="notes">
+							<p>Nous allons commencer par aborder le cable Link, en effet le gameboy dispose d'un port permettant a deux appareils reliés par un cable propriétaire de communiquer.
+							Cependant, tout cela étant propriétaire, nous allons devoir determiner le protocole de communication</p>
+						</aside>
+					</section>
+					
 					<section>
-						Ayo
+						<h2>Qu'en dit Internet ? 
+							<aside class="notes">
+							<p>Premièrement, nous sommes aller chercher des informations sur Internet. Notre principale source d'informations à été GBDev
+								Il s'agit d'une communautée d'amateurs réunis autour de l'objectif de [A remplir par elodoredo]
+								
+							</p>
+						</aside></h2>
+						<p class="fragment">
+							</p>Source principale d'information : GBDev INSERER ICI ANIMATION GAMEBOY</p>
 					</section>
 					<section>
-						<h3>Test</h3>
-						Aiee
+						<h2>Pan Docs :</h2>
+						<p style="text-align: left;">
+							<img src="slide_assets/soutenance_zz2/gameboi.png" alt="Pinout du port link" style="float: right; height: 150px; border: none;" />
+							Protocole de communication : SPI<br/>
+							Fréquence : 8192Hz
+							&Eacute;tat au repos de l'horloge : Haut<br/>
+						
+							<aside class="notes">
+								<p>On peut alors trouver les differentes informations dans la section PanDoc de GBDev
+									Le protocole de communication inter-carte est un protocole similaire à du SPI, que nous expliquerons plus loin. 
+									Aussi, l'horloge du Gameboy à une fréquence de 8192Hz et un état au repos Haut.
+									Aussi, nous avons le cablage du port Link.
+									Ces informations auront cependant un besoin d'être confirmées plus tard pour s'assurer de leur justesse
+								</p>
+							</aside>
+
+						</p>
 					</section>
 					<section>
-						<h3>Test 2</h3>
-						Aiee
+						<h2>Le protocole SPI</h2>
+						<p class="fragment">Serial Protocol Interface</p>
+						<p class="fragment">1 maître, plusieurs esclaves</p>
+						<p class="fragment">4 fils : SCL,MOSI,MISO,CS</p>
+						<p class="fragment">Communication Full-Duplex</p>
+
+						<aside class="notes">
+							<p>Le Serial Protocol Interface est un protocole de communication très couramment utilisé dans l'industrie permettant une communication rapide entre un maître et un esclave parmis plusieurs.
+								Celui ci passe par 4 fils, SCl le fil d'horloge, Les fils de communication entre maître et esclave ainsi que le fil permettant au maître de choisir son esclave.
+								Ainsi, en passant par 2 fils, la communication à lieu du maitre vers l'esclave et réciproquement en même temps, on est donc en full duplex.
+							</p>
+						</aside>
+
 					</section>
 					<section>
-						<h3>Test</h3>
-						Aiee
+						<h2>Les modes du SPI</h2>
+						<p class="fragment">Combinaison de 2 bits : CPOL et CPHA</p>
+						<p class="fragment">CPOL : &Eacute;tat au repos de l'horloge (0 pour bas)</p>
+						<p class="fragment">CPHA : Front où les valeurs sont lues (0 pour le premier) </p>
+						<aside class="notes">
+							<p>La particularité du SPI étant qu'il fonctionne selon 4 modes.
+								Le mode s'obtient en combinant 2 bits : CPOL et CPHA, CPOL étant le bit de poids fort.
+								CPOL correspond à l'état au repos de l'horloge (0 pour l'état bas et 1 pour le haut)
+								CPHA correspond au front où les valeurs sur les fils mosi et miso sont lues.	
+							</p>
+						</aside>
 					</section>
 					<section>
-						<h3>Test 2</h3>
-						Aiee
+						<h3>Ce que l'on sait mais qu'il faut confirmer :</h2>
+						<p class="fragment"> SPI mode 2 ou 3, de fréquence 8192Hz, placement des fils dans le port </p>
+						<h3>Ce qu'il faut déterminer :</h2>
+						<p class="fragment"> CPHA, Alternative au Slave Select </p>
+
+
+						<aside class="notes">
+							<p>Actuellement nous pouvons donc déjà lier ce protocole à celui du GameBoy. 
+								En effet, son mode est forcément 2 ou 3, nous avons aussi la fréquence de l'horloge ainsi que les pins du port Link.
+								Bien sur ces informations resteront a confirmer experimentalement.
+								Cependant il faut aussi trouver la valeur du bit CPHA ainsi qu'un moyen de passer outre le Slave Select.
+								En effet, le cable link ne dispose pas de slave select.
+							</p>
+						</aside>
+
 					</section>
 				</section>
 				<section>
-					<h2>Slide 2</h2>
+					<section>
+						Analyse du port Link du Gameboy
+					</section>
+					<section>
+						<h2>Le Breakout</h2>
+						<p> Objectif : <strong class="fragment">Acceder aux fils du port <img src="slide_assets/soutenance_zz2/Gamelinkcablecomparison.jpg" alt="Port link" /></strong></p>
+					</section>
+					<section>
+						<h2>Les Solutions :</h2>
+						<p class="fragment">- Existante </p>
+						<p class="fragment">- Provisoire</p>
+						<p class="fragment">- Carte électronique</p> 
+					</section>
+					<section>
+						<h2>Solutions Existantes</h2>
+						<p> Une seule : </p>
+						<p> <img src="slide_assets/soutenance_zz2/tindebreakout.jpg" alt="Breakout Tindie" height="350" /></p> 
+						<p class="fragment" >Inconvenients : Site non fiable, 13$, durée de livraison</p>
+					</section>
+					<section>
+						<h2>Solution Provisoire</h2>
+						<p> <img src="slide_assets/soutenance_zz2/breakoutcarton.jpg" alt="Breakout Carton" height="350" /></p> 
+						<p class="fragment" >Inconvenients : Faible durabilitée</p>
+					</section>
+					<section>
+						<h2>Solution Finale</h2>
+						<p> Carte électronique designé sous Easy EDA <img src="slide_assets/soutenance_zz2/easyeda.png" alt="Logo Easy EDA" /></p> 
+					</section>
+					<section>
+						<h2>Easy EDA</h2>
+						<p> Editeur en ligne de CAO de cartes électroniques <img src="slide_assets/soutenance_zz2/capture.png" alt="Interface" height="350" /></p> 
+						<p class="fragment" >Permet d'aller de l'édition de la carte à la commande</p>
+					</section>
+					<section>
+						<h2>Designs intermédiaires</h2>
+						<p> Premier concept</p>
+						<p> <img src="slide_assets/soutenance_zz2/breakoutv1.jpg" alt="Premier design imprimé" height="350" ></p> 
+						<p class="fragment" >Défauts : Pistes trop courtes, Trous non traversants</p>
+					</section>
+					<section>
+						<h2>Design final</h2>
+						<p><img src="slide_assets/soutenance_zz2/breakoutfinalplan.png" alt="Rendu final design" height="350" />
+							<img src="slide_assets/soutenance_zz2/breakputfinalphoto.png" alt="Rendu final réel" height="350" />
+						</p> 
+					</section>
+
 				</section>
 				<section>
-					<h2>Slide 1</h2>
 					<section>
-						Ayo
+						Analyse et confirmation du mode de communication
 					</section>
 					<section>
-						<h3>Test</h3>
-						Aiee
+						<h2>L'outil principal : </h2>
+						Le Logic Port Analyser
+						<p> <img src="slide_assets/soutenance_zz2/logicportanal.png" alt="Logic Port Analyser" height="350"/> </p>
+						<p class="fragment"> Ensemble Hardware et Software permettant lecture et interpretation de trames</p>
 					</section>
 					<section>
-						<h3>Test 2</h3>
-						Aiee
+						<h2>L'interface</h2>
+						<p> <img src="slide_assets/soutenance_zz2/waveforms.png" alt="Interface" height="350"/> </p>
+
+					</section>
+					<section>
+						<h2>Résultats experimentaux</h2>
+						<p>On trouve bien ce que l'on veut avec l'analyseur suivant :</p>
+						<p > <img src="slide_assets/soutenance_zz2/Capture3.png" alt="Interpreteur SPI" height="350"/> </p>
+						
 					</section>
 				</section>
 				<section>
-					<h2>Slide 2</h2>
+					<section>
+						Intégration du protocole dans la carte embarquée
+					</section>
+					<section>
+
+					</section>
+				</section>
+
 				</section>
 			</div>
 		</div>
