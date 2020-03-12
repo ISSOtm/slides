@@ -28,6 +28,24 @@
 
 		<style type="text/css">
 			.small-caps { font-variant-caps: small-caps; }
+
+			#credits { font-size: 0.7em; }
+			#credits td, #credits th { border: none; vertical-align: middle; }
+			#credits th { text-align: right; font-variant-caps: small-caps; }
+			#credits td { text-align: left; }
+
+			#logos { height: 5vh; }
+			#logos > a > img {
+				float: right;
+				margin-left: 5%;
+				height: 100%;
+
+				border-radius: 6px;
+			}
+			#logos > a > img:not(:hover) {
+				border-color: #0000;
+				background-color: initial;
+			}
 		</style>
 	</head>
 	<body>
@@ -35,70 +53,73 @@
 			<div class="slides">
 				<section>
 					<h1 class="no-toc-progress" style="font-size: 1.5em;">
-						Soutenance projet 2<sup>ème</sup> année<br>
-						<small>Adaptateur Ethernet pour Game Boy™</small>
+						<small>Soutenance projet 2<sup>ème</sup> année</small><br>
+						Adaptateur Ethernet pour Game Boy™
 					</h1>
-					<div id="gameboy" style="float: left;">
-						<div id="back"></div>
-						<div id="border"></div>
-						<div id="card3"></div>
-						<div id="card2"></div>
-						<div id="chip2"></div>
-						<div id="screenBack"></div>
-						<div id="card1"></div>
-						<div id="speaker"></div>
-						<div id="chip"></div>
-						<div id="chipPinL"></div>
-						<div id="chipPinR"></div>
-						<div id="ec1"></div>
-						<div id="volumeWheelBack"></div>
-						<div id="volumeWheel"></div>
-						<div id="joystickBack"></div>
-						<div id="buttonsABBack"></div>
-						<div id="buttonsSSBack"></div>
-						<div id="jackBack"></div>
-						<div id="jack"></div>
-						<div id="ec2"></div>
-						<div id="powerBack"></div>
-						<div id="power"></div>
-						<div id="box"></div>
-						<div id="screen"></div>
-						<div id="screen2"></div>
-						<div id="joystickCross1"></div>
-						<div id="joystickCross2"></div>
-						<div id="buttonsSS"></div>
-						<div id="buttonsSSText"></div>
-						<div id="buttonsAB"></div>
-						<div id="buttonsABText"></div>
-						<div id="powerLed"></div>
-						<div id="speakerFilter"></div>
+					<div>
+						<div id="gameboy" style="float: left;">
+							<div id="back"></div>
+							<div id="border"></div>
+							<div id="card3"></div>
+							<div id="card2"></div>
+							<div id="chip2"></div>
+							<div id="screenBack"></div>
+							<div id="card1"></div>
+							<div id="speaker"></div>
+							<div id="chip"></div>
+							<div id="chipPinL"></div>
+							<div id="chipPinR"></div>
+							<div id="ec1"></div>
+							<div id="volumeWheelBack"></div>
+							<div id="volumeWheel"></div>
+							<div id="joystickBack"></div>
+							<div id="buttonsABBack"></div>
+							<div id="buttonsSSBack"></div>
+							<div id="jackBack"></div>
+							<div id="jack"></div>
+							<div id="ec2"></div>
+							<div id="powerBack"></div>
+							<div id="power"></div>
+							<div id="box"></div>
+							<div id="screen"></div>
+							<div id="screen2"></div>
+							<div id="joystickCross1"></div>
+							<div id="joystickCross2"></div>
+							<div id="buttonsSS"></div>
+							<div id="buttonsSSText"></div>
+							<div id="buttonsAB"></div>
+							<div id="buttonsABText"></div>
+							<div id="powerLed"></div>
+							<div id="speakerFilter"></div>
+						</div>
+						<table id="credits">
+							<tr><th>Présentation</th><td>Loïck <span class="small-caps">Chovet</span>,<br>Eldred <span class="small-caps">Habert</span></td></tr>
+							<tr><th>Tuteur</th><td>Alexis <span class="small-caps">Pereda</span></td></tr>
+							<tr><th>Responsable ISIMA</th><td>Patrice <span class="small-caps">Laurençot</span></td></tr>
+						</table>
 					</div>
-					<dl>
-						<dt class="small-caps">Présentation</dt>
-						<dd>Loïck Chovet, Eldred Habert</dd>
-						<dt class="small-caps">Tuteur</dt>
-						<dd>Alexis Pereda</dd>
-						<dt class="small-caps">Responsable ISIMA</dt>
-						<dd>Patrice Laurençot</dd>
-					</dl>
+					<div id="logos">
+						<a href="https://isima.fr"><img src="slide_assets/soutenance_zz2/ISIMA.png" alt="ISIMA"></a>
+						<a href="https://uca.fr"><img src="slide_assets/soutenance_zz2/UCA.png" alt="UCA"></a>
+					</div>
 				</section>
 
 				<section>Le GameBoy </section>
 				<section >
-					<section data-background-image="slide_assets/soutenance_zz2/Link-Cable2.jpg" data-background-size="contain" data-background-opacity="0.4">Le Cable Link 
-						
+					<section data-background-image="slide_assets/soutenance_zz2/Link-Cable2.jpg" data-background-size="contain" data-background-opacity="0.4">Le Cable Link
+
 						<aside class="notes">
 							<p>Nous allons commencer par aborder le cable Link, en effet le gameboy dispose d'un port permettant a deux appareils reliés par un cable propriétaire de communiquer.
 							Cependant, tout cela étant propriétaire, nous allons devoir determiner le protocole de communication</p>
 						</aside>
 					</section>
-					
+
 					<section>
 						<h2>Qu'en dit Internet ?</h2>
 						<aside class="notes">
 							<p>Premièrement, nous sommes aller chercher des informations sur Internet. Notre principale source d'informations à été GBDev
 								Il s'agit d'une communautée d'amateurs réunis autour de l'objectif de [A remplir par elodoredo]
-								
+
 							</p>
 						</aside>
 						<p class="fragment">
@@ -111,10 +132,10 @@
 							Protocole de communication : SPI<br/>
 							Fréquence : 8192Hz
 							&Eacute;tat au repos de l'horloge : Haut<br/>
-						
+
 							<aside class="notes">
 								<p>On peut alors trouver les differentes informations dans la section PanDoc de GBDev
-									Le protocole de communication inter-carte est un protocole similaire à du SPI, que nous expliquerons plus loin. 
+									Le protocole de communication inter-carte est un protocole similaire à du SPI, que nous expliquerons plus loin.
 									Aussi, l'horloge du Gameboy à une fréquence de 8192Hz et un état au repos Haut.
 									Aussi, nous avons le cablage du port Link.
 									Ces informations auront cependant un besoin d'être confirmées plus tard pour s'assurer de leur justesse
@@ -147,7 +168,7 @@
 							<p>La particularité du SPI étant qu'il fonctionne selon 4 modes.
 								Le mode s'obtient en combinant 2 bits : CPOL et CPHA, CPOL étant le bit de poids fort.
 								CPOL correspond à l'état au repos de l'horloge (0 pour l'état bas et 1 pour le haut)
-								CPHA correspond au front où les valeurs sur les fils mosi et miso sont lues.	
+								CPHA correspond au front où les valeurs sur les fils mosi et miso sont lues.
 							</p>
 						</aside>
 					</section>
@@ -159,7 +180,7 @@
 
 
 						<aside class="notes">
-							<p>Actuellement nous pouvons donc déjà lier ce protocole à celui du GameBoy. 
+							<p>Actuellement nous pouvons donc déjà lier ce protocole à celui du GameBoy.
 								En effet, son mode est forcément 2 ou 3, nous avons aussi la fréquence de l'horloge ainsi que les pins du port Link.
 								Bien sur ces informations resteront a confirmer experimentalement.
 								Cependant il faut aussi trouver la valeur du bit CPHA ainsi qu'un moyen de passer outre le Slave Select.
@@ -181,39 +202,39 @@
 						<h2>Les Solutions :</h2>
 						<p class="fragment">- Existante </p>
 						<p class="fragment">- Provisoire</p>
-						<p class="fragment">- Carte électronique</p> 
+						<p class="fragment">- Carte électronique</p>
 					</section>
 					<section>
 						<h2>Solutions Existantes</h2>
 						<p> Une seule : </p>
-						<p> <img src="slide_assets/soutenance_zz2/tindebreakout.jpg" alt="Breakout Tindie" height="350" /></p> 
+						<p> <img src="slide_assets/soutenance_zz2/tindebreakout.jpg" alt="Breakout Tindie" height="350" /></p>
 						<p class="fragment" >Inconvenients : Site non fiable, 13$, durée de livraison</p>
 					</section>
 					<section>
 						<h2>Solution Provisoire</h2>
-						<p> <img src="slide_assets/soutenance_zz2/breakoutcarton.jpg" alt="Breakout Carton" height="350" /></p> 
+						<p> <img src="slide_assets/soutenance_zz2/breakoutcarton.jpg" alt="Breakout Carton" height="350" /></p>
 						<p class="fragment" >Inconvenients : Faible durabilitée</p>
 					</section>
 					<section>
 						<h2>Solution Finale</h2>
-						<p> Carte électronique designé sous Easy EDA <img src="slide_assets/soutenance_zz2/easyeda.png" alt="Logo Easy EDA" /></p> 
+						<p> Carte électronique designé sous Easy EDA <img src="slide_assets/soutenance_zz2/easyeda.png" alt="Logo Easy EDA" /></p>
 					</section>
 					<section>
 						<h2>Easy EDA</h2>
-						<p> Editeur en ligne de CAO de cartes électroniques <img src="slide_assets/soutenance_zz2/capture.png" alt="Interface" height="350" /></p> 
+						<p> Editeur en ligne de CAO de cartes électroniques <img src="slide_assets/soutenance_zz2/capture.png" alt="Interface" height="350" /></p>
 						<p class="fragment" >Permet d'aller de l'édition de la carte à la commande</p>
 					</section>
 					<section>
 						<h2>Designs intermédiaires</h2>
 						<p> Premier concept</p>
-						<p> <img src="slide_assets/soutenance_zz2/breakoutv1.jpg" alt="Premier design imprimé" height="350" ></p> 
+						<p> <img src="slide_assets/soutenance_zz2/breakoutv1.jpg" alt="Premier design imprimé" height="350" ></p>
 						<p class="fragment" >Défauts : Pistes trop courtes, Trous non traversants</p>
 					</section>
 					<section>
 						<h2>Design final</h2>
 						<p><img src="slide_assets/soutenance_zz2/breakoutfinalplan.png" alt="Rendu final design" height="350" />
 							<img src="slide_assets/soutenance_zz2/breakputfinalphoto.png" alt="Rendu final réel" height="350" />
-						</p> 
+						</p>
 					</section>
 
 				</section>
@@ -236,7 +257,7 @@
 						<h2>Résultats experimentaux</h2>
 						<p>On trouve bien ce que l'on veut avec l'analyseur suivant :</p>
 						<p > <img src="slide_assets/soutenance_zz2/Capture3.png" alt="Interpreteur SPI" height="350"/> </p>
-						
+
 					</section>
 				</section>
 				<section>
