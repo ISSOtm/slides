@@ -61,33 +61,64 @@ div.progress[style="display: block;"] ~ #toc-progress-footer
 
 #toc-progress-footer-main
 {
-	width: 50%;
-	height: 100%;
-	float: left;
+	width: 100%;
+	height: 50%;
 	overflow: hidden;
 	letter-spacing: 0em;
 }
 
 #toc-progress-footer-main-inside
 {
-	float: right;
-	margin-right: 2em;
+	width: 100%;
+	height: 100%;
+}
+
+#toc-progress-footer-main-inside > ul
+{
+	list-style-type: upper-roman;
+
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
 }
 
 /* Position and styles for the right part (subsections) of the TOC-Progress */
 
 #toc-progress-footer-secondary
 {
-	width: 50%;
-	height: 100%;
-	float: right;
+	width: 100%;
+	height: 50%;
 	overflow: hidden;
 	letter-spacing: 0em;
 }
 
-#toc-progress-footer-secondary-inside
+#toc-progress-footer-secondary-inside, #toc-progress-footer-secondary-inside > ul
 {
-	float: left;
-	margin-left: 2em;
+	width: 100%;
+	height: 100%;
 }
 
+#toc-progress-footer-secondary-inside > ul > ul
+{
+	list-style-type: decimal;
+
+	width: 100%;
+	height: 100%;
+
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+
+#toc-progress-footer ul
+{
+	margin: 0;
+}
+
+#toc-progress-footer ul li
+{
+	font-size: 3vh;
+}
