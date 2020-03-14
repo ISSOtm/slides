@@ -201,16 +201,39 @@
 						<h2>Utilisation du port</h2>
 						<p>Objectif : <strong class="fragment">Accéder aux fils du port</strong></p>
 						<p class="fragment">Il nous faut un <strong>breakout</strong>.</p>
+
+						<aside class="notes">
+							<p>
+								Dans le but de déterminer de manière juste le protocole de communication, nous aimerions pouvoir analyser le signal en sortie de port Link.
+								Pour cela il est necessaire d'avoir accès aux différents fils de ce port, ce qui est la fonction d'un breakout.
+							</p>
+
 					</section>
 					<section>
 						<h3>Solution<span class="fragment strike" data-fragment-index="1">s</span> existante<span class="fragment strike" data-fragment-index="1">s</span></h3>
 						<img class="fragment" src="slide_assets/soutenance_zz2/tindebreakout.jpg" alt="Breakout de Vaguilar, sur Tindie" style="width: 30vw;">
 						<p class="fragment">Inconvénients : site non &laquo;fiable&raquo;, coût, durée de livraison</p>
+
+						<aside class="notes">
+							<p>
+								Notre première idée à été de chercher les solutions sur internet. 
+								Dans les fait, une seule existe, et est proposée sur le site Tindies par un amateur.
+								Cependant, nous n'avons aucune idée de la fiabilité du site ainsi que le coût est aussi élevé (13$) pour une si petite carte et la durée de livraison nous ont motivé a trouver d'autres solutions
+							</p>
+						</aside>
+
 					</section>
 					<section>
 						<h3>Solution provisoire</h3>
 						<img class="fragment" src="slide_assets/soutenance_zz2/breakoutcarton.jpg" alt="Breakout littéralement en carton" style="width: 25vw;">
 						<p class="fragment">Inconvénient : faible durabilité</p>
+
+						<aside class="notes">
+							<p>
+								Comme nous avions besoin d'analyser rapidement le signal, nous avons débuter par la conception d'un prototype très simple alliant des fils et une feuille cartonée.
+								Cependant, bien que fonctionnel, ce dispositif ne dispose que d'une très faible durabilitée.
+							</p>
+						</aside>
 					</section>
 					<section>
 						<h3>Solution définitive</h3>
@@ -218,18 +241,37 @@
 							<img src="slide_assets/soutenance_zz2/easyeda.png" alt="Logo Easy EDA" style="float: right; width: 10vw;">
 							Carte électronique conçue sous Easy EDA
 						</p>
+
+						<aside class="notes">
+							<p>
+								Il nous as ainsi fallu concevoir notre propre carte électronique. Pour cela nous avons utilisé l'éditeur en ligne Easy EDA.
+								Il s'agit d'une site de CAO (conception assistée par ordinateur) pour le design de carte électroniques qui propose l'entièretée de la chaine de production.
+								En effet, le site propose du design a la mise en production de la carte. Nous n'avons cependant pas utilisé cette derniere fonctionnalitée, Polytech disposant d'une machine pouvant imprimer ces circuits.
+							</p>
+						</aside>
 					</section>
 					<section>
 						<h3>Designs intermédiaires</h3>
 						<p class="fragment">Premier concept :</p>
 						<img class="fragment" src="slide_assets/soutenance_zz2/breakoutv1.jpg" alt="Premier design imprimé" style="width: 15vw;">
 						<p class="fragment">Défauts : pistes trop courtes, trous non traversants</p>
+						<aside class="notes">
+							<p>
+								Le premier design réalisé à été le suivant. Cepandant nous n'avions pas pris une donnée en compte, en effet, la machine de Polytech ne peut pas effectuer de trous traversant.
+								Ainsi, seuls trois fils etaient accessibles. Aussi les piste permettant de se connecter avec le port étaient trop petites.
+							</p>
+						</aside>
 					</section>
 					<section>
 						<h3>Design final</h3>
 						<div style="display: flex; justify-content: center; align-items: center; height: 40vh;">
 							<img src="slide_assets/soutenance_zz2/breakoutfinalplan.png" alt="Rendu final design" style="margin: 1%;">
 							<img src="slide_assets/soutenance_zz2/breakoutfinalphoto.png" alt="Rendu final réel" style="margin: 1%;">
+							<aside class="notes">
+								<p>
+									Pour le design final, nous avons utilisé la solution suivante permettant de faire revenir les piste du dessous au dessus. Le breakout suivant nous permettra donc d'analyser efficacement le signal
+								</p>
+							</aside>
 						</div>
 					</section>
 				</section>
@@ -237,16 +279,37 @@
 				<section>
 					<section>
 						<h2>Mode de communication</h2>
+						<aside class="notes">
+							<p>
+								Nous allons désormais chercher a confirmer nos informations et à établir la méthode de communication du Gameboy.
+							</p>
+						</aside>
 					</section>
 					<section>
 						<h3>Le Logic Analyzer</h3>
 						<img src="slide_assets/soutenance_zz2/logicportanal.png" alt="Logic Port Analyser" style="width: 20vw;">
 						<p class="fragment">Matériel + logiciel permettant lecture et interprétation de trames</p>
+
+						<aside class="notes">
+							<p>
+								Pour cela, un outils que nous utiliserons à mainte reprise est le Logic Port Analyser. Il s'agit d'un ensemble matériel et logiciel permettant la lecture et l'interpretations de signaux.
+								En effet, il suffit de brancher les fils à étudier au logic port analyser pour les apercevoir dans l'interface du logiciel.
+								On peut ainsi dans ce dernier creer des interpreteurs basés sur des protocoles connus dont, ce qui va nous interesser : Le SPI.
+							</p>
+						</aside>
+
 					</section>
 					<section>
 						<h3>Résultats experimentaux</h3>
 						<p>On trouve bien ce que l'on veut avec l'analyseur suivant :</p>
 						<img src="slide_assets/soutenance_zz2/Capture3.png" alt="Interpréteur SPI" style="width: 20vw;">
+
+						<aside class="notes">
+							<p>
+								Après quelques recherches empyriques nous avons réussi a trouver le bon ensemble permettant la lecture des trames. Il faut donc l'interpreteur suivant.
+								Un spi en mode 3. On pourra ainsi s'en servir dans le futur, pour verifier notre signal.
+							</p>
+						</aside>
 					</section>
 				</section>
 
