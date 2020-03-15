@@ -315,11 +315,84 @@
 
 				<section>
 					<section>
-						Intégration du protocole dans la carte embarquée
+						<h2>Intégration du protocole dans la carte embarquée</h2>
 					</section>
 					<section>
+						<h3>Les cartes Utilisées : </h3>
+						<p class="fragment">
+							Lectures de trames SPI et prototypage : Nucleo F303K8 <img src="slide_assets/soutenance_zz2/nucleo_f303k8.png" alt="Nucleo F303K8" style="width: 20vw; ">	
+						</p>
 
+						<aside class="notes">
+							<p>
+								Nous avons, dans un premier temps, utilisé la carte Nucleo F303K8. Cette dernière, déjà disponible à l'Isima disposait de performances suffisantes pour effectuer ce que l'on voulait. 
+								Cependant elle manquait d'un port Ethernet
+							</p>
+						</aside>
 					</section>
+					<section>
+						<h3>Les cartes Utilisées : </h3>
+						<p >
+							Prototype final : Nucleo F746ZG                                         	
+							 
+						</p>
+						<img src="slide_assets/soutenance_zz2/nucleo_f746zg.jpg" alt="Nucleo F746ZG" style="width: 20vw;">
+						<aside class="notes">
+							<p>
+								Et c'est pour cela que nous sommes ensuite passé à la carte suivante. En effet celle-ci est l'une des rares de la game à proposer un port Ethernet, ce qui allais donc nous permettre de relier nos différents travaux.
+
+							</p>		
+						</aside>
+					</section>
+					<section>
+						<h3>Le protocole SPI sur Nucleo</h3>
+						<p class="fragment">Master (Objet SPI) ou Slave (Objet SPISlave) ?</p>
+						<pre class="fragment"><code class="highlight lang-c++">SPISlave device(MOSI, MISO, SCL, CS);</code></pre></p>
+						<p class="fragment">Plus simple d'être esclave, Carte bien plus rapide que le Gameboy qui le suit donc facilement.</p>
+						<aside class="notes">
+							L'avantage de ces cartes est qu'elles disposent de composants déstinés aux traitements du protocole SPI.
+							Ainsi le langage utilisé sera le c++ adjoint à des bibliothèques liées a la carte.
+							Cependant, il existe 2 objets correspondants a nos besoins : SPI et SPISlave, indiquant si notre objet est maître ou esclave.
+							Il nous revenait donc de faire le choix, le gameboy decidant par lui même. Il nous a donc semblé plus simple de se placer en Slave, en effet la carte étant bien plus rapide que le Gameboy, il est donc plus simple de suivre son rythme de cette manière
+						</aside>
+					</section>
+					<section>
+						<h3>s'adapter au Simili SPI du Gameboy</h3>
+						<p>Quel Pin mettre en Chip Select ? </p>
+						<pre class="fragment"><code class="highlight lang-c++">SPISlave device(MOSI, MISO, SCL, NC);</code></pre>
+						<p>Comment bien interpréter ?</p>
+						<pre class="fragment"><code class="highlight lang-c++">
+device.format(8,3); // nombre de bits par paquet et mode de spi
+device.frequency(8192);
+						</code></pre>
+
+						<aside class="notes">
+							Ainsi, Il faut permettre à notre objet de classe SPISlave de se connecter au Gameboy.
+							Pour cela, on aimerait premièrement trouver comment pallier au manque de fil Chip Select sur le Game Boy.
+							Et bien, Mbed, la plateforme de code, propose d'affecter CS à la pin NC, qui ne correspond a aucune pin.
+							Aussi, on aimerait affecter les bons paramètres à ce SPI, c'est à dire la fréquence et le mode.
+							Pour cela il suffit d'utiliser les méthodes suivantes. 
+						</aside>
+					</section>
+					<section>
+						<h3>Communication avec le Game Boy</h3>
+						Deux methodes : reply() remplis le buffer de réponse, read() retourne la valeur reçu et envoie le contenu du buffer de réponse.
+						<pre class="fragment"><code class="highlight lang-c++">
+if(device.receive()) { //On regarde si un byte est présent sur le buffer de recéption
+	recv = device.read();
+	device.reply(recv);
+	msg.fill(recv);   //On stocke le byte dans une string
+}
+						</code></pre>
+						<aside class="notes">
+							Le protocole SPI de la Nucleo est basée sur 2 buffers, un d'entrée et un de réponse.
+							de plus l'objet SPISlave dispose de 2 méthodes importantes : 
+							Reply qui remplis le buffer de réponse et read qui retourne le contenu du buffer d'entrée et envoie le contenu du buffer de réponse.
+							Il faudra donc prendre en compte le fait que la réponse de la Nucléo viendra toujours au prochain message du Gameboy
+						</aside>
+					</section>
+
+
 				</section>
 
 				<section>
