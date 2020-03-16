@@ -107,14 +107,29 @@
 						<a href="https://isima.fr"><img src="slide_assets/soutenance_zz2/ISIMA.png" alt="ISIMA"></a>
 						<a href="https://uca.fr"><img src="slide_assets/soutenance_zz2/UCA.png" alt="UCA"></a>
 					</div>
-				</section>
 
+					<aside class="notes">
+						Bonjour, nous allons aujourd'hui vous presenter notre travail sur la création d'un adaptateur Ethernet pour le Nintendo Gameboy.
+					</aside>
+				</section>
+				<section>
+					<h2>Introduction</h2>
+					<p>Mode du Retro.</p>
+					<p>Gameboy : Un ensemble de solutions pour jouer partout</p>
+					<p class="fragment">Mais pas à distance </p>
+
+					<aside class="notes">
+						La mode est actuellement à l'études d'appareils dits rétros. En effet ceux-ci savaient optimiser pour profiter des faibles capacitées de l'époque.
+						Le Game Boy à été un dispositif très innovant à sa sortie et permettait a tout à chacun de pouvoir jouer partout pour un coût relativement faible.
+						La seule problématique à laquelle il ne pouvait pas répondre était celle du jeu en ligne☝️. Et c'est ce à quoi nous allons essayer de répondre.
+					</aside>
+				</section>
 				<section>
 					<section data-background-image="slide_assets/soutenance_zz2/Link-Cable2.jpg" data-background-size="contain" data-background-opacity="0.4">
 						<h2>Le Câble Link</h2>
 
 						<aside class="notes">
-							Pour blabla
+							Le Gameboy disposait d'un moyen pour communiquer : le cable Link. Celui-ci permet à deux Gameboy reliés par leur port Link de communiquer.
 						</aside>
 					</section>
 
@@ -133,10 +148,10 @@
 						</div>
 						<aside class="notes">
 							<p>
-								Nous avons d'abord recherché des informations sur Internet, afin d'éviter de répéter du travail déjà effectué. Nous avons trouvé la communauté GBDev, et leur ressource de référence, les "Pan Docs".
+								Nous avons d'abord recherché des informations sur Internet, afin d'éviter de répéter du travail déjà effectué. Nous avons trouvé la communauté GBDev ☝️, et leur ressource de référence, les "Pan Docs".☝️
 							</p>
 							<p>
-								Nous y avons trouvé une description du protocole de communication comme proche du SPI (que nous allons expliquer bientôt), la fréquence d'horloge de la communication, l'état de l'horloge au repos, ainsi que des schémas de placement des broches sur le port.
+								☝️Nous y avons trouvé une description du protocole de communication comme proche du SPI (que nous allons expliquer bientôt), la fréquence d'horloge de la communication, l'état de l'horloge au repos, ainsi que des schémas de placement des broches sur le port.
 							</p>
 						</aside>
 					</section>
@@ -149,13 +164,13 @@
 
 						<aside class="notes">
 							<p>
-								Le <dfn>Serial Protocol Interface</dfn> est un protocole de communication très couramment utilisé dans l'industrie permettant une communication rapide entre un maître et un esclave parmis plusieurs.
+								Le <dfn>Serial Protocol Interface</dfn> ☝️ est un protocole de communication très couramment utilisé dans l'industrie permettant une communication rapide entre un maître et un esclave parmis plusieurs.☝️
 							</p>
 							<p>
-								4 fils sont impliqués : le fil d'horloge Slave CLock, un fil d'envoi du maître à l'esclave (Master Out Slave In), un fil à sens inverse, et un fil d'activation d'esclave Chip Select.
+								4 fils sont impliqués ☝️: le fil d'horloge Slave CLock, un fil d'envoi du maître à l'esclave (Master Out Slave In), un fil à sens inverse, et un fil d'activation d'esclave Chip Select.
 							</p>
 							<p>
-								Ainsi, en passant par 2 fils, la communication a simultanément lieu du maître vers l'esclave et réciproquement, ce qui porte le nom de full-duplex.
+								Ainsi, en passant par 2 fils, la communication a simultanément lieu du maître vers l'esclave et réciproquement, ce qui porte le nom de full-duplex.☝️
 							</p>
 						</aside>
 					</section>
@@ -173,10 +188,10 @@
 						</table>
 						<aside class="notes">
 							<p>
-								Le SPI possède 4 modes (de 0 à 3), obtenus en combinant deux bits. Un bit donne l'état de l'horloge au repos (Clock POLarity), l'autre à quel front les données sont échangées sur les fils MISO et MOSI.
+								Le SPI possède 4 modes (de 0 à 3), obtenus en combinant deux bits.☝️ Un bit donne l'état de l'horloge au repos (Clock POLarity), l'autre à quel front les données sont échangées sur les fils MISO et MOSI.
 							</p>
 							<p>
-								Les Pan Docs indiquent que la clock est à l'état haut au repos, nous savons donc que CPOL = 1.
+								☝️Les Pan Docs indiquent que la clock est à l'état haut au repos, nous savons donc que CPOL = 1.
 							</p>
 						</aside>
 					</section>
@@ -189,8 +204,8 @@
 								Nous validerons plus loin le rapprochement entre le SPI et le protocole de la Game Boy. À ce stade, il nous manquait cependant deux données :
 							</p>
 							<ul>
-								<li>Quelle valeur prendre pour CPHA ?</li>
-								<li>Où est le fil de sélection d'esclave ?</li>
+								<li>Quelle valeur prendre pour CPHA ?</li>☝️
+								<li>Où est le fil de sélection d'esclave ?</li>☝️
 							</ul>
 						</aside>
 					</section>
@@ -204,8 +219,8 @@
 
 						<aside class="notes">
 							<p>
-								Dans le but de déterminer de manière juste le protocole de communication, nous aimerions pouvoir analyser le signal en sortie de port Link.
-								Pour cela il est necessaire d'avoir accès aux différents fils de ce port, ce qui est la fonction d'un breakout.
+								Dans le but de déterminer de manière juste le protocole de communication, nous aimerions pouvoir analyser le signal en sortie de port Link.☝️
+								Pour cela il est necessaire d'avoir accès aux différents fils de ce port, ce qui est la fonction d'un breakout.☝️
 							</p>
 
 					</section>
@@ -217,8 +232,8 @@
 						<aside class="notes">
 							<p>
 								Notre première idée à été de chercher les solutions sur internet. 
-								Dans les fait, une seule existe, et est proposée sur le site Tindies par un amateur.
-								Cependant, nous n'avons aucune idée de la fiabilité du site ainsi que le coût est aussi élevé (13$) pour une si petite carte et la durée de livraison nous ont motivé a trouver d'autres solutions
+								Dans les fait, une seule existe,☝️ et est proposée sur le site Tindies par un amateur.
+								☝️Cependant, nous n'avons aucune idée de la fiabilité du site ainsi que le coût est aussi élevé (13$) pour une si petite carte et la durée de livraison nous ont motivé a trouver d'autres solutions
 							</p>
 						</aside>
 
@@ -230,8 +245,8 @@
 
 						<aside class="notes">
 							<p>
-								Comme nous avions besoin d'analyser rapidement le signal, nous avons débuter par la conception d'un prototype très simple alliant des fils et une feuille cartonée.
-								Cependant, bien que fonctionnel, ce dispositif ne dispose que d'une très faible durabilitée.
+								Comme nous avions besoin d'analyser rapidement le signal, nous avons débuté par la conception d'un prototype très simple alliant des fils et une feuille cartonée ☝️.
+								Cependant, bien que fonctionnel, ☝️ce dispositif ne dispose que d'une très faible durabilitée.
 							</p>
 						</aside>
 					</section>
@@ -244,7 +259,7 @@
 
 						<aside class="notes">
 							<p>
-								Il nous as ainsi fallu concevoir notre propre carte électronique. Pour cela nous avons utilisé l'éditeur en ligne Easy EDA.
+								Il nous as ainsi fallu concevoir notre propre carte électronique. Pour cela nous avons utilisé l'éditeur en ligne Easy EDA.☝️
 								Il s'agit d'une site de CAO (conception assistée par ordinateur) pour le design de carte électroniques qui propose l'entièretée de la chaine de production.
 								En effet, le site propose du design a la mise en production de la carte. Nous n'avons cependant pas utilisé cette derniere fonctionnalitée, Polytech disposant d'une machine pouvant imprimer ces circuits.
 							</p>
@@ -257,7 +272,7 @@
 						<p class="fragment">Défauts : pistes trop courtes, trous non traversants</p>
 						<aside class="notes">
 							<p>
-								Le premier design réalisé à été le suivant. Cepandant nous n'avions pas pris une donnée en compte, en effet, la machine de Polytech ne peut pas effectuer de trous traversant.
+								☝️Le premier design réalisé à été le suivant.☝️ Cependant nous n'avions pas pris une donnée en compte, en effet, la machine de Polytech ne peut pas effectuer de trous traversant.☝️
 								Ainsi, seuls trois fils etaient accessibles. Aussi les piste permettant de se connecter avec le port étaient trop petites.
 							</p>
 						</aside>
@@ -266,10 +281,10 @@
 						<h3>Design final</h3>
 						<div style="display: flex; justify-content: center; align-items: center; height: 40vh;">
 							<img src="slide_assets/soutenance_zz2/breakoutfinalplan.png" alt="Rendu final design" style="margin: 1%;">
-							<img src="slide_assets/soutenance_zz2/breakoutfinalphoto.png" alt="Rendu final réel" style="margin: 1%;">
+							
 							<aside class="notes">
 								<p>
-									Pour le design final, nous avons utilisé la solution suivante permettant de faire revenir les piste du dessous au dessus. Le breakout suivant nous permettra donc d'analyser efficacement le signal
+									Pour le design final, nous avons utilisé la solution suivante ☝️permettant de faire revenir les piste du dessous au dessus. Le breakout suivant nous permettra donc d'analyser efficacement le signal
 								</p>
 							</aside>
 						</div>
@@ -292,7 +307,7 @@
 
 						<aside class="notes">
 							<p>
-								Pour cela, un outils que nous utiliserons à mainte reprise est le Logic Port Analyser. Il s'agit d'un ensemble matériel et logiciel permettant la lecture et l'interpretations de signaux.
+								Pour cela, un outils que nous utiliserons à mainte reprise est le Logic Port Analyser☝️. Il s'agit d'un ensemble matériel et logiciel permettant la lecture et l'interpretations de signaux.
 								En effet, il suffit de brancher les fils à étudier au logic port analyser pour les apercevoir dans l'interface du logiciel.
 								On peut ainsi dans ce dernier creer des interpreteurs basés sur des protocoles connus dont, ce qui va nous interesser : Le SPI.
 							</p>
@@ -325,7 +340,7 @@
 
 						<aside class="notes">
 							<p>
-								Nous avons, dans un premier temps, utilisé la carte Nucleo F303K8. Cette dernière, déjà disponible à l'Isima disposait de performances suffisantes pour effectuer ce que l'on voulait. 
+								Nous avons, dans un premier temps, utilisé la carte Nucleo F303K8.☝️ Cette dernière, déjà disponible à l'Isima disposait de performances suffisantes pour effectuer ce que l'on voulait. 
 								Cependant elle manquait d'un port Ethernet
 							</p>
 						</aside>
@@ -346,14 +361,15 @@
 					</section>
 					<section>
 						<h3>Le protocole SPI sur Nucleo</h3>
+						<p>Composants et Bibliothèques adaptées en langage c++</p>
 						<p class="fragment">Master (Objet SPI) ou Slave (Objet SPISlave) ?</p>
 						<pre class="fragment"><code class="highlight lang-c++">SPISlave device(MOSI, MISO, SCL, CS);</code></pre></p>
 						<p class="fragment">Plus simple d'être esclave, Carte bien plus rapide que le Gameboy qui le suit donc facilement.</p>
 						<aside class="notes">
 							L'avantage de ces cartes est qu'elles disposent de composants déstinés aux traitements du protocole SPI.
 							Ainsi le langage utilisé sera le c++ adjoint à des bibliothèques liées a la carte.
-							Cependant, il existe 2 objets correspondants a nos besoins : SPI et SPISlave, indiquant si notre objet est maître ou esclave.
-							Il nous revenait donc de faire le choix, le gameboy decidant par lui même. Il nous a donc semblé plus simple de se placer en Slave, en effet la carte étant bien plus rapide que le Gameboy, il est donc plus simple de suivre son rythme de cette manière
+							Cependant, il existe 2 objets correspondants a nos besoins : SPI et SPISlave ☝️, indiquant si notre objet est maître ou esclave.
+							Il nous revenait donc de faire le choix, le gameboy decidant par lui même. Il nous a donc semblé plus simple de se placer en Slave,☝️ en effet la carte étant bien plus rapide que le Gameboy, il est donc plus simple de suivre son rythme de cette manière.☝️
 						</aside>
 					</section>
 					<section>
@@ -369,9 +385,9 @@ device.frequency(8192);
 						<aside class="notes">
 							Ainsi, Il faut permettre à notre objet de classe SPISlave de se connecter au Gameboy.
 							Pour cela, on aimerait premièrement trouver comment pallier au manque de fil Chip Select sur le Game Boy.
-							Et bien, Mbed, la plateforme de code, propose d'affecter CS à la pin NC, qui ne correspond a aucune pin.
+							Et bien, Mbed, la plateforme de code, propose d'affecter CS à la pin NC, qui ne correspond a aucune pin.☝️
 							Aussi, on aimerait affecter les bons paramètres à ce SPI, c'est à dire la fréquence et le mode.
-							Pour cela il suffit d'utiliser les méthodes suivantes. 
+							Pour cela il suffit d'utiliser les méthodes suivantes.☝️ 
 						</aside>
 					</section>
 					<section>
@@ -387,6 +403,7 @@ if(device.receive()) { //On regarde si un byte est présent sur le buffer de rec
 						<aside class="notes">
 							Le protocole SPI de la Nucleo est basée sur 2 buffers, un d'entrée et un de réponse.
 							de plus l'objet SPISlave dispose de 2 méthodes importantes : 
+							☝️
 							Reply qui remplis le buffer de réponse et read qui retourne le contenu du buffer d'entrée et envoie le contenu du buffer de réponse.
 							Il faudra donc prendre en compte le fait que la réponse de la Nucléo viendra toujours au prochain message du Gameboy
 						</aside>
