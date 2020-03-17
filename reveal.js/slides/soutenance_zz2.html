@@ -119,8 +119,8 @@
 					<p class="fragment">Mais pas à distance </p>
 
 					<aside class="notes">
-						La mode est actuellement à l'études d'appareils dits rétros. En effet ceux-ci savaient optimiser pour profiter des faibles capacitées de l'époque.
-						Le Game Boy à été un dispositif très innovant à sa sortie et permettait a tout à chacun de pouvoir jouer partout pour un coût relativement faible.
+						La mode est actuellement à l'études d'appareils dits rétros. En effet ceux-ci savaient optimiser pour profiter des faibles capacités de l'époque.
+						Le Game Boy a été un dispositif très innovant à sa sortie et permettait a tout à chacun de pouvoir jouer partout pour un coût relativement faible.
 						La seule problématique à laquelle il ne pouvait pas répondre était celle du jeu en ligne☝️. Et c'est ce à quoi nous allons essayer de répondre.
 					</aside>
 				</section>
@@ -164,7 +164,7 @@
 
 						<aside class="notes">
 							<p>
-								Le <dfn>Serial Protocol Interface</dfn> ☝️ est un protocole de communication très couramment utilisé dans l'industrie permettant une communication rapide entre un maître et un esclave parmis plusieurs.☝️
+								Le <dfn>Serial Protocol Interface</dfn> ☝️ est un protocole de communication très couramment utilisé dans l'industrie permettant une communication rapide entre un maître et un esclave parmi plusieurs.☝️
 							</p>
 							<p>
 								4 fils sont impliqués ☝️: le fil d'horloge Slave CLock, un fil d'envoi du maître à l'esclave (Master Out Slave In), un fil à sens inverse, et un fil d'activation d'esclave Chip Select.
@@ -233,7 +233,7 @@
 							<p>
 								Notre première idée à été de chercher les solutions sur internet. 
 								Dans les fait, une seule existe,☝️ et est proposée sur le site Tindies par un amateur.
-								☝️Cependant, nous n'avons aucune idée de la fiabilité du site ainsi que le coût est aussi élevé (13$) pour une si petite carte et la durée de livraison nous ont motivé a trouver d'autres solutions
+								☝️Cependant, nous n'avons aucune idée de la fiabilité du site ainsi que le coût est aussi élevé (13$) pour une si petite carte et la durée de livraison nous ont motivé à trouver d'autres solutions
 							</p>
 						</aside>
 
@@ -245,8 +245,8 @@
 
 						<aside class="notes">
 							<p>
-								Comme nous avions besoin d'analyser rapidement le signal, nous avons débuté par la conception d'un prototype très simple alliant des fils et une feuille cartonée ☝️.
-								Cependant, bien que fonctionnel, ☝️ce dispositif ne dispose que d'une très faible durabilitée.
+								Comme nous avions besoin d'analyser rapidement le signal, nous avons débuté par la conception d'un prototype très simple alliant des fils et une feuille cartonné ☝️.
+								Cependant, bien que fonctionnel, ☝️ce dispositif ne dispose que d'une très faible durabilité.
 							</p>
 						</aside>
 					</section>
@@ -260,8 +260,8 @@
 						<aside class="notes">
 							<p>
 								Il nous as ainsi fallu concevoir notre propre carte électronique. Pour cela nous avons utilisé l'éditeur en ligne Easy EDA.☝️
-								Il s'agit d'une site de CAO (conception assistée par ordinateur) pour le design de carte électroniques qui propose l'entièretée de la chaine de production.
-								En effet, le site propose du design a la mise en production de la carte. Nous n'avons cependant pas utilisé cette derniere fonctionnalitée, Polytech disposant d'une machine pouvant imprimer ces circuits.
+								Il s'agit d'une site de CAO (conception assistée par ordinateur) pour le design de carte électroniques qui propose l'entièreté de la chaine de production.
+								En effet, le site propose du design a la mise en production de la carte. Nous n'avons cependant pas utilisé cette dernière fonctionnalité, Polytech disposant d'une machine pouvant imprimer ces circuits.
 							</p>
 						</aside>
 					</section>
@@ -273,7 +273,7 @@
 						<aside class="notes">
 							<p>
 								☝️Le premier design réalisé à été le suivant.☝️ Cependant nous n'avions pas pris une donnée en compte, en effet, la machine de Polytech ne peut pas effectuer de trous traversant.☝️
-								Ainsi, seuls trois fils etaient accessibles. Aussi les piste permettant de se connecter avec le port étaient trop petites.
+								Ainsi, seuls trois fils étaient accessibles. Aussi les piste permettant de se connecter avec le port étaient trop petites.
 							</p>
 						</aside>
 					</section>
@@ -307,21 +307,21 @@
 
 						<aside class="notes">
 							<p>
-								Pour cela, un outils que nous utiliserons à mainte reprise est le Logic Port Analyser☝️. Il s'agit d'un ensemble matériel et logiciel permettant la lecture et l'interpretations de signaux.
+								Pour cela, un outils que nous utiliserons à mainte reprise est le Logic Port Analyser☝️. Il s'agit d'un ensemble matériel et logiciel permettant la lecture et l'interprétations de signaux.
 								En effet, il suffit de brancher les fils à étudier au logic port analyser pour les apercevoir dans l'interface du logiciel.
-								On peut ainsi dans ce dernier creer des interpreteurs basés sur des protocoles connus dont, ce qui va nous interesser : Le SPI.
+								On peut ainsi dans ce dernier créer des interpréteurs basés sur des protocoles connus dont, ce qui va nous intéresser : Le SPI.
 							</p>
 						</aside>
 
 					</section>
 					<section>
-						<h3>Résultats experimentaux</h3>
+						<h3>Résultats expérimentaux</h3>
 						<p>On trouve bien ce que l'on veut avec l'analyseur suivant :</p>
 						<img src="slide_assets/soutenance_zz2/Capture3.png" alt="Interpréteur SPI" style="width: 20vw;">
 
 						<aside class="notes">
 							<p>
-								Après quelques recherches empyriques nous avons réussi a trouver le bon ensemble permettant la lecture des trames. Il faut donc l'interpreteur suivant.
+								Après quelques recherches empiriques nous avons réussi a trouver le bon ensemble permettant la lecture des trames. Il faut donc l'interpréteur suivant.
 								Un spi en mode 3. On pourra ainsi s'en servir dans le futur, pour verifier notre signal.
 							</p>
 						</aside>
@@ -366,10 +366,10 @@
 						<pre class="fragment"><code class="highlight lang-c++">SPISlave device(MOSI, MISO, SCL, CS);</code></pre></p>
 						<p class="fragment">Plus simple d'être esclave, Carte bien plus rapide que le Gameboy qui le suit donc facilement.</p>
 						<aside class="notes">
-							L'avantage de ces cartes est qu'elles disposent de composants déstinés aux traitements du protocole SPI.
+							L'avantage de ces cartes est qu'elles disposent de composants destinés aux traitements du protocole SPI.
 							Ainsi le langage utilisé sera le c++ adjoint à des bibliothèques liées a la carte.
 							Cependant, il existe 2 objets correspondants a nos besoins : SPI et SPISlave ☝️, indiquant si notre objet est maître ou esclave.
-							Il nous revenait donc de faire le choix, le gameboy decidant par lui même. Il nous a donc semblé plus simple de se placer en Slave,☝️ en effet la carte étant bien plus rapide que le Gameboy, il est donc plus simple de suivre son rythme de cette manière.☝️
+							Il nous revenait donc de faire le choix, le Gameboy décidant par lui même. Il nous a donc semblé plus simple de se placer en Slave,☝️ en effet la carte étant bien plus rapide que le Gameboy, il est donc plus simple de suivre son rythme de cette manière.☝️
 						</aside>
 					</section>
 					<section>
@@ -392,14 +392,8 @@ device.frequency(8192);
 					</section>
 					<section>
 						<h3>Communication avec le Game Boy</h3>
-						Deux methodes : reply() remplis le buffer de réponse, read() retourne la valeur reçu et envoie le contenu du buffer de réponse.
-						<pre class="fragment"><code class="highlight lang-c++">
-if(device.receive()) { //On regarde si un byte est présent sur le buffer de recéption
-	recv = device.read();
-	device.reply(recv);
-	msg.fill(recv);   //On stocke le byte dans une string
-}
-						</code></pre>
+						Deux méthodes : reply() remplis le buffer de réponse, read() retourne la valeur reçu et envoie le contenu du buffer de réponse.
+						
 						<aside class="notes">
 							Le protocole SPI de la Nucleo est basée sur 2 buffers, un d'entrée et un de réponse.
 							de plus l'objet SPISlave dispose de 2 méthodes importantes : 
