@@ -125,6 +125,11 @@
 					</aside>
 				</section>
 				<section>
+					<h2>Plan</h2>
+					<p>Annonce du plan...</p>
+				</section>
+
+				<section>
 					<section data-background-image="slide_assets/soutenance_zz2/Link-Cable2.jpg" data-background-size="contain" data-background-opacity="0.4">
 						<h2>Le Câble Link</h2>
 
@@ -222,6 +227,7 @@
 								Dans le but de déterminer de manière juste le protocole de communication, nous aimerions pouvoir analyser le signal en sortie de port Link.☝️
 								Pour cela il est necessaire d'avoir accès aux différents fils de ce port, ce qui est la fonction d'un breakout.☝️
 							</p>
+						</aside>
 
 					</section>
 					<section>
@@ -231,7 +237,7 @@
 
 						<aside class="notes">
 							<p>
-								Notre première idée à été de chercher les solutions sur internet. 
+								Notre première idée à été de chercher les solutions sur internet.
 								Dans les fait, une seule existe,☝️ et est proposée sur le site Tindies par un amateur.
 								☝️Cependant, nous n'avons aucune idée de la fiabilité du site ainsi que le coût est aussi élevé (13$) pour une si petite carte et la durée de livraison nous ont motivé à trouver d'autres solutions
 							</p>
@@ -281,7 +287,7 @@
 						<h3>Design final</h3>
 						<div style="display: flex; justify-content: center; align-items: center; height: 40vh;">
 							<img src="slide_assets/soutenance_zz2/breakoutfinalplan.png" alt="Rendu final design" style="margin: 1%;">
-							
+
 							<aside class="notes">
 								<p>
 									Pour le design final, nous avons utilisé la solution suivante ☝️permettant de faire revenir les piste du dessous au dessus. Le breakout suivant nous permettra donc d'analyser efficacement le signal
@@ -335,12 +341,12 @@
 					<section>
 						<h3>Les cartes Utilisées : </h3>
 						<p class="fragment">
-							Lectures de trames SPI et prototypage : Nucleo F303K8 <img src="slide_assets/soutenance_zz2/nucleo_f303k8.png" alt="Nucleo F303K8" style="width: 20vw; ">	
+							Lectures de trames SPI et prototypage : Nucleo F303K8 <img src="slide_assets/soutenance_zz2/nucleo_f303k8.png" alt="Nucleo F303K8" style="width: 20vw; ">
 						</p>
 
 						<aside class="notes">
 							<p>
-								Nous avons, dans un premier temps, utilisé la carte Nucleo F303K8.☝️ Cette dernière, déjà disponible à l'Isima disposait de performances suffisantes pour effectuer ce que l'on voulait. 
+								Nous avons, dans un premier temps, utilisé la carte Nucleo F303K8.☝️ Cette dernière, déjà disponible à l'Isima disposait de performances suffisantes pour effectuer ce que l'on voulait.
 								Cependant elle manquait d'un port Ethernet
 							</p>
 						</aside>
@@ -348,15 +354,15 @@
 					<section>
 						<h3>Les cartes Utilisées : </h3>
 						<p >
-							Prototype final : Nucleo F746ZG                                         	
-							 
+							Prototype final : Nucleo F746ZG
+
 						</p>
 						<img src="slide_assets/soutenance_zz2/nucleo_f746zg.jpg" alt="Nucleo F746ZG" style="width: 20vw;">
 						<aside class="notes">
 							<p>
 								Et c'est pour cela que nous sommes ensuite passé à la carte suivante. En effet celle-ci est l'une des rares de la game à proposer un port Ethernet, ce qui allais donc nous permettre de relier nos différents travaux.
 
-							</p>		
+							</p>
 						</aside>
 					</section>
 					<section>
@@ -387,7 +393,7 @@ device.frequency(8192);
 							Pour cela, on aimerait premièrement trouver comment pallier au manque de fil Chip Select sur le Game Boy.
 							Et bien, Mbed, la plateforme de code, propose d'affecter CS à la pin NC, qui ne correspond a aucune pin.☝️
 							Aussi, on aimerait affecter les bons paramètres à ce SPI, c'est à dire la fréquence et le mode.
-							Pour cela il suffit d'utiliser les méthodes suivantes.☝️ 
+							Pour cela il suffit d'utiliser les méthodes suivantes.☝️
 						</aside>
 					</section>
 					<section>
@@ -396,7 +402,7 @@ device.frequency(8192);
 						
 						<aside class="notes">
 							Le protocole SPI de la Nucleo est basée sur 2 buffers, un d'entrée et un de réponse.
-							de plus l'objet SPISlave dispose de 2 méthodes importantes : 
+							de plus l'objet SPISlave dispose de 2 méthodes importantes :
 							☝️
 							Reply qui remplis le buffer de réponse et read qui retourne le contenu du buffer d'entrée et envoie le contenu du buffer de réponse.
 							Il faudra donc prendre en compte le fait que la réponse de la Nucléo viendra toujours au prochain message du Gameboy
@@ -404,6 +410,154 @@ device.frequency(8192);
 					</section>
 
 
+				</section>
+
+				<section>
+					<section>
+						<h2>Conception d'un protocole</h2>
+						<aside class="notes">
+							<p>
+								Ceci conclut la partie physique de la communication. Nous devions ensuite concevoir le reste du protocole de communication de Game Boy à Game Boy.
+							</p>
+							<p>
+								Cette communication a globalement lieu en deux parties : la Game Boy parle à l'adaptateur, et les adaptateurs se parlent entre eux. Nous avons décidé de concevoir la partie Game Boy en premier, puisque ce serait les fonctionnalités offertes à l'utilisateur final ; la communication inter-adaptateur serait ensuite conçue en fonction des services à fournir. (Des fonctionnalités pourraient être retirées si leur implémentation s'avérait trop difficile.)
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3 style="display: none;">Couches réseau</h3>
+						<table>
+							<thead>
+								<tr><th>Numéro</th><th>Description</th><th>Implémentation</th></tr>
+							</thead>
+							<tbody>
+								<tr><th>7</th><td>Application</td><td rowspan="4" class="fragment" data-fragment-index="4">Programme</td></tr>
+								<tr><th>6</th><td>Présentation</td></tr>
+								<tr><th>5</th><td>Session</td></tr>
+								<tr><th>4</th><td>Transport</td></tr>
+								<tr><th>3</th><td>Réseau</td><td class="fragment" data-fragment-index="3">N/A</td></tr>
+								<tr><th>2</th><td>Liaison de données</td><td class="fragment" data-fragment-index="2">Adaptateur</td></tr>
+								<tr><th>1</th><td>Physique</td><td class="fragment" data-fragment-index="1">Câble Link</td></tr>
+							</tbody>
+						</table>
+						<aside class="notes">
+							<p>
+								Commençons par une vue d'ensemble : comment les différentes couches de communication sont réparties. Nous venons de voir la partie physique☝️, reste déjà à définir le cadre de notre adaptateur.
+							</p>
+							<p>
+								Étant donné qu'il s'assure de la communication sur un même réseau mais pas plus (comme nous sommes basés sur de l'Ethernet), nous l'avons assimilé à un équipement de couche 2.☝️
+							</p>
+							<p>
+								La répartition des niveaux supérieurs est simple : il n'y a pas de niveau 3☝️ puisque nous n'assurons pas de communication inter-réseaux, et le reste☝️ sera laissé à nos utilisateurs.
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Objectifs</h3>
+						<ul>
+							<li class="fragment">Fiabilité</li>
+							<li class="fragment">Rapidité</li>
+							<li class="fragment">Légèreté</li>
+						</ul>
+						<aside class="notes">
+							<p>
+								Afin de concevoir un protocole adapté à notre cas d'utilisation, nous avons recherché sur quels aspects nous focaliser en priorité. ☝️La fiabilité nous est immédiatement venue à l'esprit, puisque les jeux multijoueur veulent que tous les joueurs restent synchronisés.
+							</p>
+							<p>
+								La plupart des jeux multijoueurs de la console (Tetris, pour ne citer que le plus vendu) sont en temps réel ; nous chercherons donc à minimiser l'input lag, ☝️qui est la latence entre l'appui sur un bouton et l'exécution de son action.
+							</p>
+							<p>
+								Nous avons ensuite pensé au fait que la Game Boy était une machine peu rapide, ☝️et qu'il serait donc intéressant que le protocole requière peu de calculs supplémentaires de sa part.
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Protocole</h2>
+					</section>
+					<section>
+						<h3>Principe</h3>
+						<ol>
+							<li class="fragment">Envoi d'une commande</li>
+							<li class="fragment">Envoi d'un argument</li>
+							<li class="fragment">Réponse</li>
+						</ol>
+						<aside class="notes">
+							<p>
+								Nous avons décidé que le premier octet envoyé par la console serait une commande☝️ ; la liste des commandes pourrait être définie plus tard, ceci nous semblait assez flexible.
+							</p>
+							<p>
+								Le deuxième octet serait l'argument de l'instruction☝️ : en effet, l'envoi par exemple de données pourrait difficilement être encodé dans l'octet de commande, ou alors cela restreindrait fortement l'ensemble des commandes. De plus, cela demanderait des manipulations supplémentaires du côté de la console.
+							</p>
+							<p>
+								Enfin, le troisième octet serait un retour de la Nucléo☝️. Ceci serait utile pour des commandes de questionnement (ex : combien de consoles actuellement connectées ?), mais aussi comme code retour ("impossible d'envoyer, pas de connexion").
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Sécurités</h3>
+						<p>
+							<strong>Supposition</strong> : tous les câbles sont connectés ou non <strong>ensemble</strong>.
+						</p>
+						<img class="fragment" src="slide_assets/soutenance_zz2/exemple_signal.png" alt="Exemple de signal">
+						<aside class="notes">
+							<p>
+								Nous avons fait une supposition dans la conception du protocole☝️ : que tous les fils du câble Link sont soit tous connectés, soit tous déconnectés.
+							</p>
+							<p>
+								Ceci semble plutôt réaliste si l'on met de côté les faux contacts, et si nous partons du principe que tous les signaux peuvent être indépendamment déconnectés, nous ne pouvons aller nulle part.
+							</p>
+							<p>
+								Voici donc ce à quoi nous avons pensé☝️ : ceci schématise le transfert d'un octet du Game Boy à la Nucléo. Spécifiquement, le signal d'en bas est l'horloge reçue par la Nucléo, et en haut sa réponse.
+							</p>
+							<p>
+								Dès qu'un signal d'horloge est reçu, la Nucléo passe à l'état logique 0, et le maintient pour une durée de 15 demi-périodes. Le Game Boy devrait donc recevoir l'octet "1000 0000".
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Algorithme</h3>
+						<ol>
+							<li class="fragment">Envoyer l'octet</li>
+							<li class="fragment">0x80 reçu ? (Non ⇒ recommencer)</li>
+						</ol>
+						<img class="fragment" src="slide_assets/soutenance_zz2/exemple_corruption.png" alt="Exemple de signal corrompu">
+						<aside class="notes">
+							<p>
+								Du côté Game Boy, l'algorithme de transmission serait le suivant : ☝️d'abord, transmettre l'octet ; ensuite, examiner l'octet de réponse.☝️ S'il vaut bien 0x80, le transfert a eu lieu avec succès. Sinon, recommencer.
+							</p>
+							<p>
+								Si le câble s'est déconnecté pendant une fraction de la transaction, tous les signaux passent à l'état "1" à cause des résistances de pull-up. Donc, tout bit que le Game Boy ne reçoit pas est remplacé par un 1. Ceci protège le transfert de tous les bits sauf le premier.
+							</p>
+							<p>
+								Le premier bit est néanmoins protégé, car il sert de début à la transaction — s'il n'est pas reçu par la Nucléo, le bit suivant sera un 1 et non un 0, on ne recevra donc pas 0x80.
+							</p>
+							<p>
+								La Nucléo, elle, peut vérifier que la cadence de l'horloge est correcte, et rejeter l'octet reçu si ce n'est pas le cas.
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Bilan</h3>
+						<ul style="list-style-type: '👍';">
+							<li class="fragment">Réaliste</li>
+							<li class="fragment">Minimaliste</li>
+						</ul>
+						<ul style="list-style-type: '👎';">
+							<li class="fragment">Bit à bit</li>
+							<li class="fragment">Non testé</li>
+						</ul>
+						<aside class="notes">
+							<p>
+								Ce protocole prend en compte des cas d'usage réalistes☝️ et possède une spécification simple, donc raisonnable à implémenter. Il est en outre☝️ léger en implémentation, respectant ainsi les critères de rapidité et de légèreté posés plus haut.
+							</p>
+							<p>
+								Il y a deux inconvénients à la spécification que nous avons proposée : ☝️d'une part, elle traite les bits un à un, ce qui est peu compatible avec le protocole SPI, qui travaille lui plus octet par octet. Nous pensons qu'une retouche pour travailler octet par octet serait possible, mais ☝️ à cause de problèmes techniques nous n'avons pas pu éprouver ni approfondir notre travail.
+							</p>
+						</aside>
+					</section>
 				</section>
 
 				<section>
