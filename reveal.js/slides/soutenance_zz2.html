@@ -107,34 +107,60 @@
 						<a href="https://isima.fr"><img src="slide_assets/soutenance_zz2/ISIMA.png" alt="ISIMA"></a>
 						<a href="https://uca.fr"><img src="slide_assets/soutenance_zz2/UCA.png" alt="UCA"></a>
 					</div>
-
-					<aside class="notes">
-						Bonjour, nous allons aujourd'hui vous presenter notre travail sur la création d'un adaptateur Ethernet pour le Nintendo Gameboy.
-					</aside>
 				</section>
 				<section>
 					<h2>Introduction</h2>
-					<p>Mode du Retro.</p>
-					<p>Gameboy : Un ensemble de solutions pour jouer partout</p>
-					<p class="fragment">Mais pas à distance </p>
+					<p class="fragment">Mode du retro-gaming et retro-dev</p>
+					<p class="fragment">Game Boy : favori pour jouer partout...</p>
+					<p class="fragment">...mais pas à distance</p>
+					<p class="fragment">Problématique :<br><strong class="fragment">Comment communiquer avec la console ?</strong></p>
 
 					<aside class="notes">
-						La mode est actuellement à l'études d'appareils dits rétros. En effet ceux-ci savaient optimiser pour profiter des faibles capacités de l'époque.
-						Le Game Boy a été un dispositif très innovant à sa sortie et permettait a tout à chacun de pouvoir jouer partout pour un coût relativement faible.
-						La seule problématique à laquelle il ne pouvait pas répondre était celle du jeu en ligne☝️. Et c'est ce à quoi nous allons essayer de répondre.
+						<p>
+							☝️Dans le cadre de la mode du développement de jeux rétro, et en particulier sur Game Boy☝️ — une console particulièrement populaire peut-être pour des raisons de nostalgie mais certainement grâce à sa portabilité — nous avons voulu étendre les possibilités de la console en concevant un accessoire permettant ☝️le jeu en ligne.
+						</p>
+						<p>
+							Cette présentation va se focaliser☝️ sur l'un des aspects les plus intéressants de notre projet : ☝️la communication avec la console.
+						</p>
 					</aside>
 				</section>
 				<section>
-					<h2>Plan</h2>
-					<p>Annonce du plan...</p>
+					<h2 class="no-toc-progress">Plan</h2>
+					<ol style="list-style-type: upper-roman;">
+						<li class="fragment">
+							Bas niveau
+							<ol>
+								<li class="fragment">Recherche initiale</li>
+								<li class="fragment">Implémentation</li>
+							</ol>
+						</li>
+						<li class="fragment">
+							Haut niveau
+							<ol>
+								<li class="fragment">Problématiques</li>
+								<li class="fragment">Description</li>
+							</ol>
+						</li>
+					</ol>
+					<aside class="notes">
+						<p>
+							Le déroulement global de cette présentation ira ☝️du bas niveau au haut niveau.
+						</p>
+						<p>
+							La partie bas niveau comprendra d'abord un résumé de l'analyse documentaire que nous avons menée, suivi d'explications de l'implémentation qui a été faite.
+						</p>
+						<p>
+							Celle haut niveau, d'une présentation du cadre de la conception du protocole, suivi d'un exemple illustré d'une des composantes dudit protocole.
+						</p>
+					</aside>
 				</section>
 
 				<section>
 					<section data-background-image="slide_assets/soutenance_zz2/Link-Cable2.jpg" data-background-size="contain" data-background-opacity="0.4">
-						<h2>Le Câble Link</h2>
+						<h2>Câble Link</h2>
 
 						<aside class="notes">
-							Le Gameboy disposait d'un moyen pour communiquer : le cable Link. Celui-ci permet à deux Gameboy reliés par leur port Link de communiquer.
+							Le Game Boy dispose d'un moyen pour communiquer : le câble Link. Celui-ci permet à deux Game Boy reliés par leur ports Link de communiquer.
 						</aside>
 					</section>
 
@@ -218,7 +244,7 @@
 
 				<section>
 					<section data-background-image="slide_assets/soutenance_zz2/Gamelinkcablecomparison.jpg" data-background-size="contain" data-background-opacity="0.4">
-						<h2>Utilisation du port</h2>
+						<h2>Port Link</h2>
 						<p>Objectif : <strong class="fragment">Accéder aux fils du port</strong></p>
 						<p class="fragment">Il nous faut un <strong>breakout</strong>.</p>
 
@@ -299,10 +325,10 @@
 
 				<section>
 					<section>
-						<h2>Mode de communication</h2>
+						<h2>Analyse</h2>
 						<aside class="notes">
 							<p>
-								Nous allons désormais chercher a confirmer nos informations et à établir la méthode de communication du Gameboy.
+								Nous allons désormais chercher a confirmer nos informations et à établir la méthode de communication du Game Boy.
 							</p>
 						</aside>
 					</section>
@@ -336,7 +362,7 @@
 
 				<section>
 					<section>
-						<h2>Intégration</h2>
+						<h2>Implémentation</h2>
 					</section>
 					<section>
 						<h3>Les cartes Utilisées : </h3>
@@ -399,7 +425,7 @@ device.frequency(8192);
 					<section>
 						<h3>Communication avec le Game Boy</h3>
 						Deux méthodes : reply() remplis le buffer de réponse, read() retourne la valeur reçu et envoie le contenu du buffer de réponse.
-						
+
 						<aside class="notes">
 							Le protocole SPI de la Nucleo est basée sur 2 buffers, un d'entrée et un de réponse.
 							de plus l'objet SPISlave dispose de 2 méthodes importantes :
@@ -414,7 +440,7 @@ device.frequency(8192);
 
 				<section>
 					<section>
-						<h2>Conception d'un protocole</h2>
+						<h2>Conception</h2>
 						<aside class="notes">
 							<p>
 								Ceci conclut la partie physique de la communication. Nous devions ensuite concevoir le reste du protocole de communication de Game Boy à Game Boy.
@@ -558,6 +584,28 @@ device.frequency(8192);
 							</p>
 						</aside>
 					</section>
+				</section>
+
+				<section>
+					<h2>Conclusion</h2>
+					<p class="fragment">Succès de conception</p>
+					<p class="fragment">Réutilisation de travail précédent<span class="fragment"><br>(dans certaines limites)</span></p>
+					<p class="fragment">Pas d'implémentation : <span class="fragment strike">livrable</span>, <span class="fragment strike">retours</span></p>
+					<p class="fragment">Bonne base pour la suite</p>
+					<aside class="notes">
+						<p>
+							☝️Nous avons pu concevoir, de bout en bout, un protocole de communication entre un programme tournant sur Game Boy et un accessoire conçu par nos soins.
+						</p>
+						<p>
+							☝️Nous avons pu valoriser le travail effectué par d'autres avant nous sur la partie bas niveau, mais avons été plus limités sur la partie plus haut niveau.
+						</p>
+						<p>
+							☝️Il ne nous a pas été possible de mener l'implémentation à son terme, ce qui cause ☝️l'absence d'un livrable tel que nous nous y attendions au début du projet, et ☝️nous a empêchés de profiter de retours d'expérience sur notre travail.
+						</p>
+						<p>
+							☝️Nous espérons néanmoins que notre travail pourra être utile à d'autres projets ultérieurs.
+						</p>
+					</aside>
 				</section>
 
 				<section>
