@@ -14,6 +14,11 @@
 
 		<!-- Theme used for syntax highlighting of code -->
 		<link rel="stylesheet" href="lib/css/monokai.css">
+		<style type="text/css">
+			.name {
+				font-variant: small-caps;
+			}
+		</style>
 
 		<!-- Printing and PDF exports -->
 		<script>
@@ -29,7 +34,7 @@
 			<div class="slides">
 				<section>
 					<h2><small>Présentation projet ZZ3</small><br>Visualisation et agrégation de logs</h2>
-					<small>Rodolphe CHATAGNON, Eldred HABERT</small>
+					<small>Rodolphe <span class="name">Chatagnon</span>, Eldred <span class="name">Habert</span><br>Tuteur : Landry <span class="name">Breuil</span></small>
 				</section>
 				<section>
 					<section>
@@ -68,7 +73,7 @@
 						<h3> Suite Elastic </h3>
 						<div>
 							<img src="slide_assets/projet_zz3/elastic_stack_diagram.jpeg" alt="Diagramme suite Elastic" style="float: right; width: 50%;">
-							<ul style="flex: 1 1 0;">
+							<ul>
 								<li> Suite ELK </li>
 								<li> Puissant </li>
 								<li> Complet </li>
@@ -111,7 +116,7 @@
 						<p> Une commande = Installation complète </p>
 					</section>
 				</section>
-				<section>
+				<section data-background-image="https://jorgedelacruz.uk/wp-content/uploads/2018/10/grafana-esxi-022.png" data-background-size="contain" data-background-opacity="0.4">
 					<h3>Restant à faire</h3>
 					<ul>
 						<li class="fragment">Importation logs existants</li>
