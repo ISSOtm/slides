@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Projet 3è année ISIMA</title>
 
 		<base href="../" />
 
@@ -27,7 +27,32 @@
 	<body>
 		<div class="reveal">
 			<div class="slides">
-				<section>Slide 1</section>
+				<section>
+					<h2><small>Présentation projet ZZ3</small><br>Visualisation et agrégation de logs</h2>
+					<small>Rodolphe CHATAGNON, Eldred HABERT</small>
+				</section>
+				<section>
+					<section>
+						<h2>Problématique</h2>
+					</section>
+					<section>
+						<h3>Cadre</h3>
+						<ul>
+							<li class="fragment">Serveurs</li>
+							<li class="fragment">Des logs, des logs...</li>
+							<li class="fragment">Format texte (<a href="https://en.wikipedia.org/wiki/Common_Log_Format">CLF</a>)</li>
+						</ul>
+					</section>
+					<section>
+						<h3>Besoins</h3>
+						<ul>
+							<li class="fragment">Agrégation</li>
+							<li class="fragment">Filtrage (<s>grep</s>)</li>
+							<li class="fragment">Plus de sémantique ?</li>
+							<li class="fragment">Plus agréable à l'œil</li>
+						</ul>
+					</section>
+				</section>
 				<section>
 					<section>
 						<h2> Travail réalisé </h2>
@@ -41,14 +66,14 @@
 					</section>
 					<section>
 						<h3> Suite Elastic </h3>
-						<div style="display: flex; justify-content: space-between; align-items: center;">
-							<ul>
+						<div>
+							<img src="slide_assets/projet_zz3/elastic_stack_diagram.jpeg" alt="Diagramme suite Elastic" style="float: right; width: 50%;">
+							<ul style="flex: 1 1 0;">
 								<li> Suite ELK </li>
 								<li> Puissant </li>
 								<li> Complet </li>
 								<li> Lourd </li>
 							</ul>
-							<img src="slide_assets/projet_zz3/elastic_stack_diagram.jpeg" alt="Diagramme suite Elastic" style="width: 50vw;">
 						</div>
 					</section>
 					<section>
@@ -85,6 +110,14 @@
 						<p> Code &#10132; Git</p>
 						<p> Une commande = Installation complète </p>
 					</section>
+				</section>
+				<section>
+					<h3>Restant à faire</h3>
+					<ul>
+						<li class="fragment">Importation logs existants</li>
+						<li class="fragment">Génération logs en JSON</li>
+						<li class="fragment">Configuration dashboard<br><span class="fragment">→ Besoin client = filtrages de plus en plus précis (<em>drilldown</em>)</span></li>
+					</ul>
 				</section>
 			</div>
 		</div>
