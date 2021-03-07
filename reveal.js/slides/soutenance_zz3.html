@@ -1,0 +1,211 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Soutenance projet ZZ3</title>
+
+		<base href="../" />
+
+		<link rel="stylesheet" href="css/reset.css">
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css">
+
+		<!-- Theme used for syntax highlighting of code -->
+		<link rel="stylesheet" href="lib/css/monokai.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<style type="text/css">
+			.small-caps { font-variant-caps: small-caps; }
+
+			.reveal thead > tr > th { vertical-align: bottom; text-align: center; }
+			.reveal tbody > tr > td, tbody > tr > th { vertical-align: middle; }
+			.reveal tbody > tr > th { text-align: right; }
+			.reveal tbody > tr > td { text-align: center; }
+
+			#credits { font-size: 0.7em; }
+			#credits td, #credits th { border: none; vertical-align: middle; }
+			#credits th { text-align: right; font-variant-caps: small-caps; }
+			#credits td { text-align: left; }
+
+			#logos { height: 5vh; }
+			#logos > a > img {
+				float: right;
+				margin-left: 5%;
+				height: 100%;
+
+				border-radius: 6px;
+			}
+			#logos > a > img:not(:hover) {
+				border-color: #0000;
+				background-color: initial;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section>
+					<h1 class="no-toc-progress" style="font-size: 1.5em;">
+						<small>Soutenance projet 3<sup>ème</sup> année</small><br>
+						Étude d'outils d'agrégation et d'analyse/visualisation de logs
+					</h1>
+					<table id="credits">
+						<tr><th>Présentation</th><td>Rodolphe <span class="small-caps">Chatagnon</span>,<br>Eldred <span class="small-caps">Habert</span></td></tr>
+						<tr><th>Tuteur</th><td>Landry <span class="small-caps">Breuil</span></td></tr>
+						<tr><th>Responsable ISIMA</th><td>Michel <span class="small-caps">Cheminat</span></td></tr>
+					</table>
+					<div id="logos">
+						<a href="https://isima.fr"><img src="slide_assets/soutenance_zz2/ISIMA.png" alt="ISIMA"></a>
+						<a href="https://uca.fr"><img src="slide_assets/soutenance_zz2/UCA.png" alt="UCA"></a>
+					</div>
+				</section>
+				<section>
+					<h2>Introduction</h2>
+					<p class="fragment"><code>grep</code> c'est bien, mais...</p>
+
+					<aside class="notes">
+						<p>
+							Cette présentation va se focaliser☝️ sur ...
+						</p>
+					</aside>
+				</section>
+				<section>
+					<h2 class="no-toc-progress">Plan</h2>
+					<ol style="list-style-type: upper-roman;">
+						<li class="fragment">
+							Travail préparatoire
+							<ol>
+								<li class="fragment">Éventail de solutions</li>
+								<li class="fragment">Choix des outils</li>
+							</ol>
+						</li>
+						<li class="fragment">
+							Réalisation
+							<ol>
+								<li class="fragment">A</li>
+								<li class="fragment">B</li>
+							</ol>
+						</li>
+					</ol>
+					<aside class="notes">
+						<p>
+							Cette présentation abordera d'abord le travail préparatoire, c'est-à-dire la recherche initiale de solutions et le choix parmi celles-ci ; puis nous verrons la réalisation effective...
+						</p>
+					</aside>
+				</section>
+
+				<section>
+					<section>
+						<h2>Préparation</h2>
+
+						<aside class="notes">
+							Nous avons initialement retenu deux solutions pour
+						</aside>
+					</section>
+
+					<section data-background-image="https://www.elastic.co/static-res/images/elk/elk-stack-elkb-diagram.svg" data-background-size="contain" data-background-opacity="0.4">
+						<h3>Suite Elastic (ELK)</h3>
+						<ul>
+							<li>Elasticsearch</li>
+							<li>Logstash</li>
+							<li>Kibana</li>
+							<li>Beats</li>
+						</ul>
+
+						<aside class="notes">
+							<p>
+								...
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Suite PLG</h3>
+						<ul>
+							<li>Promtail</li>
+							<li>Loki</li>
+							<li>Grafana</li>
+						</ul>
+
+						<aside class="notes">
+							<p>
+								...☝️
+							</p>
+						</aside>
+					</section>
+					<section>
+						<h3>Comparatif</h3>
+						<p class="fragment">...</p>
+						<aside class="notes">
+							<p>
+								...
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<section>
+						<h2>Travail réalisé</h2>
+
+						<aside class="notes">
+							<p>
+								...☝️
+							</p>
+						</aside>
+
+					</section>
+					<section>
+						<h3>...</h3>
+
+						<aside class="notes">
+							<p>
+								...
+							</p>
+						</aside>
+					</section>
+				</section>
+
+				<section>
+					<h2>Conclusion</h2>
+
+					<aside class="notes">
+						...
+					</aside>
+				</section>
+
+				<section>
+					<h2>Remerciements</h2>
+					<ul>
+						<li>Notre tuteur, pour sa patience ;</li>
+						<li>Vous, pour votre attention !</li>
+					</ul>
+				</section>
+			</div>
+		</div>
+
+		<script src="js/reveal.js"></script>
+
+		<script>
+			// More info about config & dependencies:
+			// - https://github.com/hakimel/reveal.js#configuration
+			// - https://github.com/hakimel/reveal.js#dependencies
+			Reveal.initialize({
+				dependencies: [
+                    { src: 'plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize('scroll', '#333'); toc_progress.create(); } },
+					{ src: 'plugin/notes/notes.js', async: true },
+					{ src: 'plugin/highlight/highlight.js', async: true }
+				]
+			});
+		</script>
+	</body>
+</html>
