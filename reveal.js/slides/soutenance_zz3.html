@@ -60,9 +60,10 @@
 						Étude d'outils d'agrégation et d'analyse/visualisation de logs
 					</h1>
 					<table id="credits">
-						<tr><th>Présentation</th><td>Rodolphe <span class="small-caps">Chatagnon</span>,<br>Eldred <span class="small-caps">Habert</span></td></tr>
+						<tr><th>Présentation</th><td>Rodolphe <span class="small-caps">Chatagnon</span> et Eldred <span class="small-caps">Habert</span></td></tr>
 						<tr><th>Tuteur</th><td>Landry <span class="small-caps">Breuil</span></td></tr>
 						<tr><th>Responsable ISIMA</th><td>Michel <span class="small-caps">Cheminat</span></td></tr>
+						<tr><th>Date</th><td>Lundi 8 Mars 2021</td></tr>
 					</table>
 					<div id="logos">
 						<a href="https://isima.fr"><img src="slide_assets/soutenance_zz2/ISIMA.png" alt="ISIMA"></a>
@@ -92,8 +93,9 @@
 						<li class="fragment">
 							Réalisation
 							<ol>
-								<li class="fragment">A</li>
-								<li class="fragment">B</li>
+								<li class="fragment">Configurations</li>
+								<li class="fragment">Dashboard pour le temps réel</li>
+								<li class="fragment">Dashboards pour les anciens logs</li>
 							</ol>
 						</li>
 					</ol>
@@ -155,32 +157,112 @@
 
 				<section>
 					<section>
-						<h2>Travail réalisé</h2>
-
-						<aside class="notes">
-							<p>
-								...☝️
-							</p>
-						</aside>
-
+						<h2> Travail réalisé </h2>
 					</section>
 					<section>
-						<h3>...</h3>
-
-						<aside class="notes">
-							<p>
-								...
-							</p>
-						</aside>
+						<h3 style="display: none;">Configurations</h3>
+						<h4> Installation et configuration </h4>
+						<ul>
+							<li> Vagrantfile </li>
+							<li> Playbook Ansible </li>
+							<li> Service </li>
+							<li> Gestion des utilisateurs </li>
+							<li> Fichiers de configurations </li>
+						</ul>
+					</section>
+					<section>
+						<h4> Labels </h4>
+						<img src="slide_assets/soutenance_zz3/real_time_hit.png" alt="Filtrage en temps réel">
+					</section>
+					<section>
+						<h3 style="display: none;">Dashboard pour le temps réel</h3>
+						<h4> Choix du dashboard </h4>
+						<div style="float: left; width: 50%;">
+							&#10008; Création à partir de 0 
+								<ul>
+									<li> Complexe </li>
+									<li> LogQL </li>
+									<li> Temps limité </li>
+								</ul>
+						</div>
+						<div style="float: right; width: 50%;">
+							&#10004; Dashboard préconfiguré 
+							<ul>
+								<li> Grafana Labs </li>
+								<li> Pertinent </li>
+								<li> Peu de modifications </li>
+							</ul>
+						</div>
+					</section>
+					<section>
+						<h4> Filtres et graphes </h4>
+						<img src="slide_assets/soutenance_zz3/real_time_dashboard_filter.png" alt="Dashboard temps réel : filtre" style="float: left; width: 49%;">
+						<img src="slide_assets/soutenance_zz3/real_time_dashboard_kpi.png" alt="Dashboard temps réel : kpi" style="float: right; width: 49%;">
+						<img src="slide_assets/soutenance_zz3/real_time_dashboard_statistics.png" alt="Dashboard temps réel : statistiques" style="float: left; width: 49%;">
+						<img src="slide_assets/soutenance_zz3/real_time_dashboard_acquisition.png" alt="Dashboard temps réel : acquisition" style="float: right; width: 49%;">
+					</section>
+					<section>
+						<h3 style="display: none;">Dashboards pour les anciens logs</h3>
+						<h4> Importation d'anciens logs </h4>
+						<p> 3 échantillons venant de la production : </p>
+						<ul>
+							<li> www : site web drupal </li>
+							<li> ids : infrastructure de données spatiales </li>
+							<li> tiles : serveur de flux OGC tuilé </li>
+						</ul>
+					</section>
+					<section>
+						<h4> Extraction de la date </h4>
+						<p> Format : </p>
+						<div style="overflow:auto">
+							<pre> $remote_addr $server_addr $remote_user [$time_local] ' '"$request" $status $body_bytes_sent ' '"$http_referer" "$http_user_agent" $request_time </pre>
+						</div>
+						<p> Regex : </p>
+						<div style="overflow:auto">
+							<pre> ^(?P&lt;remote_addr&gt;[^ ]*) (?P&lt;server_addr&gt;[^ ]*) (?P&lt;remote_user&gt;[^ ]*) \[(?P&lt;time_local&gt;[^]]*)] "(?P&lt;request&gt;[^"]*)" (?P&lt;status&gt;[^ ]*) (?P&lt;body_bytes_sent&gt;[^ ]*) "(?P&lt;http_referer&gt;[^"]*)" "(?P&lt;http_user_agent&gt;[^"]*)" (?P&lt;request_time&gt;[^\n]*)$ </pre>
+						</div>
+						<p> &#9888; Différence entre www/ids et tiles </p>
+						<p> &#9888; Loki doit accepter les anciens logs </p>
+					</section>
+					<section>
+						<h4> Extraire tous les champs dans des labels ? </h4>
+						<p> Filtre : zone de texte &#10132; boîte de sélection </p>
+						<p> 1 label par champ &#10132; tue Loki </p>
+						<p> Seulement pour remote_user </p>
+					</section>
+					<section>
+						<h4> Nouveaux dashboards </h4>
+						<p> 3 formats &#10132; 3 dashboards </p>
+						<img src="slide_assets/soutenance_zz3/three_dashboards.png" alt="3 dashboards">
 					</section>
 				</section>
-
+				<section data-background-image="slide_assets/soutenance_zz3/tiles_dashboard.png" data-background-size="contain" data-background-opacity="0.4">
+					<h2>Démonstration</h2>
+				</section>
 				<section>
-					<h2>Conclusion</h2>
-
-					<aside class="notes">
-						...
-					</aside>
+					<section>
+						<h2>Conclusion</h2>
+					</section>
+					<section>
+						<p> &#10004; Choix d'une solution </p>
+						<p> &#10004; Plateforme de démonstration </p>
+						<p> &#10004; Dashboards avec filtres </p>
+						<p> &#10004; Temps réel et anciens logs </p>
+					</section>
+					<section>
+						<p> &#10008; Déploiement automatique en production </p>
+						<p> &#10004; Suffisament d'informations pour le déploiement </p>
+						<p> &#10004; Sortie de Nginx en JSON </p>
+						<p> &#10008; Mais pas avec le protocole Syslog </p>
+					</section>
+					<section>
+						<ul>
+							<li> Apprentissage de nouveaux concepts </li>
+							<li> Tous les niveaux du domaine traités </li>
+							<li> Ansible, c'est puissant </li>
+							<li> Git aussi... </li>
+						</ul>
+					</section>
 				</section>
 
 				<section>
@@ -200,6 +282,7 @@
 			// - https://github.com/hakimel/reveal.js#configuration
 			// - https://github.com/hakimel/reveal.js#dependencies
 			Reveal.initialize({
+				slideNumber: 'c/t',
 				dependencies: [
                     { src: 'plugin/toc-progress/toc-progress.js', async: true, callback: function() { toc_progress.initialize('scroll', '#333'); toc_progress.create(); } },
 					{ src: 'plugin/notes/notes.js', async: true },
