@@ -1,0 +1,480 @@
+---
+layout: slides
+title: "Débugger son code C plus efficacement avec GDB"
+permalink: /gdb
+redirect_from:
+  - /reveal.js/slides/gdb.html
+plugins:
+  - highlight
+---
+<style type="text/css">
+.green { color: #0a0; }
+.blue { color: #0aa; }
+.warning { color: #f5f; font-weight: bold; }
+.err { color: #f55; font-weight: bold; }
+.darkblue { color: #4d4dc1; }
+.brown { color: #a05000; }
+</style>
+<section data-background-image="assets/isilabs_final.svg" data-background-size="contain" data-background-opacity="0.4">
+    <h1>Micro-tuto IsiLabs</h1>
+    <code>Débugger son code C plus efficacement avec GDB</code>
+</section>
+<section>
+    <h2>D'abord, quelques ressources</h2>
+    <ul>
+        <li>GDB (utilisez votre package manager favori)</li>
+        <li>Un compilateur C suffisamment récent (GCC >= 4.7)</li>
+        <li>Make (probablement le Make GNU)</li>
+        <li><a href="https://github.com/ISSOtm/tuto-gdb" target="_blank">Un petit programme très très bien écrit</a></li>
+    </ul>
+    <p class="fragment"><small>Note : il n'est pas nécessaire d'utiliser GCC, Clang par exemple implémente plus ou moins les mêmes options</small></p>
+</section>
+<section>
+    <h2>Pour bien commencer</h2>
+    <section>
+        <h3>Compiler le code</h3>
+        <figure>
+            <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% make
+cc -O2 -Wall -Wextra -o shifter shifter.c
+<b>shifter.c:</b> Dans la fonction « <b>main</b> »:
+<b>shifter.c:38:14:</b> <span class="warning">attention:</span> paramères « <b>argc</b> » inutilisé [<span class="warning">-Wunused-parameter</span>]
+   38 | int main(<span class="warning">int argc</span>, char * argv[]) {
+      |          <span class="warning">~~~~^~~~</span>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+            <figcaption>Un warning ? Bof, c'est pas une erreur, pas grave</figcaption>
+        </figure>
+    </section>
+    <section>
+        <h3>Petits tests ?</h3>
+            <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% ./shifter en
+Please enter an integer N:
+31
+2^N = 2147483648
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% ./shifter fr
+Veuillez entrer un entier N :
+4
+2^N = 16
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+        <p class="fragment">Chouette, tout baigne :D</p>
+    </section>
+    <section>
+        <h2>En fait, non</h2>
+        <figure>
+            <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% ./shifter
+zsh: segmentation fault (core dumped)  ./shifter
+<span class="err">139</span> <span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+            <figcaption><small>(Le résultat varie de machine en machine ; il est possible que le programme boucle indéfiniment, par exemple)</small></figcaption>
+        </figure>
+    </section>
+</section>
+<section>
+    <h2>Plus rien ne va<br /><small>Mais comment le résoudre ?</small></h2>
+    <p class="fragment">Première étape : trouver le bug</p>
+</section>
+<section>
+    <h2><q>I will look for you, I <em>will</em> find you...</q></h2>
+    <section>
+        <p>
+            Solution intuitive : <span class="fragment"><code>printf</code> !</span>
+        </p>
+        <p><strong class="fragment">À proscrire !</strong></p>
+    </section>
+    <section>
+        <p>
+            Le mot-clef est <em><a href="https://en.cppreference.com/w/c/language/behavior">undefined behavior</a></em>. En gros, dans la plupart des cas, le compilateur est libre de réarranger le code d'une manière qui fausse les observations.<br />
+        </p>
+        <p class="fragment">
+            Pour plus d'informations, voir la <a href="https://blog.regehr.org/archives/232">partie 3</a> des articles de John Regehr sur l'UB, particulièrement la section "Another Example".
+        </p>
+    </section>
+    <section>
+        <q>...and I will kill you.</q>
+        <p>
+            On va donc utiliser une autre solution, plus efficace, précise et puissante : <strong class="fragment">gdb !</strong>
+        </p>
+    </section>
+</section>
+<section>
+    <h2>Bases de GDB</h2>
+    <section>
+        <p>Lancer son programme :</p>
+        <figure>
+            <small><pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% gdb ./shifter
+<span class="warning">GNU gdb (GDB) 8.3</span>
+Copyright (C) 2019 Free Software Foundation, Inc.
+License GPLv3+: GNU GPL version 3 or later &lt<a href="http://gnu.org/licenses.gpl.html">http://gnu/org/licenses/gpl.html</a>&gt;
+This is free software: you are free to change and redistribute it.
+There is NO WWARRANTY, to the extent permitted by law.
+Type "show copying" and "show warranty" for details.
+This GDB was configured as "x86_64-pc-linux-gnu".
+Type "show configuration" for configuration details.
+For bug reporting instructions, please see:
+&lt;<a href="https://www.gnu.org/software/gdb/bugs/">http://www.gnu.org/software/gdb/bugs/</a>&gt;.
+Find the GDB manual and other documentation resources online at:
+    &lt;<a href="http://www.gnu.org/software/gdb/documentation/">http://www.gnu.org/software/gdb/documentation/</a>&gt;.
+
+For help, type "help".
+Type "apropos word" to search for commands related to "word"...
+Reading symbols from <span class="green">./shifter</span>...
+(No debugging symbols found in ./shifter)
+(gdb) █</pre></small>
+            <figcaption>(Il est possible que vous n'ayiez pas de couleur avec des vieilles versions)</figcaption>
+        </figure>
+    </section>
+    <section>
+        <p><strong>Il ne faut pas passer les arguments du programme à gdb, uniquement le chemin vers l'exécutable !</strong></p>
+        <p class="fragment">(Aussi, "<samp>No debugging symbols</samp>" ? Probablement rien de grave...)</p>
+        <p class="fragment">Vous pouvez passer <code>-q</code> à GDB pour qu'il n'affiche pas le paragraphe d'aide au lancement.</p>
+    </section>
+    <section>
+        <p>Le petit prompt <code>(gdb)</code> indique qu'il accepte des commandes.</p>
+        <p class="fragment">Si le programme a actuellement la main, Ctrl+C l'interrompt et gdb prend la main.</p>
+        <p class="fragment">À noter que les commandes GDB peuvent être abrégées, les lettres essentielles seront en majuscules par la suite.</p>
+    </section>
+    <section>
+        <h3>Première commande : <code>Run</code></h3>
+        <figure>
+            <pre>
+(gdb) run fr
+Starting program: /home/issotm/hacklab/micro-tutos/gdb/shifter fr
+Veuillez entrer un entier N :
+4
+2^N = 16
+[Inferior 1 (process 83709) exited normally]
+(gdb) █</pre>
+            <figcaption>C'est à <code>Run</code> qu'on passe les arguments du programme.</figcaption>
+        </figure>
+    </section>
+    <section>
+        <h3>Deuxième commande : <code>Quit</code></h3>
+        <figure>
+            <pre>
+(gdb) quit
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+            <figcaption>Si le programme est en cours d'exécution, une confirmation sera demandée avant de quitter.</figcaption>
+        </figure>
+        <p class="fragment"><small>Les plus pressés utiliseront probablement juste Ctrl+D</small></p>
+    </section>
+</section>
+<section>
+    <h2><q>Sarah Connor ?</q></h2>
+    <section>
+        <p>Tentons de <code>run</code> avec aucun argument...</p>
+            <pre>
+(gdb) r
+Starting program: /home/issotm/hacklab/micro-tutos/gdb/shifter
+
+Program received signal SIGSEGV, Segmentation fault.
+<span class="darkblue">0x00007ffff7f36162</span> in <span class="brown">__strcmp_avx2</span> () from /usr/lib/libc.so.6
+(gdb) █</pre>
+        <p class="fragment">Le programme a crashé et gdb a repris la main, mais <strong>là où le programme a crashé !</strong></p>
+    </section>
+    <section>
+        <p>On va essayer une nouvelle commande : <strong><code>BackTrace</code></strong>.</p>
+        <figure class="fragment">
+            <pre>
+(gdb) bt
+#0 <span class="darkblue">0x00007ffff7f36162</span> in <span class="brown">__strcmp_avx2</span> () from /usr/lib/libc.so.6
+#1 <span class="darkblue">0x0000555555555220</span> in <span class="brown">chaine_langue</span> ()
+#2 <span class="darkblue">0x00005555555550a4</span> in <span class="brown">main</span> ()
+(gdb) █</pre>
+            <figcaption>(Les noms et l'adresse mémoire des fonctions peuvent être différents selon les machines)</figcaption>
+        </figure>
+        <p class="fragment">On voit la <strong>pile d'exécution</strong> : quelles fonctions ont appelé celle en cours.</p>
+    </section>
+    <section>
+        <p>L'erreur s'est produite dans une fonction de la librairie standard (<code>strcmp</code>), donc soit on a trouvé un bug dans la libc (😂) soit on lui a passé un mauvais argument.</p>
+        <p class="fragment">On souhaite donc examiner les arguments passés à <code>strcmp</code>, on a donc besoin de se placer dans le contexte de la fonction appelante (<code>chaine_langue</code>).</p>
+    </section>
+    <section>
+        <figure>
+            <pre>
+(gdb) bt
+#0 <span class="darkblue">0x00007ffff7f36162</span> in <span class="brown">__strcmp_avx2</span> () from /usr/lib/libc.so.6
+#1 <span class="darkblue">0x0000555555555220</span> in <span class="brown">chaine_langue</span> ()
+#2 <span class="darkblue">0x00005555555550a4</span> in <span class="brown">main</span> ()
+(gdb) █</pre>
+        <p>On va utiliser la commande <strong>FRame</strong> pour sélectionner une <em>stack frame</em>. Utilisez le numéro à gauche de la ligne de <code>chaine_langue</code>.</p>
+        <figure class="fragment">
+            <pre>
+(gdb) fr 1
+#1 <span class="darkblue">0x0000555555555220</span> in <span class="brown">chaine_langue</span> ()
+(gdb) █</pre>
+            <figcaption>On manque d'informations..!</figcaption>
+        </figure>
+    </section>
+</section>
+<section>
+    <h2>La pêche aux infos</h2>
+    <section>
+        <p>En soi, un programme ne contient peu ou pas d'informations sur son code source, c'est le but de la compilation. Mais on en aimerait bien pour débugger...</p>
+        <p class="fragment">C'est l'intérêt de l'option <code>-g</code> de GCC !</p>
+    </section>
+    <section>
+        <p>On va également se heurter au problème de l'optimisation : le compilateur est libre, si on l'autorise (option <code>-O</code>), de <strong>réarranger le code</strong> pour le rendre plus efficace, tant que le programme se comporte toujours pareil.</p>
+        <p class="fragment">Mais, pour débugger, ça va poser problème. On va donc désactiver les optimisations.</p>
+    </section>
+</section>
+<section>
+    <h2>Deuxième prise !</h2>
+    <section>
+        <p>J'ai créé un target Make appelé <code>develop</code> qui compile avec les options qui vont bien. Il faut juste faire <code>make clean</code> avant, comme on veut tout recompiler.</p>
+        <p class="fragment">(Si vous avez entendu parler de "configuration debug" versus "configuration release", c'est de ça que ça parle.)</p>
+    </section>
+    <section>
+        <figure>
+            <small><pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% make develop
+cc -g -O0  -Wall -Wextra -o shifter shifter.c
+<b>shifter.c:</b> Dans la fonction « <b>main</b> »:
+<b>shifter.c:38:14:</b> <span class="warning">attention:</span> paramères « <b>argc</b> » inutilisé [<span class="warning">-Wunused-parameter</span>]
+   38 | int main(<span class="warning">int argc</span>, char * argv[]) {
+      |          <span class="warning">~~~~^~~~</span>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% gdb -q ./shifter
+Reading symbols from <span class="green">./shifter</span>...
+(gdb) r
+Starting program: /home/issotm/hacklab/micro-tutos/gdb/shifter
+
+Program received signal SIGSEGV, Segmentation fault.
+<span class="darkblue">0x00007ffff7f36162</span> in <span class="brown">__strcmp_avx2</span> () from /usr/lib/libc.so.6
+(gdb) bt
+#0 <span class="darkblue">0x00007ffff7f36162</span> in <span class="brown">__strcmp_avx2</span> () from /usr/lib/libc.so.6
+#1 <span class="darkblue">0x00005555555551bf</span> in <span class="brown">chaine_langue</span> (<span class="blue">chaines</span>=0x555555558060 &lt;prompts&gt;,
+    <span class="blue">chaine_langue</span>=0x0) at <span class="green">shifter.c:30</span>
+#2 <span class="darkblue">0x000055555555522b</span> in <span class="brown">main</span> (<span class="blue">argc</span>=1, <span class="blue">argv</span>=0x7fffffffe708) at <span class="green">shifter.c</span>:41
+(gdb) fr 1
+#1 <span class="darkblue">0x00005555555551bf</span> in <span class="brown">chaine_langue</span> (<span class="blue">chaines</span>=0x555555558060 &lt;prompts&gt;,
+    <span class="blue">chaine_langue</span>=0x0) at <span class="green">shifter.c:30</span>
+30              if (!strcmp(chaines_languages[langue], chaine_langue)) {
+(gdb) █</pre></small>
+            <figcaption>Notez qu'on n'a plus <q><code>(No debugging symbols found in ./shifter)</code></q> !</figcaption>
+        </figure>
+    </section>
+    <section>
+        <p>On voit directement que <strong>l'argument</strong> <code>chaine_langue</code> vaut 0x0 (c'est-à-dire <code>NULL</code>) ! C'est donc la fonction appelante qui pose un problème...</p>
+        <figure class="fragment">
+            <pre><code class="highlight lang-c" data-line-numbers="3" data-ln-start-from="42">    unsigned n;
+
+    printf("%s\n", chaine_langue(prompts, argv[1]));
+    scanf("%u", &n);
+            </code></pre>
+            <figcaption>La backtrace indique que l'appel est à la ligne 44 de shifter.c</figcaption>
+        </figure>
+        <p class="fragment">Ah bah oui, on a pas vérifié le nombre d'arguments !</p>
+    </section>
+    <section>
+        <pre><code class="highlight lang-c" data-line-numbers="3-6" data-ln-start-from="42">    unsigned n;
+
+    if (argc < 2) {
+        return 1;
+    }
+
+    printf("%s\n", chaine_langue(prompts, argv[1]));
+    scanf("%u", &n);
+        </code></pre>
+        <figure>
+            <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% make develop
+cc -g -O0  -Wall -Wextra -o shifter shifter.c
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% ./shifter
+<span class="err">1</span> <span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+            <figcaption>Nickel, ça crashe plus !</figcaption>
+        </figure>
+    </section>
+</section>
+<section>
+    <h2>Jamais deux sans trois</h2>
+    <section>
+        <p>On va débugger un crash un poil moins simple.</p>
+        <figure>
+            <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% ./shifter es
+zsh: segmentation fault (core dumped)  ./shifter es
+<span class="err">139</span> <span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+            <figcaption>Pas encore prêts pour l'international...</figcaption>
+        </figure>
+    </section>
+    <section>
+        <figure>
+            <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% gdb -q ./shifter
+Reading symbols from <span class="green">./shifter</span>...
+(gdb) r es
+Starting program: /home/issotm/hacklab/micro-tutos/gdb/shifter es
+
+Program received signal SIGSEGV, Segmentation fault.
+<span class="darkblue">0x00007ffff7f3ac55</span> in <span class="brown">__strlen_avx2</span> () from /usr/lib/libc.so.6
+(gdb) bt
+#0 <span class="darkblue">0x00007ffff7f3ac55</span> in <span class="brown">__strlen_avx2</span> () from /usr/lib/libc.so.6
+#1 <span class="darkblue">0x00007ffff7e50ac6</span> in <span class="brown">puts</span> () from /usr/lib/libc.so.6
+#2 <span class="darkblue">0x0000555555555240</span> in <span class="brown">main</span> (<span class="blue">argc</span>=1, <span class="blue">argv</span>=0x7fffffffe6f8) at <span class="green">shifter.c</span>:45
+(gdb) fr 2
+#2 <span class="darkblue">0x0000555555555240</span> in <span class="brown">main</span> (<span class="blue">argc</span>=1, <span class="blue">argv</span>=0x7fffffffe6f8) at <span class="green">shifter.c</span>:45
+45              printf("%s\n", chaine_langue(prompts, argv[1]));
+(gdb) █</pre>
+            <figcaption>Ce coup-ci, l'erreur vient de <code>main</code> !</figcaption>
+        </figure>
+        <p class="fragment"><small>C'est normal que la backtrace indique <code>puts</code>, faites comme si c'était <code>printf</code>.</small></p>
+    </section>
+    <section>
+        <p>Question : d'où vient l'erreur ?</p>
+        <p class="fragment">On sait que c'est un des arguments passés, donc c'est probablement le retour de <code>chaine_langue</code>.</p>
+        <figure class="fragment">
+            <figcaption>Découvrons la commande <strong>Print</strong> !</figcaption>
+            <pre>
+(gdb) p chaine_langue(prompts, argv[1])
+$1 = <span class="darkblue">0x0</span>
+(gdb) █</pre>
+        </figure>
+        <p class="fragment">Ah oui, la fonction peut retourner <code>NULL</code>.</p>
+    </section>
+    <section>
+        <figure>
+            <small><pre><code class="highlight lang-c" data-line-numbers="2,8-13" data-ln-start-from="42">    unsigned n;
+    char const * prompt;
+
+    if (argc < 2) {
+        return 1;
+    }
+
+    prompt = chaine_langue(prompts, argv[1]);
+    if (!prompt) {
+        return 1;
+    }
+
+    printf("%s\n", prompt);
+    scanf("%u", &n);
+            </code></pre></small>
+            <figcaption><small>Vous pourriez mettre un message d'erreur, si vous préférez.</small></figcaption>
+        </figure>
+        <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% make develop
+cc -g -O0  -Wall -Wextra -o shifter shifter.c
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% ./shifter es
+<span class="err">1</span> <span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+    </section>
+    <section>
+        <p>Dernière chose, le programme ne vérifie pas qu'on a rentré un nombre dans le <code>scanf</code>, mais on ne cherchera pas à le corriger ici.</p>
+        <p class="fragment">Vous pouvez vous amuser à essayer de régler ce problème par vous-mêmes ! Il y en a même beaucoup d'autres :)</p>
+        <p class="fragment">(Indice : regardez le code de retour des différentes fonctions qu'on appelle.)</p>
+    </section>
+</section>
+<section>
+    <h2>2 puissance 32..?</h2>
+    <section>
+        <p>On va étudier (mais pas fixer) un dernier bug plus pernicieux. À votre avis, combien vaut 2 puissance 32 ?</p>
+        <figure class="fragment">
+            <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% ./shifter fr
+Veuillez entrer un entier N :
+32
+2^N = 1
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+            <figcaption>Le résultat peut être différent selon votre machine !</figcaption>
+        </figure>
+    </section>
+    <section>
+        <p>Ce genre de bug provient en général d'une erreur de logique, mais pourtant on n'en a pas ici ?</p>
+        <p class="fragment">On touche là à l'un des <em>undefined behavior</em> dont on parlait <a href="slides/gdb.html#/4/1">plus tôt</a>.</p>
+        <p class="fragment">Le compilateur produit souvent des <em>warnings</em> en cas d'undefined behavior, mais par exemple ici il n'y en a pas. Nous allons voir un outil qui permet d'en détecter à l'exécution.</p>
+    </section>
+    <section>
+        <p>Décommenter les deux flags à la ligne 10 du Makefile, puis <code>make clean</code> et <code>make develop</code>.</p>
+        <pre><code class="highlight lang-make" data-line-numbers="4" data-ln-start-from="7">.PHONY:all
+
+develop: all
+develop: CFLAGS := -g -O0 -fsanitize=address -fsanitize=undefined
+.PHONY: develop
+
+clean:
+        </code></pre>
+        <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% make clean
+rm -f shifter
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% make develop
+cc -g -O0 -fsanitize=address -fsanitize=undefined -Wall -Wextra -o shifter shifter.c
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+    </section>
+    <section>
+        <p>Maintenant, si on réexécute le programme avec comme argument 32...</p>
+        <pre>
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% ./shifter fr
+Veuillez entrer un entier N :
+4
+2^N = 16
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% ./shifter fr
+Veuillez entrer un entier N :
+32
+<b>shifter.c:54:28: <span class="err">runtime error:</span> shift exponent 32 is too
+large for 32-bit type 'int'</b>
+2^N = 1
+<span class="green">issotm@sheik-kitty</span> <span class="blue">gdb</span>% █</pre>
+        <p class="fragment">Comment corriger ? À vous de voir.</p>
+    </section>
+</section>
+<section>
+    <h2>Pour aller plus loin</h2>
+</section>
+<section>
+    <p>Pour en savoir plus sur l'undefined behavior, je vous recommande de vous renseigner sur <a href="https://en.cppreference.com/w/c/language/behavior">cppreference</a>.</p>
+    <p class="fragment">Les différentes pages comportent des descriptions de ce qui est — ou pas — UB (exemple : <a href="https://en.cppreference.com/w/c/language/operator_arithmetic#Shift_operators">les shifts</a>).</p>
+    <p class="fragment">La documentation de GCC sur leurs <em>implementation-defined behavior</em> se trouve <a href="https://gcc.gnu.org/onlinedocs/gcc/C-Implementation.html#C-Implementation">ici</a> pour la dernière version de GCC.</p>
+</section>
+<section>
+        <p>Si vous voulez en savoir plus sur des options comme <code>-fsanitize</code>, lisez <code>man gcc</code> ou bien la <a href="https://gcc.gnu.org/onlinedocs/" target="_blank">documentation en ligne</a> (sélectionnez le premier lien de la version que vous avez)</p>
+</section>
+<section>
+    <h2>Commandes gdb intéressantes</h2>
+    <section>
+        <dl>
+            <dt><code>Help</code></dt><dd>Fournit de l'aide sur une commande</dd>
+            <dt><code>APRopos</code></dt><dd>Fournit une liste de commandes "à propos" d'un certain terme
+            <dt><code>Info</code></dt><dd>Affiche différentes infos sur l'exécution du programme</dd>
+        </dl>
+    </section>
+    <section>
+        <dl>
+            <dt><code>X</code></dt><dd>Permet d'examiner la mémoire, pratique pour les tableaux</dd>
+            <dt><code>DISPlay</code></dt><dd>Permet d'afficher une valeur automatiquement</dd>
+            <dt><code>LIst</code></dt><dd>Affiche les lignes de code C autour de la ligne courante</dd>
+        </dl>
+    </section>
+    <section>
+        <dl>
+            <dt><code>Break</code></dt><dd>Place un breakpoint quelque part</dd>
+            <dt><code>START</code></dt><dd>Place un breakpoint sur <code>main</code> et <code>run</code></dd>
+            <dt><code>Delete</code></dt><dd>Retire un breakpoint</dd>
+        </dl>
+    </section>
+    <section>
+        <dl>
+            <dt><code>Next</code></dt><dd>Avance le programme jusqu'à la prochaine ligne (ne rentre pas dans les fonctions)</dd>
+            <dt><code>Step</code></dt><dd>Avance le programme jusqu'à la prochaine ligne (rentre dans les fonctions)</dd>
+            <dt><code>Continue</code></dt><dd>Rend la main au programme</dd>
+        </dl>
+    </section>
+    <section>
+        <dl>
+            <dt><code>DISASsemble</code></dt><dd>Si vous voulez voir les instructions que le processeur est en train d'exécuter...</dd>
+            <dt><code>PEDA</code></dt><dd>Python Exploit Development Assistant. Ce n'est pas exactement une commande, mais une <a href="https://github.com/longld/peda">extension</a>.</dd>
+        </dl>
+    </section>
+</section>
+<section data-background-image="assets/isilabs_final.svg" data-background-size="contain" data-background-opacity="0.3">
+    <h2>Merci d'avoir suivi !</h2>
+    Plus d'Isilabs :
+    <nav>
+        <ul>
+            <li>Web <a href="https://www.isilabs.fr">isilabs.fr</a></li>
+            <li>Twitter <a href="https://twitter.com/isilabs">@isilabs</a></li>
+            <li>Facebook <a href="https://facebook.com/isilabs">IsiLabs - ISIMA</a></li>
+        </ul>
+        <hr>
+        <small>© 2019 Eldred HABERT (ISSOtm)</small>
+    </nav>
+    <p>
+</section>

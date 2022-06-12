@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+
+        <title>{{ page.title }}</title>
+
+        <meta name="description" content="A framework for easily creating beautiful presentations using HTML">
+        <meta name="author" content="Hakim El Hattab">
+
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <link rel="stylesheet" href="dist/reset.css">
+        <link rel="stylesheet" href="dist/reveal.css">
+        <link rel="stylesheet" href="dist/theme/black.css" id="theme">
+
+        <link rel="stylesheet" href="plugin/highlight/monokai.css">
+    </head>
+    <body>
+        <div class="reveal">
+            <div class="slides">
+                {{ content }}
+            </div>
+        </div>
+        <script src="dist/reveal.js"></script>
+        {%- for plugin in page.plugins -%}
+        <script src="plugin/{{ plugin }}/{{ plugin }}.js"></script>
+        {%- endfor -%}
+        <script>
+            Reveal.initialize({
+                controls: true,
+                progress: true,
+                center: true,
+                hash: true,
+                plugins: [ {% for plugin in page.plugins %}Reveal{{ plugin | capitalize }},{% endfor %} ],
+                {%- if page.toc-progress %}
+                dependencies: [
+                    { src: "plugin/toc-progress/toc-progress.js", async: true, callback: function() { toc_progress.initialize('scroll', '#333', 'body'); toc_progress.create(); toc_progress.toggle(); } },
+                ],
+                {%- endif %}
+            });
+        </script>
+    </body>
+</html>

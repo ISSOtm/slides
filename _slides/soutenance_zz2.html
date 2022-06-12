@@ -1,0 +1,599 @@
+---
+layout: slides
+title: "Soutenance projet ZZ2"
+permalink: /soutenance_zz2
+redirect_from:
+  - /reveal.js/slides/soutenance_zz2.html
+plugins:
+  - notes
+  - highlight
+toc-progress: true
+---
+<style type="text/css">
+	.small-caps { font-variant-caps: small-caps; }
+
+	.reveal thead > tr > th { vertical-align: bottom; text-align: center; }
+	.reveal tbody > tr > td, tbody > tr > th { vertical-align: middle; }
+	.reveal tbody > tr > th { text-align: right; }
+	.reveal tbody > tr > td { text-align: center; }
+
+	#credits { font-size: 0.7em; }
+	#credits td, #credits th { border: none; vertical-align: middle; }
+	#credits th { text-align: right; font-variant-caps: small-caps; }
+	#credits td { text-align: left; }
+
+	#logos { height: 5vh; }
+	#logos > a > img {
+		float: right;
+		margin-left: 5%;
+		height: 100%;
+
+		border-radius: 6px;
+	}
+	#logos > a > img:not(:hover) {
+		border-color: #0000;
+		background-color: initial;
+	}
+</style>
+<link rel="stylesheet" href="assets/soutenance_zz2/gameboy.css">
+<section>
+	<h1 class="no-toc-progress" style="font-size: 1.5em;">
+		<small>Soutenance projet 2<sup>ème</sup> année</small><br>
+		Adaptateur Ethernet pour Game Boy™
+	</h1>
+	<div>
+		<div id="gameboy" style="float: left;">
+			<div id="back"></div>
+			<div id="border"></div>
+			<div id="card3"></div>
+			<div id="card2"></div>
+			<div id="chip2"></div>
+			<div id="screenBack"></div>
+			<div id="card1"></div>
+			<div id="speaker"></div>
+			<div id="chip"></div>
+			<div id="chipPinL"></div>
+			<div id="chipPinR"></div>
+			<div id="ec1"></div>
+			<div id="volumeWheelBack"></div>
+			<div id="volumeWheel"></div>
+			<div id="joystickBack"></div>
+			<div id="buttonsABBack"></div>
+			<div id="buttonsSSBack"></div>
+			<div id="jackBack"></div>
+			<div id="jack"></div>
+			<div id="ec2"></div>
+			<div id="powerBack"></div>
+			<div id="power"></div>
+			<div id="box"></div>
+			<div id="screen"></div>
+			<div id="screen2"></div>
+			<div id="joystickCross1"></div>
+			<div id="joystickCross2"></div>
+			<div id="buttonsSS"></div>
+			<div id="buttonsSSText"></div>
+			<div id="buttonsAB"></div>
+			<div id="buttonsABText"></div>
+			<div id="powerLed"></div>
+			<div id="speakerFilter"></div>
+		</div>
+		<table id="credits">
+			<tr><th>Présentation</th><td>Loïck <span class="small-caps">Chovet</span>,<br>Eldred <span class="small-caps">Habert</span></td></tr>
+			<tr><th>Tuteur</th><td>Alexis <span class="small-caps">Pereda</span></td></tr>
+			<tr><th>Responsable ISIMA</th><td>Patrice <span class="small-caps">Laurençot</span></td></tr>
+		</table>
+	</div>
+	<div id="logos">
+		<a href="https://isima.fr"><img src="assets/soutenance_zz2/ISIMA.png" alt="ISIMA"></a>
+		<a href="https://uca.fr"><img src="assets/soutenance_zz2/UCA.png" alt="UCA"></a>
+	</div>
+</section>
+<section>
+	<h2>Introduction</h2>
+	<p class="fragment">Mode du retro-gaming et retro-dev</p>
+	<p class="fragment">Game Boy : favori pour jouer partout...</p>
+	<p class="fragment">...mais pas à distance</p>
+	<p class="fragment">Problématique :<br><strong class="fragment">Comment communiquer avec la console ?</strong></p>
+
+	<aside class="notes">
+		<p>
+			☝️Dans le cadre de la mode du développement de jeux rétro, et en particulier sur Game Boy☝️ — une console particulièrement populaire peut-être pour des raisons de nostalgie mais certainement grâce à sa portabilité — nous avons voulu étendre les possibilités de la console en concevant un accessoire permettant ☝️le jeu en ligne.
+		</p>
+		<p>
+			Cette présentation va se focaliser☝️ sur l'un des aspects les plus intéressants de notre projet : ☝️la communication avec la console.
+		</p>
+	</aside>
+</section>
+<section>
+	<h2 class="no-toc-progress">Plan</h2>
+	<ol style="list-style-type: upper-roman;">
+		<li class="fragment">
+			Bas niveau
+			<ol>
+				<li class="fragment">Recherche initiale</li>
+				<li class="fragment">Implémentation</li>
+			</ol>
+		</li>
+		<li class="fragment">
+			Haut niveau
+			<ol>
+				<li class="fragment">Problématiques</li>
+				<li class="fragment">Description</li>
+			</ol>
+		</li>
+	</ol>
+	<aside class="notes">
+		<p>
+			Le déroulement global de cette présentation ira ☝️du bas niveau au haut niveau.
+		</p>
+		<p>
+			La partie bas niveau comprendra d'abord un résumé de l'analyse documentaire que nous avons menée, suivi d'explications de l'implémentation qui a été faite.
+		</p>
+		<p>
+			Celle haut niveau, d'une présentation du cadre de la conception du protocole, suivi d'un exemple illustré d'une des composantes dudit protocole.
+		</p>
+	</aside>
+</section>
+
+<section>
+	<section data-background-image="assets/soutenance_zz2/Link-Cable2.jpg" data-background-size="contain" data-background-opacity="0.4">
+		<h2>Câble Link</h2>
+
+		<aside class="notes">
+			Le Game Boy dispose d'un moyen pour communiquer : le câble Link. Celui-ci permet à deux Game Boy reliés par leur ports Link de communiquer.
+		</aside>
+	</section>
+
+	<section>
+		<h3>Qu'en dit Internet ?</h3>
+		<p class="fragment">Communauté GBDev</p>
+		<p class="fragment">La référence : les <a href="https://gbdev.github.io/pandocs">Pan Docs</a></p>
+		<div class="fragment" style="display: flex; justify-content: space-between; align-items: center;">
+			<ul>
+				<li>Protocole : SPI-like</li>
+				<li>Fréquence : 8192 Hz</li>
+				<li>Horloge au repos : Haut</li>
+				<li>Pinout : voir ci-contre</li>
+			</ul>
+			<img src="assets/soutenance_zz2/gameboi.png" alt="Pinout du port link">
+		</div>
+		<aside class="notes">
+			<p>
+				Nous avons d'abord recherché des informations sur Internet, afin d'éviter de répéter du travail déjà effectué. Nous avons trouvé la communauté GBDev ☝️, et leur ressource de référence, les "Pan Docs".☝️
+			</p>
+			<p>
+				☝️Nous y avons trouvé une description du protocole de communication comme proche du SPI (que nous allons expliquer bientôt), la fréquence d'horloge de la communication, l'état de l'horloge au repos, ainsi que des schémas de placement des broches sur le port.
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Le protocole SPI</h3>
+		<p class="fragment">Serial Protocol Interface</p>
+		<p class="fragment">1 maître, plusieurs esclaves</p>
+		<p class="fragment">4 fils : <abbr title="Slave CLock">SCL</abbr>, <abbr title="Master Out Slave In">MOSI</abbr>, <abbr title="Master In Slave Out">MISO</abbr>, <abbr title="Chip Select">CS</abbr></p>
+		<p class="fragment">Communication full-duplex</p>
+
+		<aside class="notes">
+			<p>
+				Le <dfn>Serial Protocol Interface</dfn> ☝️ est un protocole de communication très couramment utilisé dans l'industrie permettant une communication rapide entre un maître et un esclave parmi plusieurs.☝️
+			</p>
+			<p>
+				4 fils sont impliqués ☝️: le fil d'horloge Slave CLock, un fil d'envoi du maître à l'esclave (Master Out Slave In), un fil à sens inverse, et un fil d'activation d'esclave Chip Select.
+			</p>
+			<p>
+				Ainsi, en passant par 2 fils, la communication a simultanément lieu du maître vers l'esclave et réciproquement, ce qui porte le nom de full-duplex.☝️
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Modes SPI</h3>
+		<p class="fragment">Combinaison de 2 bits : <abbr title="Clock POLarity">CPOL</abbr> et <abbr title="Clock PHAse">CPHA</abbr></p>
+		<table class="fragment">
+			<thead>
+				<tr><th></th><th>CPHA=0<br>Front montant</th><th>CPHA=1<br>Front descendant</th></tr>
+			</thead>
+			<tbody>
+				<tr><th>CPOL=0<br>0 au repos</th><td>0</td><td>1</td></tr>
+				<tr class="fragment highlight-green"><th>CPOL=1<br>1 au repos</th><td>2</td><td>3</td></tr>
+			</tbody>
+		</table>
+		<aside class="notes">
+			<p>
+				Le SPI possède 4 modes (de 0 à 3), obtenus en combinant deux bits.☝️ Un bit donne l'état de l'horloge au repos (Clock POLarity), l'autre à quel front les données sont échangées sur les fils MISO et MOSI.
+			</p>
+			<p>
+				☝️Les Pan Docs indiquent que la clock est à l'état haut au repos, nous savons donc que CPOL = 1.
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Ça se complique</h3>
+		<p class="fragment">CPHA ?</p>
+		<p class="fragment">Où est CS ?</p>
+		<aside class="notes">
+			<p>
+				Nous validerons plus loin le rapprochement entre le SPI et le protocole de la Game Boy. À ce stade, il nous manquait cependant deux données :
+			</p>
+			<ul>
+				<li>Quelle valeur prendre pour CPHA ?</li>☝️
+				<li>Où est le fil de sélection d'esclave ?</li>☝️
+			</ul>
+		</aside>
+	</section>
+</section>
+
+<section>
+	<section data-background-image="assets/soutenance_zz2/Gamelinkcablecomparison.jpg" data-background-size="contain" data-background-opacity="0.4">
+		<h2>Port Link</h2>
+		<p>Objectif : <strong class="fragment">Accéder aux fils du port</strong></p>
+		<p class="fragment">Il nous faut un <strong>breakout</strong>.</p>
+
+		<aside class="notes">
+			<p>
+				Dans le but de déterminer de manière juste le protocole de communication, nous aimerions pouvoir analyser le signal en sortie de port Link.☝️
+				Pour cela il est necessaire d'avoir accès aux différents fils de ce port, ce qui est la fonction d'un breakout.☝️
+			</p>
+		</aside>
+
+	</section>
+	<section>
+		<h3>Solution<span class="fragment strike" data-fragment-index="1">s</span> existante<span class="fragment strike" data-fragment-index="1">s</span></h3>
+		<img class="fragment" src="assets/soutenance_zz2/tindebreakout.jpg" alt="Breakout de Vaguilar, sur Tindie" style="width: 30vw;">
+		<p class="fragment">Inconvénients : site non &laquo;fiable&raquo;, coût, durée de livraison</p>
+
+		<aside class="notes">
+			<p>
+				Notre première idée à été de chercher les solutions sur internet.
+				Dans les fait, une seule existe,☝️ et est proposée sur le site Tindies par un amateur.
+				☝️Cependant, nous n'avons aucune idée de la fiabilité du site ainsi que le coût est aussi élevé (13$) pour une si petite carte et la durée de livraison nous ont motivé à trouver d'autres solutions
+			</p>
+		</aside>
+
+	</section>
+	<section>
+		<h3>Solution provisoire</h3>
+		<img class="fragment" src="assets/soutenance_zz2/breakoutcarton.jpg" alt="Breakout littéralement en carton" style="width: 25vw;">
+		<p class="fragment">Inconvénient : faible durabilité</p>
+
+		<aside class="notes">
+			<p>
+				Comme nous avions besoin d'analyser rapidement le signal, nous avons débuté par la conception d'un prototype très simple alliant des fils et une feuille cartonné ☝️.
+				Cependant, bien que fonctionnel, ☝️ce dispositif ne dispose que d'une très faible durabilité.
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Solution définitive</h3>
+		<p class="fragment">
+			<img src="assets/soutenance_zz2/easyeda.png" alt="Logo Easy EDA" style="float: right; width: 10vw;">
+			Carte électronique conçue sous Easy EDA
+		</p>
+
+		<aside class="notes">
+			<p>
+				Il nous as ainsi fallu concevoir notre propre carte électronique. Pour cela nous avons utilisé l'éditeur en ligne Easy EDA.☝️
+				Il s'agit d'une site de CAO (conception assistée par ordinateur) pour le design de carte électroniques qui propose l'entièreté de la chaine de production.
+				En effet, le site propose du design a la mise en production de la carte. Nous n'avons cependant pas utilisé cette dernière fonctionnalité, Polytech disposant d'une machine pouvant imprimer ces circuits.
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Designs intermédiaires</h3>
+		<p class="fragment">Premier concept :</p>
+		<img class="fragment" src="assets/soutenance_zz2/breakoutv1.jpg" alt="Premier design imprimé" style="width: 15vw;">
+		<p class="fragment">Défauts : pistes trop courtes, trous non traversants</p>
+		<aside class="notes">
+			<p>
+				☝️Le premier design réalisé à été le suivant.☝️ Cependant nous n'avions pas pris une donnée en compte, en effet, la machine de Polytech ne peut pas effectuer de trous traversant.☝️
+				Ainsi, seuls trois fils étaient accessibles. Aussi les piste permettant de se connecter avec le port étaient trop petites.
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Design final</h3>
+		<div style="display: flex; justify-content: center; align-items: center; height: 40vh;">
+			<img src="assets/soutenance_zz2/breakoutfinalplan.png" alt="Rendu final design" style="margin: 1%;">
+
+			<aside class="notes">
+				<p>
+					Pour le design final, nous avons utilisé la solution suivante ☝️permettant de faire revenir les piste du dessous au dessus. Le breakout suivant nous permettra donc d'analyser efficacement le signal
+				</p>
+			</aside>
+		</div>
+	</section>
+</section>
+
+<section>
+	<section>
+		<h2>Analyse</h2>
+		<aside class="notes">
+			<p>
+				Nous allons désormais chercher a confirmer nos informations et à établir la méthode de communication du Game Boy.
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Le Logic Analyzer</h3>
+		<img src="assets/soutenance_zz2/logicportanal.png" alt="Logic Port Analyser" style="width: 20vw;">
+		<p class="fragment">Matériel + logiciel permettant lecture et interprétation de trames</p>
+
+		<aside class="notes">
+			<p>
+				Pour cela, un outils que nous utiliserons à mainte reprise est le Logic Port Analyser☝️. Il s'agit d'un ensemble matériel et logiciel permettant la lecture et l'interprétations de signaux.
+				En effet, il suffit de brancher les fils à étudier au logic port analyser pour les apercevoir dans l'interface du logiciel.
+				On peut ainsi dans ce dernier créer des interpréteurs basés sur des protocoles connus dont, ce qui va nous intéresser : Le SPI.
+			</p>
+		</aside>
+
+	</section>
+	<section>
+		<h3>Résultats expérimentaux</h3>
+		<p>On trouve bien ce que l'on veut avec l'analyseur suivant :</p>
+		<img src="assets/soutenance_zz2/Capture3.png" alt="Interpréteur SPI" style="width: 20vw;">
+
+		<aside class="notes">
+			<p>
+				Après quelques recherches empiriques nous avons réussi a trouver le bon ensemble permettant la lecture des trames. Il faut donc l'interpréteur suivant.
+				Un spi en mode 3. On pourra ainsi s'en servir dans le futur, pour verifier notre signal.
+			</p>
+		</aside>
+	</section>
+</section>
+
+<section>
+	<section>
+		<h2>Implémentation</h2>
+	</section>
+	<section>
+		<h3>Les cartes Utilisées : </h3>
+		<p class="fragment">
+			Lectures de trames SPI et prototypage : Nucleo F303K8 <img src="assets/soutenance_zz2/nucleo_f303k8.png" alt="Nucleo F303K8" style="width: 20vw; ">
+		</p>
+
+		<aside class="notes">
+			<p>
+				Nous avons, dans un premier temps, utilisé la carte Nucleo F303K8.☝️ Cette dernière, déjà disponible à l'Isima disposait de performances suffisantes pour effectuer ce que l'on voulait.
+				Cependant elle manquait d'un port Ethernet
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Les cartes Utilisées : </h3>
+		<p >
+			Prototype final : Nucleo F746ZG
+
+		</p>
+		<img src="assets/soutenance_zz2/nucleo_f746zg.jpg" alt="Nucleo F746ZG" style="width: 20vw;">
+		<aside class="notes">
+			<p>
+				Et c'est pour cela que nous sommes ensuite passé à la carte suivante. En effet celle-ci est l'une des rares de la game à proposer un port Ethernet, ce qui allais donc nous permettre de relier nos différents travaux.
+
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Le protocole SPI sur Nucleo</h3>
+		<p>Composants et Bibliothèques adaptées en langage c++</p>
+		<p class="fragment">Master (Objet SPI) ou Slave (Objet SPISlave) ?</p>
+		<pre class="fragment"><code class="highlight lang-c++">SPISlave device(MOSI, MISO, SCL, CS);</code></pre></p>
+		<p class="fragment">Plus simple d'être esclave, Carte bien plus rapide que le Gameboy qui le suit donc facilement.</p>
+		<aside class="notes">
+			L'avantage de ces cartes est qu'elles disposent de composants destinés aux traitements du protocole SPI.
+			Ainsi le langage utilisé sera le c++ adjoint à des bibliothèques liées a la carte.
+			Cependant, il existe 2 objets correspondants a nos besoins : SPI et SPISlave ☝️, indiquant si notre objet est maître ou esclave.
+			Il nous revenait donc de faire le choix, le Gameboy décidant par lui même. Il nous a donc semblé plus simple de se placer en Slave,☝️ en effet la carte étant bien plus rapide que le Gameboy, il est donc plus simple de suivre son rythme de cette manière.☝️
+		</aside>
+	</section>
+	<section>
+		<h3>s'adapter au Simili SPI du Gameboy</h3>
+		<p>Quel Pin mettre en Chip Select ? </p>
+		<pre class="fragment"><code class="highlight lang-c++">SPISlave device(MOSI, MISO, SCL, NC);</code></pre>
+		<p>Comment bien interpréter ?</p>
+		<pre class="fragment"><code class="highlight lang-c++">
+device.format(8,3); // nombre de bits par paquet et mode de spi
+device.frequency(8192);
+		</code></pre>
+
+		<aside class="notes">
+			Ainsi, Il faut permettre à notre objet de classe SPISlave de se connecter au Gameboy.
+			Pour cela, on aimerait premièrement trouver comment pallier au manque de fil Chip Select sur le Game Boy.
+			Et bien, Mbed, la plateforme de code, propose d'affecter CS à la pin NC, qui ne correspond a aucune pin.☝️
+			Aussi, on aimerait affecter les bons paramètres à ce SPI, c'est à dire la fréquence et le mode.
+			Pour cela il suffit d'utiliser les méthodes suivantes.☝️
+		</aside>
+	</section>
+	<section>
+		<h3>Communication avec le Game Boy</h3>
+		Deux méthodes : reply() remplis le buffer de réponse, read() retourne la valeur reçu et envoie le contenu du buffer de réponse.
+
+		<aside class="notes">
+			Le protocole SPI de la Nucleo est basée sur 2 buffers, un d'entrée et un de réponse.
+			de plus l'objet SPISlave dispose de 2 méthodes importantes :
+			☝️
+			Reply qui remplis le buffer de réponse et read qui retourne le contenu du buffer d'entrée et envoie le contenu du buffer de réponse.
+			Il faudra donc prendre en compte le fait que la réponse de la Nucléo viendra toujours au prochain message du Gameboy
+		</aside>
+	</section>
+
+
+</section>
+
+<section>
+	<section>
+		<h2>Conception</h2>
+		<aside class="notes">
+			<p>
+				Ceci conclut la partie physique de la communication. Nous devions ensuite concevoir le reste du protocole de communication de Game Boy à Game Boy.
+			</p>
+			<p>
+				Cette communication a globalement lieu en deux parties : la Game Boy parle à l'adaptateur, et les adaptateurs se parlent entre eux. Nous avons décidé de concevoir la partie Game Boy en premier, puisque ce serait les fonctionnalités offertes à l'utilisateur final ; la communication inter-adaptateur serait ensuite conçue en fonction des services à fournir. (Des fonctionnalités pourraient être retirées si leur implémentation s'avérait trop difficile.)
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3 style="display: none;">Couches réseau</h3>
+		<table>
+			<thead>
+				<tr><th>Numéro</th><th>Description</th><th>Implémentation</th></tr>
+			</thead>
+			<tbody>
+				<tr><th>7</th><td>Application</td><td rowspan="4" class="fragment" data-fragment-index="4">Programme</td></tr>
+				<tr><th>6</th><td>Présentation</td></tr>
+				<tr><th>5</th><td>Session</td></tr>
+				<tr><th>4</th><td>Transport</td></tr>
+				<tr><th>3</th><td>Réseau</td><td class="fragment" data-fragment-index="3">N/A</td></tr>
+				<tr><th>2</th><td>Liaison de données</td><td class="fragment" data-fragment-index="2">Adaptateur</td></tr>
+				<tr><th>1</th><td>Physique</td><td class="fragment" data-fragment-index="1">Câble Link</td></tr>
+			</tbody>
+		</table>
+		<aside class="notes">
+			<p>
+				Commençons par une vue d'ensemble : comment les différentes couches de communication sont réparties. Nous venons de voir la partie physique☝️, reste déjà à définir le cadre de notre adaptateur.
+			</p>
+			<p>
+				Étant donné qu'il s'assure de la communication sur un même réseau mais pas plus (comme nous sommes basés sur de l'Ethernet), nous l'avons assimilé à un équipement de couche 2.☝️
+			</p>
+			<p>
+				La répartition des niveaux supérieurs est simple : il n'y a pas de niveau 3☝️ puisque nous n'assurons pas de communication inter-réseaux, et le reste☝️ sera laissé à nos utilisateurs.
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Objectifs</h3>
+		<ul>
+			<li class="fragment">Fiabilité</li>
+			<li class="fragment">Rapidité</li>
+			<li class="fragment">Légèreté</li>
+		</ul>
+		<aside class="notes">
+			<p>
+				Afin de concevoir un protocole adapté à notre cas d'utilisation, nous avons recherché sur quels aspects nous focaliser en priorité. ☝️La fiabilité nous est immédiatement venue à l'esprit, puisque les jeux multijoueur veulent que tous les joueurs restent synchronisés.
+			</p>
+			<p>
+				La plupart des jeux multijoueurs de la console (Tetris, pour ne citer que le plus vendu) sont en temps réel ; nous chercherons donc à minimiser l'input lag, ☝️qui est la latence entre l'appui sur un bouton et l'exécution de son action.
+			</p>
+			<p>
+				Nous avons ensuite pensé au fait que la Game Boy était une machine peu rapide, ☝️et qu'il serait donc intéressant que le protocole requière peu de calculs supplémentaires de sa part.
+			</p>
+		</aside>
+	</section>
+</section>
+
+<section>
+	<section>
+		<h2>Protocole</h2>
+	</section>
+	<section>
+		<h3>Principe</h3>
+		<ol>
+			<li class="fragment">Envoi d'une commande</li>
+			<li class="fragment">Envoi d'un argument</li>
+			<li class="fragment">Réponse</li>
+		</ol>
+		<aside class="notes">
+			<p>
+				Nous avons décidé que le premier octet envoyé par la console serait une commande☝️ ; la liste des commandes pourrait être définie plus tard, ceci nous semblait assez flexible.
+			</p>
+			<p>
+				Le deuxième octet serait l'argument de l'instruction☝️ : en effet, l'envoi par exemple de données pourrait difficilement être encodé dans l'octet de commande, ou alors cela restreindrait fortement l'ensemble des commandes. De plus, cela demanderait des manipulations supplémentaires du côté de la console.
+			</p>
+			<p>
+				Enfin, le troisième octet serait un retour de la Nucléo☝️. Ceci serait utile pour des commandes de questionnement (ex : combien de consoles actuellement connectées ?), mais aussi comme code retour ("impossible d'envoyer, pas de connexion").
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Sécurités</h3>
+		<p>
+			<strong>Supposition</strong> : tous les câbles sont connectés ou non <strong>ensemble</strong>.
+		</p>
+		<img class="fragment" src="assets/soutenance_zz2/exemple_signal.png" alt="Exemple de signal">
+		<aside class="notes">
+			<p>
+				Nous avons fait une supposition dans la conception du protocole☝️ : que tous les fils du câble Link sont soit tous connectés, soit tous déconnectés.
+			</p>
+			<p>
+				Ceci semble plutôt réaliste si l'on met de côté les faux contacts, et si nous partons du principe que tous les signaux peuvent être indépendamment déconnectés, nous ne pouvons aller nulle part.
+			</p>
+			<p>
+				Voici donc ce à quoi nous avons pensé☝️ : ceci schématise le transfert d'un octet du Game Boy à la Nucléo. Spécifiquement, le signal d'en bas est l'horloge reçue par la Nucléo, et en haut sa réponse.
+			</p>
+			<p>
+				Dès qu'un signal d'horloge est reçu, la Nucléo passe à l'état logique 0, et le maintient pour une durée de 15 demi-périodes. Le Game Boy devrait donc recevoir l'octet "1000 0000".
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Algorithme</h3>
+		<ol>
+			<li class="fragment">Envoyer l'octet</li>
+			<li class="fragment">0x80 reçu ? (Non ⇒ recommencer)</li>
+		</ol>
+		<img class="fragment" src="assets/soutenance_zz2/exemple_corruption.png" alt="Exemple de signal corrompu">
+		<aside class="notes">
+			<p>
+				Du côté Game Boy, l'algorithme de transmission serait le suivant : ☝️d'abord, transmettre l'octet ; ensuite, examiner l'octet de réponse.☝️ S'il vaut bien 0x80, le transfert a eu lieu avec succès. Sinon, recommencer.
+			</p>
+			<p>
+				Si le câble s'est déconnecté pendant une fraction de la transaction, tous les signaux passent à l'état "1" à cause des résistances de pull-up. Donc, tout bit que le Game Boy ne reçoit pas est remplacé par un 1. Ceci protège le transfert de tous les bits sauf le premier.
+			</p>
+			<p>
+				Le premier bit est néanmoins protégé, car il sert de début à la transaction — s'il n'est pas reçu par la Nucléo, le bit suivant sera un 1 et non un 0, on ne recevra donc pas 0x80.
+			</p>
+			<p>
+				La Nucléo, elle, peut vérifier que la cadence de l'horloge est correcte, et rejeter l'octet reçu si ce n'est pas le cas.
+			</p>
+		</aside>
+	</section>
+	<section>
+		<h3>Bilan</h3>
+		<ul style="list-style-type: '👍';">
+			<li class="fragment">Réaliste</li>
+			<li class="fragment">Minimaliste</li>
+		</ul>
+		<ul style="list-style-type: '👎';">
+			<li class="fragment">Bit à bit</li>
+			<li class="fragment">Non testé</li>
+		</ul>
+		<aside class="notes">
+			<p>
+				Ce protocole prend en compte des cas d'usage réalistes☝️ et possède une spécification simple, donc raisonnable à implémenter. Il est en outre☝️ léger en implémentation, respectant ainsi les critères de rapidité et de légèreté posés plus haut.
+			</p>
+			<p>
+				Il y a deux inconvénients à la spécification que nous avons proposée : ☝️d'une part, elle traite les bits un à un, ce qui est peu compatible avec le protocole SPI, qui travaille lui plus octet par octet. Nous pensons qu'une retouche pour travailler octet par octet serait possible, mais ☝️ à cause de problèmes techniques nous n'avons pas pu éprouver ni approfondir notre travail.
+			</p>
+		</aside>
+	</section>
+</section>
+
+<section>
+	<h2>Conclusion</h2>
+	<p class="fragment">Succès de conception</p>
+	<p class="fragment">Réutilisation de travail précédent<span class="fragment"><br>(dans certaines limites)</span></p>
+	<p class="fragment">Pas d'implémentation : <span class="fragment strike">livrable</span>, <span class="fragment strike">retours</span></p>
+	<p class="fragment">Bonne base pour la suite</p>
+	<aside class="notes">
+		<p>
+			☝️Nous avons pu concevoir, de bout en bout, un protocole de communication entre un programme tournant sur Game Boy et un accessoire conçu par nos soins.
+		</p>
+		<p>
+			☝️Nous avons pu valoriser le travail effectué par d'autres avant nous sur la partie bas niveau, mais avons été plus limités sur la partie plus haut niveau.
+		</p>
+		<p>
+			☝️Il ne nous a pas été possible de mener l'implémentation à son terme, ce qui cause ☝️l'absence d'un livrable tel que nous nous y attendions au début du projet, et ☝️nous a empêchés de profiter de retours d'expérience sur notre travail.
+		</p>
+		<p>
+			☝️Nous espérons néanmoins que notre travail pourra être utile à d'autres projets ultérieurs.
+		</p>
+	</aside>
+</section>
+
+<section>
+	<h2>Remerciements</h2>
+	<ul>
+		<li><a href="https://gbdev.github.io">La communauté GBDev</a> pour leur travail de recherche et de documentation ;</li>
+		<li>Heero, pour <a href="https://codepen.io/heero/pen/wylhv">l'animation</a> (retouchée) sur la couverture ;</li>
+		<li>Vous, pour votre attention !</li>
+	</ul>
+	<p>Toute question peut être soumise à l'adresse <a href="mailto:me@eldred.fr">me@eldred.fr</a>.</p>
+</section>

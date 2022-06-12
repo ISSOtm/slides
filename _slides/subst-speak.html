@@ -1,0 +1,97 @@
+---
+layout: slides
+title: "Soirée hacklab"
+permalink: /subst-speak
+redirect_from:
+  - /reveal.js/slides/subst-speak.html
+---
+<section data-background-image="assets/isilabs_final.svg" data-background-size="contain" data-background-opacity="0.4">
+	<h1>Activité IsiLabs</h1>
+	<code>subst-speak</code>
+</section>
+<section>
+	<h2>Quel est le programme ?</h2>
+	<section>
+		<p class="fragment">De la sécurité réseau et de la cryptographie !</p>
+		<p class="fragment"><small>Non attendez ne partez pas s'il vous plaît</small></p>
+	</section>
+	<section>
+		<h3>La situation</h3>
+		<p class="fragment">Alice et Bob veulent se parler de manière sécurisée.</p>
+		<p class="fragment">Et nous, grand méchant hacker, on va les espionner 😈</p>
+	</section>
+</section>
+<section>
+	<h2>Partie réseau</h2>
+	<p class="fragment">Nous allons être connectés au même réseau que Alice et Bob.</p>
+	<p class="fragment">Première étape : intercepter ce qui se passe sur le réseau !</p>
+	<p class="fragment">
+		<img src="https://www.wireshark.org/assets/images/sflogo.png" alt="Logo Wireshark" style="float: right; height: 100px; border: none;" />
+		Nous allons utiliser un outil appelé Wireshark pour <em>"sniffer"</em> ce qui passe sur le réseau.
+	</p>
+</section>
+<section>
+	<h2>À l'écoute !</h2>
+	<section>
+		Étape 1 : lancer Wireshark...
+	</section>
+	<section>
+		<img src="assets/wireshark1.png" alt="Wireshark étape 1" />
+	</section>
+	<section>
+		<img src="assets/wireshark2.png" alt="Wireshark étape 2" />
+	</section>
+	<section>
+		<img src="assets/wireshark3.png" alt="Wireshark étape 3" />
+	</section>
+</section>
+<section>
+	<h2>Partie déchiffrement</h2>
+	<section>
+		<p class="fragment">Par chance, on sait comment ils communiquent : via du <strong class="fragment">chiffrement symétrique</strong>.</p>
+		<p class="fragment">Ils effectuent de la substitution d'alphabet.</p>
+		<p class="fragment">On va casser ce code !</p>
+	</section>
+	<section>
+		<h3>Comment s'y prendre ?</h3>
+		<p class="fragment">Une substitution est une bijection.<br />(1 lettre en clair ⇔ 1 lettre chiffrée)</p>
+		<p class="fragment"><strong>Ça conserve plein de propriétés !</strong></p>
+		<p class="fragment">Par exemple... <span class="fragment">la répartition des lettres.</span></p>
+	</section>
+	<section>
+		<h3>L'analyse fréquentielle</h3>
+		<p class="fragment">La lettre "a" apparaît bien plus souvent que "y"...<br /><span class="fragment">(4 vs. 0 !)</span></p>
+		<p class="fragment">Donc on peut faire des suppositions sur quelle lettre est quoi.</p>
+		<p class="fragment">Par principe statistique, plus une lettre a été vue, plus on est sûr de ce que c'est.</p>
+	</section>
+	<section>
+		<h3>En plus de l'analyse fréquentielle...</h3>
+		<p class="fragment">On peut aussi reconnaître des constructions !</p>
+		<ul>
+			<li class="fragment">Doublons (ba<b>tt</b>re, la<b>ss</b>e, e<b>ll</b>e, mais pas de double voyelles)</li>
+			<li class="fragment">Fins de mots (e et s le plus souvent)</li>
+		</ul>
+	</section>
+</section>
+<section>
+	<h2>Cassons, mes bons !</h2>
+	<p>Bonne chance les loulous</p>
+</section>
+<section>
+	<h2>Et dans la vraie vie ?</h2>
+	<section>
+		<p class="fragment">Les communications ne circulent pas publiquement.<span class="fragment">..</span></p>
+		<p class="fragment"><strong>...sauf en sans-fil !</strong></p>
+		<p class="fragment">&rarr; Attention aux réseaux "ouverts" ! <strong class="fragment">Même s'il y a un login ! (eduspot vs eduroam)</strong></p>
+	</section>
+	<section>
+		<p class="fragment">Les communications sont chiffrées de manière plus complexe (pas d'analyse fréquentielle).</p>
+		<p class="fragment">Possibilité de <em>signer</em> des messages pour garantir l'authenticité. (Mails...)</p>
+		<p class="fragment">Chiffrements beaucoup plus forts.<span class="fragment">.. jusqu'au moment où on trouve des failles ! (WEP...)</span></p>
+	</section>
+</section>
+<section data-background-image="assets/isilabs_final.svg" data-background-size="contain" data-background-opacity="0.4">
+	<h2>Merci d'avoir suivi !</h2>
+	Le code est disponible ici :<br />
+	<a href="https://github.com/ISSOtm/subst-speak">https://github.com/ISSOtm/subst-speak</a>
+</section>

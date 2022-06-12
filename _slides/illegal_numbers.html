@@ -1,0 +1,136 @@
+---
+layout: slides
+title: '"Illegal numbers" Pecha Kucha'
+permalink: /illegal_numbers
+redirect_from:
+  - /reveal.js/slides/illegal_numbers.html
+plugins:
+- notes
+---
+<section data-autoslide="0">
+	<p><strong>Since this is a <a href="https://www.pechakucha.com/">Pecha Kucha</a>, all slides are auto-timed.</strong></p>
+	<p>Switch to the next slide to start!</p>
+	<p><label>If you want to see the slides' accompanying text, check this box: <input type="checkbox" oninput="Reveal.configure({ showNotes: this.checked });"></label></p>
+	<aside class="notes"><p>If the speed is not to your taste, you can manually control the presentation using the keyboard, too. You can play/pause using the A key.</p><p>Enjoy!</p></aside>
+</section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/aacs_encryption_key.svg"><aside class="notes">
+	<p>This presentation will be about <strong>illegal numbers</strong>.</p>
+	<p>Those are numbers whose very <em>possession</em> is illegal, which—despite sounding very silly—is a very real issue, especially in modern times.</p>
+	<p>How, you may be asking?</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/go_to_jail.jpg"><aside class="notes">
+	<p>Well, let's imagine you somehow learned the <i>Gold Codes</i> (the codes allowing to launch a nuclear strike).</p>
+	<p>Like, <em>overhear</em> them somehow, not steal them. That would be without question illegal.</p>
+	<p>You're not supposed to have that knowledge, and it's dangerous! Is it illegal?</p>
+	<p>Let's see a more realistic example.</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/aacs.jpg"><aside class="notes">
+	<p>First, I will explain the <em>AACS DRM system</em> quickly:</p>
+	<ul>
+		<li>company pays to get a decryption key,</li>
+		<li>key gets put <strong>somewhere</strong> in playback software,</li>
+		<li>which can then decrypt AACS-protected content.</li>
+	</ul>
+	<p>Thing is, while <strong>looking for</strong> the key in the software is hard and punishable,</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/guess_ill_die.jpg" data-background-color="#fff"><aside class="notes">
+	<p>playing back videos in some softwares just <strong>yields</strong> the key in memory!</p>
+	<p>Since no <em>reverse-engineering</em> was done, it's disputable whether this breaks the law.</p>
+	<p>One key (and others later) was shared around and included in some unlicensed software, such as DeCSS.</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/data_erasure.jpg"><aside class="notes">
+	<p>Thing is, the AACS LA wasn't too happy about this, and sent DMCA takedown notices to various sites.</p>
+	<p>People actually fought back, and started figuring out ways to embed the key into other types of data, that would be harder to take down.</p>
+	<p>So, getting back to that flag we saw previously...</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/aacs_encryption_key_explanation.jpg"><aside class="notes">
+	<p>This flag's colors encode the key's bytes, plus one extra byte at the end.</p>
+	<p>Concatenate all the bytes and you have the key!</p>
+	<p>The trick is, transforming the number into an image gives it a more "archivable" quality.</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/streisand_manor.jpg"><aside class="notes">
+	<p>This picture went more and more viral as the AACS Licensing Authority tried taking it down</p>
+	<p>This kind of phenomenon is called a Streisand Effect, named after Barbara Streisand, who tried to get pictures of her manor removed from the Internet, and achieved the complete opposite.</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/improvement.jpg" data-background-color="#46afc5"><aside class="notes">
+	<p>But can we do better?</p>
+	<p>Of course we can. This is just encoding the key, but <em>that</em> is a number—it's no fun.</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/bytes.jpg"><aside class="notes">
+	<p>The source code for the decoding program was to be taken down because it decoded AACS without a license.</p>
+	<p>Back to numbers: a file is just bytes, which is numbers, right? Like the key before...</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/NOTSUREIF.jpg"><aside class="notes">
+	<p>Take the source code to the program.</p>
+	<p>There are several gzip files that will decompress to that exact program, you just need to add padding bytes at the end.</p>
+	<p><strong>Thus, several <em>numbers</em> that correspond to a gzipped DeCSS source!</strong></p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/math_lady.jpg"><aside class="notes">
+	<p>Math people like prime numbers. Especially <em>extra large</em>.</p>
+	<p><strong>Let's just find a prime number that "decompresses" to the source code, and get it published!</strong></p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/illegal_prime.png" data-background-color="#fff"><aside class="notes">
+	<p>And so we now also have illegal primes.</p>
+	<p>This one in the background actually encodes an executable version of DeCSS. Not even compressed!</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/approval.jpg"><aside class="notes">
+	<p>The thing is, some of these prime numbers were large enough that they deserved to be archived if only for that reason.</p>
+	<p>And since it's an intrinsic property, they can't just be "deleted"..!</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/trash_computer.gif"><aside class="notes">
+	<p>Naturally, the AACS LA wasn't too happy with this, and looked into ways to have everything deleted.</p>
+	<p>One of the last comments they gave, regarding the flood of copies, encoded or not, of the key, was that things took an <q>interesting new twist</q>.</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/nazi_waifu.png"><aside class="notes">
+	<p>Another class of illegal numbers is numbers associated with something illegal.</p>
+	<p>For example, the number 88 is associated to Nazism, because H is the 8th letter of the alphabet, and 88 => HH => Heil Hitler.</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/consideration.jpg" data-background-color="#f4f4f4"><aside class="notes">
+	<p>Let's back up a bit.</p>
+	<p>We have seen that some numbers can be illegal (or at least arguably so), but maybe we should take a moment to consider the implications?</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/oops.jpg" data-background-color="#fff"><aside class="notes">
+	<p>Reusing that last example of illegal number, what if a computer system automatically assigned product ID #88 to some pesticide, that's just a honest mistake.</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/secret.jpg" data-background-color="#fff"><aside class="notes">
+	<p>But then on the other hand there is information that should really really really stay secret (recall the nuclear launch codes).</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/intellectual_property.jpg" data-background-color="#ebe6d2"><aside class="notes">
+	<p>And in the middle, we have things like DRM keys.</p>
+	<p>This tends to lean into the debate of whether DRM should exist or not, the question of intellectual property.</p>
+</aside></section>
+<section data-background-size="contain" data-background-image="assets/illegal_numbers/thinking.png"><aside class="notes">
+	<p>In the end, maybe we're all overthinking it too much. It's just numbers, right?</p>
+	<p>Why do we give some numbers so much meaning?</p>
+	<p>Why are some numbers so important to us?</p>
+</aside></section>
+<section data-notes="Thank you for reading!">
+	<h2>Image sources</h2>
+	<ol style="font-size: 80%;">
+		<li><a href="https://en.wikipedia.org/wiki/File:Sample_09-F9_protest_art,_Free_Speech_Flag_by_John_Marcotte.svg">DeCSS "free speech" flag</a></li>
+		<li><a href="https://www.zazzle.com/monopoly_go_to_jail_corner_square_poster-228257847301113436">"Go to jail" Monopoly poster</a></li>
+		<li><a href="assets/illegal_numbers/aacs.jpg">My own drawing</a>! (Licensed under CC-BY 2.0)</li>
+		<li><a href="https://knowyourmeme.com/memes/guess-ill-die">"Guess I'll die"</a> meme</li>
+		<li><a href="https://www.lifewire.com/gutmann-method-2625891">yenwen/Getty Images</a> (unable to find the original image on Getty)</li>
+		<li><a href="https://forum.nationstates.net/viewtopic.php?f=16&t=326257">Explanation of the AACS "free speech" flag</a></li>
+		<li><a href="https://en.wikipedia.org/wiki/Streisand_effect">Picture of Barbara Streisand's manor in Malibu. One more copy on the Web!</a></li>
+		<li><a href="https://stockfresh.com/royalty-free-stock-photos/business+rocket">I think this stock pic comes from StockFresh?</a></li>
+		<li>Couldn't find the original. <a href="https://www.network-911.com/blog/technology-basics-bits-and-bytes">This</a> is where I found it.</li>
+		<li><a href="https://knowyourmeme.com/memes/futurama-fry-not-sure-if">Futurama Fry "Not Sure If"</a>. Yes, <a href="https://knowyourmeme.com/memes/its-a-meme-you-dip">it's a meme</a>.</li>
+	</ol>
+</section>
+<section data-notes="No, sorry, there's no funny joke or reference to be found here. It's in another castle.">
+	<h2>Image sources</h2>
+	<ol style="font-size: 80%;" start="11">
+		<li><a href="https://knowyourmeme.com/memes/math-lady-confused-lady">Math/confused lady</a> meme.</li>
+		<li><a href="https://primes.utm.edu/curios/page.php?number_id=1214">Screenshot of an executable prime encoding DeCSS</a></li>
+		<li>Couldn't find the original either. I found it <a href="https://www.supermoney.com/best/personal-loans/guaranteed-approval/">here</a>.</li>
+		<li>Ron Swanson trashing his computer. This GIF is everywhere, google it.</li>
+		<li><a href="https://www.hiclipart.com/free-transparent-background-png-clipart-xozui">Hi-res clipart of a nazi waifu.</a> Now I have this image on my disk :/</li>
+		<li><a href="https://www.123rf.com/stock-photo/confused_lost.html?sti=lzq7hm83m9n6q2nqwz|&mediapopup=54478442">123RF stock photo</a> (usage OK as free license)</li>
+		<li><a href="https://www.vectorstock.com/royalty-free-vector/oops-surprised-woman-vector-7526222">Taken from VectorStock.</a> Only using the "free preview JPG".</li>
+		<li>Couldn't find a source for this image.</li>
+		<li>Unknown origin. Maybe some <a href="https://www.pinterest.com/profcomptonaman/intellectual-property/">Pinterest</a>?</li>
+		<li><a href="https://www.cleanpng.com/png-world-emoji-day-apple-smiley-1627650/preview.html">Thinking emoji from ClearPNG</a></li>
+	</ol>
+</section>

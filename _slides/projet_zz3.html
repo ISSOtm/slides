@@ -1,0 +1,104 @@
+---
+layout: slides
+title: "Projet 3è année ISIMA"
+permalink: /projet_zz3
+redirect_from:
+  - /reveal.js/slides/projet_zz3.html
+---
+<style type="text/css">
+.name {
+font-variant: small-caps;
+}
+</style>
+<section>
+	<h2><small>Présentation projet ZZ3</small><br>Visualisation et agrégation de logs</h2>
+	<small>Rodolphe <span class="name">Chatagnon</span>, Eldred <span class="name">Habert</span><br>Tuteur : Landry <span class="name">Breuil</span></small>
+</section>
+<section>
+	<section>
+		<h2>Problématique</h2>
+	</section>
+	<section>
+		<h3>Cadre</h3>
+		<ul>
+			<li class="fragment">Serveurs</li>
+			<li class="fragment">Des logs, des logs...</li>
+			<li class="fragment">Format texte (<a href="https://en.wikipedia.org/wiki/Common_Log_Format">CLF</a>)</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Besoins</h3>
+		<ul>
+			<li class="fragment">Agrégation</li>
+			<li class="fragment">Filtrage (<s>grep</s>)</li>
+			<li class="fragment">Plus de sémantique ?</li>
+			<li class="fragment">Plus agréable à l'œil</li>
+		</ul>
+	</section>
+</section>
+<section>
+	<section>
+		<h2> Travail réalisé </h2>
+	</section>
+	<section>
+		<h3> Documentation sur les solutions </h3>
+		<p> &#10008; Google Analytics </p>
+		<p> &#10008; Splunk </p>
+		<p> &#10004; Suite Elastic </p>
+		<p> &#10004; Suite PLG </p>
+	</section>
+	<section>
+		<h3> Suite Elastic </h3>
+		<div>
+			<img src="assets/projet_zz3/elastic_stack_diagram.jpeg" alt="Diagramme suite Elastic" style="float: right; width: 50%;">
+			<ul>
+				<li> Suite ELK </li>
+				<li> Puissant </li>
+				<li> Complet </li>
+				<li> Lourd </li>
+			</ul>
+		</div>
+	</section>
+	<section>
+		<h3> Suite PLG </h3>
+		<div >
+			<ul>
+				<li> Promtail, Loki, Grafana </li>
+				<li> Moins puissant </li>
+				<li> Spécifique </li>
+				<li> Léger </li>
+			</ul>
+			<img src="assets/projet_zz3/plg_stack_diagram.jpeg" alt="Diagramme suite PLG">
+		</div>
+	</section>
+	<section>
+		<h3> Contraintes de l'environnement </h3>
+		<p> Debian 10 Buster avec serveur Nginx</p>
+		<p> Comment tester sur nos machines personnelles ? </p>
+	</section>
+	<section>
+		<h3> Virtualisation </h3>
+		<p> Oracle VM VirtualBox </p>
+		<p> Puissant pour tester les solutions </p>
+	</section>
+	<section>
+		<h3> Infrastructure As Code (IaC) </h3>
+		<p> Travail en équipe : comment s'échanger le travail effectué sur nos machines personnelles ? </p>
+		<p> &#10132; Transformer les configurations en code </p>
+	</section>
+	<section>
+		<h3> Outils supplémentaires </h3>
+		<p> Gestion de la virtualisation &#10132; Vagrant </p>
+		<p> Provisionnement &#10132; Ansible </p>
+		<p> Code &#10132; Git</p>
+		<p> Une commande = Installation complète </p>
+	</section>
+</section>
+<section data-background-image="https://jorgedelacruz.uk/wp-content/uploads/2018/10/grafana-esxi-022.png" data-background-size="contain" data-background-opacity="0.4">
+	<h3>Restant à faire</h3>
+	<ul>
+		<li class="fragment">Importation logs existants</li>
+		<li class="fragment">Génération logs en JSON</li>
+		<li class="fragment">Configuration dashboard<br><span class="fragment">→ Besoin client = filtrages de plus en plus précis (<em>drilldown</em>)</span></li>
+	</ul>
+</section>

@@ -1,0 +1,153 @@
+---
+layout: slides
+title: "Projet com' 2è année"
+permalink: /projet_com
+redirect_from:
+  - /reveal.js/slides/projet_com.html
+plugins:
+  - notes
+toc-progress: true
+---
+<section style="width: 100%; height: 70%;">
+    <h2 class="no-toc-progress">Projet "Audit de sécurité"<br/>Ben Chrifa-Habert</h2>
+    <small>Eldred HABERT, Clément GUILBERT</small>
+    <div style="position: absolute; width: 100%; bottom: 0;">
+        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS8g2kIlSvz-nUHPOSIUwhSXUxQWRK83aF5C7S03boaczhv6252" style="float:left; height: 70px;">
+        Patrice LAURENÇOT<br />Murielle MOUZAT
+    </div>
+</section>
+<section>
+    <h2>Contexte</h2>
+    <section></section>
+    <section>
+        <h3>Le besoin</h3>
+        <ul>
+            <li class="fragment">Continuité de l'activité</li>
+            <li class="fragment">Protection des secrets</li>
+            <li class="fragment">Tous quelque chose à cacher</li>
+        </ul>
+
+        <aside class="notes">
+            Les entreprises ont souvent un fort besoin de sécurité informatique. Déjà de la manière évidente, <b>clic</b> quand l'infrastructure est leur base de commerce ; mais aussi plus généralement quand elles stockent des données sensibles <b>clic</b>. De toute façon, on a tous des secrets, <b>clic</b> ne serait-ce que l'accès à notre compte bancaire.
+        </aside>
+    </section>
+    <section>
+        <h3>Les solutions</h3>
+        <p class="fragment">
+            Fait maison
+            <ul>
+                <li class="fragment">Personnalisable</li>
+                <li class="fragment">Reste en interne</li>
+                <li class="fragment">Coûteux</li>
+            </ul>
+        </p>
+        <p class="fragment">
+            Déléguer à un prestataire
+            <ul>
+                <li class="fragment">Plus pointus</li>
+                <li class="fragment">Regard neuf</li>
+            </ul>
+        </p>
+
+        <aside class="notes">
+            La possibilité la plus évidente est de gérer la sécurité en interne <b>clic</b>, ce qui a l'avantage que le personnel connaît bien l'application, ses tenants et aboutissants <b>clic</b>, et en plus réduit les chances de fuites <b>clic</b>. Entraîner ledit personnel reste coûteux <b>clic</b>.
+            <hr>
+            L'autre possibilité est de faire appel à un intervenant extérieur <b>clic</b>, qui aura plus d'expérience dans son domaine <b>clic</b> et potentiellement un nouveau point de vue <b>clic</b> sur l'entreprise. Le processus reste coûteux et intrusif, ceci dit.
+        </aside>
+    </section>
+    <section>
+        <h3>Le mécanisme</h3>
+        <p class="fragment">L'<a href="https://fr.wikipedia.org/wiki/Audit_de_s%C3%A9curit%C3%A9">audit</a> !</p>
+        <p class="fragment">Processus très général</p>
+        <ul>
+            <li class="fragment">Infrastructure (réseau)</li>
+            <li class="fragment">Programmes</li>
+            <li class="fragment">Pratiques dans l'entreprise</li>
+        </ul>
+
+        <aside class="notes">
+            Dans tous les cas, on en arrive à l'audit de sécurité <b>clic</b> : dans les grandes lignes, on prend une structure existante et on en analyse les angles d'attaque.<br />
+            C'est quelque chose de très général, qui peut toucher à plusieurs
+        </aside>
+    </section>
+    <section>
+        <h3>Problématique</h3>
+        <strong>Comment automatiser un audit de sécurité ?</strong>
+    </section>
+</section>
+<section>
+    <h2>Réalisation</h2>
+    <section></section>
+    <section>
+        <h3>Réduire le champ</h3>
+        <p class="fragment">Processus complexe</p>
+        <p class="fragment">Point d'entrée privilégié : le réseau</p>
+        <p class="fragment">Quand même vaste</p>
+    </section>
+    <section>
+        <h3>Moyens de scan</h3>
+        <h4 class="fragment">De l'intérieur</h4>
+        <ul>
+            <li class="fragment">Donne plus d'informations</li>
+            <li class="fragment">Pas forcément nécessaires</li>
+            <li class="fragment">Disruptif</li>
+        </ul>
+        <h4 class="fragment">De l'extérieur</h4>
+        <ul>
+            <li class="fragment">Point de vue d'un attaquant</li>
+            <li class="fragment">Plus générique</li>
+            <li class="fragment">Également disruptif</li>
+        </ul>
+    </section>
+    <section>
+        <h3><a href="https://nmap.org/">Nmap</a></h3>
+        <p class="fragment">Network Mapper</p>
+        <p class="fragment">"Scan" pour déterminer qui est là</p>
+        <p class="fragment">Analyse de la réponse pour la version</p>
+
+        <aside class="notes">Faire une analogie avec toquer à toutes les portes d'un immeuble</aside>
+    </section>
+    <section>
+        <h3><a href="https://nmap.org/movies/">Même dans les films !</a></h3>
+        <img src="https://nmap.org/movies/matrix/trinity-nmapscreen-hd-crop-1200x728.jpg" style="height: 400px;"/>
+    </section>
+    <section>
+        <h3>Et ensuite ?</h3>
+        <p class="fragment">Logiciel + version = ?<br />
+            <img src="https://www.tecmint.com/wp-content/uploads/2016/11/Nmap-Scan-Network-Services-Ports.png" style="height: 280px; margin-bottom: -40px;"></p>
+        <p class="fragment">Listes de vulnérabilités&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="https://miro.medium.com/fit/c/1838/551/1*51hwpAU3rZpq0VN0YjAEVQ.jpeg" style="height: 40px; vertical-align: middle;" /></p>
+    </section>
+</section>
+<section>
+    <h2>Résultats</h2>
+    <section></section>
+    <section>
+        <h3>Bons résultats</h3>
+        <p class="fragment">Liste de ce qui tourne</p>
+        <p class="fragment">Parfois des versions vraiment vieilles</p>
+    </section>
+    <section>
+        <h3>Scripting</h3>
+        <p class="fragment"><i>Scraper</i> les bases de données...</p>
+        <p class="fragment">... <a href="https://github.com/vulnersCom/nmap-vulners">nous ne sommes pas les premiers !</a></p>
+    </section>
+    <section>
+        <h3>Trafic dense</h3>
+        <p class="fragment">Nmap peut <i>prober</i> <strong>beaucoup</strong> de ports</p>
+        <p class="fragment">Choix rapidité / saturation</p>
+        <p class="fragment">Les ports sont connus (?)</p>
+        <p class="fragment">Firewalls</p>
+    </section>
+    <section>
+        <h3>Conclusion</h3>
+        <p class="fragment">Analyse systémique mais générique</p>
+        <p class="fragment">Uniquement les programmes connus</p>
+        <p class="fragment"><a href="https://www.metasploit.com/">Un simple composant de l'audit !</a></p>
+    </section>
+</section>
+<section>
+    <h1 class="no-toc-progress">Merci !</h1>
+    <small>Des questions ?</small>
+    <hr>
+    <p>Présentation disponible à l'adresse :<br /><a href="https://eldred.fr/slides/projet_com">https://eldred.fr/slides/projet_com</a></p>
+</section>
