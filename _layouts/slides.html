@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="dist/reveal.css">
         <link rel="stylesheet" href="dist/theme/black.css" id="theme">
 
-        <link rel="stylesheet" href="plugin/highlight/monokai.css">
+        <link rel="stylesheet" href="css/monokai.css">
     </head>
     <body>
         <div class="reveal">
@@ -40,6 +40,9 @@
                 dependencies: [
                     { src: "plugin/toc-progress/toc-progress.js", async: true, callback: function() { toc_progress.initialize('scroll', '#333', 'body'); toc_progress.create(); toc_progress.toggle(); } },
                 ],
+                {%- endif %}
+                {%- if page.slideNumber %}
+                slideNumber: "{{ page.slideNumber }}",
                 {%- endif %}
             });
         </script>
