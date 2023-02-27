@@ -1,0 +1,964 @@
+---
+layout: slides
+title: "Devenir efficace avec Git"
+permalink: /git
+plugins:
+  - notes
+slideNumber: c/t
+---
+<style type="text/css">
+	.reveal small {
+		vertical-align: initial;
+	}
+
+	/* SVG styling. */
+
+	svg {
+		color: var(--r-main-color);
+	}
+	text {
+		font: 14px monospace;
+		dominant-baseline: middle;
+		fill: currentColor;
+	}
+	line, polyline, polygon {
+		stroke: currentColor;
+		fill: currentColor;
+	}
+	path {
+		stroke: currentColor;
+		fill: none;
+	}
+	use[href="#arrow-head"] + * {
+		stroke-dasharray: 0 6 9999;
+	}
+	.centered {
+		text-anchor: middle;
+	}
+	.right {
+		text-anchor: end;
+	}
+
+	.commit {
+		rx: 45px;
+		ry: 30px;
+		stroke: currentColor;
+		fill: var(--r-background-color);
+	}
+	.commit-id {
+		text-anchor: middle;
+		fill: #ddaf3c !important;
+		color: #ddaf3c !important;
+	}
+	.branch {
+		fill: #4ebf22 !important;
+		color: #4ebf22 !important;
+		font-weight: bold;
+	}
+	.tag {
+		fill: #ddaf3c !important;
+		color: #ddaf3c !important;
+		font-weight: bold;
+	}
+	.head {
+		fill: #54e1b9 !important;
+		color: #54e1b9 !important;
+		font-weight: bold;
+	}
+	.remote-ref {
+		fill: #dd3c69 !important;
+		color: #dd3c69 !important;
+	}
+
+	/* Terminal styling. */
+
+	.prompt { color: #4ebf22; }
+	.cwd { color: #54e1b9; }
+	.error { color: #dd3c69; }
+	.warning { color: #ddaf3c; }
+</style>
+<svg style="display: none;">
+	<defs>
+		<polygon id="arrow-head" points="0,0 8,-4 8,4"/>
+	</defs>
+</svg>
+
+<section>
+	<h1>Becoming efficient with Git</h1>
+</section>
+
+<section>
+	<h2>What is Git?</h2>
+
+	<section>
+		<p class="fragment">Distributed Version Control System (<abbr>VCS</abbr>)</p>
+	</section>
+
+	<section>
+		<h3>Version control system</h3>
+		<p class="fragment">= system allowing to manage different versions of a set of files</p>
+		<p class="fragment">(Many intermediate versions between two releases&nbsp;!)</p>
+		<p class="fragment">Often used to allow several people work the same on code... among other reasons&nbsp;!</p>
+	</section>
+
+	<section>
+		<h3>Other VCS</h3>
+
+		<ul>
+			<li class="fragment">Subversion (SVN)</li>
+			<li class="fragment">Perforce (p4)</li>
+			<li class="fragment">CVS</li>
+			<li class="fragment">Mercurial</li>
+			<li class="fragment">Bazaar</li>
+		</ul>
+	</section>
+
+	<section>
+		<h3>What Git is not</h3>
+
+		<p class="fragment">Git ≠ GitHub, GitLab, Gitea, etc.</p>
+		<p class="fragment">Git = software tool (command line)</p>
+		<p class="fragment">GitHub et GitLab = Git repository hosting services</p>
+		<p class="fragment">Linux ≠ OVH, for example</p>
+	</section>
+</section>
+
+<section>
+	<h2>Why use Git&nbsp;?</h2>
+	<p class="fragment">Benefits on several levels&nbsp;:</p>
+	<ol>
+		<li class="fragment">Backup system</li>
+		<li class="fragment">Work by "branches"</li>
+		<li class="fragment">Collaborative work</li>
+	</ol>
+	<p class="fragment"><strong>It's worth it&nbsp;!</strong></p>
+</section>
+
+<section>
+	<h2>Making backups with Git</h2>
+
+	<section>
+		<p>Let's start with a parenthesis on the word "distributed".</p>
+		<p class="fragment">You may have heard that Git is a <strong>distributed</strong> version control system .</p>
+		<p class="fragment">What does that mean?&nbsp;?</p>
+	</section>
+	<section>
+		<h3>Two types of VCS</h3>
+		<dl>
+			<dt class="fragment">Centralized</dt>
+			<dd class="fragment">Any action on the repo requires access to the server <small class="fragment">(Subversion, Perforce, etc.)</small></dd>
+			<dt class="fragment">Distributed</dt>
+			<dd class="fragment">No separate copy of the repo <small class="fragment">(Mercurial, <strong>Git</strong>, etc.)</small></dd>
+	</section>
+	<section>
+		<h3>Benefits of a distributed system</h3>
+		<ul>
+			<li class="fragment">Each developer has a full<sup>1</sup> copy of the repo, not just the server.<br/><strong class="fragment">➔ Chouette, des backups pas chers&nbsp;!</strong></li>
+			<li class="fragment">Developers can work even offline&nbsp;!<br/><em class="fragment">We will come back to conflict resolution later</em></li>
+		</ul>
+		<small class="fragment"><sup>1</sup> For more details, see <a href="https://www.youtube.com/watch?v=4XpnKHJAok8">this presentation by Linus Torvalds at Google</a>.</small>
+	</section>
+</section>
+
+<section>
+	<h2>Basic concepts</h2>
+
+	<section>
+		<h3 class="fragment">Let's not talk too much but let's talk about graphs</h3>
+		<p class="fragment">❗️ <strong>I promise, nothing complicated&nbsp;!</strong> <small>(there will be plenty of images)</small></p>
+		<p class="fragment">Git is based on a<strong>graph</strong>.</p>
+	</section>
+
+	<section>
+		<h3>What is a <strong>commit</strong>&nbsp;?</h3>
+
+		<ul>
+			<li class="fragment" data-fragment-index="0">A commit message</li>
+			<li class="fragment" data-fragment-index="1">An author (name + email address)</li>
+			<li class="fragment" data-fragment-index="2">(Some other metadata...)</li>
+			<li class="fragment" data-fragment-index="3"><span class="fragment highlight-blue" data-fragment-index="5">A set of files and their contents</span></li>
+			<li class="fragment" data-fragment-index="4"><span class="fragment highlight-blue" data-fragment-index="6">Des «flèches» vers son/ses parent(s)</span></li>
+		</ul>
+		<p class="fragment">A commit is identified in the following way <strong>unique</strong> by its <strong>hash</strong>.</p>
+	</section>
+
+	<section>
+		<h3>A hash&nbsp;? It's edible&nbsp;?</h3>
+
+		<p class="fragment">All the information in a commit, <strong>including the contents of the files,</strong> are passed to a function of <strong>hashing</strong> to obtain its <strong>hash</strong>.</p>
+		<p class="fragment">Principe d'une fonction de hachage&nbsp;: on lui passe des données <small>(une suite d'octets)</small>, elle retourne un nombre ("hash")&nbsp;; deux entrées identiques ⇔ deux hashs identiques.</p>
+		<small class="fragment">(Plus d'infos <a href="https://fr.wikipedia.org/wiki/Fonction_de_hachage">sur Wikipédia</a> pour les curieux)</small>
+	</section>
+
+	<section>
+		<h3>Les hashs de commits</h3>
+
+		<p class="fragment">Le hash d'un commit est un très grand nombre, présenté en <a href="https://fr.wikipedia.org/wiki/Hexadécimal">hexadécimal</a> : <span class="fragment commit-id">6828f7bf493cd4c9c332ea769e6e38fbbe258821</span>.</p>
+		<p class="fragment">Les hashs sont souvent raccourcis (par défaut à 7 caractères) : <span class="commit-id">6828f7b</span>, c'est ce qu'on utilisera dans ce cours.</p>
+	</section>
+
+	<section>
+		<h3>Des «pointeurs»</h3>
+		<p class="fragment" data-fragment-index="0">Il n'y a pas que les commits qui pointent sur des commits.</p>
+		<svg viewBox="-5 -5 710 160" class="fragment" data-fragment-index="0">
+			<ellipse cx="45" cy="75" class="commit"/><text x="45" y="75" class="commit-id">f37c942</text>
+				<use x="90" y="75" href="#arrow-head"/><line x1="90" y1="75" x2="175" y2="75"/>
+			<ellipse cx="220" cy="75" class="commit"/><text x="220" y="75" class="commit-id">984b311</text>
+			<g class="fragment" data-fragment-index="3">
+				<use x="220" y="105" href="#arrow-head" transform="rotate(90,220,105)"/><line x1="220" y1="105" x2="220" y2="130"/>
+				<text x="220" y="140" class="tag centered">v1.7.10</text>
+			</g>
+				<use x="265" y="75" href="#arrow-head" transform="rotate(-33,265,75)"/><line x1="265" y1="75" x2="335" y2="30"/>
+			<ellipse cx="380" cy="30" class="commit"/><text x="380" y="30" class="commit-id">c4fe9cc</text>
+				<use x="425" y="30" href="#arrow-head"/><line x1="425" y1="30" x2="495" y2="30"/>
+			<ellipse cx="540" cy="30" class="commit"/><text x="540" y="30" class="commit-id">700aced</text>
+			<g class="fragment" data-fragment-index="2">
+				<use x="585" y="30" href="#arrow-head"/><line x1="585" y1="30" x2="635" y2="30"/>
+				<text x="640" y="30" class="branch">master</text>
+			</g>
+			<g class="fragment" data-fragment-index="4">
+				<use x="540" y="60" href="#arrow-head" transform="rotate(90,540,60)"/><line x1="540" y1="60" x2="540" y2="80"/>
+				<text x="540" y="90" class="head centered">HEAD</text>
+			</g>
+				<use x="265" y="75" href="#arrow-head" transform="rotate(33,265,75)"/><line x1="265" y1="75" x2="335" y2="120"/>
+			<ellipse cx="380" cy="120" class="commit"/><text x="380" y="120" class="commit-id">150dab6</text>
+			<g class="fragment" data-fragment-index="2">
+				<use x="425" y="120" href="#arrow-head"/><line x1="425" y1="120" x2="475" y2="120"/>
+				<text x="480" y="120" class="branch">network-fixes</text>
+			</g>
+		</svg>
+		<p class="fragment" data-fragment-index="1">Il y a aussi
+			<span class="fragment" data-fragment-index="2">des branches,</span>
+			<span class="fragment" data-fragment-index="3">des tags,</span>
+			<span class="fragment" data-fragment-index="4">et quelques autres.</span>
+			<small class="fragment" data-fragment-index="5">(On parlera de leurs différences plus tard)</small>
+		</p>
+	</section>
+</section>
+
+<section>
+	<h2>Manipuler le graphe</h2>
+	<section>
+	</section>
+
+	<section>
+		<h3>Créer un commit</h3>
+		<svg viewBox="-5 -5 435 70" style="max-height: 13vh;">
+			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
+				<use x="90" y="30" href="#arrow-head"/><line x1="90" y1="30" x2="175" y2="30"/>
+			<ellipse cx="220" cy="30" class="commit"/><text x="220" y="30" class="commit-id">984b311</text>
+			<g class="fragment" data-fragment-index="1">
+				<use x="265" y="30" href="#arrow-head"/><line x1="265" y1="30" x2="335" y2="30"/>
+				<ellipse cx="380" cy="30" class="commit"/><text x="380" y="30" class="commit-id">c4fe9cc</text>
+			</g>
+		</svg>
+		<p class="fragment" data-fragment-index="0">Pour créer un commit...</p>
+		<p class="fragment" data-fragment-index="1">... on l'ajoute simplement au graphe.</p>
+	</section>
+
+	<section>
+		<h3>C'est tout&nbsp;!</h3>
+		<p class="fragment">Il n'y a pas de piège, on ne fait jamais qu'ajouter des commits au graphe.</p>
+		<p class="fragment">Parlons tout de même de ce qui se passe quand on le fait.</p>
+	</section>
+
+	<section>
+		<h3><code>HEAD</code></h3>
+		<p class="fragment"><code class="head">HEAD</code> désigne le commit qui est actuellement <em>checked out</em>.</p>
+		<p class="fragment">C'est-à-dire, il s'agit du commit dont le contenu (les fichiers) est actuellement présent dans le répertoire.</p>
+		<p class="fragment">On peut considérer le commit pointé par <code class="head">HEAD</code> comme «là où on se trouve actuellement».</p>
+	</section>
+
+	<section>
+		<h3 class="head"><code>HEAD</code></h3>
+		<p class="fragment" data-fragment-index="0">Et quand on crée un nouveau commit&nbsp;?</p>
+		<svg viewBox="-5 -5 435 105" style="max-height: 13vh;">
+			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
+				<use x="90" y="30" href="#arrow-head"/><line x1="90" y1="30" x2="175" y2="30"/>
+			<ellipse cx="220" cy="30" class="commit"/><text x="220" y="30" class="commit-id">984b311</text>
+			<g class="fragment fade-out" data-fragment-index="1">
+				<use x="220" y="60" href="#arrow-head" transform="rotate(90,220,60)"/><line x1="220" y1="60" x2="220" y2="80"/>
+				<text x="220" y="90" class="head centered">HEAD</text>
+			</g>
+			<g class="fragment" data-fragment-index="1">
+				<use x="265" y="30" href="#arrow-head"/><line x1="265" y1="30" x2="335" y2="30"/>
+				<ellipse cx="380" cy="30" class="commit"/><text x="380" y="30" class="commit-id">c4fe9cc</text>
+				<use x="380" y="60" href="#arrow-head" transform="rotate(90,380,60)"/><line x1="380" y1="60" x2="380" y2="80"/>
+				<text x="380" y="90" class="head centered">HEAD</text>
+			</g>
+		</svg>
+		<p class="fragment" data-fragment-index="2"><code class="head">HEAD</code> suit le commit <small>(il est automatiquement <em>checked out</em>)</small>.</p>
+	</section>
+
+	<section>
+		<h3 class="branch">Branches</h3>
+		<p class="fragment" data-fragment-index="0">Et quand on crée un nouveau commit&nbsp;?</p>
+		<svg viewBox="-5 -5 435 105" style="max-height: 13vh;">
+			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
+			<use x="45" y="60" href="#arrow-head" transform="rotate(90,45,60)"/><line x1="45" y1="60" x2="45" y2="80"/>
+			<text x="45" y="90" class="branch centered">master</text>
+				<use x="90" y="30" href="#arrow-head"/><line x1="90" y1="30" x2="175" y2="30"/>
+			<ellipse cx="220" cy="30" class="commit"/><text x="220" y="30" class="commit-id">984b311</text>
+			<use x="220" y="60" href="#arrow-head" transform="rotate(151,220,60)"/><line x1="220" y1="60" x2="180" y2="82"/>
+			<text x="177" y="90" class="branch right">develop</text>
+			<g class="fragment fade-out" data-fragment-index="1">
+				<use x="220" y="60" href="#arrow-head" transform="rotate(38,220,60)"/><line x1="220" y1="60" x2="250" y2="80"/>
+				<text x="250" y="90" class="branch centered">crash-fix</text>
+				<use x="290" y="90" href="#arrow-head"/><line x1="290" y1="90" x2="323" y2="90"/>
+				<text x="325" y="90" class="head">HEAD</text>
+			</g>
+			<g class="fragment" data-fragment-index="1">
+				<use x="265" y="30" href="#arrow-head"/><line x1="265" y1="30" x2="335" y2="30"/>
+				<ellipse cx="380" cy="30" class="commit"/><text x="380" y="30" class="commit-id">c4fe9cc</text>
+				<use x="380" y="60" href="#arrow-head" transform="rotate(90,380,60)"/><line x1="380" y1="60" x2="380" y2="80"/>
+				<text x="380" y="90" class="branch centered">crash-fix</text>
+				<use x="340" y="90" href="#arrow-head" transform="rotate(-180,340,90)"/><line x1="340" y1="90" x2="320" y2="90"/>
+				<text x="318" y="90" class="head right">HEAD</text>
+			</g>
+		</svg>
+		<p class="fragment" data-fragment-index="2">Une <span class="branch">branche</span> suit le commit <strong>si et seulement si elle est <em class="head">checked out</em></strong>.</p>
+	</section>
+
+	<section>
+		<h3 class="tag">Tags</h3>
+		<p class="fragment">Un tag est <strong>inamovible</strong> et ne peut pas être <em class="head">checked out</em>, il ne suit donc jamais un nouveau commit.</p>
+		<p class="fragment"><small>(Pour «déplacer» un tag, il faut le supprimer et le re-créer ailleurs.)</small></p>
+		<p class="fragment">➔ Une branche sert à <em>suivre</em> quelque chose (développement d'une feature...) ; un tag sert à <em>marquer</em> un commit particulier (version...)</p>
+	</section>
+</section>
+
+<section>
+	<h2>Parlons commandes</h2>
+	<section>
+		<p class="fragment">Essayez d'<a href="https://cbea.ms/git-commit#learn-to-love-the-command-line-leave-the-ide-behind-">éviter les interfaces graphiques</a> si possible.</p>
+		<p class="fragment">(Au moins au début.)</p>
+		<p class="fragment">Par exemple, leur gestion des erreurs est souvent hasardeuse...</p>
+	</section>
+
+	<section>
+		<h3>Créer un nouveau dépôt Git</h3>
+		{% highlight console %}
+		$ git init
+		{%- endhighlight %}
+		<p class="fragment">Crée un nouveau dépôt <strong>dans le répertoire courant</strong>.</p>
+	</section>
+
+	<section>
+		<h3>Qu'est-ce qui fait un dépôt Git&nbsp;?</h3>
+		<p class="fragment" data-fragment-index="0">Réponse : le répertoire<sup>1</sup> <code>.git</code>.</p>
+		<ul>
+			<li class="fragment" data-fragment-index="1">Git ne stocke rien en dehors de ce répertoire.</li>
+			<li class="fragment" data-fragment-index="2">On peut librement déplacer le répertoire parent, Git ne stocke aucun chemin absolu.</li>
+			<li class="fragment">Git cherche également dans tous les répertoires parents du répertoire courant.</li>
+		</ul>
+		<p class="fragment" data-fragment-index="0"><small><sup>1</sup> Dans certains cas c'est un fichier.</small></p>
+	</section>
+
+	<section>
+		<h3>Créer un commit</h3>
+		<script id="asciicast-30" src="https://asciinema.celforyon.fr/a/30.js" async data-rows="10"></script>
+		<p class="fragment">Apparemment il y a eu une erreur&nbsp;?</p>
+		<p class="fragment">Créons quelques fichiers.</p>
+	</section>
+
+	<section>
+		<h3>«Où en suis-je&nbsp;?»</h3>
+		<script id="asciicast-31" src="https://asciinema.celforyon.fr/a/31.js" async data-rows="15"></script>
+	</section>
+
+	<section>
+		<h3>Parlons <em>staging</em></h3>
+		<p class="fragment fade-in-then-out"><small>Promis c'est le dernier truc</small></p>
+		<p class="fragment">Git permet de choisir quelles modifications vont être enregistrées dans le prochain commit.</p>
+		<p class="fragment">On le fait via la commande <code>git add</code> suggérée plus tôt.</p>
+	</section>
+
+	<section>
+		<script id="asciicast-32" src="https://asciinema.celforyon.fr/a/32.js" async></script>
+	</section>
+</section>
+
+<section>
+	<h2>Éditeur interactif</h2>
+	<section>
+		<p class="fragment">On vient de voir <code>git commit</code> ouvrir un éditeur de texte.</p>
+		<figure class="fragment">
+			<blockquote><small>
+				Éditeur de texte utilisé par les commandes Git.
+				Cette valeur est intérprétée par le shell quand elle est utilisée.
+				Exemples&nbsp;: <code>~/bin/vi</code>, <code>$UNE_VARIABLE_D_ENVIRONNEMENT</code>, <code>"C:\Program Files\Vim\gvim.exe" --nofork</code>.
+				L'ordre de préférence est la variable d'environnement <code>$GIT_EDITOR</code>, puis la configuration <code>core.editor</code>, puis <code>$VISUAL</code>, puis <code>$EDITOR</code>, puis la valeur par défaut choisie à la compilation, qui est habituellement <code>vi</code>.
+			</small></blockquote>
+			<figcaption><small>
+				Source : <a href="https://git-scm.com/docs/git-var/fr#Documentation/git-var.txt-GITEDITOR">documentation de <code>GIT_EDITOR</code> dans <code>git-var</code></a>.
+			</small></figcaption>
+		</figure>
+	</section>
+
+	<section>
+		<h3>Changer la configuration</h3>
+		<p class="fragment">L'éditeur utilisé par défaut est <code>vi</code>, qui a une ergonomie... particulière.</p>
+		<p class="fragment">Pour le changer pour <code>nano</code> (par exemple) :</p>
+		<div class="fragment">{% highlight console %}
+			$ git config --global core.editor "nano"
+		{%- endhighlight %}</div>
+		<div class="fragment">
+			<small>Positionner <code>EDITOR</code> dans son <code>.bashrc</code>/<code>.zshrc</code> fonctionne aussi.</small>
+			{% highlight bash mark_lines="2" %}
+				# ...
+				export EDITOR=nano
+				# ...
+			{%- endhighlight %}
+		</div>
+	</section>
+
+	<section>
+		<h3>Utiliser un éditeur graphique</h3>
+		<p class="fragment">Oui c'est possible&nbsp;!</p>
+		<p class="fragment">Il faut cependant s'assurer que la commande ne quitte que quand le fichier est fermé :</p>
+		<dl style="display: block;">
+			<div class="fragment"><dt>Sublime Text</dt><dd>{% highlight console %}$ git config --global core.editor "subl -w"{% endhighlight %}</dd></div>
+			<div class="fragment"><dt>VS Code</dt><dd>{% highlight console %}$ git config --global core.editor "code -w"{% endhighlight %}</dd></div>
+		</dl>
+	</section>
+</section>
+
+<section>
+	<h2>La collaboration</h2>
+	<section>
+		<p class="fragment">Git sur sa machine = outil de backup (et plus)</p>
+		<p class="fragment">Git sur plusieurs machines = 🤯</p>
+	</section>
+
+	<section>
+		<h3>Principe</h3>
+		<p class="fragment">Chaque machine contient un dépôt Git. <small class="fragment">Répertoire <code>.git</code>, etc.</small></p>
+		<p class="fragment">On peut «pousser» des modifications vers une autre machine, et «tirer» des modifs depuis.</p>
+	</section>
+
+	<section>
+		<svg viewBox="40 -5 960 545">
+			<defs>
+				<g id="laptop" style="stroke-width: 2px;"><polygon points="10,0 70,0 70,50 10,50" style="fill: var(--r-background-color);"/><polygon points="10,50 70,50 80,70 0,70" fill-opacity="0.6"/></g>
+			</defs>
+			<style>.cmd { font-size: 18px; }</style>
+
+			<use x="150" y="50" href="#laptop"/><text x="190" y="75" class="centered">origin</text>
+
+			<g class="fragment" data-fragment-index="2">
+				<ellipse cx="295" cy="30" class="commit"/><text x="295" y="30" class="commit-id">6846ef5</text>
+				<g class="fragment fade-out" data-fragment-index="6">
+					<use x="295" y="60" href="#arrow-head" transform="rotate(90,295,60)"/><line x1="295" y1="60" x2="295" y2="90"/><text x="295" y="100" class="branch centered">master</text>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="6">
+					<use x="340" y="30" href="#arrow-head"/><line x1="340" y1="30" x2="375" y2="30"/>
+				<ellipse cx="420" cy="30" class="commit"/><text x="420" y="30" class="commit-id">ac2b311</text>
+					<use x="465" y="30" href="#arrow-head"/><line x1="465" y1="30" x2="500" y2="30"/>
+				<ellipse cx="545" cy="30" class="commit"/><text x="545" y="30" class="commit-id">1234567</text>
+				<g class="fragment fade-out" data-fragment-index="9">
+					<use x="545" y="60" href="#arrow-head" transform="rotate(90,545,60)"/><line x1="545" y1="60" x2="545" y2="90"/><text x="545" y="100" class="branch centered">master</text>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="9">
+					<use x="590" y="30" href="#arrow-head"/><line x1="590" y1="30" x2="625" y2="30"/>
+				<ellipse cx="670" cy="30" class="commit"/><text x="670" y="30" class="commit-id">3d5f4a2</text>
+					<use x="670" y="60" href="#arrow-head" transform="rotate(90,670,60)"/><line x1="670" y1="60" x2="670" y2="90"/><text x="670" y="100" class="branch centered">master</text>
+			</g>
+
+			<use x="170" y="415" href="#laptop"/><text x="210" y="440" class="centered">tsfe01</text>
+			<text x="270" y="425" class="cmd fragment" data-fragment-index="0">$ git init</text>
+			<text x="270" y="445" class="cmd fragment" data-fragment-index="1">$ git commit</text>
+			<text x="270" y="465" class="cmd fragment" data-fragment-index="2">$ git push</text>
+			<g class="fragment fade-in-then-out" data-fragment-index="2">
+				<use x="280" y="120" href="#arrow-head" transform="rotate(137,280,120)"/><line x1="280" y1="120" x2="100" y2="290"/>
+			</g>
+			<text x="270" y="485" class="cmd fragment" data-fragment-index="7">$ git pull</text>
+			<g class="fragment fade-in-then-out" data-fragment-index="7">
+				<use x="360" y="290" href="#arrow-head" transform="rotate(-43,360,290)"/><line x1="360" y1="290" x2="530" y2="120"/>
+			</g>
+			<text x="270" y="505" class="cmd fragment" data-fragment-index="8">$ git commit</text>
+			<text x="270" y="525" class="cmd fragment" data-fragment-index="9">$ git push</text>
+			<g class="fragment fade-in-then-out" data-fragment-index="9">
+				<use x="655" y="120" href="#arrow-head" transform="rotate(137,655,120)"/><line x1="655" y1="120" x2="485" y2="290"/>
+			</g>
+
+			<g class="fragment" data-fragment-index="1">
+				<ellipse cx="95" cy="330" class="commit"/><text x="95" y="330" class="commit-id">6846ef5</text>
+				<g class="fragment fade-out" data-fragment-index="7">
+					<use x="95" y="360" href="#arrow-head" transform="rotate(90,95,360)"/><line x1="95" y1="360" x2="95" y2="390"/><text x="95" y="400" class="branch centered">master</text>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="7">
+					<use x="140" y="330" href="#arrow-head"/><line x1="140" y1="330" x2="175" y2="330"/>
+				<ellipse cx="220" cy="330" class="commit"/><text x="220" y="330" class="commit-id">ac2b311</text>
+					<use x="265" y="330" href="#arrow-head"/><line x1="265" y1="330" x2="300" y2="330"/>
+				<ellipse cx="345" cy="330" class="commit"/><text x="345" y="330" class="commit-id">1234567</text>
+				<g class="fragment fade-out" data-fragment-index="8">
+					<use x="345" y="360" href="#arrow-head" transform="rotate(90,345,360)"/><line x1="345" y1="360" x2="345" y2="390"/><text x="345" y="400" class="branch centered">master</text>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="8">
+					<use x="390" y="330" href="#arrow-head"/><line x1="390" y1="330" x2="425" y2="330"/>
+				<ellipse cx="470" cy="330" class="commit"/><text x="470" y="330" class="commit-id">3d5f4a2</text>
+					<use x="470" y="360" href="#arrow-head" transform="rotate(90,470,360)"/><line x1="470" y1="360" x2="470" y2="390"/><text x="470" y="400" class="branch centered">master</text>
+			</g>
+
+			<use x="870" y="415" href="#laptop"/><text x="910" y="440" class="centered">tsfe02</text>
+			<text x="720" y="425" class="cmd fragment" data-fragment-index="3">$ git clone</text>
+			<g class="fragment fade-in-then-out" data-fragment-index="3">
+				<use x="680" y="290" href="#arrow-head" transform="rotate(-150,680,290)"/><line x1="680" y1="290" x2="310" y2="120"/>
+			</g>
+			<text x="720" y="445" class="cmd fragment" data-fragment-index="4">$ git commit</text>
+			<text x="720" y="465" class="cmd fragment" data-fragment-index="5">$ git commit</text>
+			<text x="720" y="485" class="cmd fragment" data-fragment-index="6">$ git push</text>
+			<g class="fragment fade-in-then-out" data-fragment-index="6">
+				<use x="560" y="120" href="#arrow-head" transform="rotate(30,560,120)"/><line x1="560" y1="120" x2="930" y2="290"/>
+			</g>
+
+			<g class="fragment" data-fragment-index="3">
+				<ellipse cx="695" cy="330" class="commit"/><text x="695" y="330" class="commit-id">6846ef5</text>
+				<g class="fragment fade-out" data-fragment-index="4">
+					<use x="695" y="360" href="#arrow-head" transform="rotate(90,695,360)"/><line x1="695" y1="360" x2="695" y2="390"/><text x="695" y="400" class="branch centered">master</text>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="4">
+					<use x="740" y="330" href="#arrow-head"/><line x1="740" y1="330" x2="775" y2="330"/>
+				<ellipse cx="820" cy="330" class="commit"/><text x="820" y="330" class="commit-id">ac2b311</text>
+				<g class="fragment fade-out" data-fragment-index="5">
+					<use x="820" y="360" href="#arrow-head" transform="rotate(90,820,360)"/><line x1="820" y1="360" x2="820" y2="390"/><text x="820" y="400" class="branch centered">master</text>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="5">
+					<use x="865" y="330" href="#arrow-head"/><line x1="865" y1="330" x2="900" y2="330"/>
+				<ellipse cx="945" cy="330" class="commit"/><text x="945" y="330" class="commit-id">1234567</text>
+				<use x="945" y="360" href="#arrow-head" transform="rotate(90,945,360)"/><line x1="945" y1="360" x2="945" y2="390"/><text x="945" y="400" class="branch centered">master</text>
+			</g>
+		</svg>
+	</section>
+
+	<section>
+		<h3>Résumé</h3>
+		<ul>
+			<li class="fragment">Pour créer un nouveau repo à partir d'un existant: <code>git clone</code></li>
+			<li class="fragment">Pour rapatrier les mises à jour depuis un repo distant : <code>git pull</code></li>
+			<li class="fragment">Pour publier ses modifications : <code>git push</code></li>
+		</ul>
+	</section>
+
+	<section>
+		<h3>Un peu plus de terminologie</h3>
+		<p class="fragment">Git modélise les machines distantes via des <strong>remotes</strong>. <small class="fragment">(«Remote» en anglais = «distant»)</small></p>
+		<p class="fragment">Une remote = un certain repo sur une certaine machine <small class="fragment">(grosso modo)</small>.</p>
+		<p class="fragment">On gère les remotes via <code>git remote</code>&nbsp;!</p>
+	</section>
+
+	<section>
+		<h3>Remotes &amp; refs</h3>
+		<svg viewBox="30 -5 540 395" style="max-height: 450px;">
+			<defs>
+				<g id="laptop" style="stroke-width: 2px;"><polygon points="10,0 70,0 70,50 10,50" style="fill: var(--r-background-color);"/><polygon points="10,50 70,50 80,70 0,70" fill-opacity="0.6"/></g>
+			</defs>
+			<style>.cmd { font-size: 18px; }</style>
+
+			<use x="150" y="50" href="#laptop"/><g class="fragment highlight-current-red" data-fragment-index="3"><text x="190" y="75" class="centered">origin</text></g>
+
+			<ellipse cx="295" cy="30" class="commit"/><text x="295" y="30" class="commit-id">ac2b311</text>
+			<use x="295" y="60" href="#arrow-head" transform="rotate(90,295,60)"/><line x1="295" y1="60" x2="295" y2="90"/><text x="295" y="100" class="branch centered">master</text>
+				<use x="340" y="30" href="#arrow-head"/><line x1="340" y1="30" x2="375" y2="30"/>
+			<ellipse cx="420" cy="30" class="commit"/><text x="420" y="30" class="commit-id">6846ef5</text>
+				<use x="420" y="60" href="#arrow-head" transform="rotate(90,420,60)"/><line x1="420" y1="60" x2="420" y2="90"/><text x="420" y="100" class="branch centered">develop</text>
+
+			<use x="50" y="315" href="#laptop" style="color: cyan;"/><text x="90" y="340" class="centered">tsfe01</text>
+
+				<line stroke-dasharray="2 2 2 2 2 2 999" x1="30" y1="230" x2="50" y2="230"/>
+			<ellipse cx="95" cy="230" class="commit"/><text x="95" y="230" class="commit-id">6846ef5</text>
+				<use x="95" y="260" href="#arrow-head" transform="rotate(90,95,260)"/><line x1="95" y1="260" x2="95" y2="290"/><text x="95" y="300" class="branch centered">develop</text>
+				<use x="140" y="230" href="#arrow-head"/><line x1="140" y1="230" x2="175" y2="230"/>
+			<ellipse cx="220" cy="230" class="commit"/><text x="220" y="230" class="commit-id">06adada</text>
+				<use x="220" y="260" href="#arrow-head" transform="rotate(90,220,260)"/><line x1="220" y1="260" x2="220" y2="290"/><text x="220" y="300" class="branch centered">fix-tests</text>
+
+			<use x="480" y="315" href="#laptop"/><g class="fragment highlight-current-red" data-fragment-index="5"><text x="520" y="340" class="centered">tsfe02</text></g>
+
+			<ellipse cx="395" cy="230" class="commit"/><text x="395" y="230" class="commit-id">ac2b311</text>
+				<use x="395" y="260" href="#arrow-head" transform="rotate(90,395,260)"/><line x1="395" y1="260" x2="395" y2="290"/><text x="395" y="300" class="branch centered">develop</text>
+				<use x="440" y="230" href="#arrow-head"/><line x1="440" y1="230" x2="475" y2="230"/>
+			<ellipse cx="520" cy="230" class="commit"/><text x="520" y="230" class="commit-id">24a8c81</text>
+				<use x="520" y="260" href="#arrow-head" transform="rotate(90,520,260)"/><line x1="520" y1="260" x2="520" y2="290"/><text x="520" y="300" class="branch centered">lts-fixes</text>
+
+			<text x="160" y="340" class="fragment branch" data-fragment-index="0">develop</text>
+			<use x="125" y="310" href="#arrow-head" transform="rotate(40,125,310)" class="fragment" data-fragment-index="1"/><line x1="125" y1="310" x2="155" y2="335" class="fragment" data-fragment-index="1"/>
+			<text x="160" y="360" class="fragment remote-ref" data-fragment-index="2">origin/develop</text>
+			<use x="390" y="110" href="#arrow-head" transform="rotate(120,390,110)" class="fragment" data-fragment-index="3"/><line x1="390" y1="110" x2="250" y2="350" class="fragment" data-fragment-index="3"/>
+			<text x="160" y="380" class="fragment remote-ref" data-fragment-index="4">tsfe02/develop</text>
+			<use x="380" y="310" href="#arrow-head" transform="rotate(148,380,310)" class="fragment" data-fragment-index="5"/><line x1="380" y1="310" x2="280" y2="370" class="fragment" data-fragment-index="5"/>
+		</svg>
+	</section>
+
+	<section>
+		<h3><code>git fetch</code></h3>
+		<p class="fragment">Git ne va pas faire des requêtes à chaque commande.</p>
+		<ul>
+			<li class="fragment">Économe en bande passante</li>
+			<li class="fragment">Permet de travailler hors-ligne</li>
+		</ul>
+		<p class="fragment">Pour se tenir au jus : <code>git fetch <var>&lt;remote&gt;</var></code>.</p>
+		<p class="fragment"><small>(<code>git pull</code> appelle implicitement <code>git fetch</code>.)</small></p>
+	</section>
+</section>
+<section>
+	<h2>La collaboration (2)</h2>
+	<section>
+		<h3>Ça tourne mal</h3>
+		<svg viewBox="40 -5 540 395" style="max-height: 450px;">
+			<defs>
+				<g id="laptop" style="stroke-width: 2px;"><polygon points="10,0 70,0 70,50 10,50" style="fill: var(--r-background-color);"/><polygon points="10,50 70,50 80,70 0,70" fill-opacity="0.6"/></g>
+			</defs>
+			<style>.cmd { font-size: 18px; }</style>
+
+			<use x="150" y="50" href="#laptop"/><text x="190" y="75" class="centered">origin</text>
+
+			<ellipse cx="295" cy="30" class="commit"/><text x="295" y="30" class="commit-id">6846ef5</text>
+			<g class="fragment fade-out" data-fragment-index="2">
+				<use x="295" y="60" href="#arrow-head" transform="rotate(90,295,60)"/><line x1="295" y1="60" x2="295" y2="90"/><text x="295" y="100" class="branch centered">master</text>
+			</g>
+			<g class="fragment" data-fragment-index="2">
+					<use x="340" y="30" href="#arrow-head"/><line x1="340" y1="30" x2="375" y2="30"/>
+				<ellipse cx="420" cy="30" class="commit"/><text x="420" y="30" class="commit-id">ac2b311</text>
+					<use x="420" y="60" href="#arrow-head" transform="rotate(90,420,60)"/><line x1="420" y1="60" x2="420" y2="90"/><text x="420" y="100" class="branch centered">master</text>
+			</g>
+
+			<use x="50" y="315" href="#laptop"/><text x="90" y="340" class="centered">tsfe01</text>
+			<text x="150" y="345" class="cmd fragment" data-fragment-index="1">$ git commit</text>
+			<text x="150" y="365" class="cmd fragment" data-fragment-index="3">$ git push</text>
+			<g class="fragment" data-fragment-index="3">
+				<use x="400" y="120" href="#arrow-head" transform="rotate(157,400,120)"/><line x1="400" y1="120" x2="235" y2="190"/>
+			</g>
+			<text x="315" y="145" class="centered fragment fade-up" data-fragment-index="4">?</text>
+
+			<ellipse cx="95" cy="230" class="commit"/><text x="95" y="230" class="commit-id">6846ef5</text>
+			<g class="fragment fade-out" data-fragment-index="1">
+				<use x="95" y="260" href="#arrow-head" transform="rotate(90,95,260)"/><line x1="95" y1="260" x2="95" y2="290"/><text x="95" y="300" class="branch centered">master</text>
+			</g>
+			<g class="fragment" data-fragment-index="1">
+					<use x="140" y="230" href="#arrow-head"/><line x1="140" y1="230" x2="175" y2="230"/>
+				<ellipse cx="220" cy="230" class="commit"/><text x="220" y="230" class="commit-id">06adada</text>
+					<use x="220" y="260" href="#arrow-head" transform="rotate(90,220,260)"/><line x1="220" y1="260" x2="220" y2="290"/><text x="220" y="300" class="branch centered">master</text>
+			</g>
+
+			<use x="480" y="315" href="#laptop"/><text x="520" y="340" class="centered">tsfe02</text>
+			<text x="340" y="345" class="cmd fragment" data-fragment-index="0">$ git commit</text>
+			<text x="340" y="365" class="cmd fragment" data-fragment-index="2">$ git push</text>
+			<g class="fragment fade-in-then-out" data-fragment-index="2">
+				<use x="440" y="120" href="#arrow-head" transform="rotate(50,440,120)"/><line x1="440" y1="120" x2="510" y2="190"/>
+			</g>
+
+			<ellipse cx="395" cy="230" class="commit"/><text x="395" y="230" class="commit-id">6846ef5</text>
+			<g class="fragment fade-out" data-fragment-index="0">
+				<use x="395" y="260" href="#arrow-head" transform="rotate(90,395,260)"/><line x1="395" y1="260" x2="395" y2="290"/><text x="395" y="300" class="branch centered">master</text>
+			</g>
+			<g class="fragment" data-fragment-index="0">
+					<use x="440" y="230" href="#arrow-head"/><line x1="440" y1="230" x2="475" y2="230"/>
+				<ellipse cx="520" cy="230" class="commit"/><text x="520" y="230" class="commit-id">ac2b311</text>
+					<use x="520" y="260" href="#arrow-head" transform="rotate(90,520,260)"/><line x1="520" y1="260" x2="520" y2="290"/><text x="520" y="300" class="branch centered">master</text>
+			</g>
+		</svg>
+	</section>
+
+	<section>
+		<h3>Ça tourne mal...</h3>
+
+		<p class="fragment" data-fragment-index="0">...mais Git couvre nos arrières.</p>
+		<pre class="fragment" data-fragment-index="0"><small><code>
+<span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/test</span>% git push
+To example.com:chemin/vers/repo.git
+<span class="error"> ! [rejected]</span>        master -> master (<span class="fragment highlight-green" data-fragment-index="1">non-fast-forward</span>)
+<span class="error">error: failed to push some refs to 'example.com:chemin/vers/repo.git'</span>
+<span class="warning">hint: Updates were rejected because a pushed branch tip is behind its remote
+hint: counterpart. Check out this branch and integrate the remote changes
+hint: (e.g. 'git pull ...') before pushing again.
+hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span>
+		</code></small></pre>
+		<p class="fragment" data-fragment-index="1">... «non-fast-forward»&nbsp;?</p>
+	</section>
+
+	<section>
+		<h3>Fast-forwarding</h3>
+
+		<p class="fragment" data-fragment-index="0">«Fast-forwarder» une branche signifie «la déplacer uniquement vers des commits enfants» :</p>
+		<svg viewBox="40 -5 500 220" class="fragment" data-fragment-index="1" style="max-height: 360px;">
+			<ellipse cx="95" cy="30" class="commit"/><text x="95" y="30" class="commit-id">6846ef5</text>
+				<use x="140" y="30" href="#arrow-head"/><line x1="140" y1="30" x2="175" y2="30"/>
+			<ellipse cx="220" cy="30" class="commit"/><text x="220" y="30" class="commit-id">ac2b311</text>
+				<use x="220" y="60" href="#arrow-head" transform="rotate(90,220,60)"/><line x1="220" y1="60" x2="220" y2="80"/><text x="220" y="90" class="branch centered">master</text>
+				<use x="265" y="30" href="#arrow-head"/><line x1="265" y1="30" x2="300" y2="30"/>
+			<ellipse cx="345" cy="30" class="commit"/><text x="345" y="30" class="commit-id">1234567</text>
+				<use x="130" y="50" href="#arrow-head" transform="rotate(58,130,50)"/><line x1="130" y1="50" x2="175" y2="120"/>
+			<ellipse cx="200" cy="140" class="commit"/><text x="200" y="140" class="commit-id">06adada</text>
+				<use x="255" y="50" href="#arrow-head" transform="rotate(58,255,50)"/><line x1="255" y1="50" x2="300" y2="120"/>
+			<ellipse cx="325" cy="140" class="commit"/><text x="325" y="140" class="commit-id">3d5f4a2</text>
+				<use x="390" y="30" href="#arrow-head"/><line x1="390" y1="30" x2="425" y2="30"/>
+			<ellipse cx="470" cy="30" class="commit"/><text x="470" y="30" class="commit-id">feedfac</text>
+			<g class="fragment" data-fragment-index="2">
+				<g class="fragment fade-out" data-fragment-index="4">
+					<use x="345" y="60" href="#arrow-head" transform="rotate(90,345,60)"/><line x1="345" y1="60" x2="345" y2="80"/><text x="345" y="90" class="branch centered">master</text>
+					<g class="fragment highlight-green" data-fragment-index="3">
+						<use x="315" y="90" href="#arrow-head" transform="rotate(-180,315,90)"/><line x1="315" y1="90" x2="250" y2="90"/>
+					</g>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="4">
+				<g class="fragment fade-out" data-fragment-index="6">
+					<use x="95" y="60" href="#arrow-head" transform="rotate(90,95,60)"/><line x1="95" y1="60" x2="95" y2="80"/><text x="95" y="90" class="branch centered">master</text>
+					<g class="fragment highlight-red" data-fragment-index="5">
+						<use x="125" y="90" href="#arrow-head"/><line x1="125" y1="90" x2="190" y2="90"/>
+					</g>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="6">
+				<g class="fragment fade-out" data-fragment-index="8">
+					<use x="325" y="170" href="#arrow-head" transform="rotate(90,325,170)"/><line x1="325" y1="170" x2="325" y2="190"/><text x="325" y="200" class="branch centered">master</text>
+					<g class="fragment highlight-green" data-fragment-index="7">
+						<use x="300" y="190" href="#arrow-head" transform="rotate(-123,300,190)"/><line x1="300" y1="190" x2="240" y2="100"/>
+					</g>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="8">
+				<g class="fragment fade-out" data-fragment-index="10">
+					<use x="470" y="60" href="#arrow-head" transform="rotate(90,470,60)"/><line x1="470" y1="60" x2="470" y2="80"/><text x="470" y="90" class="branch centered">master</text>
+					<g class="fragment highlight-green" data-fragment-index="9">
+						<use x="440" y="90" href="#arrow-head" transform="rotate(-180,440,90)"/><line x1="440" y1="90" x2="250" y2="90"/>
+					</g>
+				</g>
+			</g>
+			<g class="fragment" data-fragment-index="10">
+				<g class="fragment fade-out" data-fragment-index="12">
+					<use x="200" y="170" href="#arrow-head" transform="rotate(90,200,170)"/><line x1="200" y1="170" x2="200" y2="190"/><text x="200" y="200" class="branch centered">master</text>
+					<g class="fragment highlight-red" data-fragment-index="11">
+						<use x="170" y="200" href="#arrow-head" transform="rotate(-167,170,200)"/><path d="M 170,200 c -40,0 -60,-110 20,-110"/>
+					</g>
+				</g>
+			</g>
+		</svg>
+	</section>
+
+	<section>
+		<h3>Fast-forwarding</h3>
+
+		<p class="fragment"><small>«Fast-forwarding» parce que «avance rapide» dans le temps.</small></p>
+		<p class="fragment">Fast-forward = toujours safe (on ne peut «perdre» aucun commit).</p>
+		<p class="fragment">...et dans les autres cas&nbsp;?</p>
+		<ul>
+			<li class="fragment"><code>git merge</code></li>
+			<li class="fragment"><code>git rebase</code></li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<h2>Merge</h2>
+
+	<section>
+		<h3>Principe</h3>
+		<svg viewBox="40 -5 500 215" style="max-height: 360px;">
+			<ellipse cx="95" cy="30" class="commit"/><text x="95" y="30" class="commit-id">6846ef5</text>
+				<use x="140" y="30" href="#arrow-head"/><line x1="140" y1="30" x2="175" y2="30"/>
+			<ellipse cx="220" cy="30" class="commit"/><text x="220" y="30" class="commit-id">ac2b311</text>
+				<use x="265" y="30" href="#arrow-head"/><line x1="265" y1="30" x2="300" y2="30"/>
+			<ellipse cx="345" cy="30" class="commit"/><text x="345" y="30" class="commit-id">1234567</text>
+				<use x="345" y="60" href="#arrow-head" transform="rotate(90,345,60)"/><line x1="345" y1="60" x2="345" y2="80"/><text x="345" y="90" class="branch centered">master</text>
+				<use x="130" y="50" href="#arrow-head" transform="rotate(58,130,50)"/><line x1="130" y1="50" x2="175" y2="120"/>
+			<ellipse cx="200" cy="140" class="commit"/><text x="200" y="140" class="commit-id">06adada</text>
+			<g class="fragment fade-out" data-fragment-index="0">
+				<use x="325" y="170" href="#arrow-head" transform="rotate(90,325,170)"/><line x1="325" y1="170" x2="325" y2="190"/><text x="325" y="200" class="branch centered">add-dark-mode</text>
+			</g>
+				<use x="245" y="140" href="#arrow-head"/><line x1="245" y1="140" x2="280" y2="140"/>
+			<ellipse cx="325" cy="140" class="commit"/><text x="325" y="140" class="commit-id">3d5f4a2</text>
+			<g class="fragment" data-fragment-index="0">
+					<use x="470" y="60" href="#arrow-head" transform="rotate(90,470,60)"/><line x1="470" y1="60" x2="470" y2="80"/><text x="470" y="90" class="branch centered">add-dark-mode</text>
+					<use x="390" y="30" href="#arrow-head"/><line x1="390" y1="30" x2="425" y2="30"/>
+					<use x="365" y="125" href="#arrow-head" transform="rotate(-45,365,125)"/><line x1="365" y1="125" x2="440" y2="40"/>
+				<ellipse cx="470" cy="30" class="commit"/><text x="470" y="30" class="commit-id">feedfac</text>
+			</g>
+			<g class="fragment" data-fragment-index="1" style="color: #17ff2e;">
+				<use x="410" y="90" href="#arrow-head" transform="rotate(-180,410,90)"/><line x1="410" y1="90" x2="375" y2="90"/>
+			</g>
+		</svg>
+	</section>
+
+	<section>
+		<p>Avantages :</p>
+		<ul>
+			<li class="fragment">Historique préservé</li>
+		</ul>
+		<p>Inconvénients :</p>
+		<ul>
+			<li class="fragment"><span class="branch">master</span> non linéaire</li>
+			<li class="fragment">Les «merge commit» sont artificiels</li>
+		</ul>
+	</section>
+
+	<section>
+		<h3>Commande</h3>
+
+		<p class="fragment"><code><a href="https://git-scm.com/docs/git-merge">git merge</a> &lt;commit&gt;...</code></p>
+		<p class="fragment">Crée un nouveau commit <strong>sur la branche actuelle</strong> qui «rassemble» la branche actuelle et tous les <code>&lt;commit&gt;</code>s.</p>
+		<p class="fragment"><small>On expliquera le «rassemblement» avec <code>rebase</code>.</small></p>
+		<p class="fragment">Exemple : <code>git merge <span class="branch">master</span></code></p>
+	</section>
+</section>
+
+<section>
+	<h2>Rebase</h2>
+
+	<section>
+		<h3>Principe</h3>
+
+		<svg viewBox="40 -5 600 215" style="max-height: 360px;">
+			<ellipse cx="95" cy="30" class="commit"/><text x="95" y="30" class="commit-id">6846ef5</text>
+				<use x="140" y="30" href="#arrow-head"/><line x1="140" y1="30" x2="175" y2="30"/>
+			<ellipse cx="220" cy="30" class="commit"/><text x="220" y="30" class="commit-id">ac2b311</text>
+				<use x="265" y="30" href="#arrow-head"/><line x1="265" y1="30" x2="300" y2="30"/>
+			<ellipse cx="345" cy="30" class="commit"/><text x="345" y="30" class="commit-id">1234567</text>
+				<use x="345" y="60" href="#arrow-head" transform="rotate(90,345,60)"/><line x1="345" y1="60" x2="345" y2="80"/><text x="345" y="90" class="branch centered">master</text>
+			<g class="fragment semi-fade-out" data-fragment-index="0">
+					<use x="130" y="50" href="#arrow-head" transform="rotate(58,130,50)"/><line x1="130" y1="50" x2="175" y2="120"/>
+				<ellipse cx="200" cy="140" class="commit"/><text x="200" y="140" class="commit-id">06adada</text>
+					<use x="245" y="140" href="#arrow-head"/><line x1="245" y1="140" x2="280" y2="140"/>
+				<ellipse cx="325" cy="140" class="commit"/><text x="325" y="140" class="commit-id">3d5f4a2</text>
+			</g>
+			<g class="fragment fade-out" data-fragment-index="0">
+				<use x="325" y="170" href="#arrow-head" transform="rotate(90,325,170)"/><line x1="325" y1="170" x2="325" y2="190"/><text x="325" y="200" class="branch centered">add-dark-mode</text>
+			</g>
+			<g class="fragment" data-fragment-index="0">
+					<use x="380" y="50" href="#arrow-head" transform="rotate(58,380,50)"/><line x1="380" y1="50" x2="425" y2="120"/>
+				<ellipse cx="450" cy="140" class="commit"/><text x="450" y="140" class="commit-id">14e684a</text>
+					<use x="495" y="140" href="#arrow-head"/><line x1="495" y1="140" x2="530" y2="140"/>
+				<ellipse cx="575" cy="140" class="commit"/><text x="575" y="140" class="commit-id">af58e36</text>
+					<use x="575" y="170" href="#arrow-head" transform="rotate(90,575,170)"/><line x1="575" y1="170" x2="575" y2="190"/><text x="575" y="200" class="branch centered">add-dark-mode</text>
+			</g>
+			<g class="fragment" data-fragment-index="1" style="color: #17ff2e;">
+				<use x="515" y="200" href="#arrow-head" transform="rotate(-180,515,200)"/><path d="M 515,200 c -80,0 -130,-50 -170,-100"/>
+			</g>
+		</svg>
+	</section>
+
+	<section>
+		<h3>Principe</h3>
+
+		<ol>
+			<li class="fragment"><code class="branch">add-dark-mode</code> remonte l'historique jusqu'à trouver un commit parent de <code class="branch">master</code></li>
+			<li class="fragment"><code class="branch">add-dark-mode</code> <em>fast-forward</em>e jusqu'à <code class="branch">master</code></li>
+			<li class="fragment">Tous les commits par lesquels on est passé à l'étape 1. sont «rejoués» (ré-appliqués) un par un</li>
+		</ol>
+	</section>
+
+	<section>
+		<h3>Commande</h3>
+
+		<p class="fragment"><code><a href="https://git-scm.com/docs/git-rebase">git rebase</a> &lt;nouv-base&gt; [&lt;branche&gt;]</code></p>
+		<p class="fragment">Si <code>&lt;branche&gt;</code> est omis, la branche courante est modifiée.</p>
+		<p class="fragment">Exemple : <code>git rebase <span class="branch">master</span></code> <small class="fragment">(ou <code>git rebase <span class="branch">master</span> <span class="branch">add-dark-mode</span></code>)</small></p>
+	</section>
+</section>
+
+<section>
+	<section>
+		<h2>Petit récapitulatif</h2>
+	</section>
+
+	<section>
+		<h2>Créer un nouveau repo</h2>
+
+		<p class="fragment"><code>git init</code></p>
+		<p class="fragment">⚠️ Crée un repo <strong>dans le répertoire courant</strong>&nbsp;!</p>
+	</section>
+
+	<section>
+		<h2>Créer une copie locale d'un repo</h2>
+
+		<p class="fragment"><code>git clone &lt;URL&gt;</code></p>
+		<div class="fragment">
+			<script id="asciicast-meeryOgSfxZuYTm9ruHmb0Tse" src="https://asciinema.celforyon.fr/a/meeryOgSfxZuYTm9ruHmb0Tse.js" async></script>
+		</div>
+	</section>
+
+	<section data-auto-animate>
+		<h2>Retrouver ses petits</h2>
+
+		<p class="fragment"><code>git status</code></p>
+		<pre class="fragment"><small><code>
+<span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/rgbds</span>% git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+nothing to commit, working tree clean
+		</code></small></pre>
+	</section>
+
+	<section data-auto-animate>
+		<h2>Retrouver ses petits</h2>
+
+		<p><code>git status</code></p>
+		<pre><small><code>
+<span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/rgbds</span>% git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add/rm &lt;file&gt;..." to update what will be committed)
+  (use "git restore &lt;file&gt;..." to discard changes in working directory)
+        <span class="error">modified:   .editorconfig</span>
+        <span class="error">deleted:    .checkpatch.conf</span>
+
+no changes added to commit (use "git add" and/or "git commit -a")
+		</code></small></pre>
+	</section>
+
+	<section>
+		<h2>Sélectionner les modifs à committer</h2>
+
+		<p class="fragment"><code>git add</code></p>
+		<pre class="fragment"><small><code>
+<span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/rgbds</span>% git add .editorconfig
+<span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/rgbds</span>% git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes to be committed:
+  (use "git restore --staged &lt;file&gt;..." to unstage)
+        <span class="prompt">modified:   .editorconfig</span>
+
+Changes not staged for commit:
+  (use "git add/rm &lt;file&gt;..." to update what will be committed)
+  (use "git restore &lt;file&gt;..." to discard changes in working directory)
+        <span class="error">deleted:    .checkpatch.conf</span>
+
+		</code></small></pre>
+	</section>
+</section>
+
+<!-- TODO : checkout, branch, bisect, cherry-pick, rebase -i, stash, blame, add -p, rm, mv ; bon message de commit -->
+
+	<!-- section>
+		<h3>Le garbage collector</h3>
+		<p class="fragment">Chaque commit a donc zéro, une, ou plusieurs flèches qui lui pointent dessus. On parle de <em>reference count</em> (refcount), ou «compteur de références».</p>
+		<p class="fragment"><strong>Un commit dont le refcount arrive à zéro n'est pas immédiatement supprimé&nbsp;!</strong></p>
+		<p class="fragment">On verra pourquoi plus tard.</p>
+	</section -->
+
+<section>
+	<h2>Goodies</h2>
+
+	<p class="fragment">Un visualiseur plus joli pour <code>git diff</code> et <code>git blame</code> : <a href="https://github.com/dandavison/delta#readme">delta</a></p>
+	<p class="fragment">On peut afficher le statut Git dans son prompt de shell (par ex. via <a href="https://github.com/romkatv/powerlevel10k">powerlevel10k</a>)</p>
+	<p class="fragment">Une bonne interface graphique (certes freeware) : <a href="https://sublimemerge.com">Sublime Merge</a> <small class="fragment">(je recommande car elle liste les commandes exécutées)</small></p>
+	<p class="fragment">Si vous utilisez un IDE, il a peut-être une intégration Git (parfois via extensions), lisez la doc</p><!-- Maintenant Enzo va peut-être me laisser tranquille -->
+</section>
+
+<section>
+	<h1>Merci d'avoir suivi&nbsp;!</h1>
+
+	<p>Les slides sont disponibles en ligne : <a href="https://eldred.fr/slides/git">https://eldred.fr/slides/git</a>!</p>
+	<img src="assets/git/qr.png" class="r-stretch"/>
+</section>
