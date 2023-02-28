@@ -186,20 +186,20 @@ slideNumber: c/t
 		<h3>A hash&nbsp;? It's edible&nbsp;?</h3>
 
 		<p class="fragment">All the information in a commit, <strong>including the contents of the files,</strong> are passed to a function of <strong>hashing</strong> to obtain its <strong>hash</strong>.</p>
-		<p class="fragment">Principe d'une fonction de hachage&nbsp;: on lui passe des données <small>(une suite d'octets)</small>, elle retourne un nombre ("hash")&nbsp;; deux entrées identiques ⇔ deux hashs identiques.</p>
-		<small class="fragment">(Plus d'infos <a href="https://fr.wikipedia.org/wiki/Fonction_de_hachage">sur Wikipédia</a> pour les curieux)</small>
+		<p class="fragment">Principle of a hash function&nbsp;: data is passed to it <small>(a sequence of bytes)</small>, it returns a number ("hash")&nbsp;; two identical entries ⇔ two identical hashes.</p>
+		<small class="fragment">(More info <a href="https://fr.wikipedia.org/wiki/Fonction_de_hachage">on Wikipédia</a> for the curious)</small>
 	</section>
 
 	<section>
-		<h3>Les hashs de commits</h3>
+		<h3>Commits hashes</h3>
 
-		<p class="fragment">Le hash d'un commit est un très grand nombre, présenté en <a href="https://fr.wikipedia.org/wiki/Hexadécimal">hexadécimal</a> : <span class="fragment commit-id">6828f7bf493cd4c9c332ea769e6e38fbbe258821</span>.</p>
-		<p class="fragment">Les hashs sont souvent raccourcis (par défaut à 7 caractères) : <span class="commit-id">6828f7b</span>, c'est ce qu'on utilisera dans ce cours.</p>
+		<p class="fragment">The hash of a commit is a very large number, presented in <a href="https://fr.wikipedia.org/wiki/Hexadécimal">hexadecimal</a> : <span class="fragment commit-id">6828f7bf493cd4c9c332ea769e6e38fbbe258821</span>.</p>
+		<p class="fragment">Hashes are often shortened (by default to 7 characters) : <span class="commit-id">6828f7b</span>, this is what we will use in this course.</p>
 	</section>
 
 	<section>
-		<h3>Des «pointeurs»</h3>
-		<p class="fragment" data-fragment-index="0">Il n'y a pas que les commits qui pointent sur des commits.</p>
+		<h3>The «pointers»</h3>
+		<p class="fragment" data-fragment-index="0">It's not just commits that point to commits.</p>
 		<svg viewBox="-5 -5 710 160" class="fragment" data-fragment-index="0">
 			<ellipse cx="45" cy="75" class="commit"/><text x="45" y="75" class="commit-id">f37c942</text>
 				<use x="90" y="75" href="#arrow-head"/><line x1="90" y1="75" x2="175" y2="75"/>
@@ -227,22 +227,22 @@ slideNumber: c/t
 				<text x="480" y="120" class="branch">network-fixes</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="1">Il y a aussi
-			<span class="fragment" data-fragment-index="2">des branches,</span>
-			<span class="fragment" data-fragment-index="3">des tags,</span>
-			<span class="fragment" data-fragment-index="4">et quelques autres.</span>
-			<small class="fragment" data-fragment-index="5">(On parlera de leurs différences plus tard)</small>
+		<p class="fragment" data-fragment-index="1">There are also
+			<span class="fragment" data-fragment-index="2">branches,</span>
+			<span class="fragment" data-fragment-index="3">tags,</span>
+			<span class="fragment" data-fragment-index="4">and some others.</span>
+			<small class="fragment" data-fragment-index="5">(We'll talk about their differences later)</small>
 		</p>
 	</section>
 </section>
 
 <section>
-	<h2>Manipuler le graphe</h2>
+	<h2>Handling the graph</h2>
 	<section>
 	</section>
 
 	<section>
-		<h3>Créer un commit</h3>
+		<h3>Create a commit</h3>
 		<svg viewBox="-5 -5 435 70" style="max-height: 13vh;">
 			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
 				<use x="90" y="30" href="#arrow-head"/><line x1="90" y1="30" x2="175" y2="30"/>
@@ -252,8 +252,8 @@ slideNumber: c/t
 				<ellipse cx="380" cy="30" class="commit"/><text x="380" y="30" class="commit-id">c4fe9cc</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="0">Pour créer un commit...</p>
-		<p class="fragment" data-fragment-index="1">... on l'ajoute simplement au graphe.</p>
+		<p class="fragment" data-fragment-index="0">To create a commit...</p>
+		<p class="fragment" data-fragment-index="1">... we simply add it to the graph.</p>
 	</section>
 
 	<section>
@@ -264,14 +264,14 @@ slideNumber: c/t
 
 	<section>
 		<h3><code>HEAD</code></h3>
-		<p class="fragment"><code class="head">HEAD</code> désigne le commit qui est actuellement <em>checked out</em>.</p>
-		<p class="fragment">C'est-à-dire, il s'agit du commit dont le contenu (les fichiers) est actuellement présent dans le répertoire.</p>
-		<p class="fragment">On peut considérer le commit pointé par <code class="head">HEAD</code> comme «là où on se trouve actuellement».</p>
+		<p class="fragment"><code class="head">HEAD</code> refers to the commit that is currently <em>checked out</em>.</p>
+		<p class="fragment">That is, it is the commit whose contents (files) are currently present in the directory.</p>
+		<p class="fragment">The commit pointed to by <code class="head">HEAD</code> can be thought of as "where we are now".</p>
 	</section>
 
 	<section>
 		<h3 class="head"><code>HEAD</code></h3>
-		<p class="fragment" data-fragment-index="0">Et quand on crée un nouveau commit&nbsp;?</p>
+		<p class="fragment" data-fragment-index="0">And when you create a new commit&nbsp;?</p>
 		<svg viewBox="-5 -5 435 105" style="max-height: 13vh;">
 			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
 				<use x="90" y="30" href="#arrow-head"/><line x1="90" y1="30" x2="175" y2="30"/>
@@ -287,12 +287,12 @@ slideNumber: c/t
 				<text x="380" y="90" class="head centered">HEAD</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="2"><code class="head">HEAD</code> suit le commit <small>(il est automatiquement <em>checked out</em>)</small>.</p>
+		<p class="fragment" data-fragment-index="2"><code class="head">HEAD</code> follows the commit <small>(it is automatically <em>checked out</em>)</small>.</p>
 	</section>
 
 	<section>
 		<h3 class="branch">Branches</h3>
-		<p class="fragment" data-fragment-index="0">Et quand on crée un nouveau commit&nbsp;?</p>
+		<p class="fragment" data-fragment-index="0">And when you create a new commit&nbsp;?</p>
 		<svg viewBox="-5 -5 435 105" style="max-height: 13vh;">
 			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
 			<use x="45" y="60" href="#arrow-head" transform="rotate(90,45,60)"/><line x1="45" y1="60" x2="45" y2="80"/>
@@ -321,26 +321,26 @@ slideNumber: c/t
 
 	<section>
 		<h3 class="tag">Tags</h3>
-		<p class="fragment">Un tag est <strong>inamovible</strong> et ne peut pas être <em class="head">checked out</em>, il ne suit donc jamais un nouveau commit.</p>
-		<p class="fragment"><small>(Pour «déplacer» un tag, il faut le supprimer et le re-créer ailleurs.)</small></p>
-		<p class="fragment">➔ Une branche sert à <em>suivre</em> quelque chose (développement d'une feature...) ; un tag sert à <em>marquer</em> un commit particulier (version...)</p>
+		<p class="fragment">A tag is <strong>immovable</strong> and cannot be <em class="head">checked out</em>, so it never follows a new commit.</p>
+		<p class="fragment"><small>(To "move" a tag, it must be deleted and re-created elsewhere.)</small></p>
+		<p class="fragment">➔ A branch is used to <em>follow</em> something (development of a feature...); a tag is used to <em>mark</em> a particular commit (version...)</p>
 	</section>
 </section>
 
 <section>
-	<h2>Parlons commandes</h2>
+	<h2>Let's talk about orders</h2>
 	<section>
-		<p class="fragment">Essayez d'<a href="https://cbea.ms/git-commit#learn-to-love-the-command-line-leave-the-ide-behind-">éviter les interfaces graphiques</a> si possible.</p>
-		<p class="fragment">(Au moins au début.)</p>
-		<p class="fragment">Par exemple, leur gestion des erreurs est souvent hasardeuse...</p>
+		<p class="fragment">Try to<a href="https://cbea.ms/git-commit#learn-to-love-the-command-line-leave-the-ide-behind-">avoid graphic interfaces</a> if possible.</p>
+		<p class="fragment">(At least at the beginning.)</p>
+		<p class="fragment">For example, their error handling is often problematic...</p>
 	</section>
 
 	<section>
-		<h3>Créer un nouveau dépôt Git</h3>
+		<h3>Create a new Git repository</h3>
 		{% highlight console %}
 		$ git init
 		{%- endhighlight %}
-		<p class="fragment">Crée un nouveau dépôt <strong>dans le répertoire courant</strong>.</p>
+		<p class="fragment">Create a new repository <strong>in the current directory</strong>.</p>
 	</section>
 
 	<section>
