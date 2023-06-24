@@ -84,25 +84,26 @@ slideNumber: c/t
 </svg>
 
 <section>
-	<h1>Devenir efficace avec Git</h1>
+	<h1>Becoming efficient with Git</h1>
+	<p>ℹ️ Cette présentation est aussi <a href="/slides/git-fr">disponible en français</a> !</p>
 </section>
 
 <section>
-	<h2>Git, kézako ?</h2>
+	<h2>What is Git?</h2>
 
 	<section>
-		<p class="fragment">Système de contrôle de version (<abbr>VCS</abbr>) distribué</p>
+		<p class="fragment">Distributed Version Control System (<abbr>VCS</abbr>)</p>
 	</section>
 
 	<section>
-		<h3>Système de contrôle de version</h3>
-		<p class="fragment">= système permettant de gérer différentes versions d'un ensemble de fichiers</p>
-		<p class="fragment">(Beaucoup de versions intermédiaires entre deux releases&nbsp;!)</p>
-		<p class="fragment">Souvent utilisé pour travailler à plusieurs sur du code... entre autres&nbsp;!</p>
+		<h3>Version control system</h3>
+		<p class="fragment">= system allowing to manage different versions of a set of files</p>
+		<p class="fragment">(Many intermediate versions between two releases&nbsp;!)</p>
+		<p class="fragment">Often used to allow several people work the same on code... among other reasons&nbsp;!</p>
 	</section>
 
 	<section>
-		<h3>Autres VCS</h3>
+		<h3>Other VCS</h3>
 
 		<ul>
 			<li class="fragment">Subversion (SVN)</li>
@@ -114,92 +115,92 @@ slideNumber: c/t
 	</section>
 
 	<section>
-		<h3>Ce que Git n'est pas</h3>
+		<h3>What Git is not</h3>
 
 		<p class="fragment">Git ≠ GitHub, GitLab, Gitea, etc.</p>
-		<p class="fragment">Git = outil logiciel (en ligne de commande)</p>
-		<p class="fragment">GitHub et GitLab = services d'hébergement de dépôts Git</p>
-		<p class="fragment">Linux ≠ OVH, par exemple</p>
+		<p class="fragment">Git = software tool (command line)</p>
+		<p class="fragment">GitHub et GitLab = Git repository hosting services</p>
+		<p class="fragment">Linux ≠ OVH, for example</p>
 	</section>
 </section>
 
 <section>
-	<h2>Pourquoi utiliser Git&nbsp;?</h2>
-	<p class="fragment">Bénéfices sur plusieurs niveaux&nbsp;:</p>
+	<h2>Why use Git&nbsp;?</h2>
+	<p class="fragment">Benefits on several levels&nbsp;:</p>
 	<ol>
-		<li class="fragment">Système de backup</li>
-		<li class="fragment">Travail par "branches"</li>
-		<li class="fragment">Travail collaboratif</li>
+		<li class="fragment">Backup system</li>
+		<li class="fragment">Work by "branches"</li>
+		<li class="fragment">Collaborative work</li>
 	</ol>
-	<p class="fragment"><strong>Ça vaut le coup&nbsp;!</strong></p>
+	<p class="fragment"><strong>It's worth it&nbsp;!</strong></p>
 </section>
 
 <section>
-	<h2>Faire des backups avec Git</h2>
+	<h2>Making backups with Git</h2>
 
 	<section>
-		<p>Commençons avec une parenthèse sur le mot "distribué"</p>
-		<p class="fragment">Vous avez peut-être entendu dire que Git était un système de contrôle de version <strong>distribué</strong>.</p>
-		<p class="fragment">Qu'est-ce à dire&nbsp;?</p>
+		<p>Let's start with a parenthesis on the word "distributed".</p>
+		<p class="fragment">You may have heard that Git is a <strong>distributed</strong> version control system .</p>
+		<p class="fragment">What does that mean?&nbsp;?</p>
 	</section>
 	<section>
-		<h3>Deux types de VCS</h3>
+		<h3>Two types of VCS</h3>
 		<dl>
-			<dt class="fragment">Centralisé</dt>
-			<dd class="fragment">Toute action sur le repo requiert un accès au serveur <small class="fragment">(Subversion, Perforce, etc.)</small></dd>
-			<dt class="fragment">Distribué</dt>
-			<dd class="fragment">Aucune copie du repo n'est distincte <small class="fragment">(Mercurial, <strong>Git</strong>, etc.)</small></dd>
+			<dt class="fragment">Centralized</dt>
+			<dd class="fragment">Any action on the repo requires access to the server <small class="fragment">(Subversion, Perforce, etc.)</small></dd>
+			<dt class="fragment">Distributed</dt>
+			<dd class="fragment">No separate copy of the repo <small class="fragment">(Mercurial, <strong>Git</strong>, etc.)</small></dd>
 	</section>
 	<section>
-		<h3>Intérêts d'un système distribué</h3>
+		<h3>Benefits of a distributed system</h3>
 		<ul>
-			<li class="fragment">Chaque développeur possède une copie complète<sup>1</sup> du repo, pas juste le serveur.<br/><strong class="fragment">➔ Chouette, des backups pas chers&nbsp;!</strong></li>
-			<li class="fragment">Les développeurs peuvent travailler même hors ligne&nbsp;!<br/><em class="fragment">On reviendra plus tard à la résolution de conflits</em></li>
+			<li class="fragment">Each developer has a full<sup>1</sup> copy of the repo, not just the server.<br/><strong class="fragment">➔ Chouette, des backups pas chers&nbsp;!</strong></li>
+			<li class="fragment">Developers can work even offline&nbsp;!<br/><em class="fragment">We will come back to conflict resolution later</em></li>
 		</ul>
-		<small class="fragment"><sup>1</sup> Pour plus de détails, voir <a href="https://www.youtube.com/watch?v=4XpnKHJAok8">cette présentation de Linus Torvalds à Google</a>.</small>
+		<small class="fragment"><sup>1</sup> For more details, see <a href="https://www.youtube.com/watch?v=4XpnKHJAok8">this presentation by Linus Torvalds at Google</a>.</small>
 	</section>
 </section>
 
 <section>
-	<h2>Concepts de base</h2>
+	<h2>Basic concepts</h2>
 
 	<section>
-		<h3 class="fragment">Parlons peu mais parlons graphes</h3>
-		<p class="fragment">❗️ <strong>Promis, rien de compliqué&nbsp;!</strong> <small>(il y aura plein d'images)</small></p>
-		<p class="fragment">Git est basé sur un <strong>graphe</strong>.</p>
+		<h3 class="fragment">Let's not talk too much but let's talk about graphs</h3>
+		<p class="fragment">❗️ <strong>I promise, nothing complicated&nbsp;!</strong> <small>(there will be plenty of images)</small></p>
+		<p class="fragment">Git is based on a<strong>graph</strong>.</p>
 	</section>
 
 	<section>
-		<h3>Qu'est-ce qu'un <strong>commit</strong>&nbsp;?</h3>
+		<h3>What is a <strong>commit</strong>&nbsp;?</h3>
 
 		<ul>
-			<li class="fragment" data-fragment-index="0">Un message de commit</li>
-			<li class="fragment" data-fragment-index="1">Un auteur (nom + adresse mail)</li>
-			<li class="fragment" data-fragment-index="2">(Quelques autres métadonnées...)</li>
-			<li class="fragment" data-fragment-index="3"><span class="fragment highlight-blue" data-fragment-index="5">Un ensemble de fichiers et leurs contenus</span></li>
+			<li class="fragment" data-fragment-index="0">A commit message</li>
+			<li class="fragment" data-fragment-index="1">An author (name + email address)</li>
+			<li class="fragment" data-fragment-index="2">(Some other metadata...)</li>
+			<li class="fragment" data-fragment-index="3"><span class="fragment highlight-blue" data-fragment-index="5">A set of files and their contents</span></li>
 			<li class="fragment" data-fragment-index="4"><span class="fragment highlight-blue" data-fragment-index="6">Des «flèches» vers son/ses parent(s)</span></li>
 		</ul>
-		<p class="fragment">Un commit est identifié de manière <strong>unique</strong> par son <strong>hash</strong>.</p>
+		<p class="fragment">A commit is identified in the following way <strong>unique</strong> by its <strong>hash</strong>.</p>
 	</section>
 
 	<section>
-		<h3>Un hash&nbsp;? Ça se mange&nbsp;?</h3>
+		<h3>A hash&nbsp;? It's edible&nbsp;?</h3>
 
-		<p class="fragment">Toutes les informations d'un commit, <strong>y compris le contenu des fichiers,</strong> sont passées à une fonction de <strong>hachage</strong> pour obtenir son <strong>hash</strong>.</p>
-		<p class="fragment">Principe d'une fonction de hachage&nbsp;: on lui passe des données <small>(une suite d'octets)</small>, elle retourne un nombre ("hash")&nbsp;; deux entrées identiques ⇔ deux hashs identiques.</p>
-		<small class="fragment">(Plus d'infos <a href="https://fr.wikipedia.org/wiki/Fonction_de_hachage">sur Wikipédia</a> pour les curieux)</small>
+		<p class="fragment">All the information in a commit, <strong>including the contents of the files,</strong> are passed to a function of <strong>hashing</strong> to obtain its <strong>hash</strong>.</p>
+		<p class="fragment">Principle of a hash function&nbsp;: data is passed to it <small>(a sequence of bytes)</small>, it returns a number ("hash")&nbsp;; two identical entries ⇔ two identical hashes.</p>
+		<small class="fragment">(More info <a href="https://fr.wikipedia.org/wiki/Fonction_de_hachage">on Wikipédia</a> for the curious)</small>
 	</section>
 
 	<section>
-		<h3>Les hashs de commits</h3>
+		<h3>Commits hashes</h3>
 
-		<p class="fragment">Le hash d'un commit est un très grand nombre, présenté en <a href="https://fr.wikipedia.org/wiki/Hexadécimal">hexadécimal</a> : <span class="fragment commit-id">6828f7bf493cd4c9c332ea769e6e38fbbe258821</span>.</p>
-		<p class="fragment">Les hashs sont souvent raccourcis (par défaut à 7 caractères) : <span class="commit-id">6828f7b</span>, c'est ce qu'on utilisera dans ce cours.</p>
+		<p class="fragment">The hash of a commit is a very large number, presented in <a href="https://fr.wikipedia.org/wiki/Hexadécimal">hexadecimal</a> : <span class="fragment commit-id">6828f7bf493cd4c9c332ea769e6e38fbbe258821</span>.</p>
+		<p class="fragment">Hashes are often shortened (by default to 7 characters) : <span class="commit-id">6828f7b</span>, this is what we will use in this course.</p>
 	</section>
 
 	<section>
-		<h3>Des «pointeurs»</h3>
-		<p class="fragment" data-fragment-index="0">Il n'y a pas que les commits qui pointent sur des commits.</p>
+		<h3>The «pointers»</h3>
+		<p class="fragment" data-fragment-index="0">It's not just commits that point to commits.</p>
 		<svg viewBox="-5 -5 710 160" class="fragment" data-fragment-index="0">
 			<ellipse cx="45" cy="75" class="commit"/><text x="45" y="75" class="commit-id">f37c942</text>
 				<use x="90" y="75" href="#arrow-head"/><line x1="90" y1="75" x2="175" y2="75"/>
@@ -227,22 +228,22 @@ slideNumber: c/t
 				<text x="480" y="120" class="branch">network-fixes</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="1">Il y a aussi
-			<span class="fragment" data-fragment-index="2">des branches,</span>
-			<span class="fragment" data-fragment-index="3">des tags,</span>
-			<span class="fragment" data-fragment-index="4">et quelques autres.</span>
-			<small class="fragment" data-fragment-index="5">(On parlera de leurs différences plus tard)</small>
+		<p class="fragment" data-fragment-index="1">There are also
+			<span class="fragment" data-fragment-index="2">branches,</span>
+			<span class="fragment" data-fragment-index="3">tags,</span>
+			<span class="fragment" data-fragment-index="4">and some others.</span>
+			<small class="fragment" data-fragment-index="5">(We'll talk about their differences later)</small>
 		</p>
 	</section>
 </section>
 
 <section>
-	<h2>Manipuler le graphe</h2>
+	<h2>Handling the graph</h2>
 	<section>
 	</section>
 
 	<section>
-		<h3>Créer un commit</h3>
+		<h3>Create a commit</h3>
 		<svg viewBox="-5 -5 435 70" style="max-height: 13vh;">
 			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
 				<use x="90" y="30" href="#arrow-head"/><line x1="90" y1="30" x2="175" y2="30"/>
@@ -252,8 +253,8 @@ slideNumber: c/t
 				<ellipse cx="380" cy="30" class="commit"/><text x="380" y="30" class="commit-id">c4fe9cc</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="0">Pour créer un commit...</p>
-		<p class="fragment" data-fragment-index="1">... on l'ajoute simplement au graphe.</p>
+		<p class="fragment" data-fragment-index="0">To create a commit...</p>
+		<p class="fragment" data-fragment-index="1">... we simply add it to the graph.</p>
 	</section>
 
 	<section>
@@ -264,14 +265,14 @@ slideNumber: c/t
 
 	<section>
 		<h3><code>HEAD</code></h3>
-		<p class="fragment"><code class="head">HEAD</code> désigne le commit qui est actuellement <em>checked out</em>.</p>
-		<p class="fragment">C'est-à-dire, il s'agit du commit dont le contenu (les fichiers) est actuellement présent dans le répertoire.</p>
-		<p class="fragment">On peut considérer le commit pointé par <code class="head">HEAD</code> comme «là où on se trouve actuellement».</p>
+		<p class="fragment"><code class="head">HEAD</code> refers to the commit that is currently <em>checked out</em>.</p>
+		<p class="fragment">That is, it is the commit whose contents (files) are currently present in the directory.</p>
+		<p class="fragment">The commit pointed to by <code class="head">HEAD</code> can be thought of as "where we are now".</p>
 	</section>
 
 	<section>
 		<h3 class="head"><code>HEAD</code></h3>
-		<p class="fragment" data-fragment-index="0">Et quand on crée un nouveau commit&nbsp;?</p>
+		<p class="fragment" data-fragment-index="0">And when you create a new commit&nbsp;?</p>
 		<svg viewBox="-5 -5 435 105" style="max-height: 13vh;">
 			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
 				<use x="90" y="30" href="#arrow-head"/><line x1="90" y1="30" x2="175" y2="30"/>
@@ -287,12 +288,12 @@ slideNumber: c/t
 				<text x="380" y="90" class="head centered">HEAD</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="2"><code class="head">HEAD</code> suit le commit <small>(il est automatiquement <em>checked out</em>)</small>.</p>
+		<p class="fragment" data-fragment-index="2"><code class="head">HEAD</code> follows the commit <small>(it is automatically <em>checked out</em>)</small>.</p>
 	</section>
 
 	<section>
 		<h3 class="branch">Branches</h3>
-		<p class="fragment" data-fragment-index="0">Et quand on crée un nouveau commit&nbsp;?</p>
+		<p class="fragment" data-fragment-index="0">And when you create a new commit&nbsp;?</p>
 		<svg viewBox="-5 -5 435 105" style="max-height: 13vh;">
 			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
 			<use x="45" y="60" href="#arrow-head" transform="rotate(90,45,60)"/><line x1="45" y1="60" x2="45" y2="80"/>
@@ -321,26 +322,26 @@ slideNumber: c/t
 
 	<section>
 		<h3 class="tag">Tags</h3>
-		<p class="fragment">Un tag est <strong>inamovible</strong> et ne peut pas être <em class="head">checked out</em>, il ne suit donc jamais un nouveau commit.</p>
-		<p class="fragment"><small>(Pour «déplacer» un tag, il faut le supprimer et le re-créer ailleurs.)</small></p>
-		<p class="fragment">➔ Une branche sert à <em>suivre</em> quelque chose (développement d'une feature...) ; un tag sert à <em>marquer</em> un commit particulier (version...)</p>
+		<p class="fragment">A tag is <strong>immovable</strong> and cannot be <em class="head">checked out</em>, so it never follows a new commit.</p>
+		<p class="fragment"><small>(To "move" a tag, it must be deleted and re-created elsewhere.)</small></p>
+		<p class="fragment">➔ A branch is used to <em>follow</em> something (development of a feature...); a tag is used to <em>mark</em> a particular commit (version...)</p>
 	</section>
 </section>
 
 <section>
-	<h2>Parlons commandes</h2>
+	<h2>Let's talk about orders</h2>
 	<section>
-		<p class="fragment">Essayez d'<a href="https://cbea.ms/git-commit#learn-to-love-the-command-line-leave-the-ide-behind-">éviter les interfaces graphiques</a> si possible.</p>
-		<p class="fragment">(Au moins au début.)</p>
-		<p class="fragment">Par exemple, leur gestion des erreurs est souvent hasardeuse...</p>
+		<p class="fragment">Try to<a href="https://cbea.ms/git-commit#learn-to-love-the-command-line-leave-the-ide-behind-">avoid graphic interfaces</a> if possible.</p>
+		<p class="fragment">(At least at the beginning.)</p>
+		<p class="fragment">For example, their error handling is often problematic...</p>
 	</section>
 
 	<section>
-		<h3>Créer un nouveau dépôt Git</h3>
+		<h3>Create a new Git repository</h3>
 		{% highlight console %}
 		$ git init
 		{%- endhighlight %}
-		<p class="fragment">Crée un nouveau dépôt <strong>dans le répertoire courant</strong>.</p>
+		<p class="fragment">Create a new repository <strong>in the current directory</strong>.</p>
 	</section>
 
 	<section>
