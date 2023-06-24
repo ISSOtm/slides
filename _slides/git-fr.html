@@ -86,6 +86,15 @@ slideNumber: c/t
 <section>
 	<h1>Devenir efficace avec Git</h1>
 	<p>ℹ️ These slides are also <a href="/slides/git">available in English</a>!</p>
+	<p>👩‍💻 <a href="/slides/git-fr?shownotes">Version autonome</a> (pour lecture en solo)</p>
+
+	<aside class="notes">
+		<p><a href="https://revealjs.com/">Manuel d'utilisation de reveal.js</a></p>
+		<p>Bonjour et bienvenue dans cette présentation sur les bases de Git.</p>
+		<p>Cette présentation ne parlera pas (peu) d'une utilisation pratique de Git, mais vise plutôt à introduire les concepts et la théorie qui sous-tendent Git.</p>
+		<p>Comprendre ces concepts rend Git bien plus simple et intuitif à utiliser... et ainsi vous deviendrez plus efficace !</p>
+		<hr/>
+		<p>Durée estimée : une heure.</p>
 </section>
 
 <section>
@@ -93,13 +102,23 @@ slideNumber: c/t
 
 	<section>
 		<p class="fragment">Système de contrôle de version (<abbr>VCS</abbr>) distribué</p>
+
+		<aside class="notes">
+			Git est un système de contrôle de version, ou «VCS», distribué.
+		</aside>
 	</section>
 
 	<section>
 		<h3>Système de contrôle de version</h3>
 		<p class="fragment">= système permettant de gérer différentes versions d'un ensemble de fichiers</p>
 		<p class="fragment">(Beaucoup de versions intermédiaires entre deux releases&nbsp;!)</p>
-		<p class="fragment">Souvent utilisé pour travailler à plusieurs sur du code... entre autres&nbsp;!</p>
+		<p class="fragment">Souvent utilisé pour travailler à plusieurs sur un projet... entre autres&nbsp;!</p>
+
+		<aside class="notes">
+			<p>Un système de contrôle de version permet de gérer différentes versions d'un ensemble de fichiers.</p>
+			<p>L'intérêt existe car, entre deux versions publiées, il y a beaucoup de versions intermédiaires !</p>
+			<p>Si deux personnes travaillent en parallèle sur un projet, chacune de leurs copies (modifiées) constitue une version différente ; un VCS permet donc de travailler bien plus facilement à plusieurs !</p>
+		</aside>
 	</section>
 
 	<section>
@@ -112,6 +131,11 @@ slideNumber: c/t
 			<li class="fragment">Mercurial</li>
 			<li class="fragment">Bazaar</li>
 		</ul>
+
+		<aside class="notes">
+			<p>Ceci dit, Git n'est ni le premier (ni le dernier) VCS, «seulement» le plus populaire à l'heure actuelle.</p>
+			<p>En voici quelques autres.</p>
+		</aside>
 	</section>
 
 	<section>
@@ -121,6 +145,12 @@ slideNumber: c/t
 		<p class="fragment">Git = outil logiciel (en ligne de commande)</p>
 		<p class="fragment">GitHub et GitLab = services d'hébergement de dépôts Git</p>
 		<p class="fragment">Linux ≠ OVH, par exemple</p>
+
+		<aside class="notes">
+			<p>Puisque GitHub est souvent utilisé en tandem avec GitHub, GitLab, etc., beaucoup de gens confondent les deux !</p>
+			<p>GitHub, GitLab, etc. fournissent des fonctionnalités complémentaires à Git, mais pour autant dire «j'utilise GitHub sur mon ordi» n'a pas de sens.</p>
+			<p>La différence entre Git et Git{Hub,Lab,tea} est équivalente à la différence entre Linux et OVH, par exemple.</p>
+		</aside>
 	</section>
 </section>
 
@@ -129,17 +159,22 @@ slideNumber: c/t
 	<p class="fragment">Bénéfices sur plusieurs niveaux&nbsp;:</p>
 	<ol>
 		<li class="fragment">Système de backup</li>
-		<li class="fragment">Travail par "branches"</li>
+		<li class="fragment">Travail par «branches»</li>
 		<li class="fragment">Travail collaboratif</li>
 	</ol>
 	<p class="fragment"><strong>Ça vaut le coup&nbsp;!</strong></p>
+
+	<aside class="notes">
+		<p>Surtout au début, l'intérêt de Git n'est pas forcément évident, surtout pour des petits projets solo.</p>
+		<p>Pourtant, les fonctionnalités de Git sont (à mon avis) simples à utiliser, et utiles pour tout le monde !</p>
+	</aside>
 </section>
 
 <section>
 	<h2>Faire des backups avec Git</h2>
 
 	<section>
-		<p>Commençons avec une parenthèse sur le mot "distribué"</p>
+		<p>Commençons avec une parenthèse sur le mot «distribué»</p>
 		<p class="fragment">Vous avez peut-être entendu dire que Git était un système de contrôle de version <strong>distribué</strong>.</p>
 		<p class="fragment">Qu'est-ce à dire&nbsp;?</p>
 	</section>
@@ -154,10 +189,10 @@ slideNumber: c/t
 	<section>
 		<h3>Intérêts d'un système distribué</h3>
 		<ul>
-			<li class="fragment">Chaque développeur possède une copie complète<sup>1</sup> du repo, pas juste le serveur.<br/><strong class="fragment">➔ Chouette, des backups pas chers&nbsp;!</strong></li>
+			<li class="fragment">Chaque développeur possède une copie complète<sup aria-describedby="footnote-distributed">1</sup> du repo, pas juste le serveur.<br/><strong class="fragment">➔ Chouette, des backups pas chers&nbsp;!</strong></li>
 			<li class="fragment">Les développeurs peuvent travailler même hors ligne&nbsp;!<br/><em class="fragment">On reviendra plus tard à la résolution de conflits</em></li>
 		</ul>
-		<small class="fragment"><sup>1</sup> Pour plus de détails, voir <a href="https://www.youtube.com/watch?v=4XpnKHJAok8">cette présentation de Linus Torvalds à Google</a>.</small>
+		<small class="fragment" id="footnote-distributed"><sup>1</sup> Pour plus de détails, voir <a href="https://www.youtube.com/watch?v=4XpnKHJAok8">cette présentation de Linus Torvalds à Google</a>.</small>
 	</section>
 </section>
 
@@ -168,6 +203,13 @@ slideNumber: c/t
 		<h3 class="fragment">Parlons peu mais parlons graphes</h3>
 		<p class="fragment">❗️ <strong>Promis, rien de compliqué&nbsp;!</strong> <small>(il y aura plein d'images)</small></p>
 		<p class="fragment">Git est basé sur un <strong>graphe</strong>.</p>
+
+		<aside class="notes">
+			<p>Bien, il est temps de rentrer dans le vif du sujet.</p>
+			<p>Le choix de Git pour la représentation des différentes versions, est un <strong>graphe</strong>.</p>
+			<p>Cette présentation essaye de rendre les différentes opérations plus claires, via des visualisations animées !</p>
+			<p><small>Note : je doute de l'accessibilité des diagrammes, malheureusement, mais je ne sais pas non plus comment les transcrire. Si vous être un utilisateur de technologies assistives, <a href="https://eldred.fr/about#contact">contactez-moi</a> !</small></p>
+		</aside>
 	</section>
 
 	<section>
@@ -181,6 +223,12 @@ slideNumber: c/t
 			<li class="fragment" data-fragment-index="4"><span class="fragment highlight-blue" data-fragment-index="6">Des «flèches» vers son/ses parent(s)</span></li>
 		</ul>
 		<p class="fragment">Un commit est identifié de manière <strong>unique</strong> par son <strong>hash</strong>.</p>
+
+		<aside class="notes">
+			<p>Un des termes qui revient très souvent, et qui est en fait essentiel, est le <strong>commit</strong>.</p>
+			<p>Parmi tout ce qui compose un commit, ce qui nous intéresse le plus est l'ensemble de fichiers qu'il contient, et ses relations de parenté.</p>
+			<p>Tout ceci est, au final, résumé à un <strong>hash</strong>.</p>
+		</aside>
 	</section>
 
 	<section>
@@ -288,7 +336,7 @@ slideNumber: c/t
 				<text x="380" y="90" class="head centered">HEAD</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="2"><code class="head">HEAD</code> suit le commit <small>(il est automatiquement <em>checked out</em>)</small>.</p>
+		<p class="fragment" data-fragment-index="2"><code class="head">HEAD</code> suit le nouveau commit <small>(il est automatiquement <em>checked out</em>)</small>.</p>
 	</section>
 
 	<section>
@@ -305,7 +353,7 @@ slideNumber: c/t
 			<g class="fragment fade-out" data-fragment-index="1">
 				<use x="220" y="60" href="#arrow-head" transform="rotate(38,220,60)"/><line x1="220" y1="60" x2="250" y2="80"/>
 				<text x="250" y="90" class="branch centered">crash-fix</text>
-				<use x="290" y="90" href="#arrow-head"/><line x1="290" y1="90" x2="323" y2="90"/>
+				<use x="293" y="90" href="#arrow-head"/><line x1="293" y1="90" x2="323" y2="90"/>
 				<text x="325" y="90" class="head">HEAD</text>
 			</g>
 			<g class="fragment" data-fragment-index="1">
@@ -313,7 +361,7 @@ slideNumber: c/t
 				<ellipse cx="380" cy="30" class="commit"/><text x="380" y="30" class="commit-id">c4fe9cc</text>
 				<use x="380" y="60" href="#arrow-head" transform="rotate(90,380,60)"/><line x1="380" y1="60" x2="380" y2="80"/>
 				<text x="380" y="90" class="branch centered">crash-fix</text>
-				<use x="340" y="90" href="#arrow-head" transform="rotate(-180,340,90)"/><line x1="340" y1="90" x2="320" y2="90"/>
+				<use x="338" y="90" href="#arrow-head" transform="rotate(-180,338,90)"/><line x1="338" y1="90" x2="320" y2="90"/>
 				<text x="318" y="90" class="head right">HEAD</text>
 			</g>
 		</svg>
@@ -324,7 +372,7 @@ slideNumber: c/t
 		<h3 class="tag">Tags</h3>
 		<p class="fragment">Un tag est <strong>inamovible</strong> et ne peut pas être <em class="head">checked out</em>, il ne suit donc jamais un nouveau commit.</p>
 		<p class="fragment"><small>(Pour «déplacer» un tag, il faut le supprimer et le re-créer ailleurs.)</small></p>
-		<p class="fragment">➔ Une branche sert à <em>suivre</em> quelque chose (développement d'une feature...) ; un tag sert à <em>marquer</em> un commit particulier (version...)</p>
+		<p class="fragment">➔ Une branche sert à <em>suivre</em> quelque chose (développement d'une fonctionnalité...) ; un tag sert à <em>marquer</em> un commit particulier (version...)</p>
 	</section>
 </section>
 
@@ -346,13 +394,13 @@ slideNumber: c/t
 
 	<section>
 		<h3>Qu'est-ce qui fait un dépôt Git&nbsp;?</h3>
-		<p class="fragment" data-fragment-index="0">Réponse : le répertoire<sup>1</sup> <code>.git</code>.</p>
+		<p class="fragment" data-fragment-index="0">Réponse : le répertoire<sup aria-describedby="footnote-gitdir">1</sup> <code>.git</code>.</p>
 		<ul>
 			<li class="fragment" data-fragment-index="1">Git ne stocke rien en dehors de ce répertoire.</li>
 			<li class="fragment" data-fragment-index="2">On peut librement déplacer le répertoire parent, Git ne stocke aucun chemin absolu.</li>
 			<li class="fragment">Git cherche également dans tous les répertoires parents du répertoire courant.</li>
 		</ul>
-		<p class="fragment" data-fragment-index="0"><small><sup>1</sup> Dans certains cas c'est un fichier.</small></p>
+		<p class="fragment" data-fragment-index="0" id="footnote-gitdir"><small><sup>1</sup> Dans certains cas c'est un fichier.</small></p>
 	</section>
 
 	<section>
@@ -360,11 +408,20 @@ slideNumber: c/t
 		<script id="asciicast-30" src="https://asciinema.celforyon.fr/a/30.js" async data-rows="10"></script>
 		<p class="fragment">Apparemment il y a eu une erreur&nbsp;?</p>
 		<p class="fragment">Créons quelques fichiers.</p>
+
+		<aside class="notes">
+			<p>NB : après avoir cliqué dans le terminal, les contrôles de la présentation sont désactivés. Cliquez en-dehors du terminal pour les réactiver.</p>
+		</aside>
 	</section>
 
 	<section>
 		<h3>«Où en suis-je&nbsp;?»</h3>
 		<script id="asciicast-31" src="https://asciinema.celforyon.fr/a/31.js" async data-rows="15"></script>
+
+		<aside class="notes">
+			<p><code>git status</code> est une commande extrêmement utile, car elle permet à tout moment de savoir dans quel état on se trouve ; parfois, on a oublié qu'on était au milieu d'une opération, et ça provoque des comportements inattendus.</p>
+			<p>Conseil : si <code>git status</code> indique quelque chose que vous ne connaissez ou ne comprenez pas, faites appel à un ami ou collègue qui s'y connaît ! 😉</p>
+		</aside>
 	</section>
 
 	<section>
@@ -376,6 +433,10 @@ slideNumber: c/t
 
 	<section>
 		<script id="asciicast-32" src="https://asciinema.celforyon.fr/a/32.js" async></script>
+
+		<aside class="notes">
+			<p>Récapitulons maintenant toutes les commandes que nous venons de voir, et terminons avec un exemple d'utilisation de <code>git commit</code>.</p>
+		</aside>
 	</section>
 </section>
 
@@ -421,6 +482,10 @@ slideNumber: c/t
 			<div class="fragment"><dt>Sublime Text</dt><dd>{% highlight console %}$ git config --global core.editor "subl -w"{% endhighlight %}</dd></div>
 			<div class="fragment"><dt>VS Code</dt><dd>{% highlight console %}$ git config --global core.editor "code -w"{% endhighlight %}</dd></div>
 		</dl>
+
+		<aside class="notes">
+			<p>Ayant une place limitée dans ces diapositives, je n'ai listé que deux exemples ; si vous utilisez un autre éditeur, consultez sa documentation pour trouver une ligne de commande équivalente.</p>
+		</aside>
 	</section>
 </section>
 
@@ -508,7 +573,7 @@ slideNumber: c/t
 			<use x="870" y="415" href="#laptop"/><text x="910" y="440" class="centered">tsfe02</text>
 			<text x="720" y="425" class="cmd fragment" data-fragment-index="3">$ git clone</text>
 			<g class="fragment fade-in-then-out" data-fragment-index="3">
-				<use x="680" y="290" href="#arrow-head" transform="rotate(-150,680,290)"/><line x1="680" y1="290" x2="310" y2="120"/>
+				<use x="680" y="290" href="#arrow-head" transform="rotate(-155,680,290)"/><line x1="680" y1="290" x2="310" y2="120"/>
 			</g>
 			<text x="720" y="445" class="cmd fragment" data-fragment-index="4">$ git commit</text>
 			<text x="720" y="465" class="cmd fragment" data-fragment-index="5">$ git commit</text>
@@ -536,6 +601,12 @@ slideNumber: c/t
 				<use x="945" y="360" href="#arrow-head" transform="rotate(90,945,360)"/><line x1="945" y1="360" x2="945" y2="390"/><text x="945" y="400" class="branch centered">master</text>
 			</g>
 		</svg>
+
+		<aside class="notes">
+			<p>Voici un scénario d'utilisation de Git sur plusieurs machines.</p>
+			<p>(Certaines des commandes seront expliquées dans les diapositives suivantes.)</p>
+			<p>L'essentiel à retenir : chaque modification (nouveau commit) est d'abord effectuée localement, puis publiée, et ensuite récupérée par tout le monde.</p>
+		</aside>
 	</section>
 
 	<section>
@@ -594,6 +665,12 @@ slideNumber: c/t
 			<text x="160" y="380" class="fragment remote-ref" data-fragment-index="4">tsfe02/develop</text>
 			<use x="380" y="310" href="#arrow-head" transform="rotate(148,380,310)" class="fragment" data-fragment-index="5"/><line x1="380" y1="310" x2="280" y2="370" class="fragment" data-fragment-index="5"/>
 		</svg>
+
+		<aside class="notes">
+			<p>Allez, c'est l'heure d'un petit exercice !</p>
+			<p>Supposons qu'on soit sur la machine <code>tsfe01</code>, et qu'on ait deux <em>remotes</em>, <code>origin</code> et <code>tsfe02</code>.</p>
+			<p>À quelles branches se réfèrent les «refs» <code class="branch">develop</code>, <code class="remote-ref">origin/develop</code>, et <code class="remote-ref">tsfe02/develop</code> ?</p>
+		</aside>
 	</section>
 
 	<section>
@@ -607,8 +684,10 @@ slideNumber: c/t
 		<p class="fragment"><small>(<code>git pull</code> appelle implicitement <code>git fetch</code>.)</small></p>
 	</section>
 </section>
+
 <section>
 	<h2>La collaboration (2)</h2>
+
 	<section>
 		<h3>Ça tourne mal</h3>
 		<svg viewBox="40 -5 540 395" style="max-height: 450px;">
@@ -635,7 +714,7 @@ slideNumber: c/t
 			<g class="fragment" data-fragment-index="3">
 				<use x="400" y="120" href="#arrow-head" transform="rotate(157,400,120)"/><line x1="400" y1="120" x2="235" y2="190"/>
 			</g>
-			<text x="315" y="145" class="centered fragment fade-up" data-fragment-index="4">?</text>
+			<text x="315" y="145" class="centered fragment fade-up" data-fragment-index="4" style="font-size: 20px;">?</text>
 
 			<ellipse cx="95" cy="230" class="commit"/><text x="95" y="230" class="commit-id">6846ef5</text>
 			<g class="fragment fade-out" data-fragment-index="1">
@@ -664,6 +743,12 @@ slideNumber: c/t
 					<use x="520" y="260" href="#arrow-head" transform="rotate(90,520,260)"/><line x1="520" y1="260" x2="520" y2="290"/><text x="520" y="300" class="branch centered">master</text>
 			</g>
 		</svg>
+
+		<aside class="notes">
+			<p>Jusqu'ici, on n'a vu que des cas où tout se passait bien.</p>
+			<p>Pourtant, il est extrêmement courant de se retrouver dans une situation de conflit.</p>
+			<p>Partons d'une configuration où tout le monde est d'accord, et voyons comment causer un problème en seulement quatre commandes !</p>
+		</aside>
 	</section>
 
 	<section>
@@ -681,6 +766,12 @@ hint: (e.g. 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span>
 		</code></small></pre>
 		<p class="fragment" data-fragment-index="1">... «non-fast-forward»&nbsp;?</p>
+
+		<aside class="notes">
+			<p>Fort heureusement, Git n'autorisera pas ce dernier <code>git push</code>.</p>
+			<p>Le message d'erreur peut faire un peu peur, mais <strong>ne vous inquiétez pas</strong>, il indique en fait que <strong>rien ne s'est passé</strong>.</p>
+			<p>Ceci dit, il est intéressant de se pencher sur un certain terme présent dans ce message d'erreur...</p>
+		</aside>
 	</section>
 
 	<section>
@@ -741,6 +832,11 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 				</g>
 			</g>
 		</svg>
+
+		<aside class="notes">
+			<p>Le <strong>fast-forwarding</strong> est un concept <strong>crucial</strong> !</p>
+			<p>Afin d'aider à mieux comprendre sa définition, voici un petit jeu : pour chacun des déplacements de la branche <code class="branch">master</code>, essayez de deviner s'il est «fast-forward» ou non.</p>
+		</aside>
 	</section>
 
 	<section>
@@ -785,6 +881,12 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 				<use x="410" y="90" href="#arrow-head" transform="rotate(-180,410,90)"/><line x1="410" y1="90" x2="375" y2="90"/>
 			</g>
 		</svg>
+
+		<aside class="notes">
+			<p>Un «merge» consiste à créer un nouveau commit (logiquement appelé «merge commit»), qui a pour parents les commits qu'on cherche à «rassembler».</p>
+			<p>Une fois ce commit créé, on peut fast-forwarder la branche <code class="branch">master</code> vers <code class="branch">add-dark-mode</code>, puisque <code class="commit-id">feedfac</code> est un commit <strong>enfant</strong> de <code class="commit-id">1234567</code> !</p>
+			<p><small>Que <code class="commit-id">feedfac</code> soit aussi un enfant d'un autre commit n'est pas un problème : on pourrait imaginer que ce commit contient toutes les modifications introduites dans la branche <code class="branch">add-dark-mode</code>.</small></p>
+		</aside>
 	</section>
 
 	<section>
@@ -804,7 +906,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 
 		<p class="fragment"><code><a href="https://git-scm.com/docs/git-merge">git merge</a> &lt;commit&gt;...</code></p>
 		<p class="fragment">Crée un nouveau commit <strong>sur la branche actuelle</strong> qui «rassemble» la branche actuelle et tous les <code>&lt;commit&gt;</code>s.</p>
-		<p class="fragment"><small>On expliquera le «rassemblement» avec <code>rebase</code>.</small></p>
+		<p class="fragment"><small>On expliquera ce que «rassemblement» signifie quand on parlera de <code>rebase</code>.</small></p>
 		<p class="fragment">Exemple : <code>git merge <span class="branch">master</span></code></p>
 	</section>
 </section>
@@ -842,16 +944,16 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 				<use x="515" y="200" href="#arrow-head" transform="rotate(-180,515,200)"/><path d="M 515,200 c -80,0 -130,-50 -170,-100"/>
 			</g>
 		</svg>
-	</section>
 
-	<section>
-		<h3>Principe</h3>
-
-		<ol>
-			<li class="fragment"><code class="branch">add-dark-mode</code> remonte l'historique jusqu'à trouver un commit parent de <code class="branch">master</code></li>
-			<li class="fragment"><code class="branch">add-dark-mode</code> <em>fast-forward</em>e jusqu'à <code class="branch">master</code></li>
-			<li class="fragment">Tous les commits par lesquels on est passé à l'étape 1. sont «rejoués» (ré-appliqués) un par un</li>
-		</ol>
+		<aside class="notes">
+			<p>Un «rebase» a une exécution significativement plus complexe :</p>
+			<ol>
+				<li>On «rembobine» ("rewind") <code class="branch">add-dark-mode</code> jusqu'à tomber sur un commit parent de <code class="branch">master</code> ;</li>
+				<li>On «fast-forward» <code class="branch">add-dark-mode</code> jusqu'à <code class="branch">master</code> ;</li>
+				<li>Et enfin, on ré-applique chacun des commits qu'on avait «rembobinés» à l'étape 1.</li>
+			</ol>
+			<p>Attention : vu qu'on a créé de <strong>nouveaux</strong> commits à l'étape 3 (ils n'ont pas les mêmes parents que les originaux, et probablement pas la même date de création), <strong>ils n'ont pas le même hash</strong> !</p>
+		</aside>
 	</section>
 
 	<section>
@@ -866,6 +968,12 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 <section>
 	<section>
 		<h2>Petit récapitulatif</h2>
+
+		<aside class="notes">
+			<p>Ouf !</p>
+			<p>Après toutes ces informations, repassons rapidement sur les commandes les plus importantes qu'on a vues jusqu'ici.</p>
+			<p>Si vous êtes joueurs, vous pouvez tenter de deviner la commande associée aux actions présentées !</p>
+		</aside>
 	</section>
 
 	<section>
@@ -880,7 +988,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 
 		<p class="fragment"><code>git clone &lt;URL&gt;</code></p>
 		<div class="fragment">
-			<script id="asciicast-meeryOgSfxZuYTm9ruHmb0Tse" src="https://asciinema.celforyon.fr/a/meeryOgSfxZuYTm9ruHmb0Tse.js" async></script>
+			<script async id="asciicast-36" src="https://asciinema.celforyon.fr/a/36.js" async></script>
 		</div>
 	</section>
 
@@ -939,7 +1047,7 @@ Changes not staged for commit:
 	</section>
 </section>
 
-<!-- TODO : checkout, branch, bisect, cherry-pick, rebase -i, stash, blame, add -p, rm, mv ; bon message de commit -->
+<!-- TODO : checkout, branch, bisect, cherry-pick, rebase -i, stash, blame, add -p, rm, mv ; bon message de commit ; alias -->
 
 	<!-- section>
 		<h3>Le garbage collector</h3>
@@ -955,6 +1063,11 @@ Changes not staged for commit:
 	<p class="fragment">On peut afficher le statut Git dans son prompt de shell (par ex. via <a href="https://github.com/romkatv/powerlevel10k">powerlevel10k</a>)</p>
 	<p class="fragment">Une bonne interface graphique (certes freeware) : <a href="https://sublimemerge.com">Sublime Merge</a> <small class="fragment">(je recommande car elle liste les commandes exécutées)</small></p>
 	<p class="fragment">Si vous utilisez un IDE, il a peut-être une intégration Git (parfois via extensions), lisez la doc</p><!-- Maintenant Enzo va peut-être me laisser tranquille -->
+
+	<aside class="notes">
+		<p>Git fonctionne très bien tout seul, mais il bénéficie également d'un excellent écosystème et de bonnes intégrations un peu partout.</p>
+		<p>Voici quelques suggestions d'outils périphériques.</p>
+	</aside>
 </section>
 
 <section>

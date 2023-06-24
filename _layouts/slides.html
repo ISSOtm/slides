@@ -30,6 +30,9 @@
         <script src="plugin/{{ plugin }}/{{ plugin }}.js"></script>
         {%- endfor -%}
         <script>
+            const pageUrl = new URL(window.location.href);
+            const pageParams = pageUrl.searchParams;
+            const showNotes = pageParams.has("shownotes");
             Reveal.initialize({
                 controls: true,
                 progress: true,
@@ -44,6 +47,7 @@
                 {%- if page.slideNumber %}
                 slideNumber: "{{ page.slideNumber }}",
                 {%- endif %}
+                showNotes,
             });
         </script>
     </body>
