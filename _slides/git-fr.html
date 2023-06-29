@@ -1,7 +1,7 @@
 ---
 layout: slides
-title: "Becoming proficient with Git"
-permalink: /git
+title: "Devenir efficace avec Git"
+permalink: /git-fr
 plugins:
   - notes
 slideNumber: c/t
@@ -84,41 +84,40 @@ slideNumber: c/t
 </svg>
 
 <section>
-	<h1>Becoming proficient with Git</h1>
-	<p>ℹ️ Cette présentation est aussi <a href="/slides/git-fr">disponible en français</a> !</p>
-	<p>👩‍💻 <a href="/slides/git?shownotes">Autonomous version</a> (for solo reading)</p>
+	<h1>Devenir efficace avec Git</h1>
+	<p>ℹ️ These slides are also <a href="/slides/git">available in English</a>!</p>
+	<p>👩‍💻 <a href="/slides/git-fr?shownotes">Version autonome</a> (pour lecture en solo)</p>
 
 	<aside class="notes">
-		<p>Estimated duration: one hour. <a href="https://revealjs.com">reveal.js user manual</a></p>
+		<p>Durée estimée&nbsp;: une heure. <a href="https://revealjs.com">Manuel d'utilisation de reveal.js</a></p>
 		<hr/>
-		<p>Hello and welcome to this presentation covering the basics of Git.</p>
-		<p>This presentation will (mostly) not talk about how to use Git in practice, but rather aims at introducing the concepts and theory that underlie Git.</p>
-		<p>Understanding these concepts makes Git much simpler and intuitive to use... and thus you will become more efficient with it!</p>
-	</aside>
+		<p>Bonjour et bienvenue dans cette présentation sur les bases de Git.</p>
+		<p>Cette présentation ne parlera pas (peu) d'une utilisation pratique de Git, mais vise plutôt à introduire les concepts et la théorie qui sous-tendent Git.</p>
+		<p>Comprendre ces concepts rend Git bien plus simple et intuitif à utiliser... et ainsi vous deviendrez plus efficace&nbsp;!</p>
 </section>
 
 <section>
-	<h2>What is Git?</h2>
+	<h2>Git, kézako&nbsp;?</h2>
 
 	<section>
-		<p class="fragment">A distributed Version Control System (<abbr>VCS</abbr>)</p>
+		<p class="fragment">Un système de contrôle de version (<abbr>VCS</abbr>) distribué</p>
 	</section>
 
 	<section>
-		<h3>Version control system</h3>
-		<p class="fragment">= system allowing to manage different versions of a set of files</p>
-		<p class="fragment">(Many intermediate versions between two releases!)</p>
-		<p class="fragment">Often used to allow several people work the same on code... among other reasons!</p>
+		<h3>Système de contrôle de version</h3>
+		<p class="fragment">= système permettant de gérer différentes versions d'un ensemble de fichiers</p>
+		<p class="fragment">(Beaucoup de versions intermédiaires entre deux releases&nbsp;!)</p>
+		<p class="fragment">Souvent utilisé pour travailler à plusieurs sur un projet... entre autres&nbsp;!</p>
 
 		<aside class="notes">
-			<p>A version control system allows managing various versions of a set of files.</p>
-			<p>The usefulness arises since, between two released versions, there are a lot of intermediate versions!</p>
-			<p>If two people are working in parallel on a project, each of their (modified) copies constitutes a different version; a VCS therefore allows multiple people to work together much more easily!</p>
+			<p>Un système de contrôle de version permet de gérer différentes versions d'un ensemble de fichiers.</p>
+			<p>L'intérêt existe car, entre deux versions publiées, il y a beaucoup de versions intermédiaires&nbsp;!</p>
+			<p>Si deux personnes travaillent en parallèle sur un projet, chacune de leurs copies (modifiées) constitue une version différente&nbsp;; un VCS permet donc de travailler bien plus facilement à plusieurs&nbsp;!</p>
 		</aside>
 	</section>
 
 	<section>
-		<h3>Other VCS</h3>
+		<h3>Autres VCS</h3>
 
 		<ul>
 			<li class="fragment">Subversion (SVN)</li>
@@ -129,122 +128,122 @@ slideNumber: c/t
 		</ul>
 
 		<aside class="notes">
-			<p>That said, Git is neither (nor the last) VCS, “only” the most popular currently.</p>
-			<p>Here are a few others.</p>
+			<p>Ceci dit, Git n'est ni le premier (ni le dernier) VCS, «seulement» le plus populaire à l'heure actuelle.</p>
+			<p>En voici quelques autres.</p>
 		</aside>
 	</section>
 
 	<section>
-		<h3>What Git is not</h3>
+		<h3>Ce que Git n'est pas</h3>
 
 		<p class="fragment">Git ≠ GitHub, GitLab, Gitea, etc.</p>
-		<p class="fragment">Git = software tool (command line)</p>
-		<p class="fragment">GitHub et GitLab = Git repository hosting services</p>
-		<p class="fragment">Linux ≠ OVH, for example</p>
+		<p class="fragment">Git = outil logiciel (en ligne de commande)</p>
+		<p class="fragment">GitHub et GitLab = services d'hébergement de dépôts Git</p>
+		<p class="fragment">Linux ≠ OVH, par exemple</p>
 
 		<aside class="notes">
-			<p>Since Git is often used in tandem with GitHub, GitLab, etc., many confuse the two!</p>
-			<p>GitHub, GitLab, etc. provide functionalities complementing Git's, but still, saying “I'm using GitHub on my computer” makes no sense.</p>
-			<p>The difference between Git and Git{Hub,Lab,tea} is equivalent to the difference between Linux and OVH, for example.</p>
+			<p>Puisque Git est souvent utilisé en tandem avec GitHub, GitLab, etc., beaucoup de gens confondent les deux&nbsp;!</p>
+			<p>GitHub, GitLab, etc. fournissent des fonctionnalités complémentaires à Git, mais pour autant, dire «j'utilise GitHub sur mon ordi» n'a pas de sens.</p>
+			<p>La différence entre Git et Git{Hub,Lab,tea} est équivalente à la différence entre Linux et OVH, par exemple.</p>
 		</aside>
 	</section>
 </section>
 
 <section>
-	<h2>Why use Git?</h2>
-	<p class="fragment">Benefits on several levels:</p>
+	<h2>Pourquoi utiliser Git&nbsp;?</h2>
+	<p class="fragment">Bénéfices sur plusieurs niveaux&nbsp;:</p>
 	<ol>
-		<li class="fragment">Backup system</li>
-		<li class="fragment">Work in “branches”</li>
-		<li class="fragment">Collaborative work</li>
+		<li class="fragment">Système de backup</li>
+		<li class="fragment">Travail par «branches»</li>
+		<li class="fragment">Travail collaboratif</li>
 	</ol>
-	<p class="fragment"><strong>It's worth the trouble!</strong></p>
+	<p class="fragment"><strong>Ça vaut le coup&nbsp;!</strong></p>
 
 	<aside class="notes">
-		<p>For beginners, the point of using Git may not be obvious, especially for small solo projects.</p>
-		<p>Yet, Git's features are (in my opinion) simple to use, and useful to everyone!</p>
+		<p>Surtout au début, l'intérêt de Git n'est pas forcément évident, surtout pour des petits projets solo.</p>
+		<p>Pourtant, les fonctionnalités de Git sont (à mon avis) simples à utiliser, et utiles pour tout le monde&nbsp;!</p>
 	</aside>
 </section>
 
 <section>
-	<h2>Making backups with Git</h2>
+	<h2>Faire des backups avec Git</h2>
 
 	<section>
-		<p>Let's start with a parenthesis on the word “distributed”.</p>
-		<p class="fragment">You may have heard that Git is a <strong>distributed</strong> version control system .</p>
-		<p class="fragment">What does that mean??</p>
+		<p>Commençons avec une parenthèse sur le mot «distribué»</p>
+		<p class="fragment">Vous avez peut-être entendu dire que Git était un système de contrôle de version <strong>distribué</strong>.</p>
+		<p class="fragment">Qu'est-ce à dire&nbsp;?</p>
 	</section>
 	<section>
-		<h3>Two types of VCS</h3>
+		<h3>Deux types de VCS</h3>
 		<dl>
-			<dt class="fragment">Centralised</dt>
-			<dd class="fragment">Any action on the repo requires access to the server <small class="fragment">(Subversion, Perforce, etc.)</small></dd>
-			<dt class="fragment">Distributed</dt>
-			<dd class="fragment">No copy of the repo is special <small class="fragment">(Mercurial, <strong>Git</strong>, etc.)</small></dd>
+			<dt class="fragment">Centralisé</dt>
+			<dd class="fragment">Toute action sur le repo requiert un accès au serveur <small class="fragment">(Subversion, Perforce, etc.)</small></dd>
+			<dt class="fragment">Distribué</dt>
+			<dd class="fragment">Aucune copie du repo n'est distincte <small class="fragment">(Mercurial, <strong>Git</strong>, etc.)</small></dd>
 	</section>
 	<section>
-		<h3>Benefits of a distributed system</h3>
+		<h3>Intérêts d'un système distribué</h3>
 		<ul>
-			<li class="fragment">Each developer has a full<sup aria-describedby="footnote-distributed">1</sup> copy of the repo, not just the server.<br/><strong class="fragment">➔ Yay, cheap backups!</strong></li>
-			<li class="fragment">Developers can work even offline!<br/><em class="fragment">(We will come back to conflict resolution later)</em></li>
+			<li class="fragment">Chaque développeur possède une copie complète<sup aria-describedby="footnote-distributed">1</sup> du repo, pas juste le serveur.<br/><strong class="fragment">➔ Chouette, des backups pas chers&nbsp;!</strong></li>
+			<li class="fragment">Les développeurs peuvent travailler même hors ligne&nbsp;!<br/><em class="fragment">(On reviendra plus tard à la résolution de conflits)</em></li>
 		</ul>
-		<small class="fragment" id="footnote-distributed"><sup>1</sup> For more details, watch <a href="https://www.youtube.com/watch?v=4XpnKHJAok8">this talk by Linus Torvalds at Google</a>.</small>
+		<small class="fragment" id="footnote-distributed"><sup>1</sup> Pour plus de détails, voir <a href="https://www.youtube.com/watch?v=4XpnKHJAok8">cette présentation de Linus Torvalds à Google</a>.</small>
 	</section>
 </section>
 
 <section>
-	<h2>Basic concepts</h2>
+	<h2>Concepts de base</h2>
 
 	<section>
-		<h3 class="fragment">Let's cut to <del>the chase</del> graphs</h3>
-		<p class="fragment">❗️ <strong>I promise, nothing complicated!</strong> <small>(there will be plenty of images)</small></p>
-		<p class="fragment">Git is based on a <strong>graph</strong>.</p>
+		<h3 class="fragment">Parlons peu mais parlons graphes</h3>
+		<p class="fragment">❗️ <strong>Promis, rien de compliqué&nbsp;!</strong> <small>(il y aura plein d'images)</small></p>
+		<p class="fragment">Git est basé sur un <strong>graphe</strong>.</p>
 
 		<aside class="notes">
-			<p>Well, time to get to the meat of the subject.</p>
-			<p>Git's choice for representing the various versions, is a <strong>graph</strong>.</p>
-			<p>This talk tries to make the different operations clearer, via animated visualisations!</p>
-			<p><small>Note: I am doubtful about the accessibility of the diagrams, unfortunately, but I don't know how to transcribe them either. If you use assistive technologies, <a href="https://eldred.fr/about#contact">please contact me</a>!</small></p>
+			<p>Bien, il est temps de rentrer dans le vif du sujet.</p>
+			<p>Le choix de Git pour la représentation des différentes versions, est un <strong>graphe</strong>.</p>
+			<p>Cette présentation essaye de rendre les différentes opérations plus claires, via des visualisations animées&nbsp;!</p>
+			<p><small>Note&nbsp;: je doute de l'accessibilité des diagrammes, malheureusement, mais je ne sais pas non plus comment les transcrire. Si vous être un utilisateur de technologies assistives, <a href="https://eldred.fr/about#contact">contactez-moi</a>&nbsp;!</small></p>
 		</aside>
 	</section>
 
 	<section>
-		<h3>What is a <strong>commit</strong>?</h3>
+		<h3>Qu'est-ce qu'un <strong>commit</strong>&nbsp;?</h3>
 
 		<ul>
-			<li class="fragment" data-fragment-index="0">A commit message</li>
-			<li class="fragment" data-fragment-index="1">An author (name + email address)</li>
-			<li class="fragment" data-fragment-index="2">(Some other metadata...)</li>
-			<li class="fragment" data-fragment-index="3"><span class="fragment highlight-blue" data-fragment-index="5">A set of files and their contents</span></li>
-			<li class="fragment" data-fragment-index="4"><span class="fragment highlight-blue" data-fragment-index="6">“Arrows” towards its parent(s)</span></li>
+			<li class="fragment" data-fragment-index="0">Un message de commit</li>
+			<li class="fragment" data-fragment-index="1">Un auteur (nom + adresse mail)</li>
+			<li class="fragment" data-fragment-index="2">(Quelques autres métadonnées...)</li>
+			<li class="fragment" data-fragment-index="3"><span class="fragment highlight-blue" data-fragment-index="5">Un ensemble de fichiers et leurs contenus</span></li>
+			<li class="fragment" data-fragment-index="4"><span class="fragment highlight-blue" data-fragment-index="6">Des «flèches» vers son/ses parent(s)</span></li>
 		</ul>
-		<p class="fragment">A commit is identified in an <strong>unique</strong> way by its <strong>hash</strong>.</p>
+		<p class="fragment">Un commit est identifié de manière <strong>unique</strong> par son <strong>hash</strong>.</p>
 
 		<aside class="notes">
-			<p>A term that you will see very often, and that is actually essential, is the <strong>commit</strong>.</p>
-			<p>Among all that constitutes a commit, what we are most interested in is the set of files it contains, and its family relationships.</p>
-			<p>All of this is, finally, summed up into a <strong>hash</strong>.</p>
+			<p>Un des termes qui revient très souvent, et qui est en fait essentiel, est le <strong>commit</strong>.</p>
+			<p>Parmi tout ce qui compose un commit, ce qui nous intéresse le plus est l'ensemble de fichiers qu'il contient, et ses relations de parenté.</p>
+			<p>Tout ceci est, au final, résumé à un <strong>hash</strong>.</p>
 		</aside>
 	</section>
 
 	<section>
-		<h3>A hash? Is that edible?</h3>
+		<h3>Un hash&nbsp;? Ça se mange&nbsp;?</h3>
 
-		<p class="fragment">All the information in a commit, <strong>including the contents of the files,</strong> are passed to a <strong>hashing</strong> function to obtain its <strong>hash</strong>.</p>
-		<p class="fragment">Principle of a hash function: data <small>(a sequence of bytes)</small> is passed to it, it returns a number (“hash”); two identical entries ⇔ two identical hashes.</p>
-		<small class="fragment">(More info for the curious <a href="https://en.wikipedia.org/wiki/Hash_function">on Wikipedia</a>)</small>
+		<p class="fragment">Toutes les informations d'un commit, <strong>y compris le contenu des fichiers,</strong> sont passées à une fonction de <strong>hachage</strong> pour obtenir son <strong>hash</strong>.</p>
+		<p class="fragment">Principe d'une fonction de hachage&nbsp;: on lui passe des données <small>(une suite d'octets)</small>, elle retourne un nombre («hash»)&nbsp;; deux entrées identiques ⇔ deux hashs identiques.</p>
+		<small class="fragment">(Plus d'infos <a href="https://fr.wikipedia.org/wiki/Fonction_de_hachage">sur Wikipédia</a> pour les curieux)</small>
 	</section>
 
 	<section>
-		<h3>Commit hashes</h3>
+		<h3>Les hashs de commits</h3>
 
-		<p class="fragment">The hash of a commit is a very large number, presented in <a href="https://en.wikipedia.org/wiki/Hexadecimal">hexadecimal</a>: <span class="fragment commit-id">6828f7bf493cd4c9c332ea769e6e38fbbe258821</span>.</p>
-		<p class="fragment">Hashes are often shortened (by default to 7 characters): <span class="commit-id">6828f7b</span>, this is what we will use throughout this course.</p>
+		<p class="fragment">Le hash d'un commit est un très grand nombre, présenté en <a href="https://fr.wikipedia.org/wiki/Hexadécimal">hexadécimal</a>&nbsp;: <span class="fragment commit-id">6828f7bf493cd4c9c332ea769e6e38fbbe258821</span>.</p>
+		<p class="fragment">Les hashs sont souvent raccourcis (par défaut à 7 caractères)&nbsp;: <span class="commit-id">6828f7b</span>, c'est ce qu'on utilisera dans ce cours.</p>
 	</section>
 
 	<section>
-		<h3>“Pointers”</h3>
-		<p class="fragment" data-fragment-index="0">It's not just commits that point to commits.</p>
+		<h3>Des «pointeurs»</h3>
+		<p class="fragment" data-fragment-index="0">Il n'y a pas que les commits qui pointent sur des commits.</p>
 		<svg viewBox="-5 -5 710 160" class="fragment" data-fragment-index="0">
 			<ellipse cx="45" cy="75" class="commit"/><text x="45" y="75" class="commit-id">f37c942</text>
 				<use x="90" y="75" href="#arrow-head"/><line x1="90" y1="75" x2="175" y2="75"/>
@@ -272,22 +271,22 @@ slideNumber: c/t
 				<text x="480" y="120" class="branch">network-fixes</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="1">There are also
-			<span class="fragment" data-fragment-index="2">branches,</span>
-			<span class="fragment" data-fragment-index="3">tags,</span>
-			<span class="fragment" data-fragment-index="4">and some other things.</span>
-			<small class="fragment" data-fragment-index="5">(We'll talk about their differences later)</small>
+		<p class="fragment" data-fragment-index="1">Il y a aussi
+			<span class="fragment" data-fragment-index="2">des branches,</span>
+			<span class="fragment" data-fragment-index="3">des tags,</span>
+			<span class="fragment" data-fragment-index="4">et quelques autres choses.</span>
+			<small class="fragment" data-fragment-index="5">(On parlera de leurs différences plus tard)</small>
 		</p>
 	</section>
 </section>
 
 <section>
-	<h2>Manipulating the graph</h2>
+	<h2>Manipuler le graphe</h2>
 	<section>
 	</section>
 
 	<section>
-		<h3>Creating a commit</h3>
+		<h3>Créer un commit</h3>
 		<svg viewBox="-5 -5 435 70" style="max-height: 13vh;">
 			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
 				<use x="90" y="30" href="#arrow-head"/><line x1="90" y1="30" x2="175" y2="30"/>
@@ -297,26 +296,26 @@ slideNumber: c/t
 				<ellipse cx="380" cy="30" class="commit"/><text x="380" y="30" class="commit-id">c4fe9cc</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="0">To create a commit...</p>
-		<p class="fragment" data-fragment-index="1">... we simply add it to the graph.</p>
+		<p class="fragment" data-fragment-index="0">Pour créer un commit...</p>
+		<p class="fragment" data-fragment-index="1">... on l'ajoute simplement au graphe.</p>
 	</section>
 
 	<section>
-		<h3>That's all!</h3>
-		<p class="fragment">There is no trick here, (almost) all operations only ever add commits to the graph.</p>
-		<p class="fragment">Though, let's talk about what happens when we do.</p>
+		<h3>C'est tout&nbsp;!</h3>
+		<p class="fragment">Il n'y a pas de piège, on ne fait jamais qu'ajouter des commits au graphe.</p>
+		<p class="fragment">Parlons tout de même de ce qui se passe quand on le fait.</p>
 	</section>
 
 	<section>
 		<h3><code>HEAD</code></h3>
-		<p class="fragment"><code class="head">HEAD</code> refers to the commit that is currently <em>checked out</em>.</p>
-		<p class="fragment">That is, it is the commit whose contents (files) are currently present in the directory.</p>
-		<p class="fragment">The commit pointed to by <code class="head">HEAD</code> can be thought of as “where we are right now”.</p>
+		<p class="fragment"><code class="head">HEAD</code> désigne le commit qui est actuellement <em>checked out</em>.</p>
+		<p class="fragment">C'est-à-dire, il s'agit du commit dont le contenu (les fichiers) est actuellement présent dans le répertoire.</p>
+		<p class="fragment">On peut considérer le commit pointé par <code class="head">HEAD</code> comme «là où on se trouve actuellement».</p>
 	</section>
 
 	<section>
 		<h3 class="head"><code>HEAD</code></h3>
-		<p class="fragment" data-fragment-index="0">And when creating a new commit?</p>
+		<p class="fragment" data-fragment-index="0">Et quand on crée un nouveau commit&nbsp;?</p>
 		<svg viewBox="-5 -5 435 105" style="max-height: 13vh;">
 			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
 				<use x="90" y="30" href="#arrow-head"/><line x1="90" y1="30" x2="175" y2="30"/>
@@ -332,12 +331,12 @@ slideNumber: c/t
 				<text x="380" y="90" class="head centered">HEAD</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="2"><code class="head">HEAD</code> follows the new commit <small>(it is automatically <em>checked out</em>)</small>.</p>
+		<p class="fragment" data-fragment-index="2"><code class="head">HEAD</code> suit le nouveau commit <small>(il est automatiquement <em>checked out</em>)</small>.</p>
 	</section>
 
 	<section>
 		<h3 class="branch">Branches</h3>
-		<p class="fragment" data-fragment-index="0">And when creating a new commit?</p>
+		<p class="fragment" data-fragment-index="0">Et quand on crée un nouveau commit&nbsp;?</p>
 		<svg viewBox="-5 -5 435 105" style="max-height: 13vh;">
 			<ellipse cx="45" cy="30" class="commit"/><text x="45" y="30" class="commit-id">f37c942</text>
 			<use x="45" y="60" href="#arrow-head" transform="rotate(90,45,60)"/><line x1="45" y1="60" x2="45" y2="80"/>
@@ -361,105 +360,107 @@ slideNumber: c/t
 				<text x="318" y="90" class="head right">HEAD</text>
 			</g>
 		</svg>
-		<p class="fragment" data-fragment-index="2">A <span class="branch">branch</span> follows the commit <strong>if and only if it is <em class="head">checked out</em></strong>.</p>
+		<p class="fragment" data-fragment-index="2">Une <span class="branch">branche</span> suit le commit <strong>si et seulement si elle est <em class="head">checked out</em></strong>.</p>
 	</section>
 
 	<section>
 		<h3 class="tag">Tags</h3>
-		<p class="fragment">A tag is <strong>immovable</strong> and cannot be <em class="head">checked out</em>, so it never follows a new commit.</p>
-		<p class="fragment"><small>(To “move” a tag, it must be deleted and re-created elsewhere.)</small></p>
-		<p class="fragment">➔ A branch is used to <em>follow</em> something (development of a feature...); a tag is used to <em>mark</em> a particular commit (version...)</p>
+		<p class="fragment">Un tag est <strong>inamovible</strong> et ne peut pas être <em class="head">checked out</em>, il ne suit donc jamais un nouveau commit.</p>
+		<p class="fragment"><small>(Pour «déplacer» un tag, il faut le supprimer et le re-créer ailleurs.)</small></p>
+		<p class="fragment">➔ Une branche sert à <em>suivre</em> quelque chose (développement d'une fonctionnalité...)&nbsp;; un tag sert à <em>marquer</em> un commit particulier (version...)</p>
 	</section>
 </section>
 
 <section>
-	<h2>Let's talk commands</h2>
+	<h2>Parlons commandes</h2>
 	<section>
-		<p class="fragment">Try to <a href="https://cbea.ms/git-commit#learn-to-love-the-command-line-leave-the-ide-behind-">avoid graphic interfaces</a> if possible.</p>
-		<p class="fragment">(At least at the beginning.)</p>
-		<p class="fragment">For example, their handling of errors is often problematic...</p>
+		<p class="fragment">Essayez d'<a href="https://cbea.ms/git-commit#learn-to-love-the-command-line-leave-the-ide-behind-">éviter les interfaces graphiques</a> si possible.</p>
+		<p class="fragment">(Au moins au début.)</p>
+		<p class="fragment">Par exemple, leur gestion des erreurs est souvent hasardeuse...</p>
 	</section>
 
 	<section>
-		<h3>Create a new Git repository</h3>
+		<h3>Créer un nouveau dépôt Git</h3>
 		{% highlight console %}
 		$ git init
 		{%- endhighlight %}
-		<p class="fragment">Creates a new repository <strong>in the current directory</strong>.</p>
+		<p class="fragment">Crée un nouveau dépôt <strong>dans le répertoire courant</strong>.</p>
 	</section>
 
 	<section>
-		<h3>What makes up a Git repository?</h3>
-		<p class="fragment" data-fragment-index="0">Answer: the <code>.git</code> directory<sup aria-describedby="footnote-gitdir">1</sup>.</p>
+		<h3>Qu'est-ce qui fait un dépôt Git&nbsp;?</h3>
+		<p class="fragment" data-fragment-index="0">Réponse&nbsp;: le répertoire<sup aria-describedby="footnote-gitdir">1</sup> <code>.git</code>.</p>
 		<ul>
-			<li class="fragment" data-fragment-index="1">Git doesn't store anything outside of that directory.</li>
-			<li class="fragment" data-fragment-index="2">Its parent directory can be freely moved, Git stores no absolute paths.</li>
-			<li class="fragment" data-fragment-index="3">Git also looks for it in every parent directory of the current directory.</li>
+			<li class="fragment" data-fragment-index="1">Git ne stocke rien en dehors de ce répertoire.</li>
+			<li class="fragment" data-fragment-index="2">On peut librement déplacer le répertoire parent, Git ne stocke aucun chemin absolu.</li>
+			<li class="fragment" data-fragment-index="3">Git le cherche également dans tous les répertoires parents du répertoire courant.</li>
 		</ul>
-		<p class="fragment" data-fragment-index="0"><small id="footnote-gitdir"><sup>1</sup> In some cases it's a file.</small></p>
+		<p class="fragment" data-fragment-index="0"><small id="footnote-gitdir"><sup>1</sup> Dans certains cas c'est un fichier.</small></p>
 	</section>
 
 	<section>
-		<h3>Creating a commit</h3>
+		<h3>Créer un commit</h3>
 		<script id="asciicast-30" src="https://asciinema.celforyon.fr/a/30.js" async data-rows="10"></script>
-		<p class="fragment">Apparently there was an error?</p>
-		<p class="fragment">Let's create a few files.</p>
+		<p class="fragment">Apparemment il y a eu une erreur&nbsp;?</p>
+		<p class="fragment">Créons quelques fichiers.</p>
 
 		<aside class="notes">
-			<p>NB: after clicking inside of the terminal, the presentation's controls are disabled. Click outside of the terminal to re-enable them.</p>
+			<p>NB&nbsp;: après avoir cliqué dans le terminal, les contrôles de la présentation sont désactivés. Cliquez en-dehors du terminal pour les réactiver.</p>
 		</aside>
 	</section>
 
 	<section>
-		<h3>“Where am I?”</h3>
+		<h3>«Où en suis-je&nbsp;?»</h3>
 		<script id="asciicast-31" src="https://asciinema.celforyon.fr/a/31.js" async data-rows="15"></script>
 
 		<aside class="notes">
-			<p><code>git status</code> is an extremely useful command, as it lets you know what state we are in, at any time; sometimes, we forget that we are in the middle of a certain operation, which causes some unexpected behaviour.</p>
-			<p>A piece of advice: if <code>git status</code> indicates something that you do not know or understand, call a more experienced friend or colleague for help! 😉</p>
+			<p><code>git status</code> est une commande extrêmement utile, car elle permet à tout moment de savoir dans quel état on se trouve&nbsp;; parfois, on a oublié qu'on était au milieu d'une opération, et ça provoque des comportements inattendus.</p>
+			<p>Conseil&nbsp;: si <code>git status</code> indique quelque chose que vous ne connaissez ou ne comprenez pas, faites appel à un ami ou collègue qui s'y connaît&nbsp;! 😉</p>
 		</aside>
 	</section>
 
 	<section>
-		<h3>Let's talk <em>staging</em></h3>
-		<p class="fragment fade-in-then-out"><small>I promise this is the last thing</small></p>
-		<p class="fragment">Git lets you choose which modifications will be recorded in the next commit.</p>
-		<p class="fragment">This is done via the <code>git add</code> command suggested by the earlier hint text.</p>
+		<h3>Parlons <em>staging</em></h3>
+		<p class="fragment fade-in-then-out"><small>Promis c'est le dernier truc</small></p>
+		<p class="fragment">Git permet de choisir quelles modifications vont être enregistrées dans le prochain commit.</p>
+		<p class="fragment">On le fait via la commande <code>git add</code> suggérée par le message d'aide plus tôt.</p>
 	</section>
 
 	<section>
-		<script id="asciicast-37" src="https://asciinema.celforyon.fr/a/37.js" async></script>
+		<script id="asciicast-32" src="https://asciinema.celforyon.fr/a/32.js" async></script>
 
 		<aside class="notes">
-			<p>Let's now recap all of the commands we have seen, and end with an example of use of <code>git commit</code>.</p>
+			<p>Récapitulons maintenant toutes les commandes que nous venons de voir, et terminons avec un exemple d'utilisation de <code>git commit</code>.</p>
 		</aside>
 	</section>
 </section>
 
 <section>
-	<h2>Interactive editor</h2>
+	<h2>Éditeur interactif</h2>
 	<section>
-		<p class="fragment">We just witnessed <code>git commit</code> opening a text editor.</p>
+		<p class="fragment">On vient de voir <code>git commit</code> ouvrir un éditeur de texte.</p>
 		<figure class="fragment">
 			<blockquote><small>
-				Text editor for use by Git commands. The value is meant to be interpreted by the shell when it is used. Examples: <code>~/bin/vi</code>, <code>$SOME_ENVIRONMENT_VARIABLE</code>, <code>"C:\Program Files\Vim\gvim.exe" --nofork</code>.
-				The order of preference is the <code>$GIT_EDITOR</code> environment variable, then <code>core.editor</code> configuration, then <code>$VISUAL</code>, then <code>$EDITOR</code>, and then the default chosen at compile time, which is usually <code>vi</code>.
+				Éditeur de texte utilisé par les commandes Git.
+				Cette valeur est intérprétée par le shell quand elle est utilisée.
+				Exemples&nbsp;: <code>~/bin/vi</code>, <code>$UNE_VARIABLE_D_ENVIRONNEMENT</code>, <code>"C:\Program Files\Vim\gvim.exe" --nofork</code>.
+				L'ordre de préférence est la variable d'environnement <code>$GIT_EDITOR</code>, puis la configuration <code>core.editor</code>, puis <code>$VISUAL</code>, puis <code>$EDITOR</code>, puis la valeur par défaut choisie à la compilation, qui est habituellement <code>vi</code>.
 			</small></blockquote>
 			<figcaption><small>
-				Source: <a href="https://git-scm.com/docs/git-var/#Documentation/git-var.txt-GITEDITOR"><code>GIT_EDITOR</code> documentation in <code>git-var</code></a>.
+				Source&nbsp;: <a href="https://git-scm.com/docs/git-var/fr#Documentation/git-var.txt-GITEDITOR">documentation de <code>GIT_EDITOR</code> dans <code>git-var</code></a>.
 			</small></figcaption>
 		</figure>
 	</section>
 
 	<section>
-		<h3>Changing the configuration</h3>
-		<p class="fragment">The editor used by default is <code>vi</code>, which has a... peculiar ergonomy.</p>
-		<p class="fragment">To change that to <code>nano</code> (for example):</p>
+		<h3>Changer la configuration</h3>
+		<p class="fragment">L'éditeur utilisé par défaut est <code>vi</code>, qui a une ergonomie... particulière.</p>
+		<p class="fragment">Pour le changer pour <code>nano</code> (par exemple)&nbsp;:</p>
 		<div class="fragment">{% highlight console %}
 			$ git config --global core.editor "nano"
 		{%- endhighlight %}</div>
 		<div class="fragment">
-			<small>Setting <code>EDITOR</code> in your <code>.bashrc</code>/<code>.zshrc</code> also works.</small>
+			<small>Positionner <code>EDITOR</code> dans son <code>.bashrc</code>/<code>.zshrc</code> fonctionne aussi.</small>
 			{% highlight bash mark_lines="2" %}
 				# ...
 				export EDITOR=nano
@@ -469,31 +470,31 @@ slideNumber: c/t
 	</section>
 
 	<section>
-		<h3>Using a graphical editor</h3>
-		<p class="fragment">Yes, that's an option!</p>
-		<p class="fragment">It is however crucial to ensure that the command only returns when the file is closed:</p>
+		<h3>Utiliser un éditeur graphique</h3>
+		<p class="fragment">Oui c'est possible&nbsp;!</p>
+		<p class="fragment">Il faut cependant s'assurer que la commande ne quitte que quand le fichier est fermé&nbsp;:</p>
 		<dl style="display: block;">
 			<div class="fragment"><dt>Sublime Text</dt><dd>{% highlight console %}$ git config --global core.editor "subl -w"{% endhighlight %}</dd></div>
 			<div class="fragment"><dt>VS Code</dt><dd>{% highlight console %}$ git config --global core.editor "code -w"{% endhighlight %}</dd></div>
 		</dl>
 
 		<aside class="notes">
-			<p>Room is limited in those slides, so only two examples are given here; if you are using another editor, consult its documentation to find an equivalent command line.</p>
+			<p>Ayant une place limitée dans ces diapositives, je n'ai listé que deux exemples&nbsp;; si vous utilisez un autre éditeur, consultez sa documentation pour trouver une ligne de commande équivalente.</p>
 		</aside>
 	</section>
 </section>
 
 <section>
-	<h2>Collaboration</h2>
+	<h2>La collaboration</h2>
 	<section>
-		<p class="fragment">Git on your machine = backup tool (and more)</p>
-		<p class="fragment">Git on many machines = 🤯</p>
+		<p class="fragment">Git sur sa machine = outil de backup (et plus)</p>
+		<p class="fragment">Git sur plusieurs machines = 🤯</p>
 	</section>
 
 	<section>
-		<h3>Principle</h3>
-		<p class="fragment">Each machine contains a Git repository. <small class="fragment"><code>.git</code> directory, etc.</small></p>
-		<p class="fragment">Modifications can be “pushed” to another machine, and “pulled” from it as well.</p>
+		<h3>Principe</h3>
+		<p class="fragment">Chaque machine contient un dépôt Git. <small class="fragment">Répertoire <code>.git</code>, etc.</small></p>
+		<p class="fragment">On peut «pousser» des modifications vers une autre machine, et «tirer» des modifs depuis.</p>
 	</section>
 
 	<section>
@@ -597,26 +598,26 @@ slideNumber: c/t
 		</svg>
 
 		<aside class="notes">
-			<p>Here is a scenario of Git being used on several machines.</p>
-			<p>(Some of these commands will be explained in following slides.)</p>
-			<p>The gist to take from it: each modification (new commit) is first created locally, then published, and finally retrieved by everyone else.</p>
+			<p>Voici un scénario d'utilisation de Git sur plusieurs machines.</p>
+			<p>(Certaines des commandes seront expliquées dans les diapositives suivantes.)</p>
+			<p>L'essentiel à retenir&nbsp;: chaque modification (nouveau commit) est d'abord effectuée localement, puis publiée, et ensuite récupérée par tout le monde.</p>
 		</aside>
 	</section>
 
 	<section>
-		<h3>Summary</h3>
+		<h3>Résumé</h3>
 		<ul>
-			<li class="fragment">To create a local copy of a remote repo: <code>git clone</code></li>
-			<li class="fragment">To retrieve updates from a remote repo: <code>git pull</code></li>
-			<li class="fragment">To publish my modifications to a remote copy: <code>git push</code></li>
+			<li class="fragment">Pour créer un nouveau repo à partir d'un existant: <code>git clone</code></li>
+			<li class="fragment">Pour rapatrier les mises à jour depuis un repo distant&nbsp;: <code>git pull</code></li>
+			<li class="fragment">Pour publier ses modifications&nbsp;: <code>git push</code></li>
 		</ul>
 	</section>
 
 	<section>
-		<h3>Some more terminology</h3>
-		<p class="fragment">Git models remote machines using “<strong>remotes</strong>”.</p>
-		<p class="fragment">A remote = a certain repo on a certain machine <small class="fragment">(more or less)</small>.</p>
-		<p class="fragment">Remotes are managed via <code>git remote</code>!</p>
+		<h3>Un peu plus de terminologie</h3>
+		<p class="fragment">Git modélise les machines distantes via des <strong>remotes</strong>. <small class="fragment">(«Remote» en anglais = «distant»)</small></p>
+		<p class="fragment">Une remote = un certain repo sur une certaine machine <small class="fragment">(grosso modo)</small>.</p>
+		<p class="fragment">On gère les remotes via <code>git remote</code>&nbsp;!</p>
 	</section>
 
 	<section>
@@ -661,29 +662,29 @@ slideNumber: c/t
 		</svg>
 
 		<aside class="notes">
-			<p>Come on, time for a little practice!</p>
-			<p>Let's assume we are on the machine <code>tsfe01</code>, and we have configured two <em>remotes</em>, <code>origin</code> and <code>tsfe02</code>.</p>
-			<p>Which branches do the “refs” <code class="branch">develop</code>, <code class="remote-ref">origin/develop</code>, and <code class="remote-ref">tsfe02/develop</code> refer to?</p>
+			<p>Allez, c'est l'heure d'un petit exercice&nbsp;!</p>
+			<p>Supposons qu'on soit sur la machine <code>tsfe01</code>, et qu'on ait deux <em>remotes</em>, <code>origin</code> et <code>tsfe02</code>.</p>
+			<p>À quelles branches se réfèrent les «refs» <code class="branch">develop</code>, <code class="remote-ref">origin/develop</code>, et <code class="remote-ref">tsfe02/develop</code>&nbsp;?</p>
 		</aside>
 	</section>
 
 	<section>
 		<h3><code>git fetch</code></h3>
-		<p class="fragment">Git does not make network requests for each command.</p>
+		<p class="fragment">Git ne va pas faire des requêtes à chaque commande.</p>
 		<ul>
-			<li class="fragment">Saves bandwidth</li>
-			<li class="fragment">Allows working offline</li>
+			<li class="fragment">Économe en bande passante</li>
+			<li class="fragment">Permet de travailler hors-ligne</li>
 		</ul>
-		<p class="fragment">To remain up to date: <code>git fetch <var>&lt;remote&gt;</var></code>.</p>
-		<p class="fragment"><small>(<code>git pull</code> implicitly calls <code>git fetch</code>.)</small></p>
+		<p class="fragment">Pour se tenir au jus&nbsp;: <code>git fetch <var>&lt;remote&gt;</var></code>.</p>
+		<p class="fragment"><small>(<code>git pull</code> appelle implicitement <code>git fetch</code>.)</small></p>
 	</section>
 </section>
 
 <section>
-	<h2>Collaboration (2)</h2>
+	<h2>La collaboration (2)</h2>
 
 	<section>
-		<h3>When things go wrong</h3>
+		<h3>Ça tourne mal</h3>
 		<svg viewBox="40 -5 540 395" style="max-height: 450px;">
 			<defs>
 				<g id="laptop" style="stroke-width: 2px;"><polygon points="10,0 70,0 70,50 10,50" style="fill: var(--r-background-color);"/><polygon points="10,50 70,50 80,70 0,70" fill-opacity="0.6"/></g>
@@ -739,37 +740,37 @@ slideNumber: c/t
 		</svg>
 
 		<aside class="notes">
-			<p>Until now, we've only seen cases where everything went right.</p>
-			<p>Yet, it's extremely common to end up in a conflicting situation.</p>
-			<p>Let's start from a configuration where everyone agrees, and see how a problem can arise in only four commands!</p>
+			<p>Jusqu'ici, on n'a vu que des cas où tout se passait bien.</p>
+			<p>Pourtant, il est extrêmement courant de se retrouver dans une situation de conflit.</p>
+			<p>Partons d'une configuration où tout le monde est d'accord, et voyons comment causer un problème en seulement quatre commandes&nbsp;!</p>
 		</aside>
 	</section>
 
 	<section>
-		<h3>When things go wrong...</h3>
+		<h3>Ça tourne mal...</h3>
 
-		<p class="fragment" data-fragment-index="0">...Git has our backs.</p>
+		<p class="fragment" data-fragment-index="0">...mais Git couvre nos arrières.</p>
 		<pre class="fragment" data-fragment-index="0"><small><code><span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/test</span>% git push
-To example.com:path/to/repo.git
+To example.com:chemin/vers/repo.git
 <span class="error"> ! [rejected]</span>        master -> master (<span class="fragment highlight-green" data-fragment-index="1">non-fast-forward</span>)
-<span class="error">error: failed to push some refs to 'example.com:path/to/repo.git'</span>
+<span class="error">error: failed to push some refs to 'example.com:chemin/vers/repo.git'</span>
 <span class="warning">hint: Updates were rejected because a pushed branch tip is behind its remote
 hint: counterpart. Check out this branch and integrate the remote changes
 hint: (e.g. 'git pull ...') before pushing again.
 hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span></code></small></pre>
-		<p class="fragment" data-fragment-index="1">... “non-fast-forward”?</p>
+		<p class="fragment" data-fragment-index="1">... «non-fast-forward»&nbsp;?</p>
 
 		<aside class="notes">
-			<p>Thankfully, Git will not allow that last <code>git push</code>.</p>
-			<p>The error message may appear scary, but <strong>do not worry</strong>, it's actually indicating that <strong>nothing has happened</strong>.</p>
-			<p>Now, a specific term in that error message is worth extra scrutiny...</p>
+			<p>Fort heureusement, Git n'autorisera pas ce dernier <code>git push</code>.</p>
+			<p>Le message d'erreur peut faire un peu peur, mais <strong>ne vous inquiétez pas</strong>, il indique en fait que <strong>rien ne s'est passé</strong>.</p>
+			<p>Ceci dit, il est intéressant de se pencher sur un certain terme présent dans ce message d'erreur...</p>
 		</aside>
 	</section>
 
 	<section>
 		<h3>Fast-forwarding</h3>
 
-		<p class="fragment" data-fragment-index="0">“Fast-forwarding” a branch means “moving it only towards children commits”:</p>
+		<p class="fragment" data-fragment-index="0">«Fast-forwarder» une branche signifie «la déplacer uniquement vers des commits enfants»&nbsp;:</p>
 		<svg viewBox="40 -5 500 220" class="fragment" data-fragment-index="1" style="max-height: 360px;">
 			<ellipse cx="95" cy="30" class="commit"/><text x="95" y="30" class="commit-id">6846ef5</text>
 				<use x="140" y="30" href="#arrow-head"/><line x1="140" y1="30" x2="175" y2="30"/>
@@ -826,17 +827,17 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 		</svg>
 
 		<aside class="notes">
-			<p><strong>Fast-forwarding</strong> is a <strong>crucial</strong> concept!</p>
-			<p>To help understand that definition better, here is a little game: for each of the shown movements of the <code class="branch">master</code> branch, try guessing whether it's “fast-forward” or not.</p>
+			<p>Le <strong>fast-forwarding</strong> est un concept <strong>crucial</strong>&nbsp;!</p>
+			<p>Afin d'aider à mieux comprendre sa définition, voici un petit jeu&nbsp;: pour chacun des déplacements de la branche <code class="branch">master</code>, essayez de deviner s'il est «fast-forward» ou non.</p>
 		</aside>
 	</section>
 
 	<section>
 		<h3>Fast-forwarding</h3>
 
-		<p class="fragment"><small>“Fast-forwarding” because it's only ever going “forward” in time.</small></p>
-		<p class="fragment">Fast-forward = always safe (can't “lose” any commits).</p>
-		<p class="fragment">...what about non-fast-forward cases?</p>
+		<p class="fragment"><small>«Fast-forwarding» parce que «avance rapide» dans le temps.</small></p>
+		<p class="fragment">Fast-forward = toujours safe (on ne peut «perdre» aucun commit).</p>
+		<p class="fragment">...et dans les autres cas&nbsp;?</p>
 		<ul>
 			<li class="fragment"><code>git merge</code></li>
 			<li class="fragment"><code>git rebase</code></li>
@@ -848,7 +849,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 	<h2>Merge</h2>
 
 	<section>
-		<h3>Principle</h3>
+		<h3>Principe</h3>
 		<svg viewBox="40 -5 500 215" style="max-height: 360px;">
 			<ellipse cx="95" cy="30" class="commit"/><text x="95" y="30" class="commit-id">6846ef5</text>
 				<use x="140" y="30" href="#arrow-head"/><line x1="140" y1="30" x2="175" y2="30"/>
@@ -875,31 +876,31 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 		</svg>
 
 		<aside class="notes">
-			<p>A “merge” consists of creating a new commit (logically dubbed “merge commit”), whose parents are the commits that we are seeking to “gather”.</p>
-			<p>Once that commit has been created, we can fast-forward the <code class="branch">master</code> branch towards <code class="branch">add-dark-mode</code>, since <code class="commit-id">feedfac</code> is a <strong>child</strong> commit of <code class="commit-id">1234567</code>!</p>
-			<p><small>That <code class="commit-id">feedfac</code> is a child of other commits as well is not a problem; we could imagine that commit as containing all of the modifications introduced in the <code class="branch">add-dark-mode</code> branch.</small></p>
+			<p>Un «merge» consiste à créer un nouveau commit (logiquement appelé «merge commit»), qui a pour parents les commits qu'on cherche à «rassembler».</p>
+			<p>Une fois ce commit créé, on peut fast-forwarder la branche <code class="branch">master</code> vers <code class="branch">add-dark-mode</code>, puisque <code class="commit-id">feedfac</code> est un commit <strong>enfant</strong> de <code class="commit-id">1234567</code>&nbsp;!</p>
+			<p><small>Que <code class="commit-id">feedfac</code> soit aussi un enfant d'un autre commit n'est pas un problème&nbsp;: on pourrait imaginer que ce commit contient toutes les modifications introduites dans la branche <code class="branch">add-dark-mode</code>.</small></p>
 		</aside>
 	</section>
 
 	<section>
-		<p>Advantages:</p>
+		<p>Avantages&nbsp;:</p>
 		<ul>
-			<li class="fragment">History preserved</li>
+			<li class="fragment">Historique préservé</li>
 		</ul>
-		<p>Downsides:</p>
+		<p>Inconvénients&nbsp;:</p>
 		<ul>
-			<li class="fragment">Non-linear <span class="branch">master</span></li>
-			<li class="fragment">“Merge commits” are artificial</li>
+			<li class="fragment"><span class="branch">master</span> non linéaire</li>
+			<li class="fragment">Les «merge commit» sont artificiels</li>
 		</ul>
 	</section>
 
 	<section>
-		<h3>Command</h3>
+		<h3>Commande</h3>
 
 		<p class="fragment"><code><a href="https://git-scm.com/docs/git-merge">git merge</a> &lt;commit&gt;...</code></p>
-		<p class="fragment">Creates a new commit <strong>on the current branch</strong> that “gathers” the current branch and all <code>&lt;commit&gt;</code>s.</p>
-		<p class="fragment"><small>We will explain the “gather”ing together with <code>rebase</code>.</small></p>
-		<p class="fragment">Example: <code>git merge <span class="branch">master</span></code></p>
+		<p class="fragment">Crée un nouveau commit <strong>sur la branche actuelle</strong> qui «rassemble» la branche actuelle et tous les <code>&lt;commit&gt;</code>s.</p>
+		<p class="fragment"><small>On expliquera ce que «rassemblement» signifie quand on parlera de <code>rebase</code>.</small></p>
+		<p class="fragment">Exemple&nbsp;: <code>git merge <span class="branch">master</span></code></p>
 	</section>
 </section>
 
@@ -907,7 +908,7 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 	<h2>Rebase</h2>
 
 	<section>
-		<h3>Principle</h3>
+		<h3>Principe</h3>
 
 		<svg viewBox="40 -5 600 215" style="max-height: 360px;">
 			<ellipse cx="95" cy="30" class="commit"/><text x="95" y="30" class="commit-id">6846ef5</text>
@@ -938,54 +939,54 @@ hint: See the 'Note about fast-forwards' in 'git push --help' for details.</span
 		</svg>
 
 		<aside class="notes">
-			<p>A “rebase” has significantly more complex execution:</p>
+			<p>Un «rebase» a une exécution significativement plus complexe&nbsp;:</p>
 			<ol>
-				<li>We “rewind” <code class="branch">add-dark-mode</code> until finding a commit parent of <code class="branch">master</code>;</li>
-				<li>We “fast-forward” <code class="branch">add-dark-mode</code> up to <code class="branch">master</code>;</li>
-				<li>And finally, we re-apply each commit that we had “rewound” over in step 1.</li>
+				<li>On «rembobine» (“rewind”) <code class="branch">add-dark-mode</code> jusqu'à tomber sur un commit parent de <code class="branch">master</code>&nbsp;;</li>
+				<li>On «fast-forward» <code class="branch">add-dark-mode</code> jusqu'à <code class="branch">master</code>&nbsp;;</li>
+				<li>Et enfin, on ré-applique chacun des commits qu'on avait «rembobinés» à l'étape 1.</li>
 			</ol>
-			<p>Attention: since we created <strong>new</strong> commits in step 3 (they don't have the same parents as the originals, and probably not the same creation date), <strong>they do not have the same hash</strong>!</p>
+			<p>Attention&nbsp;: vu qu'on a créé de <strong>nouveaux</strong> commits à l'étape 3 (ils n'ont pas les mêmes parents que les originaux, et probablement pas la même date de création), <strong>ils n'ont pas le même hash</strong>&nbsp;!</p>
 		</aside>
 	</section>
 
 	<section>
 		<h3>Commande</h3>
 
-		<p class="fragment"><code><a href="https://git-scm.com/docs/git-rebase">git rebase</a> &lt;new-base&gt; [&lt;branch&gt;]</code></p>
-		<p class="fragment">If <code>&lt;branch&gt;</code> is omitted, the current branch is modified.</p>
-		<p class="fragment">Example: <code>git rebase <span class="branch">master</span></code> <small class="fragment">(or <code>git rebase <span class="branch">master</span> <span class="branch">add-dark-mode</span></code>)</small></p>
+		<p class="fragment"><code><a href="https://git-scm.com/docs/git-rebase">git rebase</a> &lt;nouv-base&gt; [&lt;branche&gt;]</code></p>
+		<p class="fragment">Si <code>&lt;branche&gt;</code> est omis, la branche courante est modifiée.</p>
+		<p class="fragment">Exemple&nbsp;: <code>git rebase <span class="branch">master</span></code> <small class="fragment">(ou <code>git rebase <span class="branch">master</span> <span class="branch">add-dark-mode</span></code>)</small></p>
 	</section>
 </section>
 
 <section>
 	<section>
-		<h2>Quick recap</h2>
+		<h2>Petit récapitulatif</h2>
 
 		<aside class="notes">
-			<p>Phew!</p>
-			<p>After all of this information dump, let's quickly go over on the most important commands we have seen thus far.</p>
-			<p>If you feel like it, you can try guessing the command associated with each action shown!</p>
+			<p>Ouf&nbsp;!</p>
+			<p>Après toutes ces informations, repassons rapidement sur les commandes les plus importantes qu'on a vues jusqu'ici.</p>
+			<p>Si vous êtes joueurs, vous pouvez tenter de deviner la commande associée aux actions présentées&nbsp;!</p>
 		</aside>
 	</section>
 
 	<section>
-		<h2>Create a new repo</h2>
+		<h2>Créer un nouveau repo</h2>
 
 		<p class="fragment"><code>git init</code></p>
-		<p class="fragment">⚠️ Creates a repo <strong>in the current directory</strong>!</p>
+		<p class="fragment">⚠️ Crée un repo <strong>dans le répertoire courant</strong>&nbsp;!</p>
 	</section>
 
 	<section>
-		<h2>Create a local copy of a repo</h2>
+		<h2>Créer une copie locale d'un repo</h2>
 
 		<p class="fragment"><code>git clone &lt;URL&gt;</code></p>
 		<div class="fragment">
-			<script id="asciicast-36" src="https://asciinema.celforyon.fr/a/36.js" async></script>
+			<script async id="asciicast-36" src="https://asciinema.celforyon.fr/a/36.js" async></script>
 		</div>
 	</section>
 
 	<section data-auto-animate>
-		<h2>Finding ourselves</h2>
+		<h2>Retrouver ses petits</h2>
 
 		<p class="fragment"><code>git status</code></p>
 		<pre class="fragment"><small><code><span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/rgbds</span>% git status
@@ -996,7 +997,7 @@ nothing to commit, working tree clean</code></small></pre>
 	</section>
 
 	<section data-auto-animate>
-		<h2>Finding ourselves</h2>
+		<h2>Retrouver ses petits</h2>
 
 		<p><code>git status</code></p>
 		<pre><small><code><span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/rgbds</span>% git status
@@ -1013,11 +1014,10 @@ no changes added to commit (use "git add" and/or "git commit -a")</code></small>
 	</section>
 
 	<section>
-		<h2>Select modifications to commit</h2>
+		<h2>Sélectionner les modifs à committer</h2>
 
 		<p class="fragment"><code>git add</code></p>
-		<pre class="fragment"><small><code>
-<span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/rgbds</span>% git add .editorconfig
+		<pre class="fragment"><small><code><span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/rgbds</span>% git add .editorconfig
 <span class="prompt">issotm@sheik-kitty</span> <span class="cwd">/tmp/rgbds</span>% git status
 On branch master
 Your branch is up to date with 'origin/master'.
@@ -1033,32 +1033,32 @@ Changes not staged for commit:
 	</section>
 </section>
 
-<!-- TODO : checkout, branch, bisect, cherry-pick, rebase -i, stash, blame, add -p, rm, mv ; good commit message -->
+<!-- TODO : checkout, branch, bisect, cherry-pick, rebase -i, stash, blame, add -p, rm, mv ; bon message de commit ; alias -->
 
 	<!-- section>
-		<h3>The garbage collector</h3>
-		<p class="fragment">Each commit has either zero, one, or several arrows pointing towards it. We talk about a <em>reference count</em> (refcount).</p>
-		<p class="fragment"><strong>A commit whose refcount reaches zero is not immediately deleted!</strong></p>
-		<p class="fragment">We will see why later.</p>
+		<h3>Le garbage collector</h3>
+		<p class="fragment">Chaque commit a donc zéro, une, ou plusieurs flèches qui lui pointent dessus. On parle de <em>reference count</em> (refcount), ou «compteur de références».</p>
+		<p class="fragment"><strong>Un commit dont le refcount arrive à zéro n'est pas immédiatement supprimé&nbsp;!</strong></p>
+		<p class="fragment">On verra pourquoi plus tard.</p>
 	</section -->
 
 <section>
 	<h2>Goodies</h2>
 
-	<p class="fragment">A neater visualiser for <code>git diff</code> and <code>git blame</code> : <a href="https://github.com/dandavison/delta#readme">delta</a></p>
-	<p class="fragment">The Git status can be shown in the shell prompt (for example via <a href="https://github.com/romkatv/powerlevel10k">powerlevel10k</a>)</p>
-	<p class="fragment">A good graphical interface (though freeware): <a href="https://sublimemerge.com">Sublime Merge</a> <small class="fragment">(I recommend because it shows the commands it executes)</small></p>
-	<p class="fragment">If you use an IDE, it may have a Git integration (sometimes via extensions), read the docs</p>
+	<p class="fragment">Un visualiseur plus joli pour <code>git diff</code> et <code>git blame</code>&nbsp;: <a href="https://github.com/dandavison/delta#readme">delta</a></p>
+	<p class="fragment">On peut afficher le statut Git dans son prompt de shell (par ex. via <a href="https://github.com/romkatv/powerlevel10k">powerlevel10k</a>)</p>
+	<p class="fragment">Une bonne interface graphique (certes freeware)&nbsp;: <a href="https://sublimemerge.com">Sublime Merge</a> <small class="fragment">(je recommande car elle liste les commandes exécutées)</small></p>
+	<p class="fragment">Si vous utilisez un IDE, il a peut-être une intégration Git (parfois via extensions), lisez la doc</p><!-- Maintenant Enzo va peut-être me laisser tranquille -->
 
 	<aside class="notes">
-		<p>Git works really well on its own, but it also benefits from an excellent ecosystem and good integrations roughly anywhere.</p>
-		<p>Here are some suggestions of peripheral tools.</p>
+		<p>Git fonctionne très bien tout seul, mais il bénéficie également d'un excellent écosystème et de bonnes intégrations un peu partout.</p>
+		<p>Voici quelques suggestions d'outils périphériques.</p>
 	</aside>
 </section>
 
 <section>
-	<h1>Thank you for following!</h1>
+	<h1>Merci d'avoir suivi&nbsp;!</h1>
 
-	<p>The slides are available online: <a href="https://eldred.fr/slides/git">https://eldred.fr/slides/git</a>!</p>
+	<p>Les slides sont disponibles en ligne&nbsp;: <a href="https://eldred.fr/slides/git">https://eldred.fr/slides/git</a>!</p>
 	<img src="assets/git/qr.png" class="r-stretch"/>
 </section>
