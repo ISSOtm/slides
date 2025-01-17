@@ -23,22 +23,157 @@ permalink: /fosdem25
 	<h2>What can make programming unfun?</h2>
 </section>
 <section>
-	<section></section>
 	<section>
 		<h3>Barrier of entry</h3>
 		<ul>
 			<li class="fragment">Getting a bunch of dependencies</li>
-			<li class="fragment">Waiting for stuff to compile</li>
+			<li class="fragment">
+				Waiting for long compilation (TODO: XKCD zooming by the screen?)
+			</li>
 			<li class="fragment">Needing more powerful hardware</li>
 		</ul>
 	</section>
 	<section>
-		<h3>...</h3>
+		<h3>Hard to finish projects this complex</h3>
+		<p>TODO: some kind of render pipeline comparison joke image?</p>
+	</section>
+	<section>
+		<h3>Hard to wrap your head around</h3>
+		<ul>
+			<li class="fragment">Debugging suffers</li>
+		</ul>
 	</section>
 </section>
 
 <section>
-	<h2>Why going back to simpler times fixes those</h2>
+	<h2>Why going back to older times fixes those</h2>
+	<p class="fragment">
+		<q>Developing for a 90's console doesn't mean you must go back to a 90's experience</q>
+	</p>
+</section>
+<section>
+	<section>
+		<h3>Fast setup</h3>
+		<p>TODO</p>
+	</section>
+	<section data-auto-animate>
+		<h3>You, the platform, and nothing else</h3>
+		<ul>
+			<li class="fragment">
+				Made to be developed for directly
+				<ul>
+					<li class="fragment">Low complexity</li>
+					<li class="fragment">No (mandatory) layers</li>
+				</ul>
+			</li>
+			<li class="fragment">Good concept-learning material...</li>
+			<li class="fragment">...but still fun and engaging on its own</li>
+		</ul>
+	</section>
+	<section data-auto-animate>
+		<h3>You, the platform, and nothing else</h3>
+		<ul>
+			<li>Enables small team sizes</li>
+			<li class="fragment">Baseline expectations are much easier to meet</li>
+			<li class="fragment">
+				Constraining
+				<ul>
+					<li class="fragment"><q>Limitations breed creativity</q></li>
+					<li class="fragment">Sometimes feels like a puzzle-solving activity</li>
+				</ul>
+			</li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<h2>The various kinds of Game Boy development</h2>
+	<p class="fragment">This niche has a little something for everybody!</p>
+</section>
+<section>
+	<section>
+		<h3>Programming games</h3>
+		<ul>
+			<li class="fragment">Assembly</li>
+			<li class="fragment">C</li>
+			<li class="fragment">Niche languages (Wiz, Millfork, TRSE...)</li>
+			<li class="fragment arrow">Not C++ nor Rust! (Yet)</li>
+			<li class="fragment cross">Python, JS...</li>
+		</ul>
+	</section>
+	<section>
+		<h3>No-code games</h3>
+		<ul>
+			<li class="fragment">GB Studio</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Demoscene</h3>
+		<ul>
+			<li class="fragment">TODO</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Music composition</h3>
+		<ul>
+			<li class="fragment">PC trackers</li>
+			<li class="fragment">On-console trackers</li>
+			<li class="fragment">Programming drivers</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Pixel art</h3>
+		<ul>
+			<li class="fragment">Dedicated pixel art tools (Aseprite, Pro Motion...)</li>
+			<li class="fragment">DMG art (4 nuances of gray)</li>
+			<li class="fragment">GBC art (unusual colour restrictions)</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Making tools</h3>
+		<ul>
+			<li class="fragment">Assemblers</li>
+			<li class="fragment">Compilers (shout out LLVM port ppl?)</li>
+			<li class="fragment">Trackers, map tools, etc?</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Emulators</h3>
+		<ul>
+			<li class="fragment">Sometimes they're on-console (TODO: CHIP-8?)</li>
+			<li class="fragment">80% of games = easy</li>
+			<li class="fragment">
+				Want difficulty? Try emulating <em>Prehistorik Man</em> pixel-perfectly...
+			</li>
+			<li class="fragment">
+				Well-understood (mostly), well-documented, a lot of people can help
+			</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Research</h3>
+		<ul>
+			<li class="fragment">Documentation</li>
+			<li class="fragment">Running tests on hardware, and making them reproducible</li>
+			<li class="fragment">Again, can do this as a community effort</li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<h2>Showcase</h2>
+	<p class="fragment">Allow us to ~show off~ a little :3</p>
+</section>
+<section>
+	<section><h3>Homebrew</h3></section>
+	<section><h3>Commercial releases</h3></section>
+	<section><h3>Demoscene</h3></section>
+	<section><h3>Music</h3></section>
+	<section><h3>RGBDS</h3></section>
+</section>
+
+<section>
+	<h2>The end!</h2>
 </section>
 
 <style>
@@ -53,5 +188,12 @@ permalink: /fosdem25
 	.fragment.yeet.visible {
 		left: 200vw;
 		transform: rotate(720deg);
+	}
+
+	.arrow {
+		list-style: "➩ ";
+	}
+	.cross {
+		list-style: "❌ ";
 	}
 </style>
