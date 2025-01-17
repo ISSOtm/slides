@@ -1,6 +1,8 @@
 ---
 layout: slides
 slideNumber: true
+plugins:
+    - notes
 
 title: "FOSDEM 2025 slides"
 permalink: /fosdem25
@@ -8,17 +10,19 @@ permalink: /fosdem25
 
 <section>
 	<section>
-		<h1>Rediscovering the fun of programming with the Game Boy</h1>
-		<aside class="notes">Actually, I lied</aside>
+		<h1 class="fragment custom yeet">Rediscovering the fun of programming with the Game Boy</h1>
+		<aside class="notes">Actually, I lied.</aside>
 	</section>
-	<section>
+	<section data-transition="none">
 		<h1>Leveraging the Game Boy to syngergise programming and fun in the next quarter</h1>
-		<aside>Hopefully everyone agrees that *this* is fun, right?</aside>
+		<aside class="notes">Hopefully everyone agrees that *this* is fun, right?</aside>
 	</section>
 </section>
 
 <section>
 	<h2>What can make programming unfun?</h2>
+</section>
+<section>
 	<section></section>
 	<section>
 		<h3>Barrier of entry</h3>
@@ -36,3 +40,18 @@ permalink: /fosdem25
 <section>
 	<h2>Why going back to simpler times fixes those</h2>
 </section>
+
+<style>
+	.fragment.yeet {
+		position: relative;
+		left: 0vw;
+		transform: rotate(0deg);
+		transition:
+			left 1s ease-out,
+			transform 1s ease-out;
+	}
+	.fragment.yeet.visible {
+		left: 200vw;
+		transform: rotate(720deg);
+	}
+</style>
