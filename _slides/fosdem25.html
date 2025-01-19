@@ -25,11 +25,15 @@ plugins:
 </section>
 <section>
 	<section>
-		<h3>Barrier of entry</h3>
+		<h3>Barriers to entry</h3>
 		<ul>
 			<li class="fragment">Getting a bunch of dependencies</li>
 			<li class="fragment">
-				Waiting for long compilation (TODO: XKCD zooming by the screen?)
+				Waiting for long compilation
+				<span class="fragment yoink">
+					<br>
+					<img src="https://imgs.xkcd.com/comics/compiling.png" width="413" height="360">
+				</spap>
 			</li>
 			<li class="fragment">Needing more powerful hardware</li>
 		</ul>
@@ -178,7 +182,8 @@ plugins:
 </section>
 
 <style>
-	.fragment.yeet {
+	.fragment.yeet:not(.visible),
+	.fragment.yoink.visible {
 		position: relative;
 		left: 0vw;
 		transform: rotate(0deg);
@@ -186,7 +191,8 @@ plugins:
 			left 1s ease-out,
 			transform 1s ease-out;
 	}
-	.fragment.yeet.visible {
+	.fragment.yeet.visible,
+	.fragment.yoink:not(.visible) {
 		left: 200vw;
 		transform: rotate(720deg);
 	}
