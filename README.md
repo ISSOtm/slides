@@ -17,5 +17,5 @@ bundle install
 
 # 4. serve!
 bundle exec jekyll serve
-open "http://localhost:4000/slides/"
+open "http://localhost:4000/slides/fosdem2025"
 ```
