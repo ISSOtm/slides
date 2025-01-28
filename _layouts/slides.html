@@ -37,7 +37,18 @@
 			    center: true,
 			    hash: true,
 			    plugins: [ {% for plugin in page.plugins %}Reveal{{ plugin | capitalize }},{% endfor %} ],
-			    {%- if page.toc-progress %}
+				{%- if page.multiplex %}
+				dependencies: [
+					{ src: 'https://shack.eldred.fr/socket.io/socket.io.min.js', async: true },
+					{ src: 'https://shack.eldred.fr/reveal-multiplex/master.js', async: true },
+					{ src: 'https://shack.eldred.fr/reveal-multiplex/client.js', async: true }
+				],
+				multiplex: {
+					secret: null, // Set only locally for the master presentation
+					id: '', // printf secret | sha512sum | cut -d' ' -f1 | xxd -r -p | base64
+					url: 'shack.eldred.fr'
+				},
+			    {%- elsif page.toc-progress %}
 			    dependencies: [
 			        { src: "plugin/toc-progress/toc-progress.js", async: true, callback: function() { toc_progress.initialize('scroll', '#333', 'body'); toc_progress.create(); toc_progress.toggle(); } },
 			    ],
