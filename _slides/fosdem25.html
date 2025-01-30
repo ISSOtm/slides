@@ -39,7 +39,7 @@ multiplex: true
 	<section>
 		<h3 class="fragment">Eldred <small>(he/they)</small></h3>
 		<ul>
-			<li class="fragment"><img src="assets/issotm.png" style="float: right" />ISSOtm</li>
+			<li class="fragment"><img src="assets/issotm.png" class="float" />ISSOtm</li>
 			<li class="fragment">First Game Boy: age 15</li>
 			<li class="fragment">Product of the famous “PHP/JS → assembly” pipeline</li>
 			<li class="fragment">Loves Rust 🦀, assembly, and nothing in-between</li>
@@ -105,36 +105,77 @@ multiplex: true
 	<section>
 		<h3>Barriers to entry</h3>
 		<ul>
-			<li class="fragment">Getting a bunch of dependencies</li>
 			<li class="fragment">
-				Waiting for long compilation
-				<br />
 				<img
 					src="https://imgs.xkcd.com/comics/compiling.png"
 					width="413"
 					height="360"
-					class="fragment fade-left"
+					class="float"
 				/>
+				Waiting for long compilation
 			</li>
+			<li class="fragment">Getting a bunch of dependencies</li>
 			<li class="fragment">Needing more powerful hardware</li>
-			<li class="fragment">Big gap between no-code and code tools?</li>
 		</ul>
 		<aside class="notes">
 			The first thing that drains fun is being taken out of “the zone” to deal with some
 			chore. ⏭️<br />
 			<br />
-			...
+			For example, waiting for long build times. Raise your hand if you have seen that comic
+			somewhere before? ⏭️<br />
+			<br />
+			There's also stressing your network bandwidth (and waiting some more) while you are
+			fetching a whole bunch of libraries... ⏭️<br />
+			<br />
+			And hardware requirements constantly increasing. ⏭️
 		</aside>
 	</section>
 	<section>
 		<h3>Hard to finish projects this complex</h3>
-		<p>TODO: some kind of render pipeline comparison joke image?</p>
+		<img
+			src="assets/fosdem25/indie_game_dev.jpg"
+			alt="Humorous image depicting how many jobs a solo game dev has to do at the same time"
+		/>
+		<aside class="notes">
+			Modern game development techniques tend to demand a lot out of a single person, so it
+			can be discouraging to actually *finish* something. ⏭️
+		</aside>
 	</section>
-	<section>
+	<section data-auto-animate>
+		<h3>Hard to wrap your head around</h3>
+		<figure class="fragment">
+			<img
+				src="assets/fosdem25/vulkan-pipeline.webp"
+				alt="Highly representative image of the Vulkan rendering pipeline"
+			/>
+			<figcaption>Typical modern rendering pipeline</figcaption>
+		</figure>
+		<aside class="notes">
+			Speaking of complexity, the raw complexity of the systems also makes it difficult to
+			grasp what's going on ⏭️<br />
+			<br />
+			I mean, what are you supposed to do when your rendering pipeline is *this* complex? ⏭️
+		</aside>
+	</section>
+	<section data-auto-animate>
 		<h3>Hard to wrap your head around</h3>
 		<ul>
+			<li>Many different targets</li>
+			<li class="fragment">And constantly evolving, too!</li>
 			<li class="fragment">Debugging suffers</li>
+			<li class="fragment">Grasping the overall functioning feels nice</li>
 		</ul>
+		<aside class="notes">
+			The modern PC platform is very diverse, with a lot of screen sizes, hardware
+			combinations and configurations... ⏭️<br />
+			<br />
+			And each of those targets are moving, to make things worse! ⏭️<br />
+			<br />
+			This especially hinders debugging, since that necessitates fairly broad understanding of
+			the systems you're debugging ⏭️<br />
+			<br />
+			And, finally, the sensation that things are escaping you just *doesn't feel great* ⏭️
+		</aside>
 	</section>
 </section>
 
@@ -143,6 +184,11 @@ multiplex: true
 	<p class="fragment">
 		<q>Developing for a 90's console doesn't mean you must go back to a 90's experience</q>
 	</p>
+	<aside class="notes">
+		So, now, let's show why retro game dev can be a solution to all of the above. ⏭️<br />
+		<br />
+		(Read the quote) ⏭️
+	</aside>
 </section>
 <section>
 	<section>
@@ -156,7 +202,7 @@ multiplex: true
 				Made to be developed for directly
 				<ul>
 					<li class="fragment">Low complexity</li>
-					<li class="fragment">No (mandatory) layers</li>
+					<li class="fragment">No (mandatory) layers (but batteries still available)</li>
 				</ul>
 			</li>
 			<li class="fragment">Good concept-learning material...</li>
@@ -294,5 +340,11 @@ multiplex: true
 	}
 	.cross {
 		list-style: "❌ ";
+	}
+
+	img.float {
+		float: right;
+		margin-left: 1em;
+		margin-bottom: 1em;
 	}
 </style>
