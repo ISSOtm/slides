@@ -66,7 +66,9 @@ multiplex: true
 	<section>
 		<h3>Sylvie <small>(she/her)</small></h3>
 		<ul>
-			<li class="fragment"><img src="assets/sylvie.png" class="float" />Nintendo 64 and Game Boy Color fan</li>
+			<li class="fragment">
+				<img src="assets/sylvie.png" class="float" />Nintendo 64 and Game Boy Color fan
+			</li>
 			<li class="fragment">Jobs: Typescript, C++, Java, PHP, etc</li>
 			<li class="fragment">Hobbies: assembly and some C</li>
 		</ul>
@@ -237,10 +239,34 @@ multiplex: true
 		<ul>
 			<li class="fragment">Assembly</li>
 			<li class="fragment">C</li>
-			<li class="fragment">Niche languages (Wiz, Millfork, TRSE...)</li>
-			<li class="fragment arrow">Not C++ nor Rust! (Yet)</li>
+			<li class="fragment">
+				Niche languages (<a href="https://github.com/bananattack/wiz">Wiz</a>, Millfork,
+				TRSE...)
+			</li>
+			<li class="fragment arrow">Not C++ nor Rust <span class="fragment">(yet)</span></li>
 			<li class="fragment cross">Python, JS...</li>
 		</ul>
+		<aside class="notes">
+			If you want to program games, there is a variety of languages available: ⏭️<br />
+			<br />
+			The first, the most historical and original one, is assembly; which, in a nutshell, is
+			you directly talking to the CPU. ⏭️<br />
+			<br />
+			Then there's the usual suspect, C; though it's poorly suited for the Game Boy, at least
+			currently ⏭️<br />
+			<br />
+			Thus, some languages have been created to fill the gap, and be a middle-ground between
+			assembly's no-frills and C's awkwardness. I'd be surprised if you've ever heard of any
+			of them before, but they're nonetheless worth giving a try! ⏭️<br />
+			<br />
+			You might expect C++ and Rust to be available, like C; unfortunately, that is ⏭️
+			currently not the case. There are ongoing efforts to change that, though. ⏭️<br />
+			<br />
+			Some languages, typically the dynamically-typed, memory-GC'd languages, have essentially
+			no hope of ever running on the console. There's been toy implementations (for example
+			Micropython), but realistically, they offer nowhere near the Python anyone is used to.
+			⏭️
+		</aside>
 	</section>
 	<section>
 		<h3>No-code games</h3>
@@ -249,10 +275,15 @@ multiplex: true
 		</ul>
 		<aside class="notes">
 			As you can probably tell from the number of stickers on my laptop, no-code tools aren't
-			really my jam; but GB Studio deserves to be mentioned, since it has enabled many a
-			non-programmer to get into the field, and also non-low level programmers to grow some
-			interest.
+			really my jam; ⏭️<br />
+			<br />
+			but GB Studio deserves to be mentioned, since it has enabled many a non-programmer to
+			get into the field, and also non-low level programmers to grow some interest. ⏭️
 		</aside>
+	</section>
+	<section>
+		<h3>Tinkering</h3>
+		<p class="fragment"><q>Hey what if I put a STM µcontroller in a cartridge?</q></p>
 	</section>
 	<section>
 		<h3>Demoscene</h3>
@@ -272,7 +303,21 @@ multiplex: true
 		<h3>Pixel art</h3>
 		<ul>
 			<li class="fragment">Dedicated pixel art tools (Aseprite, Pro Motion...)</li>
-			<li class="fragment">DMG art (4 shades of gray, dithering for nuance)</li>
+			<li class="fragment">
+				<figure class="fragment float">
+					<video
+						src="assets/quartet-cracktro-dmg.webm"
+						muted
+						controls
+						class="float"
+						style="height: 8em"
+					></video>
+					<figcaption>
+						<a href="http://eldred.fr/quartet/#first-implementation">Source</a>
+					</figcaption>
+				</figure>
+				DMG art (4 shades of gray, dithering for nuance)
+			</li>
 			<li class="fragment">GBC art (unusual colour restrictions)</li>
 		</ul>
 		<aside class="notes">
@@ -282,10 +327,25 @@ multiplex: true
 	<section>
 		<h3>Making tools</h3>
 		<ul>
-			<li class="fragment">Assemblers</li>
-			<li class="fragment">Compilers (shout out LLVM port ppl?)</li>
-			<li class="fragment">Trackers, map tools, etc?</li>
+			<li class="fragment">Assemblers, compilers</li>
+			<li class="fragment">Map tools, etc</li>
+			<li class="fragment">
+				Contributing to existing tools (TODO: illustration of open-source?)
+			</li>
 		</ul>
+		<aside class="notes">
+			Feel like doing some work outside of the console? We got you covered! ⏭️<br />
+			<br />
+			Since we mentioned programming, it follows that one can work on the tools necessary to
+			make the languages work ⏭️<br />
+			<br />
+			More on the GUI side, there are also game-making tools; really, your imagination is the
+			limit ⏭️<br />
+			<br />
+			Reinventing your own wheel is the most common choice, but there are several GBDev
+			projects that are looking for help right now. There is a strong culture of free
+			software, so anyone can contribute (and even get paid a little as thanks) ⏭️
+		</aside>
 	</section>
 	<section>
 		<h3>Emulators</h3>
@@ -293,20 +353,57 @@ multiplex: true
 			<li class="fragment">Sometimes they're on-console (TODO: CHIP-8?)</li>
 			<li class="fragment">80% of games = easy</li>
 			<li class="fragment">
-				Want difficulty? Try emulating <em>Prehistorik Man</em> pixel-perfectly...
+				Want difficulty? Try emulating
+				<a href="http://eldred.fr/blog/prehistorik"><em>Prehistorik Man</em></a>
+				pixel-perfectly... or <em>Pinball Deluxe</em> at all!
 			</li>
 			<li class="fragment">
-				Well-understood (mostly), well-documented, a lot of people can help
+				Well-understood (<em>mostly</em>), well-documented,
+				<a href="https://gbdev.io/chat">a lot of people</a> can help
 			</li>
 		</ul>
+		<aside class="notes">
+			Another interesting field is the world of emulation. ⏭️<br />
+			<br />
+			Now, some people write emulators *on* the Game Boy, but due to the system's low specs,
+			the opportunities are rare. ⏭️<br />
+			<br />
+			As for emulating the Game Boy itself, it's a common recommendation for newbies, since
+			getting it mostly right is not particularly difficult (unlike, say, the NES) ⏭️<br />
+			<br />
+			That said, if you like challenge, the Game Boy has a *lot* of headaches in store for
+			you! Here are two of the more famous expert-level targets, but don't worry, there's
+			*plenty* more where that came from :) ⏭️<br />
+			<br />
+			Overall, it can a fun activity, because the system has been researched a lot *and* said
+			research is publicly available; and there are a lot of people who will readily give you
+			a hand. ⏭️
+		</aside>
 	</section>
 	<section>
 		<h3>Research</h3>
 		<ul>
-			<li class="fragment">Documentation</li>
 			<li class="fragment">Running tests on hardware, and making them reproducible</li>
-			<li class="fragment">Again, can do this as a community effort</li>
+			<li class="fragment">
+				Documentation (<a href="https://gbdev.io/pandocs">Pan Docs</a>...)
+			</li>
+			<li class="fragment">
+				Again, can be done as a <a href="https://gbdev.io">community</a> effort
+			</li>
 		</ul>
+		<aside class="notes">
+			Although we just said that the system has been studied a lot, believe it or not,
+			research on that 35-yo system is STILL ongoing! ⏭️<br />
+			<br />
+			One notable area of work is writing what we call “test ROMs”, which enable individual
+			behaviours to be compared between implementations (including the, yknow, reference one
+			:P) ⏭️<br />
+			<br />
+			And another thing that anyone, yes *you*, can help with, is documenting all of the
+			technical details in a more human-friendly and accessible manner. ⏭️<br />
+			<br />
+			And all of this is also something that other people will gladly help you with! ⏭️
+		</aside>
 	</section>
 </section>
 
@@ -315,11 +412,7 @@ multiplex: true
 	<p class="fragment">Allow us to ~show off~ a little :3</p>
 </section>
 <section>
-	<section><h3>Homebrew</h3></section>		
-	<section>
-		<h3>Quartet cracktro</h3>
-		<video src="assets/quartet-cracktro-dmg.webm" autoplay loop muted></video>
-	</section>
+	<section><h3>Homebrew</h3></section>
 	<section><h3>Commercial releases</h3></section>
 	<section><h3>Demoscene</h3></section>
 	<section><h3>Music</h3></section>
@@ -351,9 +444,14 @@ multiplex: true
 		list-style: "❌ ";
 	}
 
-	img.float {
+	img.float,
+	figure.float {
 		float: right;
 		margin-left: 1em;
 		margin-bottom: 1em;
+	}
+
+	figcaption {
+		text-align: center;
 	}
 </style>
