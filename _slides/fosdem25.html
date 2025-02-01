@@ -114,8 +114,10 @@ feedback notes:
 			🐱 The first thing that drains fun is being taken out of “the zone” to deal with some
 			chore. ⏭️<br />
 			<br />
-			For example, waiting for long build times. Stressing your network bandwidth (and waiting
-			some more) while it fetches a whole bunch of libraries. ⏭️<br />
+			For example, waiting for long build times. ⏭️<br />
+			<br />
+			Stressing your network bandwidth (and waiting some more) while it fetches a whole bunch
+			of libraries. ⏭️<br />
 			<br />
 			And hardware requirements constantly increasing. ⏭️
 		</aside>
@@ -128,9 +130,9 @@ feedback notes:
 			style="max-height: 10em"
 		/>
 		<aside class="notes">
-			🐶 Modern development techniques tend to demand a lot out of many specialized people,
-			so it can be barely possible to actually <em>finish</em> something, especially as a
-			solo creator. ⏭️
+			🐶 Modern development techniques tend to demand a lot out of many specialized people, so
+			it can be barely possible to actually <em>finish</em> something, especially as a solo
+			creator. ⏭️
 		</aside>
 	</section>
 	<section>
@@ -142,7 +144,9 @@ feedback notes:
 			<li class="fragment">Grasping the overall functioning feels nice</li>
 		</ul>
 		<aside class="notes">
-			🐱 The modern PC platform is very diverse, with a lot of screen sizes, hardware
+			🐱 It's also just *hard*, man! ⏭️<br />
+			<br />
+			The modern PC platform is very diverse, with a lot of screen sizes, hardware
 			combinations and configurations... ⏭️<br />
 			<br />
 			And each of those targets are moving, to make things worse! ⏭️<br />
@@ -175,7 +179,15 @@ feedback notes:
 			<li class="fragment">Grab an emulator</li>
 			<li class="fragment">Done!</li>
 		</ol>
-		<aside class="notes">🐱 TODO</aside>
+		<aside class="notes">
+			🐱 No heavy SDKs to install. ⏭️<br />
+			<br />
+			Download whatever toolchain fits your criteria, ⏭️<br />
+			<br />
+			and one of the emulators we'll show later, ⏭️<br />
+			<br />
+			and on your way you go!
+		</aside>
 	</section>
 	<section data-auto-animate>
 		<h3>You, the platform, and nothing in-between</h3>
@@ -215,9 +227,7 @@ feedback notes:
 				</ul>
 			</li>
 		</ul>
-		<aside class="notes">
-			🐱 TODO: see the above slide.
-		</aside>
+		<aside class="notes">🐱 TODO: see the above slide.</aside>
 	</section>
 </section>
 
@@ -226,9 +236,9 @@ feedback notes:
 	<p class="fragment">This niche has a little something for everybody!</p>
 	<aside class="notes">
 		🐶 Creating games is, of course, a central part of Game Boy development, but it's not the
-		<em>only</em> one. From tinkering with the hardware itself, to creating pixel art and music
-		not meant for a game, to writing tools <em>for</em> the Game Boy on other platforms, there's
-		a little something for everybody!
+		<em>only</em> one. ⏭️<br />
+		<br />
+		We hope to show something you will make you go “oh wow that looks interesting”!
 	</aside>
 </section>
 <section>
@@ -268,14 +278,13 @@ feedback notes:
 				Can make your own toolchain, like <a href="https://github.com/daid/gbsdk">GBSDK</a>
 			</li>
 		</ul>
-		<aside class="notes">
-			🐱 TODO
-		</aside>
+		<aside class="notes">🐱 TODO</aside>
 	</section>
 	<section>
 		<h3>Programming: assembly</h3>
 		<ul>
 			<li class="fragment">Surprisingly accessible!</li>
+			<li class="fragment"><a href="https://gbdev.io/gb-asm-tutorial">GB ASM Tutorial</a></li>
 			<li class="fragment">
 				<img
 					style="float: right; margin: 0; max-height: 2em"
@@ -290,6 +299,17 @@ feedback notes:
 				<a href="https://github.com/vhelin/wla-dx">WLA-GB</a>, ...
 			</li>
 		</ul>
+		<aside class="notes">
+			I know, right? ⏭️<br />
+			<br />
+			On modern platforms, assembly is this vague, complex, scary thing; but on 8-bit
+			consoles, it's not too difficult to get your feet wet! ⏭️<br />
+			<br />
+			Here is a link to a tutorial that has gotten praised for its accessibility and
+			thoroughness ⏭️<br />
+			<br />
+			As for the choice of tools (...)
+		</aside>
 	</section>
 	<section>
 		<h3>Exotic languages</h3>
@@ -307,6 +327,13 @@ feedback notes:
 		<p class="fragment">
 			<a href="https://github.com/JL2210/llvm-project">LLVM port</a> (C++, Rust)
 		</p>
+		<aside class="notes">
+			There are also ongoing efforts to bring more languages to the console; in particular,
+			⏭️<br />
+			<br />
+			we'd like to shout out an in-progress port of LLVM to be able to write GB games, for
+			example, in C++ and Rust!
+		</aside>
 	</section>
 	<section>
 		<h3>Homebrew showcase</h3>
@@ -477,7 +504,7 @@ feedback notes:
 						</small>
 					</figcaption>
 				</figure>
-				DMG art (4 shades of gray, dithering for nuance)
+				Monochrome GB art (4 shades of gray, dithering for nuance)
 			</li>
 			<li class="fragment">GBC art (unusual colour restrictions)</li>
 		</ul>
@@ -488,10 +515,9 @@ feedback notes:
 			Dedicated editors for pixel art have useful features, like working with limited color
 			palettes or animating a frame at a time. ⏭️<br />
 			<br />
-			The original Game Boy (code name "Dot Matrix Game", or DMG) could show exactly four
-			shades or gray (or a low-contrast green on real hardware). But even then, you can use
-			dithering -- varying colors over space, or even over <em>time</em> -- to look like you
-			have more. ⏭️<br />
+			The original Game Boy could show exactly four shades its famous “pea soup green”. But
+			even then, you can use dithering -- mixing colors over space, or even ⏭️ over
+			<em>time</em> -- to look like you have more. ⏭️<br />
 			<br />
 			The Game Boy Color supported 32 <em>thousand</em> whole colors -- but still with its own
 			limits around how they're divided into palettes and tiles. But once again, you can use
