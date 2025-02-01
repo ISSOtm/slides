@@ -180,8 +180,12 @@ multiplex: true
 </section>
 <section>
 	<section>
-		<h3>Fast setup</h3>
-		<p>TODO</p>
+		<h3>Simple setup</h3>
+		<ol>
+			<li class="fragment">Pick a toolchain</li>
+			<li class="fragment">Grab an emulator</li>
+			<li class="fragment">Done!</li>
+		</ol>
 	</section>
 	<section data-auto-animate>
 		<h3>You, the platform, and nothing in-between</h3>
@@ -221,13 +225,33 @@ multiplex: true
 	<section>
 		<h3>Programming games</h3>
 		<ul>
-			<li class="fragment">Assembly</li>
-			<li class="fragment">C</li>
 			<li class="fragment">
-				Niche languages (<a href="https://github.com/bananattack/wiz">Wiz</a>, Millfork,
-				TRSE...)
+				<img
+					style="float: right; margin: 0; max-height: 2em"
+					src="assets/fosdem25/rgbds.png"
+					alt="RGBDS logo"
+				/>Assembly
 			</li>
-			<li class="fragment arrow">Not C++ nor Rust <span class="fragment">(yet)</span></li>
+			<li class="fragment" style="clear: right">
+				<img
+					style="float: right; margin: 0; max-height: 2em; padding-right: 2em"
+					src="assets/fosdem25/gbdk-2020.png"
+					alt="GBDK-2020 logo"
+				/>C
+			</li>
+			<li class="fragment">
+				Niche languages (<a href="https://github.com/wiz-lang/wiz#readme">Wiz</a>,
+				<a href="https://karols.github.io/millfork/">Millfork</a>,
+				<a href="https://lemonspawn.com/turbo-rascal-syntax-error-expected-but-begin"
+					>TRSE</a
+				>...)
+			</li>
+			<li class="fragment arrow">
+				Not C++ nor Rust
+				<span class="fragment"
+					>(<a href="https://github.com/JL2210/llvm-project">yet</a>)</span
+				>
+			</li>
 			<li class="fragment cross">Python, JS...</li>
 		</ul>
 		<aside class="notes">
@@ -243,8 +267,9 @@ multiplex: true
 			assembly's no-frills and C's awkwardness. I'd be surprised if you've ever heard of any
 			of them before, but they're nonetheless worth giving a try! ⏭️<br />
 			<br />
-			You might expect C++ and Rust to be available, like C; unfortunately, that is ⏭️
-			currently not the case. There are ongoing efforts to change that, though. ⏭️<br />
+			You might expect C++ and Rust to be available, being systems languages; unfortunately,
+			that is ⏭️ currently not the case. There are ongoing efforts to change that, though.
+			⏭️<br />
 			<br />
 			Some languages, typically the dynamically-typed, memory-GC'd languages, have essentially
 			no hope of ever running on the console. There's been toy implementations (for example
