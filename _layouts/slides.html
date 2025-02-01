@@ -27,16 +27,20 @@
 		{%- for plugin in page.plugins -%}
 		<script src="plugin/{{ plugin }}/{{ plugin }}.js"></script>
 		{%- endfor -%}
-		<script>
+		<script type="module">
+			import RevealGamepadController from "./plugin/gamepad-controller/gamepad-controller.js";
+
 			const pageUrl = new URL(window.location.href);
-			const pageParams = pageUrl.searchParams;
-			const showNotes = pageParams.has("shownotes");
+			const urlParams = pageUrl.searchParams;
+			const showNotes = urlParams.has("shownotes");
+			const receiver = urlParams.get('receiver');
+			const gamepadOnlyOnNotes = receiver === null ? [] : [RevealGamepadController(Reveal)];
 			Reveal.initialize({
 			    controls: true,
 			    progress: true,
 			    center: true,
 			    hash: true,
-			    plugins: [ {% for plugin in page.plugins %}Reveal{{ plugin | capitalize }},{% endfor %} ],
+			    plugins: [ {% for plugin in page.plugins %}Reveal{{ plugin | capitalize }},{% endfor %} ...gamepadOnlyOnNotes ],
 				{%- if page.multiplex %}
 				dependencies: [
 					{ src: 'https://shack.eldred.fr/socket.io/socket.io.min.js', async: true },
