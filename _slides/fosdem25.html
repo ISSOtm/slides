@@ -198,6 +198,11 @@ multiplex: true
 			<li class="fragment">Good concept-learning material...</li>
 			<li class="fragment">...but still fun and engaging on its own</li>
 		</ul>
+		<aside class="notes">
+			Sure, you <em>can</em> make modern development that simple too. Write some assembly or
+			C, compile it for your computer (probably x86 or ARM), and run; no libraries, no
+			abstractions, no layers. But it's very difficult to be prroductive or have fun that way.
+		</aside>
 	</section>
 	<section data-auto-animate>
 		<h3>You, the platform, and nothing in-between</h3>
@@ -218,6 +223,12 @@ multiplex: true
 <section>
 	<h2>The various kinds of Game Boy development</h2>
 	<p class="fragment">This niche has a little something for everybody!</p>
+	<aside class="notes">
+		Creating games is, of course, a central part of Game Boy development, but it's not the
+		<em>only</em> one. From tinkering with the hardware itself, to creating pixel art and music
+		not meant for a game, to writing tools <em>for</em> the Game Boy on other platforms, there's
+		a little something for everybody!
+	</aside>
 </section>
 <section>
 	<section>
@@ -327,6 +338,13 @@ multiplex: true
 				40-sprite limit? Eight 4-color palettes? Limits to be hacked around 😏
 			</li>
 		</ul>
+		<aside class="notes">
+			Your idea of "what can run on the Game Boy" might be simple games with obviously
+			repeating tiled graphics and beep-boop audio. But the hardware can do a <em>lot</em>
+			more than that. And if you're not dealing with a game UI, player controls, any of that,
+			you can dedicate all your efforts (and all the Game Boy's CPU) to making something
+			that looks or sounds years ahead of its time.
+		</aside>
 	</section>
 	<section>
 		<h3>Music composition</h3>
@@ -363,7 +381,20 @@ multiplex: true
 			<li class="fragment">GBC art (unusual colour restrictions)</li>
 		</ul>
 		<aside class="notes">
-			TODO... Dithering can be spatial but also temporal! Like the Quartet cracktro.
+			You can use practically any graphics editor to draw things one pixel at a time. But the
+			Game Boy has more restrictions than that. ⏭️<br />
+			<br />
+			Dedicated editors for pixel art have useful features, like working with limited color
+			palettes or animating a frame at a time. ⏭️<br />
+			<br />
+			The original Game Boy (code name "Dot Matrix Game", or DMG) could show exactly four
+			shades or gray (or a low-contrast green on real hardware). But even then, you can use
+			dithering -- varying colors over space, or even over <em>time</em> -- to look like you
+			have more. ⏭️<br />
+			<br />
+			The Game Boy Color supported 32 <em>thousand</em> whole colors -- but still with its own
+			limits around how they're divided into palettes and tiles. But once again, you can use
+			artistic and programming trickery to create "high-color" cutscenes or demos.
 		</aside>
 	</section>
 	<section>
