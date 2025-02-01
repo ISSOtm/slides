@@ -7,7 +7,7 @@ redirect_from:
 slideNumber: true
 plugins:
     - notes
-multiplex: true
+multiplex: false
 ---
 
 <!--
@@ -24,6 +24,7 @@ feedback notes:
 - "wearing many hats" DOES describe indie gb devs
 - put more flashy wow stuff interleaved
 - drop shadow on text when in front of images
+- edit Quartet showcase to end on half-grey image
 -->
 
 <section>
@@ -61,7 +62,6 @@ feedback notes:
 			<li class="fragment">First Game Boy: age 15</li>
 			<li class="fragment">Product of the famous “PHP/JS → assembly” pipeline</li>
 			<li class="fragment">Loves Rust 🦀, assembly, and nothing in-between</li>
-			<li class="fragment">Recently signed up on OSM</li>
 		</ul>
 		<aside class="notes">
 			We thought you might appreciate knowing a little more about the speakers than our
@@ -75,9 +75,7 @@ feedback notes:
 			aaaaand I got hooked ⏭️<br />
 			<br />
 			I love strongly-typed languages with a lot of static checks, and being down to the metal
-			juggling raw bytes, and have a <em>strong</em> distaste for C and C++. ⏭️<br />
-			<br />
-			As of late, my hobby has been mapping out the countryside I live in. ⏭️
+			juggling raw bytes, and have a <em>strong</em> distaste for C and C++. ⏭️
 		</aside>
 	</section>
 	<section>
@@ -249,80 +247,128 @@ feedback notes:
 	</aside>
 </section>
 <section>
+	<h2>Making games</h2>
 	<section>
-		<h3>Programming games</h3>
+		<h3>No-code</h3>
+		<p class="fragment">
+			<img src="assets/fosdem25/gbstudio.png" alt="GB Studio logo" class="float" />
+			<a href="http://gbstudio.dev">GB Studio</a>
+		</p>
 		<ul>
+			<li class="fragment">Good introduction</li>
+			<li class="fragment">Feel free to look beyond, too!</li>
+		</ul>
+		<aside class="notes">
+			As you can probably tell from the number of stickers on my laptop, no-code tools aren't
+			really my jam, so I'm talking about this from an outsider perspective; ⏭️<br />
+			<br />
+			but GB Studio should nonetheless be mentioned, ⏭️ since it has enabled many a
+			non-programmer to get into the niche, ⏭️ and also non-low level programmers to grow some
+			interest into that field. ⏭️
+		</aside>
+	</section>
+	<section>
+		<h3>Programming: C</h3>
+		<ul>
+			<li class="fragment">ZGB: game engine, essentially</li>
+			<li class="fragment">
+				<img
+					style="float: right; margin: 0; max-height: 2em; padding-right: 2em"
+					src="assets/fosdem25/gbdk-2020.png"
+					alt="GBDK-2020 logo"
+				/>
+				<a href="https://gbdk-2020.github.io">GBDK-2020</a>: many batteries included
+			</li>
+			<li class="fragment">
+				Can make your own toolchain, like <a href="https://github.com/daid/gbsdk">GBSDK</a>
+			</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Programming: assembly</h3>
+		<ul>
+			<li class="fragment">Surprisingly accessible!</li>
 			<li class="fragment">
 				<img
 					style="float: right; margin: 0; max-height: 2em"
 					src="assets/fosdem25/rgbds.png"
 					alt="RGBDS logo"
-				/>Assembly
-			</li>
-			<li class="fragment" style="clear: right">
-				<img
-					style="float: right; margin: 0; max-height: 2em; padding-right: 2em"
-					src="assets/fosdem25/gbdk-2020.png"
-					alt="GBDK-2020 logo"
-				/>C
+				/>
+				<a href="https://rgbds.gbdev.io">RGBDS</a>: the assembler with all the features
+				you'd want
 			</li>
 			<li class="fragment">
-				Niche languages (<a href="https://github.com/wiz-lang/wiz#readme">Wiz</a>,
-				<a href="https://karols.github.io/millfork/">Millfork</a>,
-				<a href="https://lemonspawn.com/turbo-rascal-syntax-error-expected-but-begin"
-					>TRSE</a
-				>...)
+				Alternatives: <a href="https://github.com/asmotor/asmotor">ASMotor</a>,
+				<a href="https://github.com/vhelin/wla-dx">WLA-GB</a>, ...
 			</li>
-			<li class="fragment arrow">
-				Not C++ nor Rust
-				<span class="fragment"
-					>(<a href="https://github.com/JL2210/llvm-project">yet</a>)</span
-				>
-			</li>
-			<li class="fragment cross">Python, JS...</li>
+		</ul>
+	</section>
+	<section>
+		<h3>Exotic languages</h3>
+		<ul>
+			<li><a href="https://github.com/wiz-lang/wiz">Wiz</a></li>
+			<li><a href="https://karols.github.io/millfork">Millfork</a></li>
 		</ul>
 		<aside class="notes">
-			If you want to program games, there is a variety of languages available: ⏭️<br />
-			<br />
-			The first, the most historical and original one, is assembly; which, in a nutshell, is
-			you directly talking to the CPU. ⏭️<br />
-			<br />
-			Then there's the usual suspect, C; though it's poorly suited for the Game Boy, at least
-			currently ⏭️<br />
-			<br />
-			Thus, some languages have been created to fill the gap, and be a middle-ground between
-			assembly's no-frills and C's awkwardness. I'd be surprised if you've ever heard of any
-			of them before, but they're nonetheless worth giving a try! ⏭️<br />
-			<br />
-			You might expect C++ and Rust to be available, being systems languages; unfortunately,
-			that is ⏭️ currently not the case. There are ongoing efforts to change that, though.
-			⏭️<br />
-			<br />
-			Some languages, typically the dynamically-typed, memory-GC'd languages, have essentially
-			no hope of ever running on the console. There's been toy implementations (for example
-			Micropython), but realistically, they offer nowhere near the Python anyone is used to.
-			⏭️
+			Some languages attempt to bridge the gap between assembly and C, and to be a
+			“higher-level assembly”; they're worth giving a try too!
 		</aside>
 	</section>
 	<section>
-		<h3>No-code games</h3>
-		<ul>
-			<li class="fragment">
-				<img src="assets/fosdem25/gbstudio.png" alt="GB Studio logo" class="float" />
-				<a href="http://gbstudio.dev">GB Studio</a>
-			</li>
-		</ul>
+		<h3>Coming soon...</h3>
+		<p class="fragment">
+			<a href="https://github.com/JL2210/llvm-project">LLVM port</a> (C++, Rust)
+		</p>
+	</section>
+	<section>
+		<h3>Homebrew showcase</h3>
+		<a href="https://snorpung.itch.io/dangan-gb2">Dangan</a> (GBC),
+		<a href="https://makrill.itch.io/quartet">Quartet</a> (SGB), Rhythm Land (DMG)... More on
+		<a href="https://hh2.gbdev.io">Homebrew Hub</a>!
+	</section>
+</section>
+<section>
+	<h2>Physical releases</h2>
+	<section>
+		<p>
+			Cartridge collection in 2025?
+			<a class="fragment" href="https://dmgpage.com/homebrew-releases/">You bet!</a><br />
+			<img
+				class="fragment"
+				src="assets/fosdem25/hermano.avif"
+				alt="Picture of Hermano's collector's edition"
+				style="margin: 0"
+			/>
+		</p>
 		<aside class="notes">
-			As you can probably tell from the number of stickers on my laptop, no-code tools aren't
-			really my jam; ⏭️<br />
+			Really quick, I'd like to mention that ⏭️ even today, people still make cartridges with
+			their homebrew on it! ⏭️<br />
 			<br />
-			but GB Studio deserves to be mentioned, since it has enabled many a non-programmer to
-			get into the field, and also non-low level programmers to grow some interest. ⏭️
+			Here is an example, from a game that was successfully crowdfunded last year. Yes, there
+			*is* a cartridge inside that box! ⏭️
 		</aside>
 	</section>
+	<section>
+		<p>
+			2022 > 1996!<br />
+			<img
+				src="assets/fosdem25/releases.png"
+				alt="Graph of the yearly physical releases"
+				style="margin: 0"
+			/>
+		</p>
+		<aside class="notes">
+			According to an incomplete survey, there have been more unlicensed physical releases in
+			2022 than there were licensed ones in 1996, in the middle of the console's heyday, while
+			the quality remains about on par ⏭️
+		</aside>
+	</section>
+</section>
+<section>
+	<h2>Tinkering</h2>
 	<section data-auto-animate>
-		<h3>Tinkering</h3>
-		<p class="fragment"><q>Hey what if I put a STM µcontroller in a cartridge?</q></p>
+		<p class="fragment"><q>Hey what if I put a STM microcontroller in a cartridge?</q></p>
+		<p class="fragment"><q>That link cable is practically SPI!</q></p>
 		<p class="fragment">
 			There are <a href="https://en.wikipedia.org/wiki/Game_Boy_accessories">precedents</a>,
 			too!
@@ -333,12 +379,14 @@ feedback notes:
 			did you know that a cartridge is basically just a PCB that gets 5V VCC, GND, and a few
 			address lines? ⏭️<br />
 			<br />
+			And there's also a communication port *right there*! ⏭️<br />
+			<br />
 			And it's not like you'd be the first, either: ⏭️
 		</aside>
 	</section>
 	<section data-auto-animate data-background-image="assets/fosdem25/sewing-machine.jpg">
-		<h3>Tinkering</h3>
-		<p><q>Hey what if I put a STM µcontroller in a cartridge?</q></p>
+		<p><q>Hey what if I put a STM microcontroller in a cartridge?</q></p>
+		<p><q>That link cable is practically SPI!</q></p>
 		<p>
 			There are <a href="https://en.wikipedia.org/wiki/Game_Boy_accessories">precedents</a>,
 			too!
@@ -348,8 +396,10 @@ feedback notes:
 			anaesthesic mask... they're real, click the link!
 		</aside>
 	</section>
+</section>
+<section>
+	<h2>Demoscene</h2>
 	<section>
-		<h3>Demoscene</h3>
 		<ul>
 			<li class="fragment">Push the hardware to its limits and show it off as art!</li>
 			<li class="fragment">
@@ -365,15 +415,77 @@ feedback notes:
 		</aside>
 	</section>
 	<section>
-		<h3>Music composition</h3>
+		<h3>Showcase: <em>GBC-NICCC</em></h3>
+		<iframe
+			width="560"
+			height="315"
+			data-src="https://www.youtube.com/embed/xu7kXQ9gmf0?start=71&amp;end=89"
+			data-preload
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			referrerpolicy="strict-origin-when-cross-origin"
+			allowfullscreen
+			data-autoplay
+		></iframe>
+		<aside class="notes">Stop before 1:39</aside>
+	</section>
+</section>
+<section>
+	<h2>Music composition</h2>
+	<section>
+		<h3>Trackers</h3>
 		<ul>
-			<li class="fragment">PC trackers</li>
-			<li class="fragment">On-console trackers</li>
-			<li class="fragment">Programming drivers/“replayers”</li>
+			<li class="fragment">PC</li>
+			<li class="fragment">On-console</li>
 		</ul>
+		<aside class="notes">
+			Music on the Game Boy can't really use the formats typical on modern machines, so it's
+			instead composed on applications called “trackers”. ⏭️<br />
+			<br />
+			Typically they run on PC,⏭️<br />
+			<br />
+			but there are a few that are designed for the Game Boy itself!
+		</aside>
 	</section>
 	<section>
-		<h3>Pixel art</h3>
+		<h3>Drivers / replayers</h3>
+		...
+	</section>
+	<section>
+		<h3>Showcase: <em>8-bit Sunset</em></h3>
+		<iframe
+			width="560"
+			height="315"
+			data-src="https://www.youtube.com/embed/De6HQPJ9Tvk?start=38&amp;end=51"
+			data-preload
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			referrerpolicy="strict-origin-when-cross-origin"
+			allowfullscreen
+			data-autoplay
+		></iframe>
+	</section>
+	<section>
+		<h3>Showcase: <em>Tune In!</em></h3>
+		<iframe
+			width="560"
+			height="315"
+			data-src="https://www.youtube.com/embed/OVfcObBX-eY?end=10"
+			data-preload
+			title="YouTube video player"
+			frameborder="0"
+			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+			referrerpolicy="strict-origin-when-cross-origin"
+			allowfullscreen
+			data-autoplay
+		></iframe>
+	</section>
+</section>
+<section>
+	<h2>Pixel art</h2>
+	<section>
 		<ul>
 			<li class="fragment">
 				Dedicated pixel art tools (<a href="https://www.aseprite.org/">Aseprite</a>,
@@ -416,12 +528,13 @@ feedback notes:
 			artistic and programming trickery to create "high-color" cutscenes or demos.
 		</aside>
 	</section>
+</section>
+<section>
 	<section>
 		<h3>Making tools</h3>
 		<ul>
 			<li class="fragment">Assemblers, compilers</li>
 			<li class="fragment">Graphics editors, mapping tools</li>
-			<li class="fragment">Audio sequencers</li>
 			<li class="fragment">Game-specific tools (scripting engines, etc)</li>
 			<li class="fragment">Contributing to existing open-source tools</li>
 		</ul>
@@ -439,8 +552,10 @@ feedback notes:
 			software, so anyone can contribute (and even get paid a little as thanks) ⏭️
 		</aside>
 	</section>
+</section>
+<section>
+	<h2>Emulators</h2>
 	<section>
-		<h3>Emulators</h3>
 		<ul>
 			<li class="fragment">80% of games are easy to accurately emulate</li>
 			<li class="fragment">
@@ -485,8 +600,50 @@ feedback notes:
 			readily give you a hand. ⏭️
 		</aside>
 	</section>
+	<section data-auto-animate>
+		<h3>Showcase: <a href="https://sameboy.github.io">SameBoy</a></h3>
+		<ul style="visibility: hidden">
+			<li>Best-in-class accuracy</li>
+			<li>All the features you'll want</li>
+			<li>Free software!</li>
+		</ul>
+	</section>
+	<section
+		data-auto-animate
+		data-background-image="assets/fosdem25/sameboy.png"
+		data-background-opacity="0.5"
+	>
+		<h3>Showcase: <a href="https://sameboy.github.io">SameBoy</a></h3>
+		<ul>
+			<li class="fragment">Best-in-class accuracy</li>
+			<li class="fragment">All the features you'll want</li>
+			<li class="fragment">Free software!</li>
+		</ul>
+	</section>
+	<section data-auto-animate data-auto-animate-restart>
+		<h3>Showcase: <a href="https://emulicious.net">Emulicious</a></h3>
+		<ul style="visibility: hidden">
+			<li>Best-in-class accuracy</li>
+			<li>All the features you'll want</li>
+			<li>Free software!</li>
+		</ul>
+	</section>
+	<section
+		data-auto-animate
+		data-background-image="assets/fosdem25/emulicious.png"
+		data-background-opacity="0.5"
+	>
+		<h3>Showcase: <a href="https://emulicious.net">Emulicious</a></h3>
+		<ul>
+			<li class="fragment">Also best-in-class accuracy</li>
+			<li class="fragment">Best debug features on the market</li>
+			<li class="fragment">Cross-platform</li>
+		</ul>
+	</section>
+</section>
+<section>
+	<h2>Research</h2>
 	<section>
-		<h3>Research</h3>
 		<ul>
 			<li class="fragment">
 				<img
@@ -522,142 +679,6 @@ feedback notes:
 			<br />
 			And all of this is also something that other people will gladly help you with! ⏭️
 		</aside>
-	</section>
-</section>
-
-<section>
-	<h2>Showcase</h2>
-	<p class="fragment">Allow us to ~show off~ a little :3</p>
-</section>
-<section>
-	<section>
-		<h3>Homebrew</h3>
-		<a href="https://snorpung.itch.io/dangan-gb2">Dangan</a> (GBC),
-		<a href="https://makrill.itch.io/quartet">Quartet</a> (SGB),
-		<a href="https://kabcorp.itch.io/8bit-sunset">8bit Sunset</a> (DMG)...
-	</section>
-	<section data-auto-animate>
-		<h3>Physical releases</h3>
-		<p>
-			Collector's anxiety in 2025?
-			<a class="fragment" href="https://dmgpage.com/homebrew-releases/">You bet!</a>
-		</p>
-		<img
-			class="fragment"
-			src="assets/fosdem25/hermano.avif"
-			alt="Picture of Hermano's collector's edition"
-		/>
-		<aside class="notes">
-			Really quick, I'd like to mention that ⏭️ even today, people still make cartridges with
-			their homebrew on it! ⏭️<br />
-			<br />
-			Here is an example, from a game that was successfully crowdfunded last year. Yes, there
-			*is* a cartridge inside that box! ⏭️
-		</aside>
-	</section>
-	<section data-auto-animate>
-		<h3>Physical releases</h3>
-		<p>2022 > 1996!</p>
-		<img src="assets/fosdem25/releases.png" alt="Graph of the yearly physical releases" />
-		<aside class="notes">
-			According to an incomplete survey, there have been more unlicensed physical releases in
-			2022 than in 1996 ⏭️
-		</aside>
-	</section>
-	<section>
-		<h3>Demoscene</h3>
-		<iframe
-			width="560"
-			height="315"
-			data-src="https://www.youtube.com/embed/xu7kXQ9gmf0?start=71&amp;end=89"
-			data-preload
-			title="YouTube video player"
-			frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-			referrerpolicy="strict-origin-when-cross-origin"
-			allowfullscreen
-			data-autoplay
-		></iframe>
-		<aside class="notes">Stop before 1:39</aside>
-	</section>
-	<section data-auto-animate>
-		<h3>Music</h3>
-		<iframe
-			width="560"
-			height="315"
-			data-src="https://www.youtube.com/embed/De6HQPJ9Tvk?start=38&amp;end=51"
-			data-preload
-			title="YouTube video player"
-			frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-			referrerpolicy="strict-origin-when-cross-origin"
-			allowfullscreen
-			data-autoplay
-		></iframe>
-	</section>
-	<section data-auto-animate>
-		<h3>Music</h3>
-		<iframe
-			width="560"
-			height="315"
-			data-src="https://www.youtube.com/embed/OVfcObBX-eY?end=10"
-			data-preload
-			title="YouTube video player"
-			frameborder="0"
-			allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-			referrerpolicy="strict-origin-when-cross-origin"
-			allowfullscreen
-			data-autoplay
-		></iframe>
-	</section>
-	<section data-auto-animate>
-		<h3>Emulators</h3>
-		<p><a href="https://sameboy.github.io">SameBoy</a></p>
-		<ul style="visibility: hidden">
-			<li>Best-in-class accuracy</li>
-			<li>All the features you'll want</li>
-			<li>Free software!</li>
-		</ul>
-	</section>
-	<section
-		data-auto-animate
-		data-background-image="assets/fosdem25/sameboy.png"
-		data-background-opacity="0.5"
-	>
-		<h3>Emulators</h3>
-		<p><a href="https://sameboy.github.io">SameBoy</a></p>
-		<ul>
-			<li class="fragment">Best-in-class accuracy</li>
-			<li class="fragment">All the features you'll want</li>
-			<li class="fragment">Free software!</li>
-		</ul>
-	</section>
-	<section data-auto-animate>
-		<h3>Emulators</h3>
-		<p><a href="https://emulicious.net">Emulicious</a></p>
-		<ul style="visibility: hidden">
-			<li>Best-in-class accuracy</li>
-			<li>All the features you'll want</li>
-			<li>Free software!</li>
-		</ul>
-	</section>
-	<section
-		data-auto-animate
-		data-background-image="assets/fosdem25/emulicious.png"
-		data-background-opacity="0.5"
-	>
-		<h3>Emulators</h3>
-		<p><a href="https://emulicious.net">Emulicious</a></p>
-		<ul>
-			<li class="fragment">Also best-in-class accuracy</li>
-			<li class="fragment">Best debug features on the market</li>
-			<li class="fragment">Cross-platform</li>
-		</ul>
-	</section>
-	<section>
-		<h3>RGBDS</h3>
-		25 years old! (Make a nice little graphic?) BG image: screenshot of `man 7 rgbds`'s history?
-		Mention the Rust port?
 	</section>
 </section>
 
