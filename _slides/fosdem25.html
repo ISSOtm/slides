@@ -35,7 +35,9 @@ feedback notes:
 		<br />
 		<img src="assets/fosdem25/qr.png" alt="QR code" />
 	</p>
-	<p>They contain links that you might like :)</p>
+	<marquee behavior="alternate" scrolldelay="70">
+		They contain links that you might like :)
+	</marquee>
 </section>
 
 <section>
@@ -234,6 +236,7 @@ feedback notes:
 				</ul>
 			</li>
 		</ul>
+		<aside class="notes">Slightly fewer hats, much smaller</aside>
 	</section>
 </section>
 
@@ -381,7 +384,8 @@ feedback notes:
 			<li class="fragment">
 				<figure class="fragment float">
 					<video
-						src="assets/quartet-cracktro-dmg.webm"
+						data-src="assets/quartet-cracktro-dmg.webm"
+						data-autoplay
 						muted
 						controls
 						class="float"
@@ -693,5 +697,13 @@ feedback notes:
 
 	figcaption {
 		text-align: center;
+	}
+
+	section {
+		--r-heading-text-shadow: var(--r-background-color) 0 0 5px,
+			var(--r-background-color) 0 0 5px, var(--r-background-color) 0 0 5px,
+			var(--r-background-color) 0 0 5px;
+
+		text-shadow: var(--r-heading-text-shadow);
 	}
 </style>
