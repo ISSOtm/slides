@@ -50,15 +50,15 @@ multiplex: false
 			<li class="fragment">Loves Rust 🦀, assembly, and nothing in-between</li>
 		</ul>
 		<aside class="notes">
-			🐱 We thought you might appreciate knowing a little more about the speakers than our
-			existence, and also this will serve to disclaim our own personal biases. ⏭️<br />
+			🐱 We thought you might appreciate knowing a little more about the speakers, and also
+			this will serve to disclaim our own personal biases. ⏭️<br />
 			<br />
 			My name is Eldred, ⏭️ but I usually go online by the nick “ISSOtm”. ⏭️<br />
 			<br />
 			I got my first Game Boy late, so I have no nostalgia for it. ⏭️<br />
 			<br />
 			I love strongly-typed languages with a lot of static checks, and being down to the metal
-			juggling raw bytes, and have a <em>strong</em> distaste for C and C++.
+			juggling raw bytes, and have grown a <em>strong</em> distaste for C and C++.
 		</aside>
 	</section>
 	<section>
@@ -89,7 +89,7 @@ multiplex: false
 	<h2>What can make programming unfun?</h2>
 	<aside class="notes">
 		🐶 Let's get to what you came here for! Since we put “<em>re</em>discovering” in the talk's
-		title, let's explore why we might have lost that fun.
+		title, let's discuss what can be more fun about retro development. Where did the fun go?
 	</aside>
 </section>
 <section>
@@ -182,12 +182,12 @@ multiplex: false
 			over the decades. ⏭️<br />
 			<br />
 			Even pixel art and four-channel music can benefit from the latest programs for creating
-			them (no more plotting pixels on graph paper!)... ⏭️<br />
+			them (no more plotting pixels on graph paper!). ⏭️<br />
 			<br />
-			...compile all your source code and graphics into a playable ROM in mere seconds...
+			You can compile all your source code and graphics into a playable ROM in mere seconds.
 			⏭️<br />
 			<br />
-			...and use modern debugging conveniences, like runtime breakpoints and time-travel
+			And you can use modern debugging conveniences, like runtime breakpoints and time-travel
 			debugging, all within your emulator.
 		</aside>
 	</section>
@@ -298,8 +298,9 @@ multiplex: false
 			</li>
 		</ul>
 		<aside class="notes">
-			🐶 Maybe "assembly language" makes you think of long, complex, inscrutable code with too
-			many consonants, that a compiler can do better than you. ⏭️<br />
+			🐶 At the lowest level, maybe "assembly language" makes you think of long, complex,
+			inscrutable code with too many consonants, that a compiler can do better than you.
+			⏭️<br />
 			<br />
 			But on an 8-bit platform like the Game Boy, developers were <em>expected</em> to write
 			assembly themselves, and it's not <em>too</em> difficult to get started! ⏭️<br />
@@ -329,7 +330,7 @@ multiplex: false
 			<a href="https://github.com/JL2210/llvm-project">LLVM port</a> (C++, Rust)
 		</p>
 		<aside class="notes">
-			🐱 There are also ongoing efforts to bring more languages to the console; in particular,
+			🐶 There are also ongoing efforts to bring more languages to the console; in particular,
 			⏭️<br />
 			<br />
 			we'd like to shout out an in-progress port of LLVM to be able to write GB games, for
@@ -414,7 +415,7 @@ multiplex: false
 	</section>
 	<section>
 		<p>
-			2022 > 1996!<br />
+			2022 &gt; 1996!<br />
 			<img
 				src="assets/fosdem25/releases.png"
 				alt="Graph of the yearly physical releases"
@@ -422,7 +423,7 @@ multiplex: false
 			/>
 		</p>
 		<aside class="notes">
-			🐱 According to an incomplete survey, there have been more unlicensed physical releases
+			🐶 According to an incomplete survey, there have been more unlicensed physical releases
 			in 2022 than there were licensed ones in 1996, in the middle of the console's heyday,
 			while the quality remains about on par
 		</aside>
@@ -456,8 +457,9 @@ multiplex: false
 			too!
 		</p>
 		<aside class="notes">
-			🐱 Like, yes, this is official, and was sold back in the day. There's also a sonar, an
-			anaesthesic mask... they're real, click the link!
+			🐱 Like, yes, this is an official sewing machine peripheral for the Game Boy, and was
+			sold back in the day. There's also a sonar for fishing, an anaesthesic mask... they're
+			real, click the link!
 		</aside>
 	</section>
 </section>
@@ -486,7 +488,7 @@ multiplex: false
 			</li>
 		</ul>
 		<aside class="notes">
-			🐱 Music on the Game Boy can't really use the formats typical on modern machines, so
+			🐶 Music on the Game Boy can't really use the formats typical on modern machines, so
 			it's instead composed on applications called “trackers”. ⏭️<br />
 			<br />
 			Typically they run on PC,⏭️<br />
@@ -576,7 +578,7 @@ multiplex: false
 		<h3>Making tools</h3>
 		<ul>
 			<li class="fragment">Assemblers, compilers</li>
-			<li class="fragment">Graphics editors, mapping tools</li>
+			<li class="fragment">Graphics editors, mapping tools, audio sequencers</li>
 			<li class="fragment">Game-specific tools (scripting engines, etc)</li>
 			<li class="fragment">Contributing to existing open-source tools</li>
 		</ul>
@@ -584,14 +586,17 @@ multiplex: false
 			🐱 Feel like doing some work outside of the console? We got you covered! ⏭️<br />
 			<br />
 			Since we mentioned programming, it follows that one can work on the tools necessary to
-			make the languages work ⏭️<br />
+			make the languages work -- assemblers and compilers. ⏭️<br />
 			<br />
-			🐶 More on the GUI side, there are also game-making tools; really, your imagination is
-			the limit ⏭️<br />
+			🐶 More on the GUI side, there are tools for creating your game assets -- graphics
+			editors, tilemap editors, audio sequencers, etc. ⏭️<br />
 			<br />
-			Reinventing your own wheel is the most common choice, but there are several GBDev
-			projects that are looking for help right now. ⏭️ There is a strong culture of free
-			software, so anyone can contribute (and even get paid a little as thanks)
+			Individual games may also use their own custom tools like for scripting cutscenes,
+			or defining enemy AI; really, your imagination is the limit. ⏭️<br />
+			<br />
+			If you'd rather not make your own game and your own tools for it, there are several
+			GBDev projects that are looking for help right now. There is a strong culture of free
+			software, so anyone can contribute (and even get paid a little as thanks).
 		</aside>
 	</section>
 	<section data-auto-animate>
