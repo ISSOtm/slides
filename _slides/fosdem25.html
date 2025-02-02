@@ -1,0 +1,862 @@
+---
+layout: slides
+title: "FOSDEM 2025"
+permalink: /fosdem2025
+redirect_from:
+    - /reveal.js/slides/fosdem2025.html
+slideNumber: true
+plugins:
+    - notes
+multiplex: false
+---
+
+<section>
+	<p>
+		Follow the slides live! 👇️
+		<br />
+		<strong>They contain links that you'll want to click‼️</strong>
+		<br />
+		<img src="assets/fosdem25/qr.png" alt="QR code" />
+	</p>
+	<a href="https://eldred.fr/slides/fosdem2025">https://eldred.fr/slides/fosdem2025</a>
+	<!-- or https://tinyurl.com/fosdem-gb-2025 -->
+</section>
+
+<section>
+	<section>
+		<h1 class="fragment custom yeet">Rediscovering the fun of programming with the Game Boy</h1>
+		<aside class="notes">
+			🐶 Rediscovering the fun of programming with the Game Boy<br />
+			<br />
+			🐱 Oh, actually, I lied.⏭️
+		</aside>
+	</section>
+	<section data-transition="none">
+		<h2>
+			Leveraging the Game Boy to synergize programming and positive engagement in the next
+			quarter
+		</h2>
+		<aside class="notes">🐱 Hopefully everyone agrees that <em>this</em> is fun, right?</aside>
+	</section>
+</section>
+
+<section>
+	<h2>Who dis</h2>
+	<section>
+		<h3 class="fragment">Eldred <small>(he/they)</small></h3>
+		<ul>
+			<li class="fragment"><img src="assets/issotm.png" class="float" />ISSOtm</li>
+			<li class="fragment">First Game Boy: age 15</li>
+			<li class="fragment">Loves Rust 🦀, assembly, and nothing in-between</li>
+		</ul>
+		<aside class="notes">
+			🐱 We thought you might appreciate knowing a little more about the speakers, and also
+			this will serve to disclaim our own personal biases. ⏭️<br />
+			<br />
+			My name is Eldred, ⏭️ but I usually go online by the nick “ISSOtm”. ⏭️<br />
+			<br />
+			I got my first Game Boy late, so I have no nostalgia for it. ⏭️<br />
+			<br />
+			I love strongly-typed languages with a lot of static checks, and being down to the metal
+			juggling raw bytes, and have grown a <em>strong</em> distaste for C and C++.
+		</aside>
+	</section>
+	<section>
+		<h3>Sylvie <small>(she/her)</small></h3>
+		<ul>
+			<li class="fragment">
+				<img src="assets/sylvie.png" class="float" />Game Boy Color and Nintendo 64 fan
+			</li>
+			<li class="fragment">High-level jobs: Typescript, C++, Java, Python...</li>
+			<li class="fragment">Low-level hobbies: C and assembly</li>
+		</ul>
+		<aside class="notes">
+			🐶 My name is Sylvie! ⏭️
+			<br />
+			I grew up playing a Game Boy Color, a Nintendo 64, and basically didn't upgrade those
+			consoles, so I have a <em>lot</em> of nostalgia for them. ⏭️<br />
+			<br />
+			There's a lot I appreciate about high-level languages: functional programming idioms,
+			lots of reusable wheels already invented. ⏭️<br />
+			<br />
+			But at the same time, as a hobby, I still like writing procedural code to directly run
+			on a retro CPU.
+		</aside>
+	</section>
+</section>
+
+<section>
+	<h2>What can make programming unfun?</h2>
+	<aside class="notes">
+		🐶 Let's get to what you came here for! Since we put “<em>re</em>discovering” in the talk's
+		title, let's discuss what can be more fun about retro development. Where did the fun go?
+	</aside>
+</section>
+<section>
+	<section>
+		<h3>Barriers to entry</h3>
+		<ul>
+			<li class="fragment">
+				<img
+					src="https://imgs.xkcd.com/comics/compiling.png"
+					width="413"
+					height="360"
+					class="float"
+				/>
+				Waiting for long compilation
+			</li>
+			<li class="fragment">Getting a bunch of dependencies</li>
+			<li class="fragment">Needing more powerful hardware</li>
+		</ul>
+		<aside class="notes">
+			🐱 The first thing that drains fun is being taken out of “the zone” to deal with some
+			chore. ⏭️<br />
+			<br />
+			For example, waiting for long build times. ⏭️<br />
+			<br />
+			Stressing your network bandwidth (and waiting some more) while it fetches a whole bunch
+			of libraries. ⏭️<br />
+			<br />
+			And hardware requirements constantly increasing.
+		</aside>
+	</section>
+	<section>
+		<h3>Hard to finish complex projects</h3>
+		<img
+			src="assets/fosdem25/indie-dev.png"
+			alt="Humorous image depicting how many jobs a solo game dev has to do at the same time"
+			style="max-height: 10em"
+		/>
+		<aside class="notes">
+			🐶 Modern development techniques tend to demand a lot out of many specialized people, so
+			it can be barely possible to actually <em>finish</em> something, especially as a solo
+			creator.
+		</aside>
+	</section>
+	<section>
+		<h3>Hard to wrap your head around</h3>
+		<ul>
+			<li class="fragment">Many different targets</li>
+			<li class="fragment">And constantly evolving, too!</li>
+			<li class="fragment">Debugging suffers</li>
+			<li class="fragment">Grasping the overall functioning feels nice</li>
+		</ul>
+		<aside class="notes">
+			🐱 It's also just <em>hard</em>, man! ⏭️<br />
+			<br />
+			The modern PC platform is very diverse, with a lot of screen sizes, hardware
+			combinations and configurations... ⏭️<br />
+			<br />
+			And each of those targets are moving, to make things worse! ⏭️<br />
+			<br />
+			🐶 This especially hinders debugging, since that necessitates fairly broad understanding
+			of the systems you're debugging ⏭️<br />
+			<br />
+			And, finally, the sensation that things are getting beyond your control just
+			<em>doesn't feel great</em>.
+		</aside>
+	</section>
+</section>
+
+<section>
+	<h2>Why going back to older times fixes those</h2>
+	<p class="fragment">
+		<q>Developing for a 90's console doesn't mean you must go back to a 90's experience</q>
+	</p>
+	<aside class="notes">
+		🐱 So, now, let's show why retro game dev can be a solution to all of the above. ⏭️<br />
+		<br />
+		"Developing for a 90's console doesn't mean you must go back to a 90's experience."
+	</aside>
+</section>
+<section>
+	<section>
+		<h3>Modern tools for a retro platform</h3>
+		<ol>
+			<li class="fragment">Create: graphics editors, music sequencers</li>
+			<li class="fragment">Build: assemblers, compilers</li>
+			<li class="fragment">Run: emulators, debuggers</li>
+		</ol>
+		<aside class="notes">
+			🐶 The Game Boy's tools, SDKs, libraries, and available resources have improved a lot
+			over the decades. ⏭️<br />
+			<br />
+			Even pixel art and four-channel music can benefit from the latest programs for creating
+			them (no more plotting pixels on graph paper!). ⏭️<br />
+			<br />
+			You can compile all your source code and graphics into a playable ROM in mere seconds.
+			⏭️<br />
+			<br />
+			And you can use modern debugging conveniences, like runtime breakpoints and time-travel
+			debugging, all within your emulator.
+		</aside>
+	</section>
+	<section>
+		<h3>It's just less complex</h3>
+		<ul>
+			<li class="fragment">Good concept-learning material...</li>
+			<li class="fragment">...but still fun and engaging on its own</li>
+			<li class="fragment">Enables small team sizes</li>
+			<li class="fragment">Baseline expectations are much easier to meet</li>
+			<li class="fragment">
+				Constraining
+				<ul>
+					<li class="fragment"><q>Limitations breed creativity</q></li>
+					<li class="fragment">Sometimes feels like a puzzle-solving activity</li>
+				</ul>
+			</li>
+		</ul>
+		<aside class="notes">
+			🐱 The Game Boy's simplicity is refreshing in many ways ⏭️<br />
+			<br />
+			Not only is it a good support to learn some fundamental lower-level concepts, ⏭️<br />
+			<br />
+			it remains an interesting object in its own right! ⏭️<br />
+			<br />
+			Further, one dev (or a small team) can wear more hats at once, without any one of them
+			being too big to handle. ⏭️<br />
+			<br />
+			This is, in part, due to the system's lower specs making it easier to have something
+			that feels reasonably complete. ⏭️<br />
+			<br />
+			And, yes, the system is under-powered, but that's a *good thing* ⏭️<br />
+			<br />
+			as the saying goes: “limitations breed creativity”. ⏭️<br />
+			<br />
+			It can also make it really interesting to have to solve minor challenges to make your
+			ideas work on the system
+		</aside>
+	</section>
+</section>
+
+<section>
+	<h2>The various kinds of Game Boy development</h2>
+	<p class="fragment">This niche has a little something for everybody!</p>
+	<aside class="notes">
+		🐶 Creating games is, of course, a central part of Game Boy development, but it's not the
+		<em>only</em> one. ⏭️<br />
+		<br />
+		We hope to show something you will make you go “oh wow that looks interesting”!
+	</aside>
+</section>
+<section>
+	<h2>Making games</h2>
+	<section>
+		<h3>No-code</h3>
+		<p class="fragment">
+			<img src="assets/fosdem25/gbstudio.png" alt="GB Studio logo" class="float" />
+			<a href="http://gbstudio.dev">GB Studio</a>
+		</p>
+		<ul>
+			<li class="fragment">Good introduction</li>
+			<li class="fragment">Also lets you write your own code!</li>
+		</ul>
+		<aside class="notes">
+			🐱 As you can probably tell from the number of stickers on my laptop, no-code tools
+			aren't really my jam, so I'm talking about this from an outsider perspective; ⏭️<br />
+			<br />
+			but GB Studio should nonetheless be mentioned, ⏭️ since it has enabled many
+			non-programmers to get into the Game Boy niche, ⏭️ and also lets its users grow their
+			skills and write however much custom code they're comfortable with.
+		</aside>
+	</section>
+	<section>
+		<h3>Programming: C</h3>
+		<ul>
+			<li class="fragment">ZGB: game engine, essentially</li>
+			<li class="fragment">
+				<img
+					style="float: right; margin: 0; max-height: 2em; padding-right: 2em"
+					src="assets/fosdem25/gbdk-2020.png"
+					alt="GBDK-2020 logo"
+				/>
+				<a href="https://gbdk-2020.github.io">GBDK-2020</a>: many batteries included
+			</li>
+			<li class="fragment">
+				Can make your own toolchain, like <a href="https://github.com/daid/gbsdk">GBSDK</a>
+			</li>
+		</ul>
+		<aside class="notes">
+			🐶 Now, let's talk about the programming solutions. The usual suspect for working with
+			an embedded system (which the Game Boy definitely is), is C ⏭️<br />
+			<br />
+			🐱 Going down the gradient from GB Studio, there is ZGB, which is essentially a game
+			engine ⏭️<br />
+			<br />
+			Then you have GBDK, which is “just” a toolchain ⏭️<br />
+			<br />
+			and if that's your jam, you can also create your own; here is an example
+		</aside>
+	</section>
+	<section>
+		<h3>Programming: assembly</h3>
+		<ul>
+			<li class="fragment">Surprisingly accessible!</li>
+			<li class="fragment"><a href="https://gbdev.io/gb-asm-tutorial">GB ASM Tutorial</a></li>
+			<li class="fragment">
+				<img
+					style="float: right; margin: 0; max-height: 2em"
+					src="assets/fosdem25/rgbds.png"
+					alt="RGBDS logo"
+				/>
+				<a href="https://rgbds.gbdev.io">RGBDS</a>: the assembler with all the features
+				you'd want
+			</li>
+			<li class="fragment">
+				Alternatives: <a href="https://github.com/asmotor/asmotor">ASMotor</a>,
+				<a href="https://github.com/vhelin/wla-dx">WLA-GB</a>, ...
+			</li>
+		</ul>
+		<aside class="notes">
+			🐶 At the lowest level, maybe "assembly language" makes you think of long, complex,
+			inscrutable code with too many consonants, that a compiler can do better than you. ⏭️<br />
+			<br />
+			But on an 8-bit platform like the Game Boy, developers were <em>expected</em> to write
+			assembly themselves, and it's not <em>too</em> difficult to get started! ⏭️<br />
+			<br />
+			🐱 Here is a link to a tutorial that has gotten praised for its accessibility and
+			thoroughness ⏭️<br />
+			<br />
+			As for the choice of tools, the most popular is RGBDS ⏭️<br />
+			<br />
+			but you have a choice
+		</aside>
+	</section>
+	<section>
+		<h3>Exotic languages</h3>
+		<ul>
+			<li><a href="https://github.com/wiz-lang/wiz">Wiz</a></li>
+			<li><a href="https://karols.github.io/millfork">Millfork</a></li>
+		</ul>
+		<aside class="notes">
+			🐱 Some languages attempt to bridge the gap between assembly and C, and to be a
+			“higher-level assembly”; they're worth giving a try too!
+		</aside>
+	</section>
+	<section>
+		<h3>Coming soon...</h3>
+		<p class="fragment">
+			<a href="https://github.com/JL2210/llvm-project">LLVM port</a> (C++, Rust)
+		</p>
+		<aside class="notes">
+			🐶 There are also ongoing efforts to bring more languages to the console; in particular,
+			⏭️<br />
+			<br />
+			we'd like to shout out an in-progress port of LLVM to be able to write GB games, for
+			example, in C++ and Rust!
+		</aside>
+	</section>
+	<section>
+		<h3>
+			Showcase: <a href="https://martendo.itch.io/rhythm-land"><em>Rhythm Land</em> (DMG)</a>
+		</h3>
+		<video data-src="assets/fosdem25/rhythm-land.mp4" data-autoplay controls></video>
+		<aside class="notes">🐱 DMG rhythm game</aside>
+	</section>
+	<section>
+		<h3>
+			Showcase: <em><a href="https://makrill.itch.io/quartet">Quartet</a></em> (SGB)
+		</h3>
+		<video
+			data-src="assets/fosdem25/quartet.mp4"
+			data-autoplay
+			controls
+			width="512"
+			height="448"
+		></video>
+		<aside class="notes">🐱 Arcade game</aside>
+	</section>
+	<section>
+		<h3>
+			Showcase: <em><a href="https://snorpung.itch.io/dangan-gb2">Dangan GB2</a></em> (GBC)
+		</h3>
+		<video
+			width="514"
+			height="461"
+			data-src="assets/fosdem25/dangan.mp4"
+			data-autoplay
+			controls
+		></video>
+		<aside class="notes">
+			🐱 Don't let someone ever tell you a system is under-powered when you can make an
+			outright danmaku on it! ;)
+		</aside>
+	</section>
+	<section data-auto-animate>
+		<h3>Discovery</h3>
+		<p style="visibility: hidden">More on <a href="https://hh.gbdev.io">Homebrew Hub</a>!</p>
+		<aside class="notes">
+			🐶 And those were just a sample of all of the homebrew that's been released out there;
+		</aside>
+	</section>
+	<section
+		data-auto-animate
+		data-background-image="assets/fosdem25/hh.png"
+		data-background-opacity=".5"
+	>
+		<h3>Discovery</h3>
+		<p>More on <a href="https://hh.gbdev.io">Homebrew Hub</a>!</p>
+		<aside class="notes">
+			🐶 the Game Boy dev community has created a hub where you can find even more of them!
+		</aside>
+	</section>
+</section>
+<section>
+	<h2>Physical releases</h2>
+	<section>
+		<p>
+			Cartridge collection in 2025?
+			<a class="fragment" href="https://dmgpage.com/homebrew-releases/">You bet!</a><br />
+			<img
+				class="fragment"
+				src="assets/fosdem25/hermano.avif"
+				alt="Picture of Hermano's collector's edition"
+				style="margin: 0"
+			/>
+		</p>
+		<aside class="notes">
+			🐶 By the way, ⏭️ even today, people still make cartridges with their homebrew on it!
+			⏭️<br />
+			<br />
+			Here is an example, from a game that was successfully crowdfunded last year. Yes, there
+			<em>is</em> a cartridge inside that box!
+		</aside>
+	</section>
+	<section>
+		<p>
+			2022 &gt; 1996!<br />
+			<img
+				src="assets/fosdem25/releases.png"
+				alt="Graph of the yearly physical releases"
+				style="margin: 0"
+			/>
+		</p>
+		<aside class="notes">
+			🐶 According to an incomplete survey, there have been more unlicensed physical releases
+			in 2022 than there were licensed ones in 1996, in the middle of the console's heyday,
+			while the quality remains about on par
+		</aside>
+	</section>
+</section>
+<section>
+	<h2>Tinkering</h2>
+	<section data-auto-animate>
+		<p class="fragment"><q>Hey what if I put a STM microcontroller in a cartridge?</q></p>
+		<p class="fragment"><q>That link cable is practically SPI!</q></p>
+		<p class="fragment">
+			There are <a href="https://en.wikipedia.org/wiki/Game_Boy_accessories">precedents</a>,
+			too!
+		</p>
+		<aside class="notes">
+			🐱 If you're more of a hardware person, well, ⏭️<br />
+			<br />
+			did you know that a cartridge is basically just a PCB that gets 5V VCC, GND, and a few
+			address lines? ⏭️<br />
+			<br />
+			And there's also a communication port <em>right there</em>! ⏭️<br />
+			<br />
+			And it's not like you'd be the first, either:
+		</aside>
+	</section>
+	<section data-auto-animate data-background-image="assets/fosdem25/sewing-machine.jpg">
+		<p><q>Hey what if I put a STM microcontroller in a cartridge?</q></p>
+		<p><q>That link cable is practically SPI!</q></p>
+		<p>
+			There are <a href="https://en.wikipedia.org/wiki/Game_Boy_accessories">precedents</a>,
+			too!
+		</p>
+		<aside class="notes">
+			🐱 Like, yes, this is an official sewing machine peripheral for the Game Boy, and was
+			sold back in the day. There's also a sonar for fishing, an anaesthesic mask... they're
+			real, click the link!
+		</aside>
+	</section>
+</section>
+<section>
+	<h2>Music composition</h2>
+	<section>
+		<h3>Trackers</h3>
+		<ul style="width: 80%">
+			<li class="fragment">
+				<img
+					src="assets/fosdem25/hugetracker.gif"
+					alt="hUGETracker logo"
+					class="float"
+					style="margin: 0"
+				/>
+				PC (e.g. <a href="https://superdisk.github.io/hUGETracker">hUGETracker</a>)
+			</li>
+			<li class="fragment">
+				<img
+					src="assets/fosdem25/lsdj.png"
+					alt="LSDj screenshot"
+					class="float"
+					style="clear: right"
+				/>
+				On-console (e.g. <a href="http://littlesounddj.com">LSDj</a>)
+			</li>
+		</ul>
+		<aside class="notes">
+			🐶 Music on the Game Boy can't really use the formats typical on modern machines, so
+			it's instead composed on applications called “trackers”. ⏭️<br />
+			<br />
+			Typically they run on PC,⏭️<br />
+			<br />
+			but there are a few that are designed for the Game Boy itself!
+		</aside>
+	</section>
+	<section>
+		<h3>Drivers / replayers</h3>
+		<img
+			src="assets/fosdem25/gbss.png"
+			alt="Screenshot from the GBSoundSystem ROM"
+			style="height: 10em"
+		/>
+		<aside class="notes">🐱 Wing it</aside>
+	</section>
+	<section>
+		<h3>Showcase: <em>8-bit Sunset</em></h3>
+		<video
+			width="560"
+			height="315"
+			data-src="assets/fosdem25/8bit-sunset.mp4"
+			data-autoplay
+			controls
+		></video>
+		<aside class="notes">🐱 Typical music</aside>
+	</section>
+	<section>
+		<h3>Showcase: <em>Tune In!</em></h3>
+		<iframe
+			width="560"
+			height="315"
+			data-src="assets/fosdem25/tune-in.mp4"
+			data-autoplay
+			controls
+		></iframe>
+		<aside class="notes">
+			🐱 If you wanna get fancy, why not, for example, try voice samples?
+		</aside>
+	</section>
+</section>
+<section>
+	<h2>Pixel art</h2>
+	<section>
+		<ul>
+			<li class="fragment">
+				Dedicated pixel art tools (<a href="https://www.aseprite.org/">Aseprite</a>,
+				<a href="https://www.piskelapp.com/">Piskel</a>...)
+			</li>
+			<li class="fragment">
+				<figure class="fragment float">
+					<video
+						data-src="assets/fosdem25/quartet-cracktro-dmg.mp4"
+						data-autoplay
+						muted
+						controls
+						class="float"
+						style="height: 8em"
+					></video>
+					<figcaption>
+						<small>
+							<a href="http://eldred.fr/quartet/#first-implementation">Source</a>
+						</small>
+					</figcaption>
+				</figure>
+				Monochrome GB art (4 shades of gray, dithering for nuance)
+			</li>
+			<li class="fragment">GBC art (unusual colour restrictions)</li>
+		</ul>
+		<aside class="notes">
+			🐶 You can use practically any graphics editor to draw things one pixel at a time. But
+			the Game Boy has more restrictions than that. ⏭️<br />
+			<br />
+			Dedicated editors for pixel art have useful features, like working with limited color
+			palettes or animating a frame at a time. ⏭️<br />
+			<br />
+			The original Game Boy could show exactly four shades its famous “pea soup green”. But
+			even then, you can use dithering -- mixing colors over space, or even ⏭️ over
+			<em>time</em> -- to look like you have more. ⏭️<br />
+			<br />
+			The Game Boy Color supported 32 <em>thousand</em> whole colors -- but still with its own
+			limits around how they're divided into palettes and tiles. But once again, you can use
+			artistic and programming trickery to create "high-color" cutscenes or demos.
+		</aside>
+	</section>
+</section>
+<section>
+	<section>
+		<h3>Making tools</h3>
+		<ul>
+			<li class="fragment">Assemblers, compilers</li>
+			<li class="fragment">Graphics editors, mapping tools, audio sequencers</li>
+			<li class="fragment">Game-specific tools (scripting engines, etc)</li>
+			<li class="fragment">Contributing to existing open-source tools</li>
+		</ul>
+		<aside class="notes">
+			🐱 Feel like doing some work outside of the console? We got you covered! ⏭️<br />
+			<br />
+			Since we mentioned programming, it follows that one can work on the tools necessary to
+			make the languages work -- assemblers and compilers. ⏭️<br />
+			<br />
+			🐶 More on the GUI side, there are tools for creating your game assets -- graphics
+			editors, tilemap editors, audio sequencers, etc. ⏭️<br />
+			<br />
+			Individual games may also use their own custom tools like for scripting cutscenes, or
+			defining enemy AI; really, your imagination is the limit. ⏭️<br />
+			<br />
+			If you'd rather not make your own game and your own tools for it, there are several
+			GBDev projects that are looking for help right now. There is a strong culture of free
+			software, so anyone can contribute (and even get paid a little as thanks).
+		</aside>
+	</section>
+	<section data-auto-animate>
+		<h3>Showcase: <a href="https://rgbds.gbdev.io">RGBDS</a></h3>
+		<ul>
+			<li class="fragment">We're the current maintainers</li>
+			<li class="fragment">All the features you'll want (and more)</li>
+			<li class="fragment">Free software!</li>
+		</ul>
+		<img src="assets/fosdem25/rgbds-timeline.png" class="fragment" data-fragment-index="0" />
+		<aside class="notes">
+			🐱 We would like to go back on that assembler we mentioned before, RGBDS;⏭️<br />
+			<br />
+			It's currently 25 years old! Yes, it <em>was</em> used for some commercial
+			releases.⏭️<br />
+			<br />
+			And, full disclosure, we are the current maintainers 🐶 (in fact, we met thanks to
+			it)⏭️<br />
+			<br />
+			And I think it's grown to have all of the features that you'd want from an
+			assembler.⏭️<br />
+			<br />
+			Please try it out, and feel free to also contribute to it: it's free software!
+		</aside>
+	</section>
+</section>
+<section>
+	<h2>Emulators</h2>
+	<section>
+		<ul>
+			<li class="fragment">80% of games are easy to accurately emulate</li>
+			<li class="fragment">
+				<img
+					src="assets/fosdem25/pinball-fantasies-crash.png"
+					alt="Pinball Fantasies crashing"
+					class="float"
+					style="height: 6em"
+				/>
+				Want difficulty? Try emulating
+				<a href="http://eldred.fr/blog/prehistorik"><em>Prehistorik Man</em></a>
+				pixel-perfectly... or
+				<a href="https://mgba.io/2017/05/29/holy-grail-bugs/#pinball-fantasies"
+					><em>Pinball Deluxe</em> at all</a
+				>!
+			</li>
+			<li class="fragment">
+				Want fun? Emulate a simpler platform <em>on</em> the Game Boy! (e.g.
+				<a href="https://chip-8.github.io/links/">CHIP-8</a>)
+			</li>
+			<li class="fragment">
+				Well-understood (<em>mostly</em>), well-documented,
+				<a href="https://gbdev.io/chat">a lot of people</a> can help
+			</li>
+		</ul>
+		<aside class="notes">
+			🐶 Another interesting field is the world of emulation. ⏭️<br />
+			<br />
+			Emulating the Game Boy on your computer is a common recommendation for newbies, since
+			getting it mostly right is not particularly difficult (unlike, say, the NES) ⏭️<br />
+			<br />
+			🐱 That said, if you like a challenge, the Game Boy has a <em>lot</em> of headaches in
+			store for you! Here are two of the more famous expert-level targets, but don't worry,
+			there's <em>plenty</em> more where that came from :) ⏭️<br />
+			<br />
+			Some people even write emulators <em>on</em> the Game Boy. Due to the system's low
+			specs, the opportunities are rare, but even lower-spec "fantasy consoles" can be done!
+			⏭️<br />
+			<br />
+			Overall, it can a fun activity, because the system has been researched a lot
+			<em>and</em> said research is publicly available; and there are a lot of people who will
+			readily give you a hand.
+		</aside>
+	</section>
+	<section data-auto-animate>
+		<h3>Showcase: <a href="https://sameboy.github.io">SameBoy</a></h3>
+		<ul style="visibility: hidden">
+			<li>Best-in-class accuracy</li>
+			<li>All the features you'll want</li>
+			<li>Free software!</li>
+		</ul>
+		<aside class="notes">🐱 Let's mention two of the top-shelf emulators...</aside>
+	</section>
+	<section
+		data-auto-animate
+		data-background-image="assets/fosdem25/sameboy.png"
+		data-background-opacity="0.5"
+	>
+		<h3>Showcase: <a href="https://sameboy.github.io">SameBoy</a></h3>
+		<ul>
+			<li class="fragment">Best-in-class accuracy</li>
+			<li class="fragment">All the features you'll want</li>
+			<li class="fragment">Free software!</li>
+		</ul>
+		<aside class="notes">🐱 Wing it</aside>
+	</section>
+	<section data-auto-animate data-auto-animate-restart>
+		<h3>Showcase: <a href="https://emulicious.net">Emulicious</a></h3>
+		<ul style="visibility: hidden">
+			<li>Best-in-class accuracy</li>
+			<li>All the features you'll want</li>
+			<li>Free software!</li>
+		</ul>
+		<aside class="notes">🐱 Wing it</aside>
+	</section>
+	<section
+		data-auto-animate
+		data-background-image="assets/fosdem25/emulicious.png"
+		data-background-opacity="0.5"
+	>
+		<h3>Showcase: <a href="https://emulicious.net">Emulicious</a></h3>
+		<ul>
+			<li class="fragment">Also best-in-class accuracy</li>
+			<li class="fragment">Best debug features on the market</li>
+			<li class="fragment">Cross-platform</li>
+		</ul>
+		<aside class="notes">🐱 Wing it</aside>
+	</section>
+</section>
+<section>
+	<h2>Research</h2>
+	<section>
+		<ul>
+			<li class="fragment">
+				<img
+					src="assets/fosdem25/acid2.png"
+					alt="Reference screenshot of cgb-acid2"
+					style="float: right; margin: 0 0 0 1em"
+				/>
+				Running tests on hardware, and making them reproducible
+			</li>
+			<li class="fragment">
+				<img
+					src="assets/fosdem25/pandocs.png"
+					alt="Logo of the (modern) Pan Docs"
+					class="float"
+					style="clear: right"
+				/>
+				Documentation (<a href="https://gbdev.io/pandocs">Pan Docs</a>...)
+			</li>
+			<li class="fragment">
+				Again, can be done as a <a href="https://gbdev.io">community</a> effort
+			</li>
+		</ul>
+		<aside class="notes">
+			🐱 Although we just said that the system has been studied a lot, believe it or not,
+			research on that 35-yo system is STILL ongoing! ⏭️<br />
+			<br />
+			One notable area of work is writing what we call “test ROMs”, which enable individual
+			behaviours to be compared between implementations (including the, y'know, original
+			physical one :P) ⏭️<br />
+			<br />
+			🐶 And another thing that anyone, yes <em>you</em>, can help with, is documenting all of
+			the technical details in a more human-friendly and accessible manner. ⏭️<br />
+			<br />
+			And all of this is also something that other people will gladly help you with!
+		</aside>
+	</section>
+</section>
+<section>
+	<h2>Demoscene</h2>
+	<section>
+		<ul>
+			<li class="fragment">Push the hardware to its limits and show it off as art!</li>
+			<li class="fragment">
+				40-sprite limit? Eight 4-color palettes? Limits to be hacked around 😏
+			</li>
+		</ul>
+		<aside class="notes">
+			🐶 Your idea of "what can run on the Game Boy" might be simple games with obviously
+			repeating tiled graphics and beep-boop audio. ⏭️<br />
+			<br />
+			But the hardware can do a <em>lot</em> more than that. And if you want to try pushing
+			the limits, ⏭️<br />
+			<br />
+			you can decide to do away with with a game UI, player controls, any of that, and to
+			dedicate all your efforts (and all the Game Boy's CPU) to making something that truly
+			stands out. That's something that gets called “a demo”.
+		</aside>
+	</section>
+	<section>
+		<h3>Showcase: <em>GBC-NICCC</em></h3>
+		<video
+			width="560"
+			height="315"
+			data-src="assets/fosdem25/gbc-niccc.mp4"
+			data-autoplay
+			controls
+		></video>
+		<aside class="notes">🐱 Here is an example,</aside>
+	</section>
+</section>
+
+<section>
+	<h2>The end!</h2>
+	<p class="fragment">
+		<img src="assets/fosdem25/gbdev.jpg" alt="GBDev avatar" style="float: left; height: 2em" />
+		Hungry for more?<br />
+		👉️ GBDev (<a href="https://gbdev.io">https://gbdev.io</a>) is on
+		<a href="https://fedi.gbdev.io/@gbdev">Fediverse</a> and
+		<a href="https://bsky.app/profile/gbdev.bsky.social">Bluesky</a>
+	</p>
+	<p class="fragment">Thank you for listening!</p>
+	<aside class="notes">
+		🐱 And... that's it! ⏭️<br />
+		<br />
+		Here are the social links to the GB dev community, if you're interested in learning more, or
+		even want to join! ⏭️<br />
+		<br />
+		Any questions?
+	</aside>
+</section>
+
+<style>
+	.fragment.yeet {
+		position: relative;
+		left: 0vw;
+		transform: rotate(0deg);
+		transition:
+			left 1s ease-out,
+			transform 1s ease-out;
+	}
+	.fragment.yeet.visible {
+		left: 200vw;
+		transform: rotate(720deg);
+	}
+
+	.arrow {
+		list-style: "➩ ";
+	}
+	.cross {
+		list-style: "❌ ";
+	}
+
+	img.float,
+	figure.float {
+		float: right;
+		margin-left: 1em;
+		margin-bottom: 1em;
+	}
+
+	figcaption {
+		text-align: center;
+	}
+
+	section {
+		--r-heading-text-shadow: var(--r-background-color) 0 0 5px,
+			var(--r-background-color) 0 0 5px, var(--r-background-color) 0 0 5px,
+			var(--r-background-color) 0 0 5px;
+
+		text-shadow: var(--r-heading-text-shadow);
+	}
+</style>

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>RGBDS timeline</title>
+	<style>
+		:root {
+			--fg: #ffffff;
+			--bg: #191919;
+			--big: 20px;
+			--small: 16px;
+			--lh: 20px;
+		}
+		html, body {
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			font: var(--small)/var(--lh) sans-serif;
+			background: var(--bg);
+			color: var(--fg);
+			overflow: hidden;
+		}
+		.timeline {
+			height: 100%;
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: center;
+			gap: 0.5em;
+			padding: 1em;
+		}
+		.point {
+			flex: 1;
+			display: flex;
+			flex-direction: column;
+			gap: 1.5em;
+			position: relative;
+		}
+		.point:nth-child(odd) {
+			flex-direction: column-reverse;
+		}
+		.point::before {
+			content: "";
+			height: calc(var(--lh) * 6 + (8px + 1px) * 2);
+		}
+		.time {
+			border: 2px solid var(--fg);
+			border-radius: 8px;
+			padding: 8px;
+			font-size: var(--big);
+			line-height: var(--big);
+			text-align: center;
+		}
+		.point:not(:last-child) .time::after {
+			position: absolute;
+			content: "";
+			background: var(--fg);
+			top: calc(50% - 1px);
+			left: 100%;
+			width: 0.5em;
+			height: 2px;
+		}
+		.description {
+			border: 1px solid var(--fg);
+			border-radius: 8px;
+			padding: 8px;
+			text-align: left;
+			height: calc(var(--lh) * 6);
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			margin: 0 -1em;
+			position: relative;
+		}
+		.description div::before {
+			position: absolute;
+			content: "";
+			background: var(--fg);
+			left: calc(50% - 1px);
+			top: calc(-1px - 1.5em);
+			width: 2px;
+			height: 1.5em;
+		}
+		.point:nth-child(odd) .description div::before {
+			top: unset;
+			bottom: calc(-1px - 1.5em);
+		}
+		.author {
+			font-weight: bold;
+		}
+		.subject {
+			font-weight: bold;
+		}
+		.birthday {
+			background: #1919a9;
+			box-shadow: 0 0 0.5em 0.5em #1919a980;
+		}
+	</style>
+</head>
+	<body>
+		<div class="timeline">
+			<div class="point">
+				<div class="time">Oct 1996</div>
+				<div class="description"><div>
+					<span class="author">Carsten Sørensen</span>
+					releases
+					<span class="subject">xAsm</span>,
+					<span class="subject">xLink</span>, and
+					<span class="subject">RGBFix</span>
+					for MS&#x2011;DOS.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">Jul 1997</div>
+				<div class="description"><div>
+					Sørensen packages them together as
+					<span class="subject">ASMotor</span>.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time birthday">Aug 1999</div>
+				<div class="description"><div>
+					<span class="author">Justin Lloyd</span>
+					adapts it to just the Game Boy CPU as
+					<span class="subject">RGBDS</span>.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">Jun 2009</div>
+				<div class="description"><div>
+					<span class="author">Vegard Nossum</span>
+					ports it to Linux as
+					<span class="subject">rgbds&#x2011;linux</span>.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">Jan 2010</div>
+				<div class="description"><div>
+					<span class="author">Anthony Bentley</span>'s
+					fork of it becomes the canonical
+					<span class="subject">RGBDS</span>.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">Sep 2010</div>
+				<div class="description"><div>
+					Sørensen's GitHub project becomes the canonical 
+					<span class="subject">ASMotor</span>.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">Jan 2015</div>
+				<div class="description"><div>
+					<span class="author">stag019</span>
+					begins
+					<span class="subject">RGBGFX</span>,
+					a GB graphics converter.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">Sep 2016</div>
+				<div class="description"><div>
+					<span class="subject">RGBGFX</span>
+					is added to the RGBDS toolchain.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">Feb 2017</div>
+				<div class="description"><div>
+					RGBDS moves to the
+					<span class="subject">Rednex</span>
+					organization.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">Jan 2018</div>
+				<div class="description"><div>
+					RGBDS is relicensed as
+					<span class="subject">MIT</span>.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">Sep 2020</div>
+				<div class="description"><div>
+					RGBDS moves to the
+					<span class="subject">GBDev</span>
+					organization.
+				</div></div>
+			</div>
+			<div class="point">
+				<div class="time">May 2022</div>
+				<div class="description"><div>
+					GBDev publishes
+					<span class="subject">rgbds.gbdev.io</span>
+					for docs.
+				</div></div>
+			</div>
+		</div>
+	</body>
+</html>
