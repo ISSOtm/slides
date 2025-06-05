@@ -1,0 +1,315 @@
+---
+layout: slides
+title: "What's in an assembler"
+permalink: /rgbds
+slideNumber: true
+plugins:
+    - notes
+    - highlight
+---
+
+<section>
+	<h1>What's in an assembler?</h1>
+</section>
+<section>
+	<h2>Summary:</h2>
+	<ol>
+		<li class="fragment">Langdev crash course</li>
+		<li class="fragment">
+			Case study: a particular assembler from the 90's
+			<ol>
+				<li class="fragment">Quick intro</li>
+				<li class="fragment">Language's design</li>
+				<li class="fragment">Design takeaways</li>
+			</ol>
+		</li>
+	</ol>
+</section>
+
+<section>
+	<h2>Langdev crash course</h2>
+	<section>
+		<p class="fragment">How does a compiler work, anyway?</p>
+		<aside class="notes">An assembler is a compiler without the codegen stage</aside>
+	</section>
+	<section data-auto-animate>
+		<svg viewBox="0 0 760 205">
+			<defs>
+				<style>
+					polyline,
+					line {
+						fill: none;
+						stroke: var(--r-main-color);
+					}
+					path,
+					rect {
+						fill: #333;
+						stroke: var(--r-main-color);
+					}
+					text {
+						stroke: none;
+						fill: var(--r-main-color);
+						dominant-baseline: middle;
+						text-anchor: start;
+					}
+					.centered {
+						text-anchor: middle;
+					}
+					.right {
+						text-anchor: end;
+					}
+				</style>
+				<path
+					d="m0,0 v120 h80 v-96 l-24,-24 z m56,0 v24 h24
+					m-5,20 h-70 m0,4 h70 m0,4 h-70 m0,4 h70 m0,4 h-70 m0,4 h70 m0,4 h-70
+					m0,4 h70 m0,4 h-70 m0,4 h70 m0,4 h-70 m0,4 h70 m0,4 h-70 m0,4 h70 m0,4 h-70
+					m0,4 h70 m0,4 h-70"
+					id="src-code"
+				/>
+				<g id="bin-file" style="font-size: 45%">
+					<path d="m0,0 v120 h80 v-96 l-24,-24 z m56,0 v24 h24" />
+					<text x="40" y="43" class="centered">01110100</text>
+					<text x="40" y="63" class="centered">10101010</text>
+					<text x="40" y="83" class="centered">01011101</text>
+					<text x="40" y="103" class="centered">10101000</text>
+				</g>
+				<polyline points="-15,-15 0,0 -15,15" id="arrow-head" />
+			</defs>
+			<g data-id="src-code">
+				<use x="20" y="3" href="#src-code" />
+				<text x="60" y="150" class="centered">Source</text>
+				<text x="60" y="190" class="centered">code</text>
+			</g>
+
+			<line x1="110" y1="80" x2="250" y2="80" />
+			<use x="250" y="80" href="#arrow-head" />
+
+			<rect x="260" y="30" width="200" height="100" />
+			<text x="360" y="80" class="centered">Assembler</text>
+
+			<line x1="470" y1="80" x2="610" y2="80" />
+			<use x="610" y="80" href="#arrow-head" />
+
+			<g data-id="exe">
+				<use x="620" y="3" href="#bin-file" />
+				<text x="660" y="150" class="centered">Executable</text>
+			</g>
+		</svg>
+	</section>
+	<section data-auto-animate>
+		<svg viewBox="0 -200 2000 605">
+			<g data-id="src-code">
+				<use x="20" y="3" href="#src-code" />
+				<text x="60" y="150" class="centered">Source</text>
+				<text x="60" y="190" class="centered">code</text>
+			</g>
+
+			<line x1="110" y1="80" x2="250" y2="80" />
+			<use x="250" y="80" href="#arrow-head" />
+
+			<rect x="260" y="30" width="200" height="100" />
+			<text x="360" y="80" class="centered">Lexer</text>
+
+			<line x1="470" y1="80" x2="610" y2="80" />
+			<use x="610" y="80" href="#arrow-head" />
+
+			<text x="660" y="80" class="centered">...</text>
+			<text x="660" y="150" class="centered">Tokens</text>
+
+			<line x1="710" y1="80" x2="850" y2="80" />
+			<use x="850" y="80" href="#arrow-head" />
+
+			<rect x="860" y="30" width="200" height="100" />
+			<text x="960" y="80" class="centered">Parser</text>
+
+			<line x1="1070" y1="80" x2="1210" y2="80" />
+			<use x="1210" y="80" href="#arrow-head" />
+
+			<text x="1260" y="80" class="centered">...</text>
+			<text x="1260" y="150" class="centered">Semantics</text>
+
+			<line x1="1310" y1="80" x2="1450" y2="80" />
+			<use x="1450" y="80" href="#arrow-head" />
+
+			<rect x="1460" y="30" width="200" height="100" />
+			<text x="1560" y="80" class="centered">Codegen</text>
+
+			<line x1="1670" y1="80" x2="1810" y2="80" />
+			<use x="1810" y="80" href="#arrow-head" />
+
+			<g data-id="exe">
+				<use x="1820" y="3" href="#bin-file" />
+				<text x="1860" y="150" class="centered">Executable</text>
+			</g>
+		</svg>
+		<p class="fragment">Lexer? Parser?</p>
+	</section>
+	<section>
+		<h2>Difference between lexer and parser</h2>
+		<p class="fragment">Consider:</p>
+		<ul>
+			<li class="fragment">fjshdfoilu gdiyuktf ggdbkifucqjuhzsiudmfppoe arzej</li>
+			<li class="fragment">now a sentence this like, but none sense makes</li>
+		</ul>
+		<p class="fragment">→ token ≅ <b>word</b></p>
+	</section>
+	<section>
+		<h2>Codegen</h2>
+		<p class="fragment">After parsing: <strong>semantics</strong></p>
+		<p class="fragment">Roughly, instructions for code generation</p>
+		<p class="fragment">A (really tough) science <em>and</em> an art</p>
+		<p class="fragment">Thankfully trivial for an assembler 🙃</p>
+	</section>
+</section>
+
+<section data-auto-animate>
+	<h2>Case study:</h2>
+	<h2>RGBDS</h2>
+</section>
+<section data-auto-animate>
+	<h2>A cautionary tale:</h2>
+	<h2>RGBDS</h2>
+</section>
+<section>
+	<h2>RGBDS</h2>
+	<section>
+		<h3>Background</h3>
+		<p class="fragment">Born in 1997</p>
+		<p class="fragment">Pile of 90's-style C code 🐛</p>
+		<p class="fragment">Claim to fame: used for some commercial releases!</p>
+		<p class="fragment">Very 90's design...</p>
+	</section>
+	<section>
+		<h3>Design points</h3>
+		<p class="fragment">Macro assembler</p>
+		<p class="fragment">Unlimited relocation complexity</p>
+		<p class="fragment">Human-oriented</p>
+	</section>
+	<section>
+		<h3><i>Tangent</i>: two kinds of assembler</h3>
+		<table>
+			<tr>
+				<td class="fragment">Human-oriented:</td>
+				<td>
+					<ul>
+						<li class="fragment">Featureful</li>
+						<li class="fragment">Conveniences</li>
+					</ul>
+				</td>
+			</tr>
+			<tr>
+				<td class="fragment">Compiler-oriented:</td>
+				<td>
+					<ul>
+						<li class="fragment">Uniform</li>
+						<li class="fragment">Predictable</li>
+					</ul>
+				</td>
+			</tr>
+		</table>
+		<p class="fragment">Sometimes at odds, but possible to marry both with enough effort</p>
+	</section>
+</section>
+
+<section>
+	<h2>90's design, you say?</h2>
+	<section>
+		<p class="fragment">Let's witness some design lessons</p>
+		<p class="fragment">...primarily negative.</p>
+	</section>
+
+	<section data-auto-animate>
+		<h3><code>PURGE</code></h3>
+		<p class="fragment">Metaprogramming facilities</p>
+		<p class="fragment">Compile-time variables to store info</p>
+		<p class="fragment">Uh-oh, no namespacing!</p>
+	</section>
+	<section data-auto-animate>
+		<h3><code>PURGE</code></h3>
+		<p>Let's allow deleting symbols!</p>
+		<img src="assets/rgbds/purge.png" class="fragment" style="height: 9em" />
+	</section>
+
+	<section data-auto-animate data-auto-animate-restart>
+		<h3>Metaprogramming</h3>
+		<div class="fragment">
+			<script
+				async
+				id="asciicast-Um1RhqJka4jPhj685Kpryp1WW"
+				src="https://asciinema.celforyon.fr/a/Um1RhqJka4jPhj685Kpryp1WW.js"
+			></script>
+		</div>
+	</section>
+	<section data-auto-animate>
+		<h3>Metaprogramming</h3>
+		<p><code>EQUS</code> = compile-time <code>eval</code></p>
+		<p class="fragment">Imagine C macros, but there is no preprocessor</p>
+		<p class="fragment"><strong>Fully text-based</strong>, bypassing tokens</p>
+		<p class="fragment">→ Can't even lex a line until previous one is processed</p>
+		<aside class="notes">
+			Every line depending on the previous makes for terrible error recovery, and thus
+			terrible error messages
+		</aside>
+	</section>
+	<section data-auto-animate>
+		<h3>Metaprogramming</h3>
+		<img src="assets/rgbds/equs.png" style="height: 11em" />
+	</section>
+</section>
+
+<section>
+	<h2>Insanely powerful</h2>
+	<section></section>
+	<section>
+		<h3>Structs</h3>
+		<img
+			src="assets/rgbds/structs.png"
+			style="height: 11em; float: right"
+			class="fragment"
+			data-fragment-index="2"
+		/>
+		<p class="fragment" data-fragment-index="1">RGBASM doesn't support structs</p>
+		<p>&nbsp;</p>
+		<p class="fragment">And now it does!</p>
+	</section>
+	<section>
+		<h3>Brainfuck interpreter</h3>
+		<p class="fragment"><a href="https://pastebin.com/aPgXik7T">Yes, really.</a></p>
+		<pre class="fragment">; hello world
+	bf ++++++++[>++++[>++>+++>+++>+<<<<-]>+>+>->>+[<]<-]>>.>---.+++++++..+++.>>.<-.<.+++.------.--------.>>+.>++.
+; echo
+	bf \,+[-.\,+], HELLO WORLD!\n</pre>
+	</section>
+</section>
+
+<section>
+	<h2>Horribly unmaintainable</h2>
+	<section>
+		<p class="fragment">(Image missing)</p>
+	</section>
+</section>
+
+<section>
+	<h2>Design takeaways</h2>
+	<section>
+		<h3>Language design</h3>
+		<ul>
+			<li class="fragment">Processing in passes = better</li>
+			<li class="fragment">Metaprogramming = good, actually</li>
+		</ul>
+	</section>
+
+	<section>
+		<h3>Design in general</h3>
+		<ul>
+			<li class="fragment">Simplicity is a lie</li>
+			<li class="fragment">Good to think about implications of a design</li>
+			<li class="fragment">Oh how far we've come</li>
+		</ul>
+	</section>
+</section>
+
+<section>
+	<h2>EOF</h2>
+	<p class="fragment">Thank you for listening!</p>
+</section>
